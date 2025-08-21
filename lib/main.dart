@@ -7,14 +7,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRouter().getRoutes,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white
+        fontFamily: "PlusJakartaSans",
+        appBarTheme: AppBarTheme(color: Colors.white),
+        scaffoldBackgroundColor: Colors.white,
       ),
     );
   }
