@@ -6,6 +6,18 @@ class Assets {
   /// assets/images/png/arch-monument.png
   static const String assetsImagesPngArchMonument = "assets/images/png/arch-monument.png";
 
+  /// Assets for assetsImagesPngBasmala
+  /// assets/images/png/Basmala.png
+  static const String assetsImagesPngBasmala = "assets/images/png/Basmala.png";
+
+  /// Assets for assetsImagesPngHeadOfSurah
+  /// assets/images/png/head_of_surah.png
+  static const String assetsImagesPngHeadOfSurah = "assets/images/png/head_of_surah.png";
+
+  /// Assets for assetsImagesPngHeader
+  /// assets/images/png/header.png
+  static const String assetsImagesPngHeader = "assets/images/png/header.png";
+
   /// Assets for assetsImagesPngIslam
   /// assets/images/png/islam.png
   static const String assetsImagesPngIslam = "assets/images/png/islam.png";
@@ -33,5 +45,13 @@ class Assets {
   /// Assets for assetsImagesPngWindow
   /// assets/images/png/window.png
   static const String assetsImagesPngWindow = "assets/images/png/window.png";
+
+  /// Assets for assetsImagesSvgAyaShape
+  /// assets/images/svg/aya_shape.svg
+  static const String assetsImagesSvgAyaShape = "assets/images/svg/aya_shape.svg";
+
+  /// Assets for assetsImagesSvgHeaderSura1
+  /// assets/images/svg/header_sura1.svg
+  static const String assetsImagesSvgHeaderSura1 = "assets/images/svg/header_sura1.svg";
 }
 

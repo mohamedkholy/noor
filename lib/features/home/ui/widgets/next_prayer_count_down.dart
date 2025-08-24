@@ -15,10 +15,13 @@ class NextPrayerCountDown extends StatefulWidget {
 
 class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   late PrayerTimes _prayerTimes;
-  late String _nextPrayer;
+  late Prayer _nextPrayer;
   late DateTime _nextPrayerTime;
   late double _totalDuration;
   late Duration _nextPrayerDuration;
+  final ValueNotifier<Duration> _nextPrayerDurationNotifier = ValueNotifier(
+    Duration.zero,
+  );
   Timer? timer;
 
   @override
@@ -30,13 +33,14 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   @override
   void dispose() {
     timer?.cancel();
+    _nextPrayerDurationNotifier.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           opacity: .06,
           image: AssetImage(Assets.assetsImagesPngMosqueIstanbul),
@@ -46,25 +50,28 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
       width: double.infinity,
       child: Column(
         children: [
-          CircularSlider(
-            totalDuration: _totalDuration,
-            nextPrayerDuration: _nextPrayerDuration,
-            nextPrayer: _nextPrayer,
+          ValueListenableBuilder<Duration>(
+            valueListenable: _nextPrayerDurationNotifier,
+            builder: (context, value, child) => CircularSlider(
+              totalDuration: _totalDuration,
+              nextPrayerDuration: _nextPrayerDuration,
+              nextPrayer: _nextPrayer,
+            ),
           ),
           PrayersTimeRow(prayerTimes: _prayerTimes, nextPrayer: _nextPrayer),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
         ],
       ),
     );
   }
 
-  initPrayerTimes() {
+  void initPrayerTimes() {
     final myCoordinates = Coordinates(30.789319545900607, 30.99762890423023);
     final params = CalculationMethod.egyptian.getParameters();
     params.madhab = Madhab.shafi;
     _prayerTimes = PrayerTimes.today(myCoordinates, params);
     if (_prayerTimes.nextPrayer() == Prayer.none) {
-      var tomorrow = DateTime.now().add(Duration(days: 1));
+      final tomorrow = DateTime.now().add(const Duration(days: 1));
       _prayerTimes = PrayerTimes(
         myCoordinates,
         DateComponents(tomorrow.year, tomorrow.month, tomorrow.day),
@@ -76,10 +83,11 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   }
 
   void _calculateNextPrayer(PrayerTimes prayerTimes) {
-    final nextprayer = prayerTimes.nextPrayer();
-    _nextPrayer = nextprayer.name;
-    _nextPrayerTime = prayerTimes.timeForPrayer(nextprayer)!;
-    _calcTotalDuration(prayerTimes, nextprayer);
+    setState(() {
+      _nextPrayer = prayerTimes.nextPrayer();
+    });
+    _nextPrayerTime = prayerTimes.timeForPrayer(_nextPrayer)!;
+    _calcTotalDuration(prayerTimes, _nextPrayer);
     startTimer(prayerTimes);
   }
 
@@ -90,7 +98,7 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
       Prayer.asr: prayerTimes.dhuhr,
       Prayer.maghrib: prayerTimes.asr,
       Prayer.isha: prayerTimes.maghrib,
-      Prayer.fajr: prayerTimes.isha.subtract(Duration(days: 1)),
+      Prayer.fajr: prayerTimes.isha.subtract(const Duration(days: 1)),
     };
     _totalDuration = _nextPrayerTime
         .difference(previousPrayers[nextprayer]!)
@@ -99,22 +107,19 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   }
 
   void _updateRemainigTime(PrayerTimes prayerTimes) {
-    if (prayerTimes.nextPrayer().name != _nextPrayer) {
+    if (prayerTimes.nextPrayer() != _nextPrayer) {
       timer?.cancel();
       initPrayerTimes();
       return;
     }
-    if (mounted) {
-      setState(() {
-        _nextPrayerDuration = _nextPrayerTime.difference(DateTime.now());
-      });
-    }
+    _nextPrayerDuration = _nextPrayerTime.difference(DateTime.now());
+    _nextPrayerDurationNotifier.value = _nextPrayerDuration;
   }
 
   void startTimer(PrayerTimes prayerTimes) {
     timer?.cancel();
     _updateRemainigTime(prayerTimes);
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _updateRemainigTime(prayerTimes);
     });
   }

@@ -11,7 +11,7 @@ class AyahOfTheDayWidget extends StatelessWidget {
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        image: DecorationImage(
+        image: const DecorationImage(
           image: AssetImage(Assets.assetsImagesPngWindow),
           fit: BoxFit.cover,
           opacity: .04,
@@ -19,7 +19,7 @@ class AyahOfTheDayWidget extends StatelessWidget {
         color: MyColors.primary,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

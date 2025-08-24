@@ -5,8 +5,12 @@ import 'package:noor/core/theming/my_colors.dart';
 
 class PrayersTimeRow extends StatefulWidget {
   final PrayerTimes prayerTimes;
-  final String nextPrayer;
-  const PrayersTimeRow({super.key, required this.prayerTimes, required this.nextPrayer});
+  final Prayer nextPrayer;
+  const PrayersTimeRow({
+    super.key,
+    required this.prayerTimes,
+    required this.nextPrayer,
+  });
 
   @override
   State<PrayersTimeRow> createState() => _PrayersTimeRowState();
@@ -43,7 +47,7 @@ class _PrayersTimeRowState extends State<PrayersTimeRow> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: prayers.map((e) {
-        final isNextPrayer = widget.nextPrayer == e.$4.name;
+        final isNextPrayer = widget.nextPrayer == e.$4;
         final color = isNextPrayer ? MyColors.secondary : Colors.white;
         return Column(
           children: [
@@ -51,9 +55,9 @@ class _PrayersTimeRowState extends State<PrayersTimeRow> {
               e.$1,
               style: TextStyle(color: color, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Icon(e.$2, color: color),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(DateFormat.Hm().format(e.$3), style: TextStyle(color: color)),
           ],
         );

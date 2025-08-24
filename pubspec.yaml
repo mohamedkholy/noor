@@ -1,7 +1,6 @@
 name: noor
 description: "A new Flutter project."
-publish_to: 'none' 
-
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -11,28 +10,38 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
+    
+  adhan: ^2.0.0+1
+  auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.8
-  flutter_svg: ^2.2.0
   drift: ^2.28.1
   drift_flutter: ^0.2.5
+  flutter_bloc: ^9.1.1
+  flutter_svg: ^2.2.0
+  font_awesome_flutter: ^10.9.1
+  get_it: ^8.2.0
+  hijri: ^3.0.0
+  injectable: ^2.5.1
+  intl: ^0.20.2
+  marquee: ^2.3.0
+  path: ^1.9.1
   path_provider: ^2.1.5
   sleek_circular_slider: ^2.1.0
-  marquee: ^2.3.0
-  font_awesome_flutter: ^10.9.1
-  adhan: ^2.0.0+1
-  intl: ^0.20.2
-  hijri: ^3.0.0
+  sqlite3: ^2.9.0
+  sqlite3_flutter_libs: ^0.5.39
+  scrollable_positioned_list: ^0.3.8
+  shared_preferences: ^2.5.3
+  visibility_detector: ^0.4.0+2
+ 
 
 dev_dependencies:
+  build_runner: ^2.6.0
+  drift_dev: ^2.28.1
+  flutter_lints: ^6.0.0
+  injectable_generator: ^2.8.1
   flutter_test:
     sdk: flutter
 
- 
-  flutter_lints: ^5.0.0
-  drift_dev: ^2.28.1
-  build_runner: ^2.6.0
 
 flutter:
 
@@ -41,7 +50,7 @@ flutter:
   assets:
     - assets/images/png/
     - assets/images/svg/
-
+    - assets/database/
   fonts:
     - family: PlusJakartaSans
       fonts:
@@ -58,17 +67,36 @@ flutter:
         - asset: assets/fonts/PlusJakartaSans-Regular.ttf
           weight: 400
         - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
-          weight: 600  
+          weight: 600
+    - family: AmiriQuran
+      fonts:
+        - asset: assets/fonts/AmiriQuran-Regular.ttf
+    - family: Elgharib
+      fonts:
+        - asset: assets/fonts/Elgharib.-A579.ttf    
+    - family: KFGQPC_Uthmanic
+      fonts:
+        - asset: assets/fonts/KFGQPC Uthmanic Script HAFS Regular.otf    
+    - family: ArabicTwoBold
+      fonts:
+        - asset: assets/fonts/ArabicTwo Bold.ttf    
+    - family: ScheherazadeNew-Regular
+      fonts:
+        - asset: assets/fonts/ScheherazadeNew-Regular.ttf    
     - family: Tasbih
       fonts:
         - asset: assets/fonts/font_icons/Sibha.ttf
     - family: Quran
       fonts:
-        - asset: assets/fonts/font_icons/Quran.ttf    
-  
+        - asset: assets/fonts/font_icons/Quran.ttf
+    - family: MeQuran
+      fonts:
+        - asset: assets/fonts/Me_quran Regular.ttf  
+    - family: HafsSmart_08
+      fonts:
+        - asset: assets/fonts/HafsSmart_08.ttf
 
 flutter_assets:
   assets_path: assets/images/
   output_path: lib/core/helpers/
-  filename: assets_helper.dart 
-  
+  filename: assets_helper.dart

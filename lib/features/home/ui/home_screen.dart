@@ -15,39 +15,38 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.primary,
       appBar: AppBar(
-        backgroundColor: MyColors.primary,
         toolbarHeight: 60,
-        titleTextStyle: TextStyle(fontSize: 20, color: Colors.white),
+        titleTextStyle: const TextStyle(fontSize: 20, color: Colors.white),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(HijriCalendar.now().toFormat("dd MMMM yyyy")),
-            Text("Egypt, Cairo"),
+            const Text("Egypt, Cairo"),
           ],
         ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications, color: Colors.white),
+            icon: const Icon(Icons.notifications, color: Colors.white),
           ),
         ],
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 600),
+          constraints: const BoxConstraints(maxWidth: 600),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 20),
-                  child: NextPrayerCountDown(),
+                  child: const NextPrayerCountDown(),
                 ),
                 IntrinsicHeight(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -56,11 +55,11 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        FeaturesRow(),
-                        SizedBox(height: 15),
+                        const FeaturesRow(),
+                        const SizedBox(height: 15),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Column(
+                          child: const Column(
                             children: [
                               LastReadWidget(),
                               AyahOfTheDayWidget(),
