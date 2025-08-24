@@ -53,5 +53,13 @@ class Assets {
   /// Assets for assetsImagesSvgHeaderSura1
   /// assets/images/svg/header_sura1.svg
   static const String assetsImagesSvgHeaderSura1 = "assets/images/svg/header_sura1.svg";
+
+  /// Assets for assetsImagesSvgOctagonallShape
+  /// assets/images/svg/octagonall_shape.svg
+  static const String assetsImagesSvgOctagonallShape = "assets/images/svg/octagonall_shape.svg";
+
+  /// Assets for assetsImagesSvgOctagonallShapeSolid
+  /// assets/images/svg/octagonall_shape_solid.svg
+  static const String assetsImagesSvgOctagonallShapeSolid = "assets/images/svg/octagonall_shape_solid.svg";
 }
 

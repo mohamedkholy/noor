@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/core/theming/my_text_styles.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/logic/quran_state.dart';
 import 'package:noor/features/quran/ui/chapters_screen.dart';
@@ -26,11 +27,7 @@ class _QuranScreenState extends State<QuranScreen> {
       appBar: AppBar(
         title: const Text(
           "Quran",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
+          style: MyTextStyles.appBarTextStyle,
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
