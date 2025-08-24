@@ -27,7 +27,13 @@ class _FeaturesRowState extends State<FeaturesRow> {
     ),
     ("Hadith", FontAwesomeIcons.book, () {}),
     ("Tasbih", const IconData(0xe81f, fontFamily: "Tasbih"), () {}),
-    ("Azkar", FontAwesomeIcons.handsPraying, () {}),
+    (
+      "Azkar",
+      FontAwesomeIcons.handsPraying,
+      () {
+        Navigator.pushNamed(context, MyRoutes.azkar);
+      },
+    ),
     ("Qibla", FontAwesomeIcons.compass, () {}),
     ("Near mosque", Icons.mosque, () {}),
     ("Calendar", FontAwesomeIcons.calendarDays, () {}),
