@@ -39,27 +39,34 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
         ),
       ),
-      body: BlocBuilder<AzkarCubit, AzkarState>(
-        builder: (context, state) {
-          if (state is AzkarLoaded) {
-            azkarCount.addAll(List.generate(state.azkar.length, (index) => 0));
-            return ListView.builder(
-              controller: pageController,
-              itemCount: state.azkar.length,
-              itemBuilder: (context, index) {
-                final azkar = state.azkar[index];
-                return ZikrWidget(
-                  zekr: azkar,
-                  count: azkarCount[index],
-                  onCountChange: (count) {
-                    azkarCount[index] = count;
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: BlocBuilder<AzkarCubit, AzkarState>(
+            builder: (context, state) {
+              if (state is AzkarLoaded) {
+                azkarCount.addAll(
+                  List.generate(state.azkar.length, (index) => 0),
+                );
+                return ListView.builder(
+                  controller: pageController,
+                  itemCount: state.azkar.length,
+                  itemBuilder: (context, index) {
+                    final azkar = state.azkar[index];
+                    return ZikrWidget(
+                      zekr: azkar,
+                      count: azkarCount[index],
+                      onCountChange: (count) {
+                        azkarCount[index] = count;
+                      },
+                    );
                   },
                 );
-              },
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
+              }
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
+        ),
       ),
     );
   }

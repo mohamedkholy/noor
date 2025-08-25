@@ -5,6 +5,10 @@ import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/features/azkar/logic/azkar_cubit.dart';
 import 'package:noor/features/azkar/ui/azkar_category_screen.dart';
 import 'package:noor/features/azkar/ui/azkar_screen.dart';
+import 'package:noor/features/hadith/data/models/kitab.dart';
+import 'package:noor/features/hadith/logic/hadith_cubit.dart';
+import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
+import 'package:noor/features/hadith/ui/hadith_screen.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/home_screen.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
@@ -53,6 +57,20 @@ class AppRouter {
           builder: (context) => BlocProvider(
             create: (context) => getIt<AzkarCubit>(),
             child: AzkarCategoryScreen(category: args as String),
+          ),
+        );
+         case MyRoutes.hadith:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<HadithCubit>(),
+            child: const HadithScreen(),
+          ),
+        );
+      case MyRoutes.hadithList:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<HadithCubit>(),
+            child: HadithListScreen(type: args as Kitab),
           ),
         );
       default:

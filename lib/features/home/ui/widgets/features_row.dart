@@ -25,7 +25,13 @@ class _FeaturesRowState extends State<FeaturesRow> {
         });
       },
     ),
-    ("Hadith", FontAwesomeIcons.book, () {}),
+    (
+      "Hadith",
+      FontAwesomeIcons.book,
+      () {
+        Navigator.pushNamed(context, MyRoutes.hadith);
+      },
+    ),
     ("Tasbih", const IconData(0xe81f, fontFamily: "Tasbih"), () {}),
     (
       "Azkar",

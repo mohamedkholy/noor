@@ -32,7 +32,7 @@ class AzkarCategoryWidget extends StatelessWidget {
             opacity: .03,
             fit: BoxFit.cover,
           ),
-          color: MyColors.primary.withAlpha(50),
+          color: MyColors.primary.withAlpha(100),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

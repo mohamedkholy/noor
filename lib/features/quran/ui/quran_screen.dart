@@ -25,10 +25,7 @@ class _QuranScreenState extends State<QuranScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Quran",
-          style: MyTextStyles.appBarTextStyle,
-        ),
+        title: const Text("Quran", style: MyTextStyles.appBarTextStyle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -36,44 +33,49 @@ class _QuranScreenState extends State<QuranScreen> {
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: BlocBuilder<QuranCubit, QuranState>(
-          builder: (context, state) {
-            if (state is SurahsLoaded) {
-              return DefaultTabController(
-                length: 2,
-                child: Column(
-                  children: [
-                    const TabBar(
-                      indicatorColor: MyColors.primary,
-                      labelColor: MyColors.primary,
-                      unselectedLabelColor: Colors.grey,
-                      labelStyle: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      tabs: [
-                        Tab(text: "Surah", height: 60),
-                        Tab(text: "Juz", height: 60),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 800),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: BlocBuilder<QuranCubit, QuranState>(
+              builder: (context, state) {
+                if (state is SurahsLoaded) {
+                  return DefaultTabController(
+                    length: 2,
+                    child: Column(
+                      children: [
+                        const TabBar(
+                          indicatorColor: MyColors.primary,
+                          labelColor: MyColors.primary,
+                          unselectedLabelColor: Colors.grey,
+                          labelStyle: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          tabs: [
+                            Tab(text: "Surah", height: 60),
+                            Tab(text: "Juz", height: 60),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              SurahsScreen(surahs: state.surahs),
+                              if (state.verses != null)
+                                ChaptersScreen(verses: state.verses!),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    Expanded(
-                      child: TabBarView(
-                        children: [
-                          SurahsScreen(surahs: state.surahs),
-                          if (state.verses != null)
-                            ChaptersScreen(verses: state.verses!),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }
-            return const SizedBox();
-          },
+                  );
+                }
+                return const SizedBox();
+              },
+            ),
+          ),
         ),
       ),
     );

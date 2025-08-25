@@ -42,9 +42,25 @@ class Assets {
   /// assets/images/png/pattern.png
   static const String assetsImagesPngPattern = "assets/images/png/pattern.png";
 
+  /// Assets for assetsImagesPngSahihAlBukhari
+  /// assets/images/png/sahih_al-bukhari.png
+  static const String assetsImagesPngSahihAlBukhari = "assets/images/png/sahih_al-bukhari.png";
+
+  /// Assets for assetsImagesPngSahihMuslim
+  /// assets/images/png/sahih_muslim.png
+  static const String assetsImagesPngSahihMuslim = "assets/images/png/sahih_muslim.png";
+
   /// Assets for assetsImagesPngWindow
   /// assets/images/png/window.png
   static const String assetsImagesPngWindow = "assets/images/png/window.png";
+
+  /// Assets for assetsImagesPngWindow4
+  /// assets/images/png/window4.png
+  static const String assetsImagesPngWindow4 = "assets/images/png/window4.png";
+
+  /// Assets for assetsImagesPngWindow5
+  /// assets/images/png/window5.png
+  static const String assetsImagesPngWindow5 = "assets/images/png/window5.png";
 
   /// Assets for assetsImagesSvgAyaShape
   /// assets/images/svg/aya_shape.svg

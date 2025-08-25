@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+import 'package:noor/core/helpers/assets_helper.dart';
+import 'package:noor/core/routing/my_routes.dart';
+import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/features/hadith/data/models/kitab.dart';
+import 'package:noor/features/hadith/ui/widgets/hadith_button.dart';
+
+class HadithScreen extends StatefulWidget {
+  const HadithScreen({super.key});
+
+  @override
+  State<HadithScreen> createState() => _HadithScreenState();
+}
+
+class _HadithScreenState extends State<HadithScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Hadith", style: MyTextStyles.appBarTextStyle),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 30),
+              width: double.infinity,
+              child: Column(
+                children: [
+                  HadithButton(
+                    title: "Sahih Bukhari",
+                    subtitle: "Authentic Hadith Collection",
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        MyRoutes.hadithList,
+                        arguments: Kitab.sahihBukhari,
+                      );
+                    },
+                    image: Assets.assetsImagesPngSahihAlBukhari,
+                  ),
+                  const SizedBox(height: 25),
+                  HadithButton(
+                    title: "Sahih Muslim",
+                    subtitle: "Authentic Hadith Collection",
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        MyRoutes.hadithList,
+                        arguments: Kitab.sahihMuslim,
+                      );
+                    },
+                    image: Assets.assetsImagesPngSahihMuslim,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
