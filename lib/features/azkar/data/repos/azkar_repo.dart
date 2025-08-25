@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/azkar/azkar_database.dart';
@@ -17,14 +15,16 @@ class AzkarRepo {
   }
 
   Stream<List<CategoryData>> getAzkarCategories() {
-    return (_db.select(_db.category)..orderBy([(e)=>OrderingTerm(expression: e.isFavorite,mode: OrderingMode.desc)])).watch();
+    return (_db.select(_db.category)..orderBy([
+          (e) =>
+              OrderingTerm(expression: e.isFavorite, mode: OrderingMode.desc),
+        ]))
+        .watch();
   }
 
   void updateCategory(String category) {
-    (_db.update(_db.category)
-          ..where((e) => e.category.equals(category)))
-        .write(const CategoryCompanion(
-          isFavorite: Value(true),
-        ));
+    (_db.update(_db.category)..where((e) => e.category.equals(category))).write(
+      const CategoryCompanion(isFavorite: Value(true)),
+    );
   }
 }

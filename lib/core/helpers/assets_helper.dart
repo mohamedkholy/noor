@@ -30,6 +30,14 @@ class Assets {
   /// assets/images/png/koran.png
   static const String assetsImagesPngKoran = "assets/images/png/koran.png";
 
+  /// Assets for assetsImagesPngMasjidMosque
+  /// assets/images/png/masjid-mosque.png
+  static const String assetsImagesPngMasjidMosque = "assets/images/png/masjid-mosque.png";
+
+  /// Assets for assetsImagesPngMasjidMosquePhotoroom
+  /// assets/images/png/masjid-mosque-Photoroom.png
+  static const String assetsImagesPngMasjidMosquePhotoroom = "assets/images/png/masjid-mosque-Photoroom.png";
+
   /// Assets for assetsImagesPngMosque
   /// assets/images/png/mosque.png
   static const String assetsImagesPngMosque = "assets/images/png/mosque.png";
@@ -61,6 +69,14 @@ class Assets {
   /// Assets for assetsImagesPngWindow5
   /// assets/images/png/window5.png
   static const String assetsImagesPngWindow5 = "assets/images/png/window5.png";
+
+  /// Assets for assetsImagesPngWindow6
+  /// assets/images/png/window6.png
+  static const String assetsImagesPngWindow6 = "assets/images/png/window6.png";
+
+  /// Assets for assetsImagesPngWindow6PhotoroomPhotoroom
+  /// assets/images/png/window6-Photoroom-Photoroom.png
+  static const String assetsImagesPngWindow6PhotoroomPhotoroom = "assets/images/png/window6-Photoroom-Photoroom.png";
 
   /// Assets for assetsImagesSvgAyaShape
   /// assets/images/svg/aya_shape.svg

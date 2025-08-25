@@ -4,6 +4,8 @@ import 'package:noor/core/database/azkar/azkar_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/core/widgets/decorated_container.dart';
 
 class AzkarCategoryWidget extends StatelessWidget {
   final CategoryData category;
@@ -24,17 +26,9 @@ class AzkarCategoryWidget extends StatelessWidget {
           arguments: category.category,
         );
       },
-      child: Container(
+      child: DecoratedContainer(
         padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-            image: AssetImage(Assets.assetsImagesPngWindow),
-            opacity: .03,
-            fit: BoxFit.cover,
-          ),
-          color: MyColors.primary.withAlpha(100),
-          borderRadius: BorderRadius.circular(10),
-        ),
+        color: MyColors.primary,
         child: Row(
           children: [
             GestureDetector(
@@ -46,7 +40,7 @@ class AzkarCategoryWidget extends StatelessWidget {
                     ? Assets.assetsImagesSvgOctagonallShapeSolid
                     : Assets.assetsImagesSvgOctagonallShape,
                 colorFilter: ColorFilter.mode(
-                  category.isFavorite ? MyColors.primary : Colors.black,
+                  category.isFavorite ? Colors.amber : Colors.black,
                   BlendMode.srcIn,
                 ),
                 width: 50,
@@ -57,10 +51,9 @@ class AzkarCategoryWidget extends StatelessWidget {
             Text(
               textDirection: TextDirection.rtl,
               category.category,
-              style: const TextStyle(
-                fontSize: 20,
-                fontFamily: "Amiri",
-                fontWeight: FontWeight.bold,
+              style: MyTextStyles.fontAmiriBold.copyWith(
+                fontSize: 25,
+                color: Colors.white,
               ),
             ),
           ],

@@ -32,7 +32,13 @@ class _FeaturesRowState extends State<FeaturesRow> {
         Navigator.pushNamed(context, MyRoutes.hadith);
       },
     ),
-    ("Tasbih", const IconData(0xe81f, fontFamily: "Tasbih"), () {}),
+    (
+      "Tasbih",
+      const IconData(0xe81f, fontFamily: "Tasbih"),
+      () {
+        Navigator.pushNamed(context, MyRoutes.tasbih);
+      },
+    ),
     (
       "Azkar",
       FontAwesomeIcons.handsPraying,

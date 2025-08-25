@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         );
       },
       theme: ThemeData(
+        dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
         fontFamily: "PlusJakartaSans",
         appBarTheme: const AppBarTheme(color: MyColors.primary),
         scaffoldBackgroundColor: Colors.white,

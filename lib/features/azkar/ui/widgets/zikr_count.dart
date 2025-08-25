@@ -14,34 +14,40 @@ class ZikrCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: onTap,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            height: 100,
-            width: 100,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: MyColors.primary.withAlpha(50),
-            ),
-            child: CircularProgressIndicator(
-              value: progress,
-              color: MyColors.primary,
-            ),
-          ),
-          Center(
-            child: Text(
-              count.toString(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+      child: SizedBox(
+        height: 100,
+        width: 100,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: MyColors.primary.withAlpha(50),
+              ),
+              child: CircularProgressIndicator(
+                value: progress,
+                color: MyColors.primary,
               ),
             ),
-          ),
-        ],
+            Center(
+              child: Text(
+                count.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

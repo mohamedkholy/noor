@@ -104,6 +104,9 @@ flutter:
     - family: HafsSmart_08
       fonts:
         - asset: assets/fonts/HafsSmart_08.ttf
+    - family: DS-DIGI
+      fonts:
+        - asset: assets/fonts/DS-DIGI.TTF    
 
 flutter_assets:
   assets_path: assets/images/
