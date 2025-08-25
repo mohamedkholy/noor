@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/constants/shared_preferences_keys.dart';
@@ -15,7 +14,6 @@ class QuranCubit extends Cubit<QuranState> {
   final QuranRepo quranRepo;
   QuranCubit(this.quranRepo) : super(QuranInitial());
 
-
   Future<void> getVerses() async {
     final verses = await quranRepo.getVersesPerSura();
     emit(QuranLoaded(verses));
@@ -28,16 +26,13 @@ class QuranCubit extends Cubit<QuranState> {
     emit(SurahsLoaded(surahs: surahs, verses: verses));
   }
 
-  void saveLastReading(Verse? verse,String suraNameEn) {
- 
-       
-
-     getIt.get<SharedPreferences>().setString(
+  void saveLastReading(Verse? verse, String suraNameEn) {
+    getIt.get<SharedPreferences>().setString(
       SharedPreferencesKeys.lastReading,
-        jsonEncode(<String,dynamic>{
-          "verse" : verse?.toJson(),
-          "suraNameEn" : suraNameEn,
-        })
+      jsonEncode(<String, dynamic>{
+        "verse": verse?.toJson(),
+        "suraNameEn": suraNameEn,
+      }),
     );
   }
 }

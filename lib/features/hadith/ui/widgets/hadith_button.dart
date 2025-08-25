@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noor/core/helpers/assets_helper.dart';
-import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/core/widgets/decorated_container.dart';
 
 class HadithButton extends StatelessWidget {
   const HadithButton({
@@ -21,32 +20,9 @@ class HadithButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(25),
-      child: Container(
+      child: DecoratedContainer(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         padding: const EdgeInsets.only(bottom: 24),
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-            image: AssetImage(Assets.assetsImagesPngWindow5),
-            fit: BoxFit.cover,
-            opacity: .04,
-          ),
-          gradient: LinearGradient(
-            colors: [
-              MyColors.primary.withAlpha(180),
-              Color.lerp(MyColors.primary.withAlpha(200), Colors.black, 0.3)!,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(25),
-          boxShadow: [
-            BoxShadow(
-              color: MyColors.primary.withValues(alpha: 0.4),
-              blurRadius: 10,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
         child: Column(
           children: [
             ClipRRect(

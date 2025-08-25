@@ -6,4 +6,6 @@ abstract class MyRoutes {
   static const String azkarCategory = '/azkarCategory';
   static const String hadith = '/hadith';
    static const String hadithList = '/hadithList';
+   static const String tasbih = '/tasbih';
+    static const String zekr = '/zekr';
 }

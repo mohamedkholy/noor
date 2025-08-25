@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:noor/core/database/azkar/azkar_database.dart' as _i155;
 import 'package:noor/core/database/hadith/hadith_database.dart' as _i928;
 import 'package:noor/core/database/quran/quran_database.dart' as _i651;
+import 'package:noor/core/database/tasbih/tasbih_database.dart' as _i339;
 import 'package:noor/core/di/register_module.dart' as _i662;
 import 'package:noor/features/azkar/data/repos/azkar_repo.dart' as _i99;
 import 'package:noor/features/azkar/logic/azkar_cubit.dart' as _i824;
@@ -22,6 +23,8 @@ import 'package:noor/features/hadith/logic/hadith_cubit.dart' as _i501;
 import 'package:noor/features/home/logic/home_cubit.dart' as _i892;
 import 'package:noor/features/quran/data/repos/quran_repo.dart' as _i1015;
 import 'package:noor/features/quran/logic/quran_cubit.dart' as _i239;
+import 'package:noor/features/tasbih/data/repos/tasbih_repo.dart' as _i966;
+import 'package:noor/features/tasbih/logic/tasbih_cubit.dart' as _i434;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -40,8 +43,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i155.AzkarDatabase>(() => _i155.AzkarDatabase());
     gh.singleton<_i928.HadithDatabase>(() => _i928.HadithDatabase());
     gh.singleton<_i651.QuranDatabase>(() => _i651.QuranDatabase());
+    gh.singleton<_i339.TasbihDatabase>(() => _i339.TasbihDatabase());
     gh.singleton<_i952.HadithRepo>(
       () => _i952.HadithRepo(gh<_i928.HadithDatabase>()),
+    );
+    gh.factory<_i966.TasbihRepo>(
+      () => _i966.TasbihRepo(gh<_i339.TasbihDatabase>()),
     );
     gh.factory<_i99.AzkarRepo>(() => _i99.AzkarRepo(gh<_i155.AzkarDatabase>()));
     gh.factory<_i501.HadithCubit>(
@@ -49,6 +56,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1015.QuranRepo>(
       () => _i1015.QuranRepo(gh<_i651.QuranDatabase>()),
+    );
+    gh.factory<_i434.TasbihCubit>(
+      () => _i434.TasbihCubit(gh<_i966.TasbihRepo>()),
     );
     gh.factory<_i824.AzkarCubit>(() => _i824.AzkarCubit(gh<_i99.AzkarRepo>()));
     gh.factory<_i239.QuranCubit>(

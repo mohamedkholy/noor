@@ -88,7 +88,7 @@ class _ZikrWidgetState extends State<ZikrWidget> {
     child: Text(
       text,
       textDirection: TextDirection.rtl,
-      style: MyTextStyles.font20AmiriBlack.copyWith(fontSize: fontSize),
+      style: MyTextStyles.fontAmiriBold.copyWith(fontSize: fontSize),
     ),
   );
 }
