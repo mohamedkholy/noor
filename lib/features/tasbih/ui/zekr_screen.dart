@@ -4,10 +4,10 @@ import 'package:noor/core/database/tasbih/tasbih_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/theming/my_text_styles.dart';
-import 'package:noor/core/widgets/electronic_sibha_shape.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/widgets/count_button.dart';
 import 'package:noor/features/tasbih/ui/widgets/reset_button.dart';
+import 'package:noor/features/tasbih/ui/widgets/shape.dart';
 import 'package:noor/features/tasbih/ui/widgets/tasbih_count_widget.dart';
 
 class ZekrScreen extends StatefulWidget {
@@ -72,7 +72,7 @@ class _ZekrScreenState extends State<ZekrScreen> {
                         return Container(
                           margin: const EdgeInsets.symmetric(vertical: 50),
                           child: CustomPaint(
-                            painter: ElectronicSibhaShape(),
+                            painter: Shape(),
                             child: SizedBox(
                               width: constraints.maxWidth,
                               height: constraints.maxWidth,
