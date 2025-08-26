@@ -46,7 +46,13 @@ class _FeaturesRowState extends State<FeaturesRow> {
         Navigator.pushNamed(context, MyRoutes.azkar);
       },
     ),
-    ("Qibla", FontAwesomeIcons.compass, () {}),
+    (
+      "Qibla",
+      FontAwesomeIcons.compass,
+      () {
+        Navigator.pushNamed(context, MyRoutes.qibla);
+      },
+    ),
     ("Near mosque", Icons.mosque, () {}),
     ("Calendar", FontAwesomeIcons.calendarDays, () {}),
   ];

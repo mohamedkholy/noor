@@ -82,9 +82,17 @@ class Assets {
   /// assets/images/svg/aya_shape.svg
   static const String assetsImagesSvgAyaShape = "assets/images/svg/aya_shape.svg";
 
+  /// Assets for assetsImagesSvgCompass
+  /// assets/images/svg/compass.svg
+  static const String assetsImagesSvgCompass = "assets/images/svg/compass.svg";
+
   /// Assets for assetsImagesSvgHeaderSura1
   /// assets/images/svg/header_sura1.svg
   static const String assetsImagesSvgHeaderSura1 = "assets/images/svg/header_sura1.svg";
+
+  /// Assets for assetsImagesSvgNeedle
+  /// assets/images/svg/needle.svg
+  static const String assetsImagesSvgNeedle = "assets/images/svg/needle.svg";
 
   /// Assets for assetsImagesSvgOctagonallShape
   /// assets/images/svg/octagonall_shape.svg

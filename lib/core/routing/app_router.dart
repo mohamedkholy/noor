@@ -12,6 +12,7 @@ import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
 import 'package:noor/features/hadith/ui/hadith_screen.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/home_screen.dart';
+import 'package:noor/features/qibla/ui/qibla_screen.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
 import 'package:noor/features/quran/ui/reading_screen.dart';
@@ -89,6 +90,10 @@ class AppRouter {
             create: (context) => getIt<TasbihCubit>(),
             child: ZekrScreen(tasbih: args as Tasbih),
           ),
+        );
+      case MyRoutes.qibla:
+        return MaterialPageRoute(
+          builder: (context) => const QiblaScreen(),
         );
       default:
         return null;
