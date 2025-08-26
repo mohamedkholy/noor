@@ -11,16 +11,23 @@ class Shape extends CustomPainter {
     final path = Path();
 
     path.moveTo(size.width * .13, size.height - (size.height * .4));
-    path.lineTo(size.width * .15, size.height - (size.height * .4) + 50);
+    path.quadraticBezierTo(
+      size.width * .155,
+      size.height - (size.height * .33),
+      size.width * .15,
+      size.height - (size.height * .3),
+    );
     path.cubicTo(
       size.width * .12,
-      size.height + 50,
+      size.height + (size.height * .11),
       size.width - size.width * .12,
-      size.height + 50,
+      size.height + (size.height * .11),
       size.width - size.width * .15,
-      size.height - (size.height * .4) + 50,
+      size.height - (size.height * .3),
     );
-    path.lineTo(
+    path.quadraticBezierTo(
+      size.width - size.width * .155,
+      size.height - (size.height * .33),
       size.width - size.width * .13,
       size.height - (size.height * .4),
     );
@@ -32,9 +39,9 @@ class Shape extends CustomPainter {
     );
     path.cubicTo(
       size.width - size.width * .2,
-      -60,
+      -size.height * .13,
       size.width * .2,
-      -60,
+      -size.height * .13,
       size.width * .12,
       size.height * .05,
     );

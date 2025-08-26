@@ -6,6 +6,7 @@ import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/features/azkar/logic/azkar_cubit.dart';
 import 'package:noor/features/azkar/ui/azkar_category_screen.dart';
 import 'package:noor/features/azkar/ui/azkar_screen.dart';
+import 'package:noor/features/calender/ui/calender_screen.dart';
 import 'package:noor/features/hadith/data/models/kitab.dart';
 import 'package:noor/features/hadith/logic/hadith_cubit.dart';
 import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
@@ -94,6 +95,10 @@ class AppRouter {
       case MyRoutes.qibla:
         return MaterialPageRoute(
           builder: (context) => const QiblaScreen(),
+        );
+      case MyRoutes.calender:
+        return MaterialPageRoute(
+          builder: (context) => const CalenderScreen(),
         );
       default:
         return null;

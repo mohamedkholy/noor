@@ -512,6 +512,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  jhijri:
+    dependency: transitive
+    description:
+      name: jhijri
+      sha256: c2a28e803b1d07513a29953c6685b933235511a1f57966fd5bf66bfdae131f70
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  jhijri_picker:
+    dependency: "direct main"
+    description:
+      name: jhijri_picker
+      sha256: "55e3cdc03a20284fea179658c102b8eed802a5cc0e1fd949265285b1d352da8a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   json_annotation:
     dependency: transitive
     description:
@@ -973,6 +989,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
+  syncfusion_flutter_core:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_core
+      sha256: bfd026c0f9822b49ff26fed11cd3334519acb6a6ad4b0c81d9cd18df6af1c4c0
+      url: "https://pub.dev"
+    source: hosted
+    version: "30.2.7"
+  syncfusion_flutter_datepicker:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_datepicker
+      sha256: b5f35cc808e91b229d41613efe71dadab1549a35bfd493f922fc06ccc2fe908c
+      url: "https://pub.dev"
+    source: hosted
+    version: "30.2.7"
   term_glyph:
     dependency: transitive
     description:

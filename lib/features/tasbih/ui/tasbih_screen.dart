@@ -50,35 +50,40 @@ class _TasbihScreenState extends State<TasbihScreen> {
         },
         child: const Icon(Icons.add, color: Colors.white),
       ),
-      body: BlocBuilder<TasbihCubit, TasbihState>(
-        builder: (context, state) {
-          if (state is TasbihLoaded) {
-            return ListView.builder(
-              itemCount: state.tasbih.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      MyRoutes.zekr,
-                      arguments: state.tasbih[index],
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 700),
+          child: BlocBuilder<TasbihCubit, TasbihState>(
+            builder: (context, state) {
+              if (state is TasbihLoaded) {
+                return ListView.builder(
+                  itemCount: state.tasbih.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          MyRoutes.zekr,
+                          arguments: state.tasbih[index],
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          bottom: index == state.tasbih.length - 1 ? 15 : 5,
+                          top: index == 0 ? 15 : 5,
+                        ),
+                        child: TasbihWidget(tasbih: state.tasbih[index]),
+                      ),
                     );
                   },
-                  child: Container(
-                    margin: EdgeInsets.only(
-                      bottom: index == state.tasbih.length - 1 ? 15 : 5,
-                      top: index == 0 ? 15 : 5,
-                    ),
-                    child: TasbihWidget(tasbih: state.tasbih[index]),
-                  ),
                 );
-              },
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(color: MyColors.primary),
-          );
-        },
+              }
+              return const Center(
+                child: CircularProgressIndicator(color: MyColors.primary),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

@@ -54,7 +54,13 @@ class _FeaturesRowState extends State<FeaturesRow> {
       },
     ),
     ("Near mosque", Icons.mosque, () {}),
-    ("Calendar", FontAwesomeIcons.calendarDays, () {}),
+    (
+      "Calendar",
+      FontAwesomeIcons.calendarDays,
+      () {
+        Navigator.pushNamed(context, MyRoutes.calender);
+      },
+    ),
   ];
 
   @override
