@@ -33,6 +33,10 @@ class QiblahCompassWidget extends StatelessWidget {
         final qiblahDirection = snapshot.data;
         final children = [
           QiblaTextWidget(qibla: qiblahDirection?.offset ?? 0),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).width < 600 ? 15 : 0,
+            width: MediaQuery.sizeOf(context).width < 600 ? 15 : 0,
+          ),
           Expanded(
             child: Stack(
               alignment: Alignment.center,

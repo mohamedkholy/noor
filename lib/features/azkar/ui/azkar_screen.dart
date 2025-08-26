@@ -33,7 +33,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 800),
+          constraints: const BoxConstraints(maxWidth: 700),
           child: BlocBuilder<AzkarCubit, AzkarState>(
             builder: (context, state) {
               if (state is AzkarCategoriesLoaded) {

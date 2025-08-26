@@ -70,7 +70,9 @@ class _ZekrScreenState extends State<ZekrScreen> {
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         return Container(
-                          margin: const EdgeInsets.symmetric(vertical: 50),
+                          margin: EdgeInsets.symmetric(
+                            vertical: (constraints.maxWidth * .15),
+                          ),
                           child: CustomPaint(
                             painter: Shape(),
                             child: SizedBox(
