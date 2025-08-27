@@ -13,6 +13,8 @@ import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
 import 'package:noor/features/hadith/ui/hadith_screen.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/home_screen.dart';
+import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
+import 'package:noor/features/near_mosque/ui/near_mosque_screen.dart';
 import 'package:noor/features/qibla/ui/qibla_screen.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
@@ -93,12 +95,15 @@ class AppRouter {
           ),
         );
       case MyRoutes.qibla:
-        return MaterialPageRoute(
-          builder: (context) => const QiblaScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const QiblaScreen());
       case MyRoutes.calender:
+        return MaterialPageRoute(builder: (context) => const CalenderScreen());
+      case MyRoutes.nearMosque:
         return MaterialPageRoute(
-          builder: (context) => const CalenderScreen(),
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<NearMosqueCubit>(),
+            child: const NearMosqueScreen(),
+          ),
         );
       default:
         return null;

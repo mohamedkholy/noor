@@ -10,6 +10,14 @@ class Assets {
   /// assets/images/png/Basmala.png
   static const String assetsImagesPngBasmala = "assets/images/png/Basmala.png";
 
+  /// Assets for assetsImagesPngCurrentLocation
+  /// assets/images/png/current_location.png
+  static const String assetsImagesPngCurrentLocation = "assets/images/png/current_location.png";
+
+  /// Assets for assetsImagesPngCurrentMosque
+  /// assets/images/png/current_mosque.png
+  static const String assetsImagesPngCurrentMosque = "assets/images/png/current_mosque.png";
+
   /// Assets for assetsImagesPngHeadOfSurah
   /// assets/images/png/head_of_surah.png
   static const String assetsImagesPngHeadOfSurah = "assets/images/png/head_of_surah.png";
