@@ -10,4 +10,5 @@ abstract class MyRoutes {
   static const String zekr = '/zekr';
   static const String qibla = '/qibla';
    static const String calender = '/calender';
+   static const String nearMosque = '/nearMosque';
 }

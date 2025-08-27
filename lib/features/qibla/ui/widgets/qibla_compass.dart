@@ -86,4 +86,6 @@ class QiblahCompassState extends State<QiblahCompass> {
       _locationStreamController.sink.add(locationStatus);
     }
   }
+
+  
 }
