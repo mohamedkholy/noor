@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
-import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/near_mosque/data/models/mosque_data.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_state.dart';
 import 'package:noor/features/near_mosque/ui/widgets/collapesd_error_widget.dart';
+import 'package:noor/features/near_mosque/ui/widgets/current_location_button.dart';
 import 'package:noor/features/near_mosque/ui/widgets/error_state_widget.dart';
 import 'package:noor/features/near_mosque/ui/widgets/expand_button.dart';
 import 'package:noor/features/near_mosque/ui/widgets/nearby_mosques_widget.dart';
@@ -81,20 +81,12 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                   currentLocation = state.currelocation;
                   polylines.clear();
                   markers.clear();
-                  mapController?.animateCamera(
-                    CameraUpdate.newCameraPosition(
-                      CameraPosition(target: currentLocation!, zoom: 16),
-                    ),
-                  );
+                  animateCameraToCurrentLocation();
                 }
                 if (state is UnselectMosque) {
                   polylines.clear();
                   markers.clear();
-                  mapController?.animateCamera(
-                    CameraUpdate.newCameraPosition(
-                      CameraPosition(target: currentLocation!, zoom: 16),
-                    ),
-                  );
+                  animateCameraToCurrentLocation();
                 }
                 if (currentLocation != null) {
                   markers.add(
@@ -195,38 +187,10 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                           onTap: state is NearMosqueLoading
                               ? null
                               : () {
-                                  mapController?.animateCamera(
-                                    CameraUpdate.newCameraPosition(
-                                      CameraPosition(
-                                        target: currentLocation!,
-                                        zoom: 16,
-                                      ),
-                                    ),
-                                  );
+                                  animateCameraToCurrentLocation();
                                 },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 5),
-                            padding: const EdgeInsets.all(8),
-                            decoration: const BoxDecoration(
-                              color: MyColors.primary,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                            ),
-                            child: state is NearMosqueLoading
-                                ? const SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.white,
-                                      strokeWidth: 2,
-                                    ),
-                                  )
-                                : const Icon(
-                                    Icons.my_location_rounded,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
+                          child: CurrentLocationButton(
+                            isLoading: state is NearMosqueLoading,
                           ),
                         );
                       },
@@ -252,19 +216,17 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                             )
                           : Align(
                               alignment: Alignment.bottomRight,
-                              child: Container(
+                              child: ExpandButton(
+                                arrowUp: true,
                                 margin: const EdgeInsets.only(
                                   right: 5,
                                   bottom: 10,
                                 ),
-                                child: ExpandButton(
-                                  arrowUp: true,
-                                  padding: const EdgeInsets.all(4),
-                                  onArrowClick: () {
-                                    isNerbayMosquesExpanded.value =
-                                        !isNerbayMosquesExpanded.value;
-                                  },
-                                ),
+                                padding: const EdgeInsets.all(4),
+                                onArrowClick: () {
+                                  isNerbayMosquesExpanded.value =
+                                      !isNerbayMosquesExpanded.value;
+                                },
                               ),
                             );
                     },
@@ -274,6 +236,14 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void animateCameraToCurrentLocation() {
+    mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: currentLocation!, zoom: 16),
       ),
     );
   }

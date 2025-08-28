@@ -63,7 +63,7 @@ class _NearbyMosquesWidgetState extends State<NearbyMosquesWidget> {
                   ),
                 if (mosqueData != null) const SizedBox(width: 10),
                 Text(
-                  mosqueData != null ? mosqueData!.name : "Nearby Mosques",
+                  mosqueData != null ? "Details" : "Nearby Mosques",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

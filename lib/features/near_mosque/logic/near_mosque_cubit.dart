@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:noor/core/helpers/connection_observer.dart';
 import 'package:noor/features/near_mosque/data/models/mosque_data.dart';
 import 'package:noor/features/near_mosque/data/models/near_mosque_error.dart';
+import 'package:noor/features/near_mosque/data/models/nearby_mosques_response.dart';
 import 'package:noor/features/near_mosque/data/repos/near_mosque_repo.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_state.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,6 +23,16 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
 
   Future<void> checkLocationStatus(LatLng? savedLocation) async {
     emit(NearMosqueLoading());
+    if (await ConnectionObserver.checkConnectivity() ==
+        InternetConnectionState.disconnected) {
+      emit(
+        NearMosqueErrorState(
+          message: 'No internet connection',
+          errorType: NearMosqueError.noInternet,
+        ),
+      );
+      return;
+    }
     if (await Geolocator.isLocationServiceEnabled()) {
       var status = await Geolocator.checkPermission();
       if (status == LocationPermission.always ||
@@ -30,7 +42,9 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
           emit(NearMosqueInitial());
           return;
         }
-        getNearMosques(location: LatLng(position.latitude, position.longitude));
+        _getNearMosques(
+          location: LatLng(position.latitude, position.longitude),
+        );
       } else {
         status = await Geolocator.requestPermission();
         if (status == LocationPermission.deniedForever) {
@@ -55,7 +69,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
             emit(NearMosqueInitial());
             return;
           }
-          getNearMosques(
+          _getNearMosques(
             location: LatLng(position.latitude, position.longitude),
           );
         }
@@ -70,7 +84,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
     }
   }
 
-  Future<void> getNearMosques({required LatLng location}) async {
+  Future<void> _getNearMosques({required LatLng location}) async {
     if (state is! NearMosqueLoading) {
       emit(NearMosqueLoading());
     }
@@ -102,7 +116,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
   Future<void> initMap() async {
     final savedLocation = await nearMosqueRepo.getLastLocation();
     if (savedLocation != null) {
-      final mosques = await nearMosqueRepo.getLastLocationNearMosques();
+      final mosques = await nearMosqueRepo.getNearMosquesLastLocations();
       emit(NearMosquesLoaded(mosques: mosques, currelocation: savedLocation));
       currentLocation = savedLocation;
       await Future.delayed(const Duration(milliseconds: 300));
