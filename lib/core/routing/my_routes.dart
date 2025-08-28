@@ -9,6 +9,7 @@ abstract class MyRoutes {
   static const String tasbih = '/tasbih';
   static const String zekr = '/zekr';
   static const String qibla = '/qibla';
-   static const String calender = '/calender';
-   static const String nearMosque = '/nearMosque';
+  static const String calender = '/calender';
+  static const String nearMosque = '/nearMosque';
+  static const String location = '/location';
 }

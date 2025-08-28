@@ -6,6 +6,7 @@ part 'overpass_response.g.dart';
 class OverpassResponse {
   double version;
   String generator;
+  @JsonKey(name: "osm3s")
   Osm3S osm3S;
   List<Element> elements;
 

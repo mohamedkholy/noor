@@ -20,7 +20,7 @@ Map<String, dynamic> _$OverpassResponseToJson(OverpassResponse instance) =>
     <String, dynamic>{
       'version': instance.version,
       'generator': instance.generator,
-      'osm3S': instance.osm3S,
+      'osm3s': instance.osm3S,
       'elements': instance.elements,
     };
 

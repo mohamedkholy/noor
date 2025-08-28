@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:hijri/hijri_calendar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/widgets/ayah_of_the_day_widget.dart';
+import 'package:noor/features/home/ui/widgets/date_location_widget.dart';
 import 'package:noor/features/home/ui/widgets/features_row.dart';
 import 'package:noor/features/home/ui/widgets/hadith_of_the_day.dart';
 import 'package:noor/features/home/ui/widgets/last_read_widget.dart';
 import 'package:noor/features/home/ui/widgets/next_prayer_count_down.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  
+
+  @override
+  void initState() {
+     context.read<HomeCubit>().askForPermission();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +40,7 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 20,
                 color: Colors.white,
               ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(HijriCalendar.now().toFormat("dd MMMM yyyy")),
-                  const Text("Egypt, Cairo"),
-                ],
-              ),
+              title: const DateLocationWidget(),
               actions: [
                 IconButton(
                   onPressed: () {},

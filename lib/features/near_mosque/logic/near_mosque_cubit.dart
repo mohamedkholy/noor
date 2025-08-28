@@ -50,7 +50,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
         if (status == LocationPermission.deniedForever) {
           emit(
             NearMosqueErrorState(
-              message: 'Location permission denied',
+              message: 'You need to allow location permission from settings',
               errorType: NearMosqueError.locationDenied,
               openSettings: true,
             ),
@@ -58,7 +58,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
         } else if (status == LocationPermission.denied) {
           emit(
             NearMosqueErrorState(
-              message: 'Location permission denied',
+              message: 'To get your current location you must accept the location permission',
               errorType: NearMosqueError.locationDenied,
             ),
           );
