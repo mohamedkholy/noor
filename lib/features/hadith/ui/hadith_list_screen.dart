@@ -17,8 +17,7 @@ class HadithListScreen extends StatefulWidget {
 class _HadithListScreenState extends State<HadithListScreen> {
   late final HadithCubit hadithCubit = context.read();
   int page = 0;
-  bool isSearching = false;
-  String value = "";
+  String? query;
 
   @override
   void initState() {
@@ -32,28 +31,20 @@ class _HadithListScreenState extends State<HadithListScreen> {
       appBar: SearchAppBar(
         title: widget.type.name,
         onstartSearch: (bool isSearching) {
-          setState(() {
-            this.isSearching = isSearching;
-            value = "";
-          });
-          hadithCubit.clearList();
-          Future.delayed(const Duration(milliseconds: 1), () {
-            if (!isSearching) {
-              page = 0;
+          page = 0;
+          query = "";
+          if (!isSearching) {
+            Future.delayed(const Duration(milliseconds: 100), () {
               hadithCubit.getKitab(widget.type, page);
-            }
-          });
+            });
+          }
         },
         onSearch: (value) {
-          if (value.isEmpty) {
-            hadithCubit.clearList();
-            return;
-          }
           setState(() {
-            this.value = value;
-            page = 0;
+            query = value;
           });
-          hadithCubit.search(widget.type, page, value);
+          page = 0;
+          hadithCubit.getKitab(widget.type, page, value);
         },
       ),
       body: Center(
@@ -66,17 +57,13 @@ class _HadithListScreenState extends State<HadithListScreen> {
                   itemCount: state.hadiths.length,
                   itemBuilder: (context, index) {
                     if (index == state.hadiths.length - 5) {
-                      if (!isSearching) {
-                        hadithCubit.getKitab(widget.type, ++page);
-                      } else {
-                        hadithCubit.search(widget.type, ++page, value);
-                      }
+                      hadithCubit.getKitab(widget.type, ++page, query);
                     }
                     return HadithWidget(
                       textAr: state.hadiths[index].arab,
                       textEn: state.hadiths[index].terjemah,
                       hadithNumber: state.hadiths[index].number,
-                      searchValue: value,
+                      searchValue: query ?? "",
                     );
                   },
                 );

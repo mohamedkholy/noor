@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
+import 'package:noor/core/theming/my_colors.dart';
 
 abstract class MyTextStyles {
   static const TextStyle appBarTextStyle = TextStyle(
@@ -17,5 +18,23 @@ abstract class MyTextStyles {
     fontSize: 15,
     fontWeight: FontWeightHelper.regular,
     color: Colors.grey,
+  );
+
+  static const TextStyle font20PrimarySemiBold = TextStyle(
+    fontSize: 25,
+    color: MyColors.primary,
+    fontWeight: FontWeightHelper.bold,
+  );
+
+  static TextStyle font15greyRegular = TextStyle(
+    fontSize: 17,
+    color: Colors.grey.shade600,
+    fontWeight: FontWeightHelper.medium,
+  );
+
+  static const TextStyle font15whiteRegular = TextStyle(
+    fontSize: 15,
+    color: Colors.white,
+    fontWeight: FontWeightHelper.bold,
   );
 }

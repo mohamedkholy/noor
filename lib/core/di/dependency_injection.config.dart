@@ -13,6 +13,7 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:noor/core/database/azkar/azkar_database.dart' as _i155;
+import 'package:noor/core/database/cities/cities_database.dart' as _i502;
 import 'package:noor/core/database/hadith/hadith_database.dart' as _i928;
 import 'package:noor/core/database/mosques/mosques_database.dart' as _i495;
 import 'package:noor/core/database/quran/quran_database.dart' as _i651;
@@ -23,7 +24,10 @@ import 'package:noor/features/azkar/data/repos/azkar_repo.dart' as _i99;
 import 'package:noor/features/azkar/logic/azkar_cubit.dart' as _i824;
 import 'package:noor/features/hadith/data/repos/hadith_repo.dart' as _i952;
 import 'package:noor/features/hadith/logic/hadith_cubit.dart' as _i501;
+import 'package:noor/features/home/data/repos/home_repo.dart' as _i298;
 import 'package:noor/features/home/logic/home_cubit.dart' as _i892;
+import 'package:noor/features/location/data/repos/location_repo.dart' as _i839;
+import 'package:noor/features/location/logic/location_cubit.dart' as _i803;
 import 'package:noor/features/near_mosque/data/repos/near_mosque_repo.dart'
     as _i1051;
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart'
@@ -47,12 +51,18 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i361.Dio>(() => registerModule.dio);
-    gh.factory<_i892.HomeCubit>(() => _i892.HomeCubit());
     gh.singleton<_i155.AzkarDatabase>(() => _i155.AzkarDatabase());
+    gh.singleton<_i502.CitiesDatabase>(() => _i502.CitiesDatabase());
     gh.singleton<_i928.HadithDatabase>(() => _i928.HadithDatabase());
     gh.singleton<_i495.MosquesDatabase>(() => _i495.MosquesDatabase());
     gh.singleton<_i651.QuranDatabase>(() => _i651.QuranDatabase());
     gh.singleton<_i339.TasbihDatabase>(() => _i339.TasbihDatabase());
+    gh.factory<_i298.HomeRepo>(
+      () => _i298.HomeRepo(gh<_i502.CitiesDatabase>()),
+    );
+    gh.factory<_i839.LocationRepo>(
+      () => _i839.LocationRepo(gh<_i502.CitiesDatabase>()),
+    );
     gh.factory<_i543.MosqueApiService>(
       () => _i543.MosqueApiService(gh<_i361.Dio>()),
     );
@@ -63,6 +73,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i966.TasbihRepo(gh<_i339.TasbihDatabase>()),
     );
     gh.factory<_i99.AzkarRepo>(() => _i99.AzkarRepo(gh<_i155.AzkarDatabase>()));
+    gh.factory<_i892.HomeCubit>(() => _i892.HomeCubit(gh<_i298.HomeRepo>()));
     gh.factory<_i501.HadithCubit>(
       () => _i501.HadithCubit(gh<_i952.HadithRepo>()),
     );
@@ -71,6 +82,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i434.TasbihCubit>(
       () => _i434.TasbihCubit(gh<_i966.TasbihRepo>()),
+    );
+    gh.factory<_i803.LocationCubit>(
+      () => _i803.LocationCubit(gh<_i839.LocationRepo>()),
     );
     gh.factory<_i1051.NearMosqueRepo>(
       () => _i1051.NearMosqueRepo(

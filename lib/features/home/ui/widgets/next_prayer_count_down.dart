@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
+import 'package:noor/features/home/logic/home_cubit.dart';
+import 'package:noor/features/home/logic/home_state.dart';
 import 'package:noor/features/home/ui/widgets/circular_slider.dart';
 import 'package:noor/features/home/ui/widgets/prayers_time_row.dart';
 
@@ -19,6 +23,7 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   late DateTime _nextPrayerTime;
   late double _totalDuration;
   late Duration _nextPrayerDuration;
+  late City _city;
   final ValueNotifier<Duration> _nextPrayerDurationNotifier = ValueNotifier(
     Duration.zero,
   );
@@ -26,7 +31,15 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
 
   @override
   void initState() {
-    initPrayerTimes();
+    _city =
+        context.read<HomeCubit>().getSavedCity() ??
+        const City(
+          name: "Makkah",
+          lat: 21.42664,
+          lng: 39.82563,
+          country: "SA",
+        );
+    initPrayerTimes(_city);
     super.initState();
   }
 
@@ -39,34 +52,50 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          opacity: .06,
-          image: AssetImage(Assets.assetsImagesPngMosqueIstanbul),
-          fit: BoxFit.cover,
-        ),
-      ),
-      width: double.infinity,
-      child: Column(
-        children: [
-          ValueListenableBuilder<Duration>(
-            valueListenable: _nextPrayerDurationNotifier,
-            builder: (context, value, child) => CircularSlider(
-              totalDuration: _totalDuration,
-              nextPrayerDuration: _nextPrayerDuration,
-              nextPrayer: _nextPrayer,
+    return BlocConsumer<HomeCubit, HomeState>(
+      listener: (context, state) {
+        if (state is CityLoaded) {
+          _city = state.city;
+          initPrayerTimes(_city);
+        }
+      },
+      builder: (context, state) {
+        return Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              opacity: .06,
+              image: AssetImage(Assets.assetsImagesPngMosqueIstanbul),
+              fit: BoxFit.cover,
             ),
           ),
-          PrayersTimeRow(prayerTimes: _prayerTimes, nextPrayer: _nextPrayer),
-          const SizedBox(height: 15),
-        ],
-      ),
+          width: double.infinity,
+          child: Column(
+            children: [
+              ValueListenableBuilder<Duration>(
+                valueListenable: _nextPrayerDurationNotifier,
+                builder: (context, value, child) => CircularSlider(
+                  totalDuration: _totalDuration,
+                  nextPrayerDuration: _nextPrayerDuration,
+                  nextPrayer: _nextPrayer,
+                ),
+              ),
+              PrayersTimeRow(
+                prayerTimes: _prayerTimes,
+                nextPrayer: _nextPrayer,
+              ),
+              const SizedBox(height: 15),
+            ],
+          ),
+        );
+      },
     );
   }
 
-  void initPrayerTimes() {
-    final myCoordinates = Coordinates(30.789319545900607, 30.99762890423023);
+  void initPrayerTimes(City city) {
+    final myCoordinates = Coordinates(
+      city.lat,
+      city.lng,
+    );
     final params = CalculationMethod.egyptian.getParameters();
     params.madhab = Madhab.shafi;
     _prayerTimes = PrayerTimes.today(myCoordinates, params);
@@ -109,7 +138,7 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   void _updateRemainigTime(PrayerTimes prayerTimes) {
     if (prayerTimes.nextPrayer() != _nextPrayer) {
       timer?.cancel();
-      initPrayerTimes();
+      initPrayerTimes(_city);
       return;
     }
     _nextPrayerDuration = _nextPrayerTime.difference(DateTime.now());

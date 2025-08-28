@@ -98,6 +98,10 @@ class Assets {
   /// assets/images/svg/header_sura1.svg
   static const String assetsImagesSvgHeaderSura1 = "assets/images/svg/header_sura1.svg";
 
+  /// Assets for assetsImagesSvgMap
+  /// assets/images/svg/map.svg
+  static const String assetsImagesSvgMap = "assets/images/svg/map.svg";
+
   /// Assets for assetsImagesSvgNeedle
   /// assets/images/svg/needle.svg
   static const String assetsImagesSvgNeedle = "assets/images/svg/needle.svg";

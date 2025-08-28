@@ -108,10 +108,13 @@ class _NearbyMosquesWidgetState extends State<NearbyMosquesWidget> {
                             },
                           ),
                         )
-                      : const Center(
-                          child: Text(
-                            "No nearby mosques found",
-                            textAlign: TextAlign.center,
+                      : SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.25,
+                          child: const Center(
+                            child: Text(
+                              "No nearby mosques found",
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         )
                 : Flexible(

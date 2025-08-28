@@ -50,7 +50,7 @@ class QiblahCompassState extends State<QiblahCompass> {
                 return QiblahCompassWidget();
               case LocationPermission.deniedForever:
                 return LocationDeniedWidget(
-                  error: "Location service Denied Forever !",
+                  error: "You need to allow location permission from settings",
                   openSettings: true,
                   callback: () {
                     Geolocator.openAppSettings();
@@ -58,7 +58,8 @@ class QiblahCompassState extends State<QiblahCompass> {
                 );
               case LocationPermission.denied:
                 return LocationDeniedWidget(
-                  error: "Location service permission denied",
+                  error:
+                      "To get your current location you must accept the location permission",
                   callback: _checkLocationStatus,
                 );
               default:
@@ -86,6 +87,4 @@ class QiblahCompassState extends State<QiblahCompass> {
       _locationStreamController.sink.add(locationStatus);
     }
   }
-
-  
 }
