@@ -3,11 +3,13 @@ import 'package:noor/core/theming/my_colors.dart';
 
 class ExpandButton extends StatelessWidget {
   final EdgeInsets? padding;
+  final EdgeInsets? margin;
   final bool arrowUp;
   const ExpandButton({
     super.key,
     required this.onArrowClick,
     this.padding,
+    this.margin,
     this.arrowUp = false,
   });
 
@@ -18,6 +20,7 @@ class ExpandButton extends StatelessWidget {
     return InkWell(
       onTap: onArrowClick,
       child: Container(
+        margin: margin,
         padding: padding ?? EdgeInsets.zero,
         decoration: const BoxDecoration(
           color: MyColors.primary,
