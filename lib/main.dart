@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/di/dependency_injection.dart';
+import 'package:noor/core/notifications/notifications_manager.dart';
 import 'package:noor/core/routing/app_router.dart';
 import 'package:noor/core/theming/my_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
+  await NotificationsManager.instance.init();
+
   runApp(const MyApp());
 }
 

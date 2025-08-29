@@ -7,9 +7,11 @@ import 'package:noor/core/constants/shared_preferences_keys.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
+import 'package:noor/core/notifications/notifications_manager.dart';
 import 'package:noor/features/home/data/models/last_reading.dart';
 import 'package:noor/features/home/data/repos/home_repo.dart';
 import 'package:noor/features/home/logic/home_state.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
@@ -27,7 +29,11 @@ class HomeCubit extends Cubit<HomeState> {
       );
       final verse = Verse.fromJson(lastReadingJson['verse']);
       final suraNameEn = lastReadingJson['suraNameEn'];
-      emit(LastReadingLoaded(lastReading: LastReadingData(verse: verse, suraNameEn: suraNameEn)));
+      emit(
+        LastReadingLoaded(
+          lastReading: LastReadingData(verse: verse, suraNameEn: suraNameEn),
+        ),
+      );
       return LastReadingData(verse: verse, suraNameEn: suraNameEn);
     }
     return null;
@@ -40,8 +46,9 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  void setCity(City city) {
+  Future<void> setCity(City city) async {
     emit(CityLoaded(city: city));
+    NotificationsManager.instance.scheduleNotifications();
   }
 
   City? getSavedCity() {
@@ -53,10 +60,12 @@ class HomeCubit extends Cubit<HomeState> {
     return City.fromJson(map);
   }
 
-  void askForPermission() {
-    Geolocator.requestPermission().then((status) {
+  Future<void> askForPermissions() async {
+    await NotificationsManager.instance.requestPermission();
+    await Geolocator.requestPermission().then((status) async {
       if (status == LocationPermission.always ||
-          status == LocationPermission.whileInUse) {
+          status == LocationPermission.whileInUse &&
+              await Geolocator.isLocationServiceEnabled()) {
         Geolocator.getCurrentPosition().then((position) {
           _homeRepo.findNearest(position.latitude, position.longitude).then((
             city,
@@ -65,7 +74,12 @@ class HomeCubit extends Cubit<HomeState> {
             setCity(city);
           });
         });
+      } else {
+        if (await Permission.notification.isGranted) {
+          NotificationsManager.instance.scheduleNotifications();
+        }
       }
     });
+    NotificationsManager.instance.testNotification();
   }
 }

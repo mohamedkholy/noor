@@ -1,7 +1,11 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/database/cities/cities_database.dart';
+import 'package:noor/core/helpers/prayer_times_helper.dart';
 import 'package:noor/core/widgets/decorated_container.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
+import 'package:noor/features/calender/ui/logic/calender_cubit.dart';
 import 'package:noor/features/calender/ui/widgets/calender_widget.dart';
 import 'package:noor/features/calender/ui/widgets/prayers_item.dart';
 
@@ -15,11 +19,15 @@ class CalenderScreen extends StatefulWidget {
 class _CalenderScreenState extends State<CalenderScreen> {
   late PrayerTimes prayerTimes;
   Prayer? nextPrayer;
+  late City _city;
 
   @override
   void initState() {
+    _city =
+        context.read<CalenderCubit>().getSavedCity() ??
+        const City(name: "Makkah", lat: 21.42664, lng: 39.82563, country: "SA");
+    initPrayerTimes(DateTime.now(), _city);
     super.initState();
-    initPrayerTimes(DateTime.now());
   }
 
   @override
@@ -40,7 +48,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                   const SizedBox(height: 20),
                   CalenderWidget(
                     onDateChanged: (date) {
-                      initPrayerTimes(date);
+                      initPrayerTimes(date, _city);
                       setState(() {});
                     },
                   ),
@@ -55,15 +63,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
     );
   }
 
-  void initPrayerTimes(DateTime date) {
-    final myCoordinates = Coordinates(30.789319545900607, 30.99762890423023);
-    final params = CalculationMethod.egyptian.getParameters();
-    params.madhab = Madhab.shafi;
-    prayerTimes = PrayerTimes(
-      myCoordinates,
-      DateComponents(date.year, date.month, date.day),
-      params,
-    );
+  void initPrayerTimes(DateTime date, City city) {
+    prayerTimes = PrayerTimesHelper.getPrayerTimes(city: city, date: date);
     nextPrayer = DateUtils.dateOnly(date) == DateUtils.dateOnly(DateTime.now())
         ? prayerTimes.nextPrayer()
         : null;

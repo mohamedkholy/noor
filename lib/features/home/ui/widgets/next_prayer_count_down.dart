@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
+import 'package:noor/core/helpers/prayer_times_helper.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/logic/home_state.dart';
 import 'package:noor/features/home/ui/widgets/circular_slider.dart';
@@ -33,12 +34,7 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   void initState() {
     _city =
         context.read<HomeCubit>().getSavedCity() ??
-        const City(
-          name: "Makkah",
-          lat: 21.42664,
-          lng: 39.82563,
-          country: "SA",
-        );
+        const City(name: "Makkah", lat: 21.42664, lng: 39.82563, country: "SA");
     initPrayerTimes(_city);
     super.initState();
   }
@@ -92,22 +88,14 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   }
 
   void initPrayerTimes(City city) {
-    final myCoordinates = Coordinates(
-      city.lat,
-      city.lng,
-    );
-    final params = CalculationMethod.egyptian.getParameters();
-    params.madhab = Madhab.shafi;
-    _prayerTimes = PrayerTimes.today(myCoordinates, params);
+    _prayerTimes = PrayerTimesHelper.getPrayerTimes(city: city);
     if (_prayerTimes.nextPrayer() == Prayer.none) {
       final tomorrow = DateTime.now().add(const Duration(days: 1));
-      _prayerTimes = PrayerTimes(
-        myCoordinates,
-        DateComponents(tomorrow.year, tomorrow.month, tomorrow.day),
-        params,
+      _prayerTimes = PrayerTimesHelper.getPrayerTimes(
+        city: city,
+        date: tomorrow,
       );
     }
-
     _calculateNextPrayer(_prayerTimes);
   }
 

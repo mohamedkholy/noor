@@ -94,11 +94,15 @@ class _LocationScreenState extends State<LocationScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      "${_cities[index].name} (${_cities[index].country})",
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeightHelper.medium,
+                                    Expanded(
+                                      child: Text(
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        "${_cities[index].name} (${_cities[index].country})",
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeightHelper.medium,
+                                        ),
                                       ),
                                     ),
                                     if (_cities[index] == _city)
