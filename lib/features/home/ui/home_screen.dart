@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/notifications/notifications_manager.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/widgets/ayah_of_the_day_widget.dart';
@@ -17,11 +18,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
-
   @override
   void initState() {
-     context.read<HomeCubit>().askForPermission();
+    context.read<HomeCubit>().askForPermissions();
     super.initState();
   }
 
