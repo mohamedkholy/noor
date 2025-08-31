@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/search_app_bar.dart';
 import 'package:noor/features/azkar/logic/azkar_cubit.dart';
 import 'package:noor/features/azkar/logic/azkar_state.dart';
@@ -62,7 +63,11 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       )
                     : const Center(child: Text("No result found"));
               }
-              return const SizedBox();
+               return const Center(
+                child: CircularProgressIndicator(
+                  color: MyColors.primary,
+                ),
+              );
             },
           ),
         ),

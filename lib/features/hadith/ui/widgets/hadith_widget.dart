@@ -1,19 +1,16 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:noor/core/database/hadith/hadith_database.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
 
 class HadithWidget extends StatelessWidget {
-  final String textAr;
-  final String textEn;
-  final int hadithNumber;
+  final Hadith hadith;
   final String searchValue;
   const HadithWidget({
     super.key,
-    required this.textAr,
-    required this.textEn,
-    required this.hadithNumber,
+    required this.hadith,
     required this.searchValue,
   });
 
@@ -36,7 +33,7 @@ class HadithWidget extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: MyColors.primary.withAlpha(100),
                 child: Text(
-                  "$hadithNumber",
+                  "${hadith.number}",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -50,7 +47,7 @@ class HadithWidget extends StatelessWidget {
               width: double.infinity,
               child: TextHighlight(
                 textDirection: TextDirection.rtl,
-                text: formatText(textAr),
+                text: formatText(hadith.arab),
                 words: {
                   searchValue: HighlightedWord(
                     textStyle: const TextStyle(color: Colors.red, fontSize: 28),
@@ -65,8 +62,7 @@ class HadithWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextHighlight(
-              textDirection: TextDirection.rtl,
-              text: formatText(textEn),
+              text: formatText(hadith.terjemah),
               words: {
                 searchValue: HighlightedWord(
                   textStyle: const TextStyle(color: Colors.red, fontSize: 20),

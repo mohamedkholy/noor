@@ -16,6 +16,8 @@ import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/home_screen.dart';
 import 'package:noor/features/location/logic/location_cubit.dart';
 import 'package:noor/features/location/ui/location_screen.dart';
+import 'package:noor/features/navigation/logic/navigation_cubit.dart';
+import 'package:noor/features/navigation/ui/navigation_screen.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
 import 'package:noor/features/near_mosque/ui/near_mosque_screen.dart';
 import 'package:noor/features/qibla/ui/qibla_screen.dart';
@@ -31,97 +33,134 @@ class AppRouter {
     final args = settings.arguments;
 
     switch (settings.name) {
-      case MyRoutes.home:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<HomeCubit>(),
-            child: const HomeScreen(),
+      case MyRoutes.navigation:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<NavigationCubit>(),
+            child: const NavigationScreen(),
           ),
+          settings,
         );
       case MyRoutes.reading:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<QuranCubit>(),
             child: ReadingScreen(
               surahNumber: (args as Map<String, int>)['surahNumber']!,
               ayaNumber: args['ayaNumber'],
             ),
           ),
+          settings,
         );
       case MyRoutes.quran:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<QuranCubit>(),
             child: const QuranScreen(),
           ),
+          settings,
         );
       case MyRoutes.azkar:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<AzkarCubit>(),
             child: const AzkarScreen(),
           ),
+          settings,
         );
       case MyRoutes.azkarCategory:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<AzkarCubit>(),
             child: AzkarCategoryScreen(category: args as String),
           ),
+          settings,
         );
       case MyRoutes.hadith:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<HadithCubit>(),
             child: const HadithScreen(),
           ),
+          settings,
         );
       case MyRoutes.hadithList:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<HadithCubit>(),
             child: HadithListScreen(type: args as Kitab),
           ),
+          settings,
         );
       case MyRoutes.tasbih:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<TasbihCubit>(),
             child: const TasbihScreen(),
           ),
+          settings,
         );
       case MyRoutes.zekr:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<TasbihCubit>(),
             child: ZekrScreen(tasbih: args as Tasbih),
           ),
+          settings,
         );
       case MyRoutes.qibla:
-        return MaterialPageRoute(builder: (context) => const QiblaScreen());
+        return _createRoute(const QiblaScreen(), settings);
       case MyRoutes.calender:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => CalenderCubit(),
             child: const CalenderScreen(),
           ),
+          settings,
         );
       case MyRoutes.nearMosque:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<NearMosqueCubit>(),
             child: const NearMosqueScreen(),
           ),
+          settings,
         );
       case MyRoutes.location:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
+        return _createRoute(
+          BlocProvider(
             create: (context) => getIt<LocationCubit>(),
             child: const LocationScreen(),
           ),
+          settings,
         );
       default:
         return null;
     }
+  }
+
+  static Route<dynamic> _createRoute(Widget page, RouteSettings settings) {
+    return PageRouteBuilder(
+      settings: settings,
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: _slideFromRight,
+      transitionDuration: const Duration(milliseconds: 1000),
+    );
+  }
+
+  static Widget _slideFromRight(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    final curved = CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+
+    final offsetAnimation = Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: Offset.zero,
+    ).animate(curved);
+
+    return SlideTransition(position: offsetAnimation, child: child);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/search_app_bar.dart';
 import 'package:noor/features/hadith/data/models/kitab.dart';
 import 'package:noor/features/hadith/logic/hadith_cubit.dart';
@@ -60,15 +61,15 @@ class _HadithListScreenState extends State<HadithListScreen> {
                       hadithCubit.getKitab(widget.type, ++page, query);
                     }
                     return HadithWidget(
-                      textAr: state.hadiths[index].arab,
-                      textEn: state.hadiths[index].terjemah,
-                      hadithNumber: state.hadiths[index].number,
+                      hadith: state.hadiths[index],
                       searchValue: query ?? "",
                     );
                   },
                 );
               }
-              return Container();
+              return const Center(
+                child: CircularProgressIndicator(color: MyColors.primary),
+              );
             },
           ),
         ),

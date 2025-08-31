@@ -41,7 +41,7 @@ class _FeaturesRowState extends State<FeaturesRow> {
     ),
     (
       "Azkar",
-      FontAwesomeIcons.handsPraying,
+      const IconData(0xe820, fontFamily: "Dua"),
       () {
         Navigator.pushNamed(context, MyRoutes.azkar);
       },

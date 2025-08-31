@@ -18,7 +18,9 @@ class LocationCubit extends Cubit<LocationState> {
     }
     final cities = await _locationRepo.getCities(page: page, query: query);
     _cities.addAll(cities);
-    emit(CitiesLoadedState(cities: _cities));
+    if (!isClosed) {
+      emit(CitiesLoadedState(cities: _cities));
+    }
   }
 
   Future<void> saveCity(City city) async {
@@ -38,14 +40,14 @@ class LocationCubit extends Cubit<LocationState> {
         getNearestCity();
       } else {
         status = await Geolocator.requestPermission();
-        if (status == LocationPermission.deniedForever) {
+        if (status == LocationPermission.deniedForever && !isClosed) {
           emit(
             RelocatingErrorState(
               message: 'You need to allow location permission from settings',
               openSettings: true,
             ),
           );
-        } else if (status == LocationPermission.denied) {
+        } else if (status == LocationPermission.denied && !isClosed) {
           emit(
             RelocatingErrorState(
               message:
@@ -59,12 +61,14 @@ class LocationCubit extends Cubit<LocationState> {
         }
       }
     } else {
-      emit(
-        RelocatingErrorState(
-          message: 'Location service disabled',
-          openSettings: false,
-        ),
-      );
+      if (!isClosed) {
+        emit(
+          RelocatingErrorState(
+            message: 'Location service disabled',
+            openSettings: false,
+          ),
+        );
+      }
     }
   }
 
@@ -74,8 +78,9 @@ class LocationCubit extends Cubit<LocationState> {
       position.latitude,
       position.longitude,
     );
-    print("city =============== $city");
     await saveCity(city);
-    emit(RelocatingSuccessState(city: city));
+    if (!isClosed) {
+      emit(RelocatingSuccessState(city: city));
+    }
   }
 }

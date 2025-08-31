@@ -1035,16 +1035,287 @@ class VersesCompanion extends UpdateCompanion<Verse> {
   }
 }
 
+class $DailyVersesTable extends DailyVerses
+    with TableInfo<$DailyVersesTable, DailyVerse> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DailyVersesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dayMeta = const VerificationMeta('day');
+  @override
+  late final GeneratedColumn<int> day = GeneratedColumn<int>(
+    'day',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _surahNumberMeta = const VerificationMeta(
+    'surahNumber',
+  );
+  @override
+  late final GeneratedColumn<int> surahNumber = GeneratedColumn<int>(
+    'surah_number',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _numberMeta = const VerificationMeta('number');
+  @override
+  late final GeneratedColumn<int> number = GeneratedColumn<int>(
+    'number',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [day, surahNumber, number];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'daily_verses';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DailyVerse> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('day')) {
+      context.handle(
+        _dayMeta,
+        day.isAcceptableOrUnknown(data['day']!, _dayMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dayMeta);
+    }
+    if (data.containsKey('surah_number')) {
+      context.handle(
+        _surahNumberMeta,
+        surahNumber.isAcceptableOrUnknown(
+          data['surah_number']!,
+          _surahNumberMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_surahNumberMeta);
+    }
+    if (data.containsKey('number')) {
+      context.handle(
+        _numberMeta,
+        number.isAcceptableOrUnknown(data['number']!, _numberMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_numberMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {day, surahNumber, number};
+  @override
+  DailyVerse map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DailyVerse(
+      day: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}day'],
+      )!,
+      surahNumber: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}surah_number'],
+      )!,
+      number: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}number'],
+      )!,
+    );
+  }
+
+  @override
+  $DailyVersesTable createAlias(String alias) {
+    return $DailyVersesTable(attachedDatabase, alias);
+  }
+}
+
+class DailyVerse extends DataClass implements Insertable<DailyVerse> {
+  final int day;
+  final int surahNumber;
+  final int number;
+  const DailyVerse({
+    required this.day,
+    required this.surahNumber,
+    required this.number,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['day'] = Variable<int>(day);
+    map['surah_number'] = Variable<int>(surahNumber);
+    map['number'] = Variable<int>(number);
+    return map;
+  }
+
+  DailyVersesCompanion toCompanion(bool nullToAbsent) {
+    return DailyVersesCompanion(
+      day: Value(day),
+      surahNumber: Value(surahNumber),
+      number: Value(number),
+    );
+  }
+
+  factory DailyVerse.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DailyVerse(
+      day: serializer.fromJson<int>(json['day']),
+      surahNumber: serializer.fromJson<int>(json['surahNumber']),
+      number: serializer.fromJson<int>(json['number']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'day': serializer.toJson<int>(day),
+      'surahNumber': serializer.toJson<int>(surahNumber),
+      'number': serializer.toJson<int>(number),
+    };
+  }
+
+  DailyVerse copyWith({int? day, int? surahNumber, int? number}) => DailyVerse(
+    day: day ?? this.day,
+    surahNumber: surahNumber ?? this.surahNumber,
+    number: number ?? this.number,
+  );
+  DailyVerse copyWithCompanion(DailyVersesCompanion data) {
+    return DailyVerse(
+      day: data.day.present ? data.day.value : this.day,
+      surahNumber: data.surahNumber.present
+          ? data.surahNumber.value
+          : this.surahNumber,
+      number: data.number.present ? data.number.value : this.number,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyVerse(')
+          ..write('day: $day, ')
+          ..write('surahNumber: $surahNumber, ')
+          ..write('number: $number')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(day, surahNumber, number);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DailyVerse &&
+          other.day == this.day &&
+          other.surahNumber == this.surahNumber &&
+          other.number == this.number);
+}
+
+class DailyVersesCompanion extends UpdateCompanion<DailyVerse> {
+  final Value<int> day;
+  final Value<int> surahNumber;
+  final Value<int> number;
+  final Value<int> rowid;
+  const DailyVersesCompanion({
+    this.day = const Value.absent(),
+    this.surahNumber = const Value.absent(),
+    this.number = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DailyVersesCompanion.insert({
+    required int day,
+    required int surahNumber,
+    required int number,
+    this.rowid = const Value.absent(),
+  }) : day = Value(day),
+       surahNumber = Value(surahNumber),
+       number = Value(number);
+  static Insertable<DailyVerse> custom({
+    Expression<int>? day,
+    Expression<int>? surahNumber,
+    Expression<int>? number,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (day != null) 'day': day,
+      if (surahNumber != null) 'surah_number': surahNumber,
+      if (number != null) 'number': number,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DailyVersesCompanion copyWith({
+    Value<int>? day,
+    Value<int>? surahNumber,
+    Value<int>? number,
+    Value<int>? rowid,
+  }) {
+    return DailyVersesCompanion(
+      day: day ?? this.day,
+      surahNumber: surahNumber ?? this.surahNumber,
+      number: number ?? this.number,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (day.present) {
+      map['day'] = Variable<int>(day.value);
+    }
+    if (surahNumber.present) {
+      map['surah_number'] = Variable<int>(surahNumber.value);
+    }
+    if (number.present) {
+      map['number'] = Variable<int>(number.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyVersesCompanion(')
+          ..write('day: $day, ')
+          ..write('surahNumber: $surahNumber, ')
+          ..write('number: $number, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$QuranDatabase extends GeneratedDatabase {
   _$QuranDatabase(QueryExecutor e) : super(e);
   $QuranDatabaseManager get managers => $QuranDatabaseManager(this);
   late final $SurahsTable surahs = $SurahsTable(this);
   late final $VersesTable verses = $VersesTable(this);
+  late final $DailyVersesTable dailyVerses = $DailyVersesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [surahs, verses];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+    surahs,
+    verses,
+    dailyVerses,
+  ];
 }
 
 typedef $$SurahsTableCreateCompanionBuilder =
@@ -1555,6 +1826,170 @@ typedef $$VersesTableProcessedTableManager =
       Verse,
       PrefetchHooks Function()
     >;
+typedef $$DailyVersesTableCreateCompanionBuilder =
+    DailyVersesCompanion Function({
+      required int day,
+      required int surahNumber,
+      required int number,
+      Value<int> rowid,
+    });
+typedef $$DailyVersesTableUpdateCompanionBuilder =
+    DailyVersesCompanion Function({
+      Value<int> day,
+      Value<int> surahNumber,
+      Value<int> number,
+      Value<int> rowid,
+    });
+
+class $$DailyVersesTableFilterComposer
+    extends Composer<_$QuranDatabase, $DailyVersesTable> {
+  $$DailyVersesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get surahNumber => $composableBuilder(
+    column: $table.surahNumber,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get number => $composableBuilder(
+    column: $table.number,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DailyVersesTableOrderingComposer
+    extends Composer<_$QuranDatabase, $DailyVersesTable> {
+  $$DailyVersesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get surahNumber => $composableBuilder(
+    column: $table.surahNumber,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get number => $composableBuilder(
+    column: $table.number,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DailyVersesTableAnnotationComposer
+    extends Composer<_$QuranDatabase, $DailyVersesTable> {
+  $$DailyVersesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get day =>
+      $composableBuilder(column: $table.day, builder: (column) => column);
+
+  GeneratedColumn<int> get surahNumber => $composableBuilder(
+    column: $table.surahNumber,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get number =>
+      $composableBuilder(column: $table.number, builder: (column) => column);
+}
+
+class $$DailyVersesTableTableManager
+    extends
+        RootTableManager<
+          _$QuranDatabase,
+          $DailyVersesTable,
+          DailyVerse,
+          $$DailyVersesTableFilterComposer,
+          $$DailyVersesTableOrderingComposer,
+          $$DailyVersesTableAnnotationComposer,
+          $$DailyVersesTableCreateCompanionBuilder,
+          $$DailyVersesTableUpdateCompanionBuilder,
+          (
+            DailyVerse,
+            BaseReferences<_$QuranDatabase, $DailyVersesTable, DailyVerse>,
+          ),
+          DailyVerse,
+          PrefetchHooks Function()
+        > {
+  $$DailyVersesTableTableManager(_$QuranDatabase db, $DailyVersesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DailyVersesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DailyVersesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DailyVersesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> day = const Value.absent(),
+                Value<int> surahNumber = const Value.absent(),
+                Value<int> number = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => DailyVersesCompanion(
+                day: day,
+                surahNumber: surahNumber,
+                number: number,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required int day,
+                required int surahNumber,
+                required int number,
+                Value<int> rowid = const Value.absent(),
+              }) => DailyVersesCompanion.insert(
+                day: day,
+                surahNumber: surahNumber,
+                number: number,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DailyVersesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$QuranDatabase,
+      $DailyVersesTable,
+      DailyVerse,
+      $$DailyVersesTableFilterComposer,
+      $$DailyVersesTableOrderingComposer,
+      $$DailyVersesTableAnnotationComposer,
+      $$DailyVersesTableCreateCompanionBuilder,
+      $$DailyVersesTableUpdateCompanionBuilder,
+      (
+        DailyVerse,
+        BaseReferences<_$QuranDatabase, $DailyVersesTable, DailyVerse>,
+      ),
+      DailyVerse,
+      PrefetchHooks Function()
+    >;
 
 class $QuranDatabaseManager {
   final _$QuranDatabase _db;
@@ -1563,4 +1998,6 @@ class $QuranDatabaseManager {
       $$SurahsTableTableManager(_db, _db.surahs);
   $$VersesTableTableManager get verses =>
       $$VersesTableTableManager(_db, _db.verses);
+  $$DailyVersesTableTableManager get dailyVerses =>
+      $$DailyVersesTableTableManager(_db, _db.dailyVerses);
 }

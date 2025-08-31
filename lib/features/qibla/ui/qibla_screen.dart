@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:noor/core/theming/my_colors.dart';
-import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/qibla/ui/widgets/qibla_compass.dart';
 
 class QiblaScreen extends StatefulWidget {
@@ -15,15 +15,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Qibla', style: MyTextStyles.appBarTextStyle),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-        ),
-      ),
+      appBar: const MyAppBar(title: 'Qibla'),
       body: SafeArea(
         child: FutureBuilder<bool?>(
           future: FlutterQiblah.androidDeviceSensorSupport(),

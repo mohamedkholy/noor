@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/tasbih/tasbih_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
-import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/widgets/count_button.dart';
 import 'package:noor/features/tasbih/ui/widgets/reset_button.dart';
@@ -25,20 +25,10 @@ class _ZekrScreenState extends State<ZekrScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.tasbih.zekr,
-          style: MyTextStyles.fontAmiriBold.copyWith(
-            fontSize: 30,
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
+      appBar: MyAppBar(
+        title: widget.tasbih.zekr,
+        fontSize: 30,
+        fontFamily: "Amiri",
       ),
       body: Container(
         decoration: BoxDecoration(

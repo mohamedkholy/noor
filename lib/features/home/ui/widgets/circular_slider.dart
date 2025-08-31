@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:adhan/adhan.dart';
+import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class CircularSlider extends StatelessWidget {
   final double totalDuration;
@@ -23,26 +23,23 @@ class CircularSlider extends StatelessWidget {
     final nextPrayerName = nextPrayer == Prayer.sunrise
         ? "Shorok"
         : "${nextPrayer.name[0].toUpperCase()}${nextPrayer.name.substring(1)} Prayer";
-    return SleekCircularSlider(
-      max: totalDuration,
-      initialValue: max(
-        0,
-        totalDuration - nextPrayerDuration.inSeconds.toDouble(),
-      ),
-      appearance: CircularSliderAppearance(
-        size: 250,
-        customWidths: CustomSliderWidths(
-          progressBarWidth: 10,
-          trackWidth: 5,
-          handlerSize: 10,
-        ),
-        customColors: CustomSliderColors(
-          dotColor: MyColors.secondary,
-          progressBarColor: MyColors.secondary,
-          trackColor: Colors.white,
-        ),
-      ),
-      innerWidget: (percentage) => Center(
+    return DashedCircularProgressBar(
+      width: 250,
+      height: 250,
+      startAngle: 225,
+      sweepAngle: 270,
+      foregroundColor: MyColors.secondary,
+      seekColor: MyColors.secondary,
+      backgroundColor: Colors.white24,
+      foregroundStrokeWidth: 10,
+      backgroundStrokeWidth: 5,
+      animation: true,
+      seekSize: 15,
+      progress:
+          (max(0, totalDuration - nextPrayerDuration.inSeconds.toDouble()) /
+              totalDuration) *
+          100,
+      child: Center(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
@@ -66,3 +63,39 @@ class CircularSlider extends StatelessWidget {
     return "${twoDigits(d.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
   }
 }
+
+
+// SleekCircularSlider(
+//       max: totalDuration,
+//       initialValue: max(
+//         0,
+//         totalDuration - nextPrayerDuration.inSeconds.toDouble(),
+//       ),
+//       appearance: CircularSliderAppearance(
+//         size: 250,
+//         customWidths: CustomSliderWidths(
+//           progressBarWidth: 10,
+//           trackWidth: 5,
+//           handlerSize: 10,
+//         ),
+//         customColors: CustomSliderColors(
+//           dotColor: MyColors.secondary,
+//           progressBarColor: MyColors.secondary,
+//           trackColor: Colors.white,
+//         ),
+//       ),
+//       innerWidget: (percentage) => Center(
+//         child: Padding(
+//           padding: const EdgeInsets.all(10),
+//           child: Text(
+//             textAlign: TextAlign.center,
+//             "$nextPrayerName in\n${_formatDuration(nextPrayerDuration)}",
+//             style: const TextStyle(
+//               color: Colors.white,
+//               fontSize: 24,
+//               fontWeight: FontWeightHelper.bold,
+//             ),
+//           ),
+//         ),
+//       ),
+//     );

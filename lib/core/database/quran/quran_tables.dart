@@ -28,3 +28,13 @@ class Verses extends Table {
   @override
   Set<Column> get primaryKey => {surahNumber, number};
 }
+
+
+class DailyVerses extends Table {
+  IntColumn get day => integer()();
+  IntColumn get surahNumber => integer()();
+  IntColumn get number => integer()();
+
+  @override
+  Set<Column> get primaryKey => {day, surahNumber, number};
+}

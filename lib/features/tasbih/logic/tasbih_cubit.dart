@@ -11,7 +11,9 @@ class TasbihCubit extends Cubit<TasbihState> {
 
   void getTasbih() {
     tasbihRepo.getTasbih().listen((tasbihList) {
-      emit(TasbihLoaded(tasbihList));
+      if (!isClosed) {
+        emit(TasbihLoaded(tasbihList));
+      }
     });
   }
 
@@ -30,8 +32,6 @@ class TasbihCubit extends Cubit<TasbihState> {
       return -1;
     }
   }
-
-  void editTasbih(Tasbih tasbih) {}
 
   Future<int> updateTasbih(String oldZekr, Tasbih newTasbih) async {
     try {

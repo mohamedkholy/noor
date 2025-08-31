@@ -8,9 +8,9 @@ extension KitabExtension on Kitab {
   String get name {
     switch (this) {
       case Kitab.sahihBukhari:
-        return "Shahih Bukhari";
+        return "Sahih Bukhari";
       case Kitab.sahihMuslim:
-        return "Shahih Muslim";
+        return "Sahih Muslim";
     }
   }
 } 

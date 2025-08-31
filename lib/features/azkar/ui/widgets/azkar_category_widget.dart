@@ -47,13 +47,17 @@ class AzkarCategoryWidget extends StatelessWidget {
                 height: 50,
               ),
             ),
-            const Spacer(),
-            Text(
-              textDirection: TextDirection.rtl,
-              category.category,
-              style: MyTextStyles.fontAmiriBold.copyWith(
-                fontSize: 25,
-                color: Colors.white,
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textDirection: TextDirection.rtl,
+                category.category,
+                style: MyTextStyles.fontAmiriBold.copyWith(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

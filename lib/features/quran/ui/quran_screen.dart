@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/theming/my_colors.dart';
-import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/logic/quran_state.dart';
 import 'package:noor/features/quran/ui/chapters_screen.dart';
@@ -24,15 +24,7 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Quran", style: MyTextStyles.appBarTextStyle),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-      ),
+      appBar: const MyAppBar(title: "Quran"),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 800),
@@ -63,8 +55,7 @@ class _QuranScreenState extends State<QuranScreen> {
                           child: TabBarView(
                             children: [
                               SurahsScreen(surahs: state.surahs),
-                              if (state.verses != null)
-                                ChaptersScreen(verses: state.verses!),
+                              ChaptersScreen(verses: state.verses),
                             ],
                           ),
                         ),
@@ -72,7 +63,9 @@ class _QuranScreenState extends State<QuranScreen> {
                     ),
                   );
                 }
-                return const SizedBox();
+                return const Center(
+                  child: CircularProgressIndicator(color: MyColors.primary),
+                );
               },
             ),
           ),

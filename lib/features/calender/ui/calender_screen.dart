@@ -48,8 +48,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                   const SizedBox(height: 20),
                   CalenderWidget(
                     onDateChanged: (date) {
-                      initPrayerTimes(date, _city);
-                      setState(() {});
+                      setState(() {
+                        initPrayerTimes(date, _city);
+                      });
                     },
                   ),
                   const SizedBox(height: 20),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/logic/tasbih_state.dart';
 import 'package:noor/features/tasbih/ui/widgets/tasbih_dialog.dart';
@@ -27,15 +28,7 @@ class _TasbihScreenState extends State<TasbihScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tasbih", style: MyTextStyles.appBarTextStyle),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        centerTitle: true,
-      ),
+      appBar: const MyAppBar(title: 'Tasbih'),
       floatingActionButton: FloatingActionButton(
         backgroundColor: MyColors.primary,
         shape: const CircleBorder(),
