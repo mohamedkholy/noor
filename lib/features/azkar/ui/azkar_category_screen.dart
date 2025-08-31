@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/azkar/logic/azkar_cubit.dart';
 import 'package:noor/features/azkar/logic/azkar_state.dart';
 import 'package:noor/features/azkar/ui/widgets/zikr_widget.dart';
@@ -25,19 +26,17 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.category,
-          style: MyTextStyles.appBarTextStyle.copyWith(fontFamily: "Amiri"),
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-        ),
+      appBar: MyAppBar(
+        title: widget.category,
+        fontFamily: "Amiri",
       ),
       body: Center(
         child: ConstrainedBox(
@@ -63,7 +62,9 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
                   },
                 );
               }
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(color: MyColors.primary),
+              );
             },
           ),
         ),

@@ -311,15 +311,278 @@ class HadithsCompanion extends UpdateCompanion<Hadith> {
   }
 }
 
+class $DailyHadithsTable extends DailyHadiths
+    with TableInfo<$DailyHadithsTable, DailyHadith> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DailyHadithsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dayMeta = const VerificationMeta('day');
+  @override
+  late final GeneratedColumn<int> day = GeneratedColumn<int>(
+    'day',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _kitabNameMeta = const VerificationMeta(
+    'kitabName',
+  );
+  @override
+  late final GeneratedColumn<String> kitabName = GeneratedColumn<String>(
+    'kitab_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _numberMeta = const VerificationMeta('number');
+  @override
+  late final GeneratedColumn<int> number = GeneratedColumn<int>(
+    'number',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [day, kitabName, number];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'daily_hadiths';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DailyHadith> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('day')) {
+      context.handle(
+        _dayMeta,
+        day.isAcceptableOrUnknown(data['day']!, _dayMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dayMeta);
+    }
+    if (data.containsKey('kitab_name')) {
+      context.handle(
+        _kitabNameMeta,
+        kitabName.isAcceptableOrUnknown(data['kitab_name']!, _kitabNameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_kitabNameMeta);
+    }
+    if (data.containsKey('number')) {
+      context.handle(
+        _numberMeta,
+        number.isAcceptableOrUnknown(data['number']!, _numberMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_numberMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {day, number};
+  @override
+  DailyHadith map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DailyHadith(
+      day: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}day'],
+      )!,
+      kitabName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kitab_name'],
+      )!,
+      number: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}number'],
+      )!,
+    );
+  }
+
+  @override
+  $DailyHadithsTable createAlias(String alias) {
+    return $DailyHadithsTable(attachedDatabase, alias);
+  }
+}
+
+class DailyHadith extends DataClass implements Insertable<DailyHadith> {
+  final int day;
+  final String kitabName;
+  final int number;
+  const DailyHadith({
+    required this.day,
+    required this.kitabName,
+    required this.number,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['day'] = Variable<int>(day);
+    map['kitab_name'] = Variable<String>(kitabName);
+    map['number'] = Variable<int>(number);
+    return map;
+  }
+
+  DailyHadithsCompanion toCompanion(bool nullToAbsent) {
+    return DailyHadithsCompanion(
+      day: Value(day),
+      kitabName: Value(kitabName),
+      number: Value(number),
+    );
+  }
+
+  factory DailyHadith.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DailyHadith(
+      day: serializer.fromJson<int>(json['day']),
+      kitabName: serializer.fromJson<String>(json['kitabName']),
+      number: serializer.fromJson<int>(json['number']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'day': serializer.toJson<int>(day),
+      'kitabName': serializer.toJson<String>(kitabName),
+      'number': serializer.toJson<int>(number),
+    };
+  }
+
+  DailyHadith copyWith({int? day, String? kitabName, int? number}) =>
+      DailyHadith(
+        day: day ?? this.day,
+        kitabName: kitabName ?? this.kitabName,
+        number: number ?? this.number,
+      );
+  DailyHadith copyWithCompanion(DailyHadithsCompanion data) {
+    return DailyHadith(
+      day: data.day.present ? data.day.value : this.day,
+      kitabName: data.kitabName.present ? data.kitabName.value : this.kitabName,
+      number: data.number.present ? data.number.value : this.number,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyHadith(')
+          ..write('day: $day, ')
+          ..write('kitabName: $kitabName, ')
+          ..write('number: $number')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(day, kitabName, number);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DailyHadith &&
+          other.day == this.day &&
+          other.kitabName == this.kitabName &&
+          other.number == this.number);
+}
+
+class DailyHadithsCompanion extends UpdateCompanion<DailyHadith> {
+  final Value<int> day;
+  final Value<String> kitabName;
+  final Value<int> number;
+  final Value<int> rowid;
+  const DailyHadithsCompanion({
+    this.day = const Value.absent(),
+    this.kitabName = const Value.absent(),
+    this.number = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DailyHadithsCompanion.insert({
+    required int day,
+    required String kitabName,
+    required int number,
+    this.rowid = const Value.absent(),
+  }) : day = Value(day),
+       kitabName = Value(kitabName),
+       number = Value(number);
+  static Insertable<DailyHadith> custom({
+    Expression<int>? day,
+    Expression<String>? kitabName,
+    Expression<int>? number,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (day != null) 'day': day,
+      if (kitabName != null) 'kitab_name': kitabName,
+      if (number != null) 'number': number,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DailyHadithsCompanion copyWith({
+    Value<int>? day,
+    Value<String>? kitabName,
+    Value<int>? number,
+    Value<int>? rowid,
+  }) {
+    return DailyHadithsCompanion(
+      day: day ?? this.day,
+      kitabName: kitabName ?? this.kitabName,
+      number: number ?? this.number,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (day.present) {
+      map['day'] = Variable<int>(day.value);
+    }
+    if (kitabName.present) {
+      map['kitab_name'] = Variable<String>(kitabName.value);
+    }
+    if (number.present) {
+      map['number'] = Variable<int>(number.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyHadithsCompanion(')
+          ..write('day: $day, ')
+          ..write('kitabName: $kitabName, ')
+          ..write('number: $number, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$HadithDatabase extends GeneratedDatabase {
   _$HadithDatabase(QueryExecutor e) : super(e);
   $HadithDatabaseManager get managers => $HadithDatabaseManager(this);
   late final $HadithsTable hadiths = $HadithsTable(this);
+  late final $DailyHadithsTable dailyHadiths = $DailyHadithsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [hadiths];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [hadiths, dailyHadiths];
 }
 
 typedef $$HadithsTableCreateCompanionBuilder =
@@ -497,10 +760,174 @@ typedef $$HadithsTableProcessedTableManager =
       Hadith,
       PrefetchHooks Function()
     >;
+typedef $$DailyHadithsTableCreateCompanionBuilder =
+    DailyHadithsCompanion Function({
+      required int day,
+      required String kitabName,
+      required int number,
+      Value<int> rowid,
+    });
+typedef $$DailyHadithsTableUpdateCompanionBuilder =
+    DailyHadithsCompanion Function({
+      Value<int> day,
+      Value<String> kitabName,
+      Value<int> number,
+      Value<int> rowid,
+    });
+
+class $$DailyHadithsTableFilterComposer
+    extends Composer<_$HadithDatabase, $DailyHadithsTable> {
+  $$DailyHadithsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get kitabName => $composableBuilder(
+    column: $table.kitabName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get number => $composableBuilder(
+    column: $table.number,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DailyHadithsTableOrderingComposer
+    extends Composer<_$HadithDatabase, $DailyHadithsTable> {
+  $$DailyHadithsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get kitabName => $composableBuilder(
+    column: $table.kitabName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get number => $composableBuilder(
+    column: $table.number,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DailyHadithsTableAnnotationComposer
+    extends Composer<_$HadithDatabase, $DailyHadithsTable> {
+  $$DailyHadithsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get day =>
+      $composableBuilder(column: $table.day, builder: (column) => column);
+
+  GeneratedColumn<String> get kitabName =>
+      $composableBuilder(column: $table.kitabName, builder: (column) => column);
+
+  GeneratedColumn<int> get number =>
+      $composableBuilder(column: $table.number, builder: (column) => column);
+}
+
+class $$DailyHadithsTableTableManager
+    extends
+        RootTableManager<
+          _$HadithDatabase,
+          $DailyHadithsTable,
+          DailyHadith,
+          $$DailyHadithsTableFilterComposer,
+          $$DailyHadithsTableOrderingComposer,
+          $$DailyHadithsTableAnnotationComposer,
+          $$DailyHadithsTableCreateCompanionBuilder,
+          $$DailyHadithsTableUpdateCompanionBuilder,
+          (
+            DailyHadith,
+            BaseReferences<_$HadithDatabase, $DailyHadithsTable, DailyHadith>,
+          ),
+          DailyHadith,
+          PrefetchHooks Function()
+        > {
+  $$DailyHadithsTableTableManager(_$HadithDatabase db, $DailyHadithsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DailyHadithsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DailyHadithsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DailyHadithsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> day = const Value.absent(),
+                Value<String> kitabName = const Value.absent(),
+                Value<int> number = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => DailyHadithsCompanion(
+                day: day,
+                kitabName: kitabName,
+                number: number,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required int day,
+                required String kitabName,
+                required int number,
+                Value<int> rowid = const Value.absent(),
+              }) => DailyHadithsCompanion.insert(
+                day: day,
+                kitabName: kitabName,
+                number: number,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DailyHadithsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$HadithDatabase,
+      $DailyHadithsTable,
+      DailyHadith,
+      $$DailyHadithsTableFilterComposer,
+      $$DailyHadithsTableOrderingComposer,
+      $$DailyHadithsTableAnnotationComposer,
+      $$DailyHadithsTableCreateCompanionBuilder,
+      $$DailyHadithsTableUpdateCompanionBuilder,
+      (
+        DailyHadith,
+        BaseReferences<_$HadithDatabase, $DailyHadithsTable, DailyHadith>,
+      ),
+      DailyHadith,
+      PrefetchHooks Function()
+    >;
 
 class $HadithDatabaseManager {
   final _$HadithDatabase _db;
   $HadithDatabaseManager(this._db);
   $$HadithsTableTableManager get hadiths =>
       $$HadithsTableTableManager(_db, _db.hadiths);
+  $$DailyHadithsTableTableManager get dailyHadiths =>
+      $$DailyHadithsTableTableManager(_db, _db.dailyHadiths);
 }

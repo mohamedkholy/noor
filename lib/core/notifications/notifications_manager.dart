@@ -17,15 +17,25 @@ class NotificationsManager {
   static final NotificationsManager instance = NotificationsManager._();
 
   final _localNotifications = FlutterLocalNotificationsPlugin();
-  static const _channeid = 'azan_channel';
-  static const _channelName = 'Azan Notifications';
-  static const _channelDescription = 'Azan Notifications';
+  static const _azanChannelId = 'azan_channel';
+  static const _azanChannelName = 'Azan Notifications';
+  static const _azanChannelDescription = 'Azan Notifications';
+  static const _azkarChannelId = 'azkar_channel';
+  static const _azkarChannelName = 'Azkar Notifications';
+  static const _azkarChannelDescription = 'Azkar Notifications';
 
-  static const _androidNotificationChannel = AndroidNotificationChannel(
-    _channeid,
-    _channelName,
+  static const _azanNotificationChannel = AndroidNotificationChannel(
+    _azanChannelId,
+    _azanChannelName,
     importance: Importance.max,
     sound: RawResourceAndroidNotificationSound('azan'),
+  );
+
+  static const _azkarNotificationChannel = AndroidNotificationChannel(
+    _azkarChannelId,
+    _azkarChannelName,
+    importance: Importance.max,
+    sound: RawResourceAndroidNotificationSound('azkar'),
   );
 
   Future<PermissionStatus> requestPermission() async {
@@ -54,11 +64,16 @@ class NotificationsManager {
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >()
-        ?.createNotificationChannel(_androidNotificationChannel);
+        ?.createNotificationChannel(_azanNotificationChannel);
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_azkarNotificationChannel);
   }
 
   void scheduleNotifications() {
-    _localNotifications.cancelAll();
+    cancelAllNotifications();
     final city =
         _getSavedCity() ??
         const City(name: "Makkah", lat: 21.42664, lng: 39.82563, country: "SA");
@@ -69,23 +84,28 @@ class NotificationsManager {
         date: date,
       );
       _scheduleAzanNotifications(prayerTimes);
+      _scheduleAzkarNotifications(prayerTimes);
     }
   }
 
-  void testNotification() {
-    _localNotifications.show(
-      1,
-      'موعد الصلاة',
-      'حان وقت صلاة الفجر',
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          _channeid,
-          _channelName,
-          channelDescription: _channelDescription,
-        ),
-      ),
-    );
+  void cancelAllNotifications() {
+    _localNotifications.cancelAll();
   }
+
+  // void testNotification() {
+  //   _localNotifications.show(
+  //     1,
+  //     'موعد الصلاة',
+  //     'حان وقت صلاة الفجر',
+  //     const NotificationDetails(
+  //       android: AndroidNotificationDetails(
+  //         _channeid,
+  //         _channelName,
+  //         channelDescription: _channelDescription,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Future<void> _scheduleAzanNotifications(PrayerTimes prayerTimes) async {
     final List<(DateTime, String)> prayerTimesList = [
@@ -100,14 +120,45 @@ class NotificationsManager {
       if (e.$1.isBefore(DateTime.now())) continue;
       await _localNotifications.zonedSchedule(
         e.hashCode,
-        'موعد الصلاة',
+        'حى على الفلاح',
         'حان موعد صلاة ${e.$2}',
         tz.TZDateTime.from(e.$1, tz.local),
         const NotificationDetails(
           android: AndroidNotificationDetails(
-            _channeid,
-            _channelName,
-            channelDescription: _channelDescription,
+            _azanChannelId,
+            _azanChannelName,
+            channelDescription: _azanChannelDescription,
+          ),
+        ),
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      );
+    }
+  }
+
+  Future<void> _scheduleAzkarNotifications(PrayerTimes prayerTimes) async {
+    final azkarTimes = [
+      (
+        prayerTimes.sunrise.subtract(const Duration(minutes: 30)),
+        "أذكار الصباح",
+      ),
+      (
+        prayerTimes.maghrib.subtract(const Duration(hours: 1, minutes: 23)),
+        "أذكار المساء",
+      ),
+    ];
+
+    for (var e in azkarTimes) {
+      if (e.$1.isBefore(DateTime.now())) continue;
+      await _localNotifications.zonedSchedule(
+        e.hashCode,
+        'حى على الفلاح',
+        'حان موعد ${e.$2}',
+        tz.TZDateTime.from(e.$1, tz.local),
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            _azkarChannelId,
+            _azkarChannelName,
+            channelDescription: _azkarChannelDescription,
           ),
         ),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,

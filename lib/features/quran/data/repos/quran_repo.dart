@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 
@@ -29,9 +30,16 @@ class QuranRepo {
         _db.verses,
       )..where((tbl) => tbl.surahNumber.equals(surahNumber))).get();
 
-  Future<List<(Surah, List<Verse>)>> getVersesPerSura() async {
+  Future<List<(Surah, List<Verse>)>> getVersesPerSura(int suraNumber) async {
     final List<(Surah, List<Verse>)> result = [];
-    final surahs = await getSurahs();
+    final surahs =
+        await (_db.select(_db.surahs)..where(
+              (t) => t.number.isBetween(
+                Variable(suraNumber - 5),
+                Variable(suraNumber + 5),
+              ),
+            ))
+            .get();
     for (final surah in surahs) {
       final verses = await getSurahsVerses(surah.number);
       result.add((surah, verses));
@@ -42,4 +50,38 @@ class QuranRepo {
   Future<List<Verse>> getChaptersVerses() async => await (_db.select(
     _db.verses,
   )..where((t) => t.newJuz.isNotValue(0))).get();
+
+  Future<List<(Surah, List<Verse>)>> getReadingDataPagination(
+    int suraNumber,
+    bool isFromStart,
+  ) async {
+    print("suraNumber $suraNumber");
+    print("isFromStart $isFromStart");
+
+    final List<(Surah, List<Verse>)> result = [];
+    final surahs =
+        await (_db.select(_db.surahs)
+              ..where(
+                (t) => isFromStart
+                    ? t.number.isSmallerThan(Variable(suraNumber))
+                    : t.number.isBiggerThan(Variable(suraNumber)),
+              )
+              ..orderBy([
+                (r) => OrderingTerm(
+                  expression: _db.surahs.number,
+                  mode: isFromStart ? OrderingMode.desc : OrderingMode.asc,
+                ),
+              ])
+              ..limit(5)
+              )
+            .get();  
+    for (final surah in surahs) {  
+      final verses = await getSurahsVerses(surah.number);
+      result.add((surah, verses));
+    }
+    if(isFromStart){
+      result.sort((a, b) => a.$1.number.compareTo(b.$1.number));
+    }
+    return result;
+  }
 }

@@ -7,9 +7,10 @@ import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/helpers/prayer_times_helper.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
-import 'package:noor/features/home/logic/home_state.dart';
 import 'package:noor/features/home/ui/widgets/circular_slider.dart';
 import 'package:noor/features/home/ui/widgets/prayers_time_row.dart';
+import 'package:noor/features/navigation/logic/navigation_cubit.dart';
+import 'package:noor/features/navigation/logic/navigation_state.dart';
 
 class NextPrayerCountDown extends StatefulWidget {
   const NextPrayerCountDown({super.key});
@@ -33,7 +34,7 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   @override
   void initState() {
     _city =
-        context.read<HomeCubit>().getSavedCity() ??
+        context.read<NavigationCubit>().getSavedCity() ??
         const City(name: "Makkah", lat: 21.42664, lng: 39.82563, country: "SA");
     initPrayerTimes(_city);
     super.initState();
@@ -48,7 +49,8 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
+    return BlocConsumer<NavigationCubit, NavigationState>(
+      buildWhen: (previous, current) => current is CityLoaded,
       listener: (context, state) {
         if (state is CityLoaded) {
           _city = state.city;
@@ -57,6 +59,7 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
       },
       builder: (context, state) {
         return Container(
+          margin: const EdgeInsets.symmetric(vertical: 20),
           decoration: const BoxDecoration(
             image: DecorationImage(
               opacity: .06,

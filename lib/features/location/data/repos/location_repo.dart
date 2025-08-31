@@ -20,6 +20,13 @@ class LocationRepo {
                 city.name.contains(query ?? "") |
                 city.country.contains(query ?? ""),
           )
+          ..orderBy([
+            (city) => OrderingTerm(
+              expression: city.name.like("${query ?? ""}%"),
+              mode: OrderingMode.desc,
+            ),
+            (city) => OrderingTerm(expression: city.name),
+          ])
           ..limit((page + 1) * 100, offset: 100 * page))
         .get();
   }

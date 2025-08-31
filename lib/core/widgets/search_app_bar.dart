@@ -27,10 +27,12 @@ class _SearchAppBarState extends State<SearchAppBar> {
     return AppBar(
       automaticallyImplyLeading: false,
       leading: !isSearching
-          ? IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            )
+          ? ModalRoute.of(context)?.canPop == true
+              ? IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                  onPressed: () => Navigator.pop(context),
+                )
+              : null
           : null,
       centerTitle: true,
       title: !isSearching

@@ -16,6 +16,13 @@ class CalenderWidget extends StatefulWidget {
 
 class _CalenderWidgetState extends State<CalenderWidget> {
   final HijriDatePickerController _controller = HijriDatePickerController();
+  DateTime _date = DateTime.now();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +32,10 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           children: [
             IconButton(
               onPressed: () {
-                _controller.backward!();
-                setState(() {});
+                setState(() {
+                  _controller.backward!();
+                  _date = _controller.displayDate!.toDateTime();
+                });
               },
               icon: const Icon(Icons.arrow_back, color: Colors.white, size: 26),
             ),
@@ -38,11 +47,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
                     AutoSizeText(
                       maxLines: 1,
                       textAlign: TextAlign.center,
-                      HijriCalendar.fromDate(
-                        _controller.displayDate != null
-                            ? _controller.displayDate!.toDateTime()
-                            : DateTime.now(),
-                      ).toFormat("MMMM  yyyy"),
+                      HijriCalendar.fromDate(_date).toFormat("MMMM  yyyy"),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 17,
@@ -52,11 +57,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
                     AutoSizeText(
                       maxLines: 1,
                       textAlign: TextAlign.center,
-                      DateFormat.yMMMd().format(
-                        _controller.displayDate != null
-                            ? _controller.displayDate!.toDateTime()
-                            : DateTime.now(),
-                      ),
+                      DateFormat.yMMMM().format(_date),
                       style: const TextStyle(
                         color: Colors.orange,
                         fontSize: 15,
@@ -69,8 +70,10 @@ class _CalenderWidgetState extends State<CalenderWidget> {
             ),
             IconButton(
               onPressed: () {
-                _controller.forward!();
-                setState(() {});
+                setState(() {
+                  _controller.forward!();
+                  _date = _controller.displayDate!.toDateTime();
+                });
               },
               icon: const Icon(
                 Icons.arrow_forward,
@@ -92,6 +95,9 @@ class _CalenderWidgetState extends State<CalenderWidget> {
           onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
             final HijriDateTime date = args.value;
             widget.onDateChanged(date.toDateTime());
+            setState(() {
+              _date = date.toDateTime();
+            });
           },
           cellBuilder: (context, cellDetails) {
             final isSelected =

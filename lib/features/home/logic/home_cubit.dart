@@ -39,47 +39,12 @@ class HomeCubit extends Cubit<HomeState> {
     return null;
   }
 
-  Future<void> saveCityToPrefs(City city) async {
-    await getIt<SharedPreferences>().setString(
-      SharedPreferencesKeys.savedCity,
-      city.toJsonString(),
-    );
+  Future<void> getTodayContent() async {
+    final (hadith, verse) = await _homeRepo.getTodayContent();
+    if (!isClosed) {
+      emit(TodayHadithLoaded(hadith: hadith));
+      emit(TodayVerseLoaded(verse: verse));
+    }
   }
 
-  Future<void> setCity(City city) async {
-    emit(CityLoaded(city: city));
-    NotificationsManager.instance.scheduleNotifications();
-  }
-
-  City? getSavedCity() {
-    final result = getIt<SharedPreferences>().getString(
-      SharedPreferencesKeys.savedCity,
-    );
-    if (result == null) return null;
-    final map = jsonDecode(result) as Map<String, dynamic>;
-    return City.fromJson(map);
-  }
-
-  Future<void> askForPermissions() async {
-    await NotificationsManager.instance.requestPermission();
-    await Geolocator.requestPermission().then((status) async {
-      if (status == LocationPermission.always ||
-          status == LocationPermission.whileInUse &&
-              await Geolocator.isLocationServiceEnabled()) {
-        Geolocator.getCurrentPosition().then((position) {
-          _homeRepo.findNearest(position.latitude, position.longitude).then((
-            city,
-          ) async {
-            await saveCityToPrefs(city);
-            setCity(city);
-          });
-        });
-      } else {
-        if (await Permission.notification.isGranted) {
-          NotificationsManager.instance.scheduleNotifications();
-        }
-      }
-    });
-    NotificationsManager.instance.testNotification();
-  }
 }

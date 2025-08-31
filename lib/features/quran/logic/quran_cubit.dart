@@ -12,18 +12,43 @@ import 'package:shared_preferences/shared_preferences.dart';
 @Injectable()
 class QuranCubit extends Cubit<QuranState> {
   final QuranRepo quranRepo;
+  List<(Surah, List<Verse>)> versesPerSura = [];
   QuranCubit(this.quranRepo) : super(QuranInitial());
 
-  Future<void> getVerses() async {
-    final verses = await quranRepo.getVersesPerSura();
-    emit(QuranLoaded(verses));
+  Future<void> getReadingData(int suraNumber) async {
+    versesPerSura = await quranRepo.getVersesPerSura(suraNumber);
+    if (!isClosed) {
+      emit(QuranLoaded(versesPerSura));
+    }
+  }
+
+  Future<void> getReadingDataPagination({
+    required int suraNumber,
+    required bool isFromStart,
+  }) async {
+    versesPerSura = await quranRepo.getReadingDataPagination(
+      suraNumber,
+      isFromStart,
+    );
+    if (!isClosed) {
+      emit(
+        isFromStart
+            ? QuranLodedFromStart(versesPerSura)
+            : QuranLodedFromEnd(versesPerSura),
+      );
+    }
   }
 
   Future<void> getSuras() async {
-    final surahs = await quranRepo.getSurahs();
-    emit(SurahsLoaded(surahs: surahs));
-    final verses = await quranRepo.getChaptersVerses();
-    emit(SurahsLoaded(surahs: surahs, verses: verses));
+    final result = await Future.wait([
+      quranRepo.getSurahs(),
+      quranRepo.getChaptersVerses(),
+    ]);
+    final surahs = result[0] as List<Surah>;
+    final verses = result[1] as List<Verse>;
+    if (!isClosed) {
+      emit(SurahsLoaded(surahs: surahs, verses: verses));
+    }
   }
 
   void saveLastReading(Verse? verse, String suraNameEn) {

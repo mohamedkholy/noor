@@ -19,7 +19,9 @@ class AzkarCubit extends Cubit<AzkarState> {
   Future<void> addAzkarCategoriesListener() async {
     azkarRepo.getAzkarCategories().listen((event) {
       azkarCategories = event;
-      emit(AzkarCategoriesLoaded(azkarCategories));
+      if (!isClosed) {
+        emit(AzkarCategoriesLoaded(azkarCategories));
+      }
     });
   }
 

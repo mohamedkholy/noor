@@ -37,4 +37,9 @@ abstract class MyTextStyles {
     color: Colors.white,
     fontWeight: FontWeightHelper.bold,
   );
+
+  static const TextStyle font24Bold = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeightHelper.bold,
+  );
 }

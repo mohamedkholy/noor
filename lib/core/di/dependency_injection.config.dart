@@ -28,6 +28,9 @@ import 'package:noor/features/home/data/repos/home_repo.dart' as _i298;
 import 'package:noor/features/home/logic/home_cubit.dart' as _i892;
 import 'package:noor/features/location/data/repos/location_repo.dart' as _i839;
 import 'package:noor/features/location/logic/location_cubit.dart' as _i803;
+import 'package:noor/features/navigation/data/repos/navigation_repo.dart'
+    as _i730;
+import 'package:noor/features/navigation/logic/navigation_cubit.dart' as _i915;
 import 'package:noor/features/near_mosque/data/repos/near_mosque_repo.dart'
     as _i1051;
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart'
@@ -58,7 +61,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i651.QuranDatabase>(() => _i651.QuranDatabase());
     gh.singleton<_i339.TasbihDatabase>(() => _i339.TasbihDatabase());
     gh.factory<_i298.HomeRepo>(
-      () => _i298.HomeRepo(gh<_i502.CitiesDatabase>()),
+      () =>
+          _i298.HomeRepo(gh<_i928.HadithDatabase>(), gh<_i651.QuranDatabase>()),
     );
     gh.factory<_i839.LocationRepo>(
       () => _i839.LocationRepo(gh<_i502.CitiesDatabase>()),
@@ -66,8 +70,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i543.MosqueApiService>(
       () => _i543.MosqueApiService(gh<_i361.Dio>()),
     );
+    gh.singleton<_i730.NavigationRepo>(
+      () => _i730.NavigationRepo(gh<_i502.CitiesDatabase>()),
+    );
     gh.singleton<_i952.HadithRepo>(
       () => _i952.HadithRepo(gh<_i928.HadithDatabase>()),
+    );
+    gh.factory<_i915.NavigationCubit>(
+      () => _i915.NavigationCubit(gh<_i730.NavigationRepo>()),
     );
     gh.factory<_i966.TasbihRepo>(
       () => _i966.TasbihRepo(gh<_i339.TasbihDatabase>()),
