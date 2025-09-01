@@ -9,4 +9,3 @@ class HadithLoaded extends HadithState {
 
   HadithLoaded({required this.hadiths});
 }
-

@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/near_mosque/data/models/near_mosque_error.dart';
 import 'package:noor/features/near_mosque/ui/widgets/expand_button.dart';
+import 'package:noor/generated/l10n.dart';
 
 class ErrorStateWidget extends StatelessWidget {
   final String errorMessage;
@@ -71,9 +72,12 @@ class ErrorStateWidget extends StatelessWidget {
                   ),
                   onPressed: callback,
                   icon: const Icon(Icons.refresh),
-                  label: const Text(
-                    "Retry",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  label: Text(
+                    S.current.retry,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
                 if (openSettings == true)
@@ -88,9 +92,9 @@ class ErrorStateWidget extends StatelessWidget {
                         Geolocator.openAppSettings();
                       },
                       icon: const Icon(Icons.settings),
-                      label: const Text(
-                        "Open Settings",
-                        style: TextStyle(
+                      label: Text(
+                        S.current.open_settings,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),

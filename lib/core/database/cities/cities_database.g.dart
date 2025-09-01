@@ -17,6 +17,17 @@ class $CitiesTable extends Cities with TableInfo<$CitiesTable, City> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _searchNamesMeta = const VerificationMeta(
+    'searchNames',
+  );
+  @override
+  late final GeneratedColumn<String> searchNames = GeneratedColumn<String>(
+    'search_names',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _latMeta = const VerificationMeta('lat');
   @override
   late final GeneratedColumn<double> lat = GeneratedColumn<double>(
@@ -47,7 +58,7 @@ class $CitiesTable extends Cities with TableInfo<$CitiesTable, City> {
     requiredDuringInsert: true,
   );
   @override
-  List<GeneratedColumn> get $columns => [name, lat, lng, country];
+  List<GeneratedColumn> get $columns => [name, searchNames, lat, lng, country];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -67,6 +78,15 @@ class $CitiesTable extends Cities with TableInfo<$CitiesTable, City> {
       );
     } else if (isInserting) {
       context.missing(_nameMeta);
+    }
+    if (data.containsKey('search_names')) {
+      context.handle(
+        _searchNamesMeta,
+        searchNames.isAcceptableOrUnknown(
+          data['search_names']!,
+          _searchNamesMeta,
+        ),
+      );
     }
     if (data.containsKey('lat')) {
       context.handle(
@@ -105,6 +125,10 @@ class $CitiesTable extends Cities with TableInfo<$CitiesTable, City> {
         DriftSqlType.string,
         data['${effectivePrefix}name'],
       )!,
+      searchNames: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}search_names'],
+      ),
       lat: attachedDatabase.typeMapping.read(
         DriftSqlType.double,
         data['${effectivePrefix}lat'],
@@ -128,11 +152,13 @@ class $CitiesTable extends Cities with TableInfo<$CitiesTable, City> {
 
 class City extends DataClass implements Insertable<City> {
   final String name;
+  final String? searchNames;
   final double lat;
   final double lng;
   final String country;
   const City({
     required this.name,
+    this.searchNames,
     required this.lat,
     required this.lng,
     required this.country,
@@ -141,6 +167,9 @@ class City extends DataClass implements Insertable<City> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['name'] = Variable<String>(name);
+    if (!nullToAbsent || searchNames != null) {
+      map['search_names'] = Variable<String>(searchNames);
+    }
     map['lat'] = Variable<double>(lat);
     map['lng'] = Variable<double>(lng);
     map['country'] = Variable<String>(country);
@@ -150,6 +179,9 @@ class City extends DataClass implements Insertable<City> {
   CitiesCompanion toCompanion(bool nullToAbsent) {
     return CitiesCompanion(
       name: Value(name),
+      searchNames: searchNames == null && nullToAbsent
+          ? const Value.absent()
+          : Value(searchNames),
       lat: Value(lat),
       lng: Value(lng),
       country: Value(country),
@@ -163,6 +195,7 @@ class City extends DataClass implements Insertable<City> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return City(
       name: serializer.fromJson<String>(json['name']),
+      searchNames: serializer.fromJson<String?>(json['searchNames']),
       lat: serializer.fromJson<double>(json['lat']),
       lng: serializer.fromJson<double>(json['lng']),
       country: serializer.fromJson<String>(json['country']),
@@ -173,22 +206,32 @@ class City extends DataClass implements Insertable<City> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'name': serializer.toJson<String>(name),
+      'searchNames': serializer.toJson<String?>(searchNames),
       'lat': serializer.toJson<double>(lat),
       'lng': serializer.toJson<double>(lng),
       'country': serializer.toJson<String>(country),
     };
   }
 
-  City copyWith({String? name, double? lat, double? lng, String? country}) =>
-      City(
-        name: name ?? this.name,
-        lat: lat ?? this.lat,
-        lng: lng ?? this.lng,
-        country: country ?? this.country,
-      );
+  City copyWith({
+    String? name,
+    Value<String?> searchNames = const Value.absent(),
+    double? lat,
+    double? lng,
+    String? country,
+  }) => City(
+    name: name ?? this.name,
+    searchNames: searchNames.present ? searchNames.value : this.searchNames,
+    lat: lat ?? this.lat,
+    lng: lng ?? this.lng,
+    country: country ?? this.country,
+  );
   City copyWithCompanion(CitiesCompanion data) {
     return City(
       name: data.name.present ? data.name.value : this.name,
+      searchNames: data.searchNames.present
+          ? data.searchNames.value
+          : this.searchNames,
       lat: data.lat.present ? data.lat.value : this.lat,
       lng: data.lng.present ? data.lng.value : this.lng,
       country: data.country.present ? data.country.value : this.country,
@@ -199,6 +242,7 @@ class City extends DataClass implements Insertable<City> {
   String toString() {
     return (StringBuffer('City(')
           ..write('name: $name, ')
+          ..write('searchNames: $searchNames, ')
           ..write('lat: $lat, ')
           ..write('lng: $lng, ')
           ..write('country: $country')
@@ -207,12 +251,13 @@ class City extends DataClass implements Insertable<City> {
   }
 
   @override
-  int get hashCode => Object.hash(name, lat, lng, country);
+  int get hashCode => Object.hash(name, searchNames, lat, lng, country);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is City &&
           other.name == this.name &&
+          other.searchNames == this.searchNames &&
           other.lat == this.lat &&
           other.lng == this.lng &&
           other.country == this.country);
@@ -220,12 +265,14 @@ class City extends DataClass implements Insertable<City> {
 
 class CitiesCompanion extends UpdateCompanion<City> {
   final Value<String> name;
+  final Value<String?> searchNames;
   final Value<double> lat;
   final Value<double> lng;
   final Value<String> country;
   final Value<int> rowid;
   const CitiesCompanion({
     this.name = const Value.absent(),
+    this.searchNames = const Value.absent(),
     this.lat = const Value.absent(),
     this.lng = const Value.absent(),
     this.country = const Value.absent(),
@@ -233,6 +280,7 @@ class CitiesCompanion extends UpdateCompanion<City> {
   });
   CitiesCompanion.insert({
     required String name,
+    this.searchNames = const Value.absent(),
     required double lat,
     required double lng,
     required String country,
@@ -243,6 +291,7 @@ class CitiesCompanion extends UpdateCompanion<City> {
        country = Value(country);
   static Insertable<City> custom({
     Expression<String>? name,
+    Expression<String>? searchNames,
     Expression<double>? lat,
     Expression<double>? lng,
     Expression<String>? country,
@@ -250,6 +299,7 @@ class CitiesCompanion extends UpdateCompanion<City> {
   }) {
     return RawValuesInsertable({
       if (name != null) 'name': name,
+      if (searchNames != null) 'search_names': searchNames,
       if (lat != null) 'lat': lat,
       if (lng != null) 'lng': lng,
       if (country != null) 'country': country,
@@ -259,6 +309,7 @@ class CitiesCompanion extends UpdateCompanion<City> {
 
   CitiesCompanion copyWith({
     Value<String>? name,
+    Value<String?>? searchNames,
     Value<double>? lat,
     Value<double>? lng,
     Value<String>? country,
@@ -266,6 +317,7 @@ class CitiesCompanion extends UpdateCompanion<City> {
   }) {
     return CitiesCompanion(
       name: name ?? this.name,
+      searchNames: searchNames ?? this.searchNames,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
       country: country ?? this.country,
@@ -278,6 +330,9 @@ class CitiesCompanion extends UpdateCompanion<City> {
     final map = <String, Expression>{};
     if (name.present) {
       map['name'] = Variable<String>(name.value);
+    }
+    if (searchNames.present) {
+      map['search_names'] = Variable<String>(searchNames.value);
     }
     if (lat.present) {
       map['lat'] = Variable<double>(lat.value);
@@ -298,6 +353,7 @@ class CitiesCompanion extends UpdateCompanion<City> {
   String toString() {
     return (StringBuffer('CitiesCompanion(')
           ..write('name: $name, ')
+          ..write('searchNames: $searchNames, ')
           ..write('lat: $lat, ')
           ..write('lng: $lng, ')
           ..write('country: $country, ')
@@ -321,6 +377,7 @@ abstract class _$CitiesDatabase extends GeneratedDatabase {
 typedef $$CitiesTableCreateCompanionBuilder =
     CitiesCompanion Function({
       required String name,
+      Value<String?> searchNames,
       required double lat,
       required double lng,
       required String country,
@@ -329,6 +386,7 @@ typedef $$CitiesTableCreateCompanionBuilder =
 typedef $$CitiesTableUpdateCompanionBuilder =
     CitiesCompanion Function({
       Value<String> name,
+      Value<String?> searchNames,
       Value<double> lat,
       Value<double> lng,
       Value<String> country,
@@ -346,6 +404,11 @@ class $$CitiesTableFilterComposer
   });
   ColumnFilters<String> get name => $composableBuilder(
     column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get searchNames => $composableBuilder(
+    column: $table.searchNames,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -379,6 +442,11 @@ class $$CitiesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get searchNames => $composableBuilder(
+    column: $table.searchNames,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<double> get lat => $composableBuilder(
     column: $table.lat,
     builder: (column) => ColumnOrderings(column),
@@ -406,6 +474,11 @@ class $$CitiesTableAnnotationComposer
   });
   GeneratedColumn<String> get name =>
       $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get searchNames => $composableBuilder(
+    column: $table.searchNames,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<double> get lat =>
       $composableBuilder(column: $table.lat, builder: (column) => column);
@@ -446,12 +519,14 @@ class $$CitiesTableTableManager
           updateCompanionCallback:
               ({
                 Value<String> name = const Value.absent(),
+                Value<String?> searchNames = const Value.absent(),
                 Value<double> lat = const Value.absent(),
                 Value<double> lng = const Value.absent(),
                 Value<String> country = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => CitiesCompanion(
                 name: name,
+                searchNames: searchNames,
                 lat: lat,
                 lng: lng,
                 country: country,
@@ -460,12 +535,14 @@ class $$CitiesTableTableManager
           createCompanionCallback:
               ({
                 required String name,
+                Value<String?> searchNames = const Value.absent(),
                 required double lat,
                 required double lng,
                 required String country,
                 Value<int> rowid = const Value.absent(),
               }) => CitiesCompanion.insert(
                 name: name,
+                searchNames: searchNames,
                 lat: lat,
                 lng: lng,
                 country: country,

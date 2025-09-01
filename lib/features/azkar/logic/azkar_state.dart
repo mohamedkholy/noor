@@ -9,8 +9,7 @@ class AzkarLoaded extends AzkarState {
   AzkarLoaded(this.azkar);
 }
 
-
- class AzkarCategoriesLoaded extends AzkarState {
+class AzkarCategoriesLoaded extends AzkarState {
   final List<CategoryData> azkarCategories;
   AzkarCategoriesLoaded(this.azkarCategories);
 }

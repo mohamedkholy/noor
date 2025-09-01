@@ -6,6 +6,8 @@ import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/theming/my_colors.dart';
 
+import '../../../../generated/l10n.dart';
+
 class SurahWidget extends StatelessWidget {
   final Surah surah;
   const SurahWidget({super.key, required this.surah});
@@ -63,7 +65,7 @@ class SurahWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                " ${surah.revelationPlaceEn} - ${surah.versesCount} Ayahs",
+                " ${Localizations.localeOf(context).languageCode == "ar" ? surah.revelationPlaceAr : surah.revelationPlaceEn} - ${surah.versesCount} ${S.current.aya} ",
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeightHelper.medium,

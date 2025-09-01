@@ -9,6 +9,7 @@ class DecoratedContainer extends StatelessWidget {
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
   final Color? color;
+  final bool? fullWidth;
   const DecoratedContainer({
     super.key,
     this.image,
@@ -17,11 +18,13 @@ class DecoratedContainer extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.color,
+    this.fullWidth = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: fullWidth == true ? double.infinity : null,
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(

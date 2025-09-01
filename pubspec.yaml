@@ -8,6 +8,12 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
+
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
   adhan: ^2.0.0+1
   auto_size_text: ^3.0.0
   connectivity_plus: ^6.1.5
@@ -18,8 +24,6 @@ dependencies:
   dotted_line: ^3.2.3
   drift: ^2.28.1
   drift_flutter: ^0.2.5
-  flutter:
-    sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_launcher_icons: ^0.14.4
   flutter_local_notifications: ^19.4.1
@@ -76,20 +80,51 @@ flutter:
   fonts:
     - family: PlusJakartaSans
       fonts:
-        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+        - asset: assets/fonts/PlusJakartaSans/PlusJakartaSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/PlusJakartaSans-ExtraBold.ttf
+        - asset: assets/fonts/PlusJakartaSans/PlusJakartaSans-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/PlusJakartaSans-ExtraLight.ttf
+        - asset: assets/fonts/PlusJakartaSans/PlusJakartaSans-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/PlusJakartaSans-Light.ttf
+        - asset: assets/fonts/PlusJakartaSans/PlusJakartaSans-Light.ttf
           weight: 300
-        - asset: assets/fonts/PlusJakartaSans-Medium.ttf
+        - asset: assets/fonts/PlusJakartaSans/PlusJakartaSans-Medium.ttf
           weight: 500
-        - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+        - asset: assets/fonts/PlusJakartaSans/PlusJakartaSans-Regular.ttf
           weight: 400
-        - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
+        - asset: assets/fonts/PlusJakartaSans/PlusJakartaSans-SemiBold.ttf
           weight: 600
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/cairo/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/cairo/Cairo-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/cairo/Cairo-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/cairo/Cairo-Light.ttf
+          weight: 300
+        - asset: assets/fonts/cairo/Cairo-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/cairo/Cairo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/cairo/Cairo-SemiBold.ttf
+          weight: 600 
+    - family: Tajawal
+      fonts:
+        - asset: assets/fonts/tajawal/Tajawal-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/tajawal/Tajawal-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/tajawal/Tajawal-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/tajawal/Tajawal-Light.ttf
+          weight: 300
+        - asset: assets/fonts/tajawal/Tajawal-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/tajawal/Tajawal-Regular.ttf
+          weight: 400
+            
     - family: Amiri
       fonts:
         - asset: assets/fonts/Amiri-Bold.ttf
@@ -119,7 +154,7 @@ flutter:
         - asset: assets/fonts/font_icons/Quran.ttf
     - family: Dua
       fonts:
-        - asset: assets/fonts/font_icons/Dua.ttf    
+        - asset: assets/fonts/font_icons/Dua.ttf
     - family: MeQuran
       fonts:
         - asset: assets/fonts/Me_quran Regular.ttf
@@ -155,3 +190,5 @@ flutter_native_splash:
     image: assets/images/png/app_icon.png
     icon_background_color: "#348C7C"
     branding: assets/images/png/branding.png
+flutter_intl:
+  enabled: true

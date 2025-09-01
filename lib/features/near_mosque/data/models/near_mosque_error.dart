@@ -1,3 +1,1 @@
-enum NearMosqueError {
-  locationDenied, noInternet,unknown   
-}
+enum NearMosqueError { locationDenied, noInternet, unknown }

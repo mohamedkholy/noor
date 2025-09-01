@@ -6,6 +6,7 @@ import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/logic/quran_state.dart';
 import 'package:noor/features/quran/ui/chapters_screen.dart';
 import 'package:noor/features/quran/ui/surahs_screen.dart';
+import 'package:noor/generated/l10n.dart';
 
 class QuranScreen extends StatefulWidget {
   const QuranScreen({super.key});
@@ -24,7 +25,7 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(title: "Quran"),
+      appBar: MyAppBar(title: S.current.quran),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 800),
@@ -37,17 +38,17 @@ class _QuranScreenState extends State<QuranScreen> {
                     length: 2,
                     child: Column(
                       children: [
-                        const TabBar(
+                        TabBar(
                           indicatorColor: MyColors.primary,
                           labelColor: MyColors.primary,
                           unselectedLabelColor: Colors.grey,
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                           tabs: [
-                            Tab(text: "Surah", height: 60),
-                            Tab(text: "Juz", height: 60),
+                            Tab(text: S.current.surah, height: 60),
+                            Tab(text: S.current.juz, height: 60),
                           ],
                         ),
                         const SizedBox(height: 10),

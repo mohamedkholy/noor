@@ -25,11 +25,7 @@ class _ZekrScreenState extends State<ZekrScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(
-        title: widget.tasbih.zekr,
-        fontSize: 30,
-        fontFamily: "Amiri",
-      ),
+      appBar: MyAppBar(title: widget.tasbih.zekr, fontSize: 30),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

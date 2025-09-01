@@ -5,6 +5,7 @@ import 'package:marquee/marquee.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
+import 'package:noor/generated/l10n.dart';
 
 class FeaturesRow extends StatefulWidget {
   const FeaturesRow({super.key});
@@ -15,62 +16,11 @@ class FeaturesRow extends StatefulWidget {
 
 class _FeaturesRowState extends State<FeaturesRow> {
   late final HomeCubit homeCubit = context.read();
-  late final features = [
-    (
-      "Quran",
-      const IconData(0xe821, fontFamily: "Quran"),
-      () {
-        Navigator.pushNamed(context, MyRoutes.quran).then((value) {
-          homeCubit.getLasReading();
-        });
-      },
-    ),
-    (
-      "Hadith",
-      FontAwesomeIcons.book,
-      () {
-        Navigator.pushNamed(context, MyRoutes.hadith);
-      },
-    ),
-    (
-      "Tasbih",
-      const IconData(0xe81f, fontFamily: "Tasbih"),
-      () {
-        Navigator.pushNamed(context, MyRoutes.tasbih);
-      },
-    ),
-    (
-      "Azkar",
-      const IconData(0xe820, fontFamily: "Dua"),
-      () {
-        Navigator.pushNamed(context, MyRoutes.azkar);
-      },
-    ),
-    (
-      "Qibla",
-      FontAwesomeIcons.compass,
-      () {
-        Navigator.pushNamed(context, MyRoutes.qibla);
-      },
-    ),
-    (
-      "Near mosque",
-      Icons.mosque,
-      () {
-        Navigator.pushNamed(context, MyRoutes.nearMosque);
-      },
-    ),
-    (
-      "Calendar",
-      FontAwesomeIcons.calendarDays,
-      () {
-        Navigator.pushNamed(context, MyRoutes.calender);
-      },
-    ),
-  ];
+  late List<(String, IconData, Null Function())> features;
 
   @override
   Widget build(BuildContext context) {
+    _initFeatures();
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -124,5 +74,61 @@ class _FeaturesRowState extends State<FeaturesRow> {
         ),
       ),
     );
+  }
+
+  void _initFeatures() {
+    features = [
+      (
+        S.of(context).quran,
+        const IconData(0xe821, fontFamily: "Quran"),
+        () {
+          Navigator.pushNamed(context, MyRoutes.quran).then((value) {
+            homeCubit.getLasReading();
+          });
+        },
+      ),
+      (
+        S.of(context).hadith,
+        FontAwesomeIcons.book,
+        () {
+          Navigator.pushNamed(context, MyRoutes.hadith);
+        },
+      ),
+      (
+        S.of(context).tasbih,
+        const IconData(0xe81f, fontFamily: "Tasbih"),
+        () {
+          Navigator.pushNamed(context, MyRoutes.tasbih);
+        },
+      ),
+      (
+        S.of(context).azkar,
+        const IconData(0xe820, fontFamily: "Dua"),
+        () {
+          Navigator.pushNamed(context, MyRoutes.azkar);
+        },
+      ),
+      (
+        S.of(context).qibla,
+        FontAwesomeIcons.compass,
+        () {
+          Navigator.pushNamed(context, MyRoutes.qibla);
+        },
+      ),
+      (
+        S.of(context).near_mosque,
+        Icons.mosque,
+        () {
+          Navigator.pushNamed(context, MyRoutes.nearMosque);
+        },
+      ),
+      (
+        S.of(context).calendar,
+        FontAwesomeIcons.calendarDays,
+        () {
+          Navigator.pushNamed(context, MyRoutes.calender);
+        },
+      ),
+    ];
   }
 }

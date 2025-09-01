@@ -55,9 +55,6 @@ class QuranRepo {
     int suraNumber,
     bool isFromStart,
   ) async {
-    print("suraNumber $suraNumber");
-    print("isFromStart $isFromStart");
-
     final List<(Surah, List<Verse>)> result = [];
     final surahs =
         await (_db.select(_db.surahs)
@@ -72,14 +69,13 @@ class QuranRepo {
                   mode: isFromStart ? OrderingMode.desc : OrderingMode.asc,
                 ),
               ])
-              ..limit(5)
-              )
-            .get();  
-    for (final surah in surahs) {  
+              ..limit(5))
+            .get();
+    for (final surah in surahs) {
       final verses = await getSurahsVerses(surah.number);
       result.add((surah, verses));
     }
-    if(isFromStart){
+    if (isFromStart) {
       result.sort((a, b) => a.$1.number.compareTo(b.$1.number));
     }
     return result;

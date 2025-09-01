@@ -6,6 +6,7 @@ import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/near_mosque/data/models/mosque_data.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
 import 'package:noor/features/near_mosque/ui/widgets/distance_widget.dart';
+import 'package:noor/generated/l10n.dart';
 
 class MosqueDetailsWidget extends StatelessWidget {
   const MosqueDetailsWidget({super.key, required this.mosqueData});
@@ -56,7 +57,9 @@ class MosqueDetailsWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 5),
-                Text("${mosqueData.distance.toStringAsFixed(2)} KM"),
+                Text(
+                  "${mosqueData.distance.toStringAsFixed(2)}  ${S.current.km}",
+                ),
               ],
             ),
           ],
@@ -67,7 +70,7 @@ class MosqueDetailsWidget extends StatelessWidget {
             Expanded(
               child: DistanceWidget(
                 distance: mosqueData.distance,
-                title: "Ariel Distance",
+                title: S.current.aerial_distance,
                 icon: Icons.straight,
                 margin: const EdgeInsets.symmetric(horizontal: 5),
               ),
@@ -77,7 +80,7 @@ class MosqueDetailsWidget extends StatelessWidget {
                 distance: DistanceCalculator.calculateRouteDistance(
                   mosqueData.route,
                 ),
-                title: "Road Distance",
+                title: S.current.road_distance,
                 icon: Icons.straight,
                 margin: const EdgeInsets.symmetric(horizontal: 5),
               ),
@@ -95,12 +98,12 @@ class MosqueDetailsWidget extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            context.read<NearMosqueCubit>().Navigate(mosqueData.location);
+            context.read<NearMosqueCubit>().navigate(mosqueData.location);
           },
           icon: const Icon(Icons.navigation_sharp, size: 25),
-          label: const Text(
-            "Start Navigation",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          label: Text(
+            S.current.start_navigation,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
       ],

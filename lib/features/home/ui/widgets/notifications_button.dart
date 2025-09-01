@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:noor/features/home/logic/home_cubit.dart';
-import 'package:noor/features/home/logic/home_state.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/features/navigation/logic/navigation_state.dart';
 
-// ignore: must_be_immutable
 class NotificatiosButton extends StatefulWidget {
   const NotificatiosButton({super.key});
 
@@ -27,12 +24,14 @@ class _NotificatiosButtonState extends State<NotificatiosButton> {
           onPressed: () {
             notificationsState = !notificationsState;
             context.read<NavigationCubit>().saveNotificationsState(
-              notificationsState, 
+              notificationsState,
             );
           },
-          icon: notificationsState
-              ? const Icon(Icons.notifications, color: Colors.white)
-              : const Icon(Icons.notifications_off, color: Colors.white),
+          icon: Icon(
+            notificationsState ? Icons.notifications : Icons.notifications_off,
+            color: Colors.white,
+            size: 26,
+          ),
         );
       },
     );

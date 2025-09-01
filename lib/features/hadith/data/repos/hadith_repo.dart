@@ -14,9 +14,9 @@ class HadithRepo {
           ..where((t) => t.kitab.equals(kitab.name))
           ..where(
             (t) =>
-                t.arab.contains(value??"") |
-                t.terjemah.contains(value??"") |
-                t.number.equals(int.tryParse(value??"") ?? 0),
+                t.arab.contains(value ?? "") |
+                t.terjemah.contains(value ?? "") |
+                t.number.equals(int.tryParse(value ?? "") ?? 0),
           )
           ..limit(20, offset: page * 20)
           ..orderBy([(e) => OrderingTerm(expression: _db.hadiths.number)]))

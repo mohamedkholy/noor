@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,6 +11,8 @@ import 'package:noor/features/near_mosque/ui/widgets/current_location_button.dar
 import 'package:noor/features/near_mosque/ui/widgets/error_state_widget.dart';
 import 'package:noor/features/near_mosque/ui/widgets/expand_button.dart';
 import 'package:noor/features/near_mosque/ui/widgets/nearby_mosques_widget.dart';
+
+import '../../../generated/l10n.dart';
 
 class NearMosqueScreen extends StatefulWidget {
   const NearMosqueScreen({super.key});
@@ -63,7 +63,7 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MediaQuery.sizeOf(context).height > 700
-          ? const MyAppBar(title: 'Near Mosque')
+          ? MyAppBar(title: S.current.near_mosque)
           : null,
       body: SafeArea(
         top: false,
@@ -93,7 +93,7 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                     Marker(
                       markerId: const MarkerId("current_location"),
                       position: currentLocation!,
-                      infoWindow: const InfoWindow(title: "Current Location"),
+                      infoWindow: InfoWindow(title: S.current.current_location),
                       icon: currentLocationIcon,
                     ),
                   );
@@ -104,6 +104,7 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                     Marker(
                       markerId: MarkerId(mosqueData!.name),
                       position: mosqueData!.location,
+                      infoWindow: InfoWindow(title: mosqueData!.name),
                       icon: mosqueIcon,
                     ),
                   );
@@ -115,7 +116,10 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                       width: 4,
                     ),
                   );
-                  final bounds = getBounds();
+                  final bounds = _nearMosqueCubit.getBounds(
+                    mosqueData!.location,
+                    currentLocation!,
+                  );
                   mapController?.animateCamera(
                     CameraUpdate.newLatLngBounds(bounds, 15),
                   );
@@ -246,30 +250,5 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
         CameraPosition(target: currentLocation!, zoom: 16),
       ),
     );
-  }
-
-  LatLngBounds getBounds() {
-    final double minLat = min(
-      mosqueData!.location.latitude,
-      currentLocation!.latitude,
-    );
-    final double maxLat = max(
-      mosqueData!.location.latitude,
-      currentLocation!.latitude,
-    );
-    final double minLng = min(
-      mosqueData!.location.longitude,
-      currentLocation!.longitude,
-    );
-    final double maxLng = max(
-      mosqueData!.location.longitude,
-      currentLocation!.longitude,
-    );
-
-    const buffer = 0.009;
-    final southwest = LatLng(minLat - buffer, minLng - buffer);
-    final northeast = LatLng(maxLat + buffer, maxLng + buffer);
-
-    return LatLngBounds(southwest: southwest, northeast: northeast);
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/theming/my_text_styles.dart';
 
+import '../../generated/l10n.dart';
+
 class SearchAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   final Function(String) onSearch;
@@ -28,11 +30,14 @@ class _SearchAppBarState extends State<SearchAppBar> {
       automaticallyImplyLeading: false,
       leading: !isSearching
           ? ModalRoute.of(context)?.canPop == true
-              ? IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-                  onPressed: () => Navigator.pop(context),
-                )
-              : null
+                ? IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => Navigator.pop(context),
+                  )
+                : null
           : null,
       centerTitle: true,
       title: !isSearching
@@ -41,9 +46,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
               cursorColor: Colors.white,
               autofocus: true,
               style: const TextStyle(color: Colors.white, fontSize: 18),
-              decoration: const InputDecoration(
-                hintText: "Search...",
-                hintStyle: TextStyle(color: Colors.white70),
+              decoration: InputDecoration(
+                hintText: S.current.search,
+                hintStyle: const TextStyle(color: Colors.white70),
                 border: InputBorder.none,
               ),
               onChanged: widget.onSearch,

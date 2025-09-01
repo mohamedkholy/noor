@@ -6,6 +6,8 @@ import 'package:noor/features/near_mosque/ui/widgets/expand_button.dart';
 import 'package:noor/features/near_mosque/ui/widgets/mosque_details_widget.dart';
 import 'package:noor/features/near_mosque/ui/widgets/mosque_widget.dart';
 
+import '../../../../generated/l10n.dart';
+
 class NearbyMosquesWidget extends StatefulWidget {
   final List<MosqueData> mosques;
   final VoidCallback onArrowClick;
@@ -63,7 +65,9 @@ class _NearbyMosquesWidgetState extends State<NearbyMosquesWidget> {
                   ),
                 if (mosqueData != null) const SizedBox(width: 10),
                 Text(
-                  mosqueData != null ? "Details" : "Nearby Mosques",
+                  mosqueData != null
+                      ? S.current.details
+                      : S.current.nearby_mosques,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -110,9 +114,9 @@ class _NearbyMosquesWidgetState extends State<NearbyMosquesWidget> {
                         )
                       : SizedBox(
                           height: MediaQuery.sizeOf(context).height * 0.25,
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              "No nearby mosques found",
+                              S.current.no_nearby_mosques_found,
                               textAlign: TextAlign.center,
                             ),
                           ),

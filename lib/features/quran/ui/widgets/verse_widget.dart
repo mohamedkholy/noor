@@ -20,7 +20,8 @@ class VerseWidget extends StatelessWidget {
             child: RichText(
               textDirection: TextDirection.rtl,
               text: TextSpan(
-                text: "${verse.textAr} ${ArabicNumbersConverter.convertToArabicDigits(verse.number)} ",
+                text:
+                    "${verse.textAr} ${ArabicNumbersConverter.convertToArabicDigits(verse.number)} ",
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 26.3,
@@ -31,6 +32,7 @@ class VerseWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
+            textDirection: TextDirection.ltr,
             verse.textEn,
             style: const TextStyle(
               color: Colors.black,
@@ -42,6 +44,4 @@ class VerseWidget extends StatelessWidget {
       ),
     );
   }
-
- 
 }

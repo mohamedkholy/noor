@@ -22,14 +22,11 @@ class MosqueApiService {
     if (response.statusCode != 200 || response.data == null) {
       throw Exception("Overpass API error: ${response.statusCode}");
     }
-    print("Overpass API response: ${response.data}");
     final OverpassResponse overpassResponse = OverpassResponse.fromJson(
       response.data,
     );
-    print("Overpass API response fromJson: ${overpassResponse}");
     return overpassResponse.elements;
   }
-    
 
   Future<List<LatLng>> fetchRouteFromOSRM(
     LatLng origin,

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
-import 'package:noor/core/constants/shared_preferences_keys.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
@@ -18,6 +18,7 @@ class LocationRepo {
           ..where(
             (city) =>
                 city.name.contains(query ?? "") |
+                city.searchNames.contains(query ?? "") |
                 city.country.contains(query ?? ""),
           )
           ..orderBy([

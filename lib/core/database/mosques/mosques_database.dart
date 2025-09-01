@@ -12,10 +12,7 @@ class MosquesDatabase extends _$MosquesDatabase {
   @override
   int get schemaVersion => 1;
 
-
-
-  static  QueryExecutor _openConnection(){
-      return driftDatabase(name: "mosques_database");
+  static QueryExecutor _openConnection() {
+    return driftDatabase(name: "mosques_database");
   }
-
 }

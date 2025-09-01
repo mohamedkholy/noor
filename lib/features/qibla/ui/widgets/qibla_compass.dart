@@ -7,6 +7,8 @@ import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/location_denied_widget.dart';
 import 'package:noor/features/qibla/ui/widgets/qibla_compass_widget.dart';
 
+import '../../../../generated/l10n.dart';
+
 class QiblahCompass extends StatefulWidget {
   const QiblahCompass({super.key});
 
@@ -50,7 +52,7 @@ class QiblahCompassState extends State<QiblahCompass> {
                 return QiblahCompassWidget();
               case LocationPermission.deniedForever:
                 return LocationDeniedWidget(
-                  error: "You need to allow location permission from settings",
+                  error: S.current.location_permission_settings,
                   openSettings: true,
                   callback: () {
                     Geolocator.openAppSettings();
@@ -58,8 +60,7 @@ class QiblahCompassState extends State<QiblahCompass> {
                 );
               case LocationPermission.denied:
                 return LocationDeniedWidget(
-                  error:
-                      "To get your current location you must accept the location permission",
+                  error: S.current.location_permission,
                   callback: _checkLocationStatus,
                 );
               default:
@@ -67,7 +68,7 @@ class QiblahCompassState extends State<QiblahCompass> {
             }
           } else {
             return LocationDeniedWidget(
-              error: "Please enable Location service",
+              error: S.current.enable_location_service,
               callback: _checkLocationStatus,
             );
           }

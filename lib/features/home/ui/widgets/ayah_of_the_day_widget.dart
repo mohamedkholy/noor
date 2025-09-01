@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
+import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/logic/home_state.dart';
+import 'package:noor/generated/l10n.dart' show S;
 
 class AyahOfTheDayWidget extends StatelessWidget {
   const AyahOfTheDayWidget({super.key});
@@ -30,17 +32,22 @@ class AyahOfTheDayWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Ayah of the Day",
-                  style: TextStyle(
+                Text(
+                  S.of(context).ayah_of_the_day,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 5),
                 Text(
-                  "Surah ${state.verse.surahName},Aya ${state.verse.number}",
-                  style: const TextStyle(color: Colors.white),
+                  "${S.of(context).surah} ${state.verse.surahName}, ${S.of(context).aya} ${state.verse.number}",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeightHelper.medium,
+                  ),
                 ),
                 const SizedBox(height: 15),
                 SizedBox(
@@ -59,8 +66,13 @@ class AyahOfTheDayWidget extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
+                    textDirection: TextDirection.ltr,
                     state.verse.textEn,
-                    style: const TextStyle(color: Colors.white, fontSize: 17),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeightHelper.medium,
+                    ),
                   ),
                 ),
               ],
@@ -71,9 +83,7 @@ class AyahOfTheDayWidget extends StatelessWidget {
           width: double.infinity,
           height: 100,
           child: Center(
-            child: CircularProgressIndicator(
-              color: MyColors.primary,
-            ),
+            child: CircularProgressIndicator(color: MyColors.primary),
           ),
         );
       },

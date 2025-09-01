@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 
 class Category extends Table {
-  TextColumn get category => text()(); 
+  TextColumn get category => text()();
   TextColumn get search => text().nullable()();
   BoolColumn get isFavorite => boolean()();
 

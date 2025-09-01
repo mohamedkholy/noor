@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
+import 'package:noor/core/helpers/constants.dart';
 import 'package:noor/core/helpers/prayer_times_helper.dart';
-import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/widgets/circular_slider.dart';
 import 'package:noor/features/home/ui/widgets/prayers_time_row.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
@@ -34,8 +34,7 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   @override
   void initState() {
     _city =
-        context.read<NavigationCubit>().getSavedCity() ??
-        const City(name: "Makkah", lat: 21.42664, lng: 39.82563, country: "SA");
+        context.read<NavigationCubit>().getSavedCity() ?? Constants.defaultCity;
     initPrayerTimes(_city);
     super.initState();
   }

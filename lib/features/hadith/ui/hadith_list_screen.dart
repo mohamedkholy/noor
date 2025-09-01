@@ -30,7 +30,7 @@ class _HadithListScreenState extends State<HadithListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SearchAppBar(
-        title: widget.type.name,
+        title: widget.type.getTranslatedName(),
         onstartSearch: (bool isSearching) {
           page = 0;
           query = "";

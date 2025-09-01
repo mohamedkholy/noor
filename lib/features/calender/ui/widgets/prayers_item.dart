@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
 
+import '../../../../generated/l10n.dart';
+
 class PrayersItem extends StatefulWidget {
   final PrayerTimes prayerTimes;
   final Prayer? nextPrayer;
@@ -22,35 +24,35 @@ class _PrayersItemState extends State<PrayersItem> {
     initPrayers();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    initPrayers();
-  }
-
   void initPrayers() {
     prayers = [
-      ("Fajr", Icons.nights_stay, widget.prayerTimes.fajr, Prayer.fajr),
+      (S.current.fajr, Icons.nights_stay, widget.prayerTimes.fajr, Prayer.fajr),
       (
-        "Shorok",
+        S.current.shorok,
         Icons.wb_twighlight,
         widget.prayerTimes.sunrise,
         Prayer.sunrise,
       ),
-      ("Dhuhr", Icons.sunny, widget.prayerTimes.dhuhr, Prayer.dhuhr),
-      ("Asr", Icons.brightness_medium, widget.prayerTimes.asr, Prayer.asr),
+      (S.current.dhuhr, Icons.sunny, widget.prayerTimes.dhuhr, Prayer.dhuhr),
       (
-        "Maghrib",
+        S.current.asr,
+        Icons.brightness_medium,
+        widget.prayerTimes.asr,
+        Prayer.asr,
+      ),
+      (
+        S.current.maghrib,
         Icons.nightlight_round,
         widget.prayerTimes.maghrib,
         Prayer.maghrib,
       ),
-      ("Isha", Icons.nightlight, widget.prayerTimes.isha, Prayer.isha),
+      (S.current.isha, Icons.nightlight, widget.prayerTimes.isha, Prayer.isha),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
+    initPrayers();
     return Column(
       children: [
         ...prayers.map((e) {

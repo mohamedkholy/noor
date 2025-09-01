@@ -8,6 +8,8 @@ import 'package:noor/core/widgets/decorated_container.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/widgets/tasbih_dialog.dart';
 
+import '../../../../generated/l10n.dart';
+
 class TasbihWidget extends StatelessWidget {
   final Tasbih tasbih;
   const TasbihWidget({super.key, required this.tasbih});
@@ -22,6 +24,7 @@ class TasbihWidget extends StatelessWidget {
       child: Row(
         children: [
           PopupMenuButton(
+            color: Colors.white,
             onSelected: (value) {
               if (value == "delete") {
                 buildcontext.read<TasbihCubit>().deleteTasbih(tasbih);
@@ -36,8 +39,8 @@ class TasbihWidget extends StatelessWidget {
               }
             },
             itemBuilder: (context) => [
-              const PopupMenuItem(value: "edit", child: Text("Edit")),
-              const PopupMenuItem(value: "delete", child: Text("Delete")),
+              PopupMenuItem(value: "edit", child: Text(S.current.edit)),
+              PopupMenuItem(value: "delete", child: Text(S.current.delete)),
             ],
             child: const Icon(Icons.more_vert, size: 35, color: Colors.white),
           ),
@@ -61,7 +64,7 @@ class TasbihWidget extends StatelessWidget {
                   width: double.infinity,
                   child: Text(
                     textDirection: TextDirection.rtl,
-                    "التكرار: ${tasbih.count.toString()}",
+                    "${S.current.repetition}: ${tasbih.count.toString()}",
                     style: MyTextStyles.fontAmiriBold.copyWith(
                       fontSize: 20,
                       color: Colors.white,

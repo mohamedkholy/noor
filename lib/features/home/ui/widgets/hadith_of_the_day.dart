@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
+import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/logic/home_state.dart';
+import 'package:noor/generated/l10n.dart';
 
 class HadithOfTheDay extends StatelessWidget {
   const HadithOfTheDay({super.key});
@@ -30,17 +32,22 @@ class HadithOfTheDay extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Hadith of the Day",
-                  style: TextStyle(
+                Text(
+                  S.of(context).hadith_of_the_day,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 5),
                 Text(
                   state.hadith.kitab,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeightHelper.medium,
+                  ),
                 ),
                 const SizedBox(height: 15),
                 SizedBox(
@@ -59,8 +66,13 @@ class HadithOfTheDay extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Text(
+                    textDirection: TextDirection.ltr,
                     state.hadith.terjemah,
-                    style: const TextStyle(color: Colors.white, fontSize: 17),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeightHelper.medium,
+                    ),
                   ),
                 ),
               ],

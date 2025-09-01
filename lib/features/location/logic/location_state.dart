@@ -20,7 +20,7 @@ class RelocatingErrorState extends LocationState {
   RelocatingErrorState({required this.message, required this.openSettings});
 }
 
- class RelocatingSuccessState extends LocationState {
+class RelocatingSuccessState extends LocationState {
   final City city;
-  RelocatingSuccessState({required this.city}); 
+  RelocatingSuccessState({required this.city});
 }

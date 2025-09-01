@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
@@ -8,7 +9,7 @@ import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/theming/my_text_styles.dart';
 import 'package:noor/features/location/logic/location_cubit.dart';
 import 'package:noor/features/location/logic/location_state.dart';
-import 'package:permission_handler/permission_handler.dart' as Geolocator;
+import 'package:noor/generated/l10n.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class CurrentLocationWidget extends StatefulWidget {
@@ -33,9 +34,9 @@ class _CurrentLocationWidgetState extends State<CurrentLocationWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Current Location",
-            style: TextStyle(color: Colors.white, fontSize: 15),
+          Text(
+            S.of(context).current_location,
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
           const SizedBox(height: 5),
           Row(
@@ -70,7 +71,7 @@ class _CurrentLocationWidgetState extends State<CurrentLocationWidget> {
                   if (state is RelocatingErrorState) {
                     showDenialDialog(state);
                   } else if (state is RelocatingSuccessState) {
-                    Navigator.pop(context,state.city);
+                    Navigator.pop(context, state.city);
                   }
                 },
                 builder: (context, state) {
@@ -100,9 +101,9 @@ class _CurrentLocationWidgetState extends State<CurrentLocationWidget> {
                                   strokeWidth: 3,
                                 ),
                               )
-                            : const Text(
-                                "Relocate",
-                                style: TextStyle(
+                            : Text(
+                                S.of(context).Relocate,
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -124,7 +125,7 @@ class _CurrentLocationWidgetState extends State<CurrentLocationWidget> {
     Alert(
       context: context,
       image: SvgPicture.asset(Assets.assetsImagesSvgMap, height: 100),
-      title: "Location  ",
+      title: S.of(context).location,
       desc: state.message,
       style: AlertStyle(
         titleStyle: MyTextStyles.font20PrimarySemiBold,
@@ -134,7 +135,9 @@ class _CurrentLocationWidgetState extends State<CurrentLocationWidget> {
         DialogButton(
           color: MyColors.primary,
           child: Text(
-            state.openSettings ? "Go to settings" : "Ask Again",
+            state.openSettings
+                ? S.of(context).open_settings
+                : S.of(context).ask_again,
             style: MyTextStyles.font15whiteRegular,
           ),
           onPressed: () async {

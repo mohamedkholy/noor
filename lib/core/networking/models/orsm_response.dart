@@ -14,7 +14,8 @@ class OrsmResponse {
     required this.waypoints,
   });
 
-  factory OrsmResponse.fromJson(Map<String, dynamic> json) => _$OrsmResponseFromJson(json);
+  factory OrsmResponse.fromJson(Map<String, dynamic> json) =>
+      _$OrsmResponseFromJson(json);
   Map<String, dynamic> toJson() => _$OrsmResponseToJson(this);
 }
 
@@ -37,7 +38,8 @@ class RouteModel {
     required this.distance,
   });
 
-  factory RouteModel.fromJson(Map<String, dynamic> json) => _$RouteModelFromJson(json);
+  factory RouteModel.fromJson(Map<String, dynamic> json) =>
+      _$RouteModelFromJson(json);
   Map<String, dynamic> toJson() => _$RouteModelToJson(this);
 }
 
@@ -46,12 +48,10 @@ class Geometry {
   final List<List<double>> coordinates;
   final String type;
 
-  Geometry({
-    required this.coordinates,
-    required this.type,
-  });
+  Geometry({required this.coordinates, required this.type});
 
-  factory Geometry.fromJson(Map<String, dynamic> json) => _$GeometryFromJson(json);
+  factory Geometry.fromJson(Map<String, dynamic> json) =>
+      _$GeometryFromJson(json);
   Map<String, dynamic> toJson() => _$GeometryToJson(this);
 }
 
@@ -89,6 +89,7 @@ class Waypoint {
     required this.distance,
   });
 
-  factory Waypoint.fromJson(Map<String, dynamic> json) => _$WaypointFromJson(json);
+  factory Waypoint.fromJson(Map<String, dynamic> json) =>
+      _$WaypointFromJson(json);
   Map<String, dynamic> toJson() => _$WaypointToJson(this);
 }
