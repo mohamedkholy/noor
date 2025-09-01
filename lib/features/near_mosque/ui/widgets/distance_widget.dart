@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/generated/l10n.dart';
 
 class DistanceWidget extends StatelessWidget {
   const DistanceWidget({
@@ -36,7 +37,7 @@ class DistanceWidget extends StatelessWidget {
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
               Text(
-                "${distance.toStringAsFixed(2)} KM",
+                "${distance.toStringAsFixed(2)} ${S.current.km}",
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],

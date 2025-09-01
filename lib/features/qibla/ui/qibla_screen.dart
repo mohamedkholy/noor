@@ -4,6 +4,8 @@ import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/qibla/ui/widgets/qibla_compass.dart';
 
+import '../../../generated/l10n.dart';
+
 class QiblaScreen extends StatefulWidget {
   const QiblaScreen({super.key});
 
@@ -15,7 +17,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(title: 'Qibla'),
+      appBar: MyAppBar(title: S.current.qibla),
       body: SafeArea(
         child: FutureBuilder<bool?>(
           future: FlutterQiblah.androidDeviceSensorSupport(),
@@ -26,15 +28,17 @@ class _QiblaScreenState extends State<QiblaScreen> {
               );
             }
             if (snapshot.hasError) {
-              return Center(child: Text("Error: ${snapshot.error.toString()}"));
+              return Center(
+                child: Text("${S.current.error}: ${snapshot.error.toString()}"),
+              );
             }
             if (snapshot.data != null) {
               return const QiblahCompass();
             } else {
-              return const Center(
+              return Center(
                 child: Text(
-                  "Your device doesn't support compass sensor",
-                  style: TextStyle(
+                  S.current.no_compass_sensor,
+                  style: const TextStyle(
                     color: Colors.red,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

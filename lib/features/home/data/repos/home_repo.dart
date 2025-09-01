@@ -1,12 +1,8 @@
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
-import 'package:noor/core/constants/shared_preferences_keys.dart';
 import 'package:noor/core/database/hadith/hadith_database.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
-import 'package:noor/core/di/dependency_injection.dart';
-import 'package:noor/core/notifications/notifications_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
 class HomeRepo {
@@ -17,7 +13,6 @@ class HomeRepo {
 
   Future<(Hadith, Verse)> getTodayContent() async {
     final dayOfYear = getdayOfYear();
-
     final hadithFuture = _hadithDb.select(_hadithDb.hadiths).join([
       innerJoin(
         _hadithDb.dailyHadiths,
@@ -47,7 +42,5 @@ class HomeRepo {
     );
   }
 
-  int getdayOfYear() => int.parse(DateFormat("D").format(DateTime.now()));
-
- 
+  int getdayOfYear() => int.parse(DateFormat("D", "en").format(DateTime.now()));
 }

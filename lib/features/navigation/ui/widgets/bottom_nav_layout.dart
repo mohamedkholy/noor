@@ -19,7 +19,7 @@ class BottomNavLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 75,
       decoration: const BoxDecoration(
         color: Color(0xFF328475),
         boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10)],

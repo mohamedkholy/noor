@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 
+import '../../../../generated/l10n.dart';
+
 class SurahAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String juz;
   final String surahNumber;
@@ -15,14 +17,13 @@ class SurahAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       automaticallyImplyLeading: false,
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.baseline,
         textBaseline: TextBaseline.alphabetic,
         children: [
           Text(
-            "Juz $juz",
+            " ${S.current.juz} $juz",
             style: const TextStyle(
               fontSize: 17,
               color: Colors.white,

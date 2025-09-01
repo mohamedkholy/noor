@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/features/location/data/repos/location_repo.dart';
 import 'package:noor/features/location/logic/location_state.dart';
+import 'package:noor/generated/l10n.dart';
 
 @injectable
 class LocationCubit extends Cubit<LocationState> {
@@ -43,15 +44,14 @@ class LocationCubit extends Cubit<LocationState> {
         if (status == LocationPermission.deniedForever && !isClosed) {
           emit(
             RelocatingErrorState(
-              message: 'You need to allow location permission from settings',
+              message: S.current.location_permission_settings,
               openSettings: true,
             ),
           );
         } else if (status == LocationPermission.denied && !isClosed) {
           emit(
             RelocatingErrorState(
-              message:
-                  'To get your current location you must accept the location permission',
+              message: S.current.location_permission,
               openSettings: false,
             ),
           );
@@ -64,7 +64,7 @@ class LocationCubit extends Cubit<LocationState> {
       if (!isClosed) {
         emit(
           RelocatingErrorState(
-            message: 'Location service disabled',
+            message: S.current.location_disabled,
             openSettings: false,
           ),
         );

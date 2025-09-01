@@ -12,8 +12,6 @@ import 'package:noor/features/hadith/data/models/kitab.dart';
 import 'package:noor/features/hadith/logic/hadith_cubit.dart';
 import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
 import 'package:noor/features/hadith/ui/hadith_screen.dart';
-import 'package:noor/features/home/logic/home_cubit.dart';
-import 'package:noor/features/home/ui/home_screen.dart';
 import 'package:noor/features/location/logic/location_cubit.dart';
 import 'package:noor/features/location/ui/location_screen.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
@@ -24,6 +22,8 @@ import 'package:noor/features/qibla/ui/qibla_screen.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
 import 'package:noor/features/quran/ui/reading_screen.dart';
+import 'package:noor/features/settings/logic/settings_cubit.dart';
+import 'package:noor/features/settings/ui/settings_screen.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/tasbih_screen.dart';
 import 'package:noor/features/tasbih/ui/zekr_screen.dart';
@@ -131,6 +131,14 @@ class AppRouter {
           BlocProvider(
             create: (context) => getIt<LocationCubit>(),
             child: const LocationScreen(),
+          ),
+          settings,
+        );
+      case MyRoutes.settings:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<SettingsCubit>(),
+            child: const SettingsScreen(),
           ),
           settings,
         );

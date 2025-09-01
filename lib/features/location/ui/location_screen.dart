@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
+import 'package:noor/core/helpers/constants.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
+import 'package:noor/core/helpers/language_converter.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/search_app_bar.dart';
 import 'package:noor/features/location/logic/location_cubit.dart';
 import 'package:noor/features/location/logic/location_state.dart';
 import 'package:noor/features/location/ui/widgets/current_location_widget.dart';
+import 'package:noor/generated/l10n.dart' show S;
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
@@ -25,9 +28,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void initState() {
     _locationCubit.getCities(_page);
-    _city =
-        _locationCubit.getSavedCity() ??
-        const City(name: "Makkah", lat: 21.42664, lng: 39.82563, country: "SA");
+    _city = _locationCubit.getSavedCity() ?? Constants.defaultCity;
     super.initState();
   }
 
@@ -35,7 +36,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SearchAppBar(
-        title: "Cities",
+        title: S.of(context).location,
         onstartSearch: (isSearching) {
           _page = 0;
           _query = "";
@@ -98,7 +99,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                       child: Text(
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        "${_cities[index].name} (${_cities[index].country})",
+                                        "${LanguageConverter.cityDisplayName(city: _cities[index], lang: Localizations.localeOf(context).languageCode)} (${_cities[index].country})",
                                         style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeightHelper.medium,

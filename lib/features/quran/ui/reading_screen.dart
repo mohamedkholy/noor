@@ -4,7 +4,7 @@ import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/logic/quran_state.dart';
-import 'package:noor/features/quran/ui/widgets/basmallah%20.dart';
+import 'package:noor/features/quran/ui/widgets/basmallah.dart';
 import 'package:noor/features/quran/ui/widgets/header_widget.dart';
 import 'package:noor/features/quran/ui/widgets/surah_app_bar.dart';
 import 'package:noor/features/quran/ui/widgets/verse_widget.dart';
@@ -107,7 +107,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                 );
               }
             },
-            reverse: true,
+            reverse: Localizations.localeOf(context).languageCode != "ar",
             controller: pageController,
             itemCount: surahs.length,
             itemBuilder: (context, index) {

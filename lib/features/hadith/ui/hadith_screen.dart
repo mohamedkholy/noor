@@ -5,6 +5,8 @@ import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/hadith/data/models/kitab.dart';
 import 'package:noor/features/hadith/ui/widgets/hadith_button.dart';
 
+import '../../../generated/l10n.dart';
+
 class HadithScreen extends StatefulWidget {
   const HadithScreen({super.key});
 
@@ -21,9 +23,7 @@ class _HadithScreenState extends State<HadithScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(
-        title: "Hadith",
-      ),
+      appBar: MyAppBar(title: S.current.hadith),
       body: SingleChildScrollView(
         child: Center(
           child: ConstrainedBox(
@@ -34,8 +34,8 @@ class _HadithScreenState extends State<HadithScreen> {
               child: Column(
                 children: [
                   HadithButton(
-                    title: "Sahih Bukhari",
-                    subtitle: "Authentic Hadith Collection",
+                    title: S.current.sahih_bukhari,
+                    subtitle: S.current.authentic_hadith_collection,
                     onTap: () {
                       Navigator.pushNamed(
                         context,
@@ -47,8 +47,8 @@ class _HadithScreenState extends State<HadithScreen> {
                   ),
                   const SizedBox(height: 25),
                   HadithButton(
-                    title: "Sahih Muslim",
-                    subtitle: "Authentic Hadith Collection",
+                    title: S.current.sahih_muslim,
+                    subtitle: S.current.authentic_hadith_collection,
                     onTap: () {
                       Navigator.pushNamed(
                         context,

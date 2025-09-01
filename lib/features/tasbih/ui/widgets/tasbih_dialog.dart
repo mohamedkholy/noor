@@ -7,6 +7,8 @@ import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/my_text_form_field.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 
+import '../../../../generated/l10n.dart';
+
 class TasbihDialog extends StatefulWidget {
   final Tasbih? tasbih;
   const TasbihDialog({super.key, this.tasbih});
@@ -52,7 +54,7 @@ class _TasbihDialogState extends State<TasbihDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "${widget.tasbih == null ? "Add" : "Edit"} Tasbih",
+                  "${widget.tasbih == null ? S.current.add : S.current.edit} ${S.current.tasbih}",
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeightHelper.bold,
@@ -61,14 +63,14 @@ class _TasbihDialogState extends State<TasbihDialog> {
                 const SizedBox(height: 25),
                 MyTextFormField(
                   maxLength: 30,
-                  hintText: "Zekr",
+                  hintText: S.current.zekr,
                   controller: zekrController,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Field is required";
+                      return S.current.field_is_required;
                     }
                     if (isAlreadyAdded) {
-                      return "Already added";
+                      return S.current.already_added;
                     }
                     return null;
                   },
@@ -76,7 +78,7 @@ class _TasbihDialogState extends State<TasbihDialog> {
                 const SizedBox(height: 15),
                 MyTextFormField(
                   maxLength: 10,
-                  hintText: "Count (optional)",
+                  hintText: S.current.count_optional,
                   controller: countController,
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -138,7 +140,11 @@ class _TasbihDialogState extends State<TasbihDialog> {
                                   ),
                                 )
                               : Text(
-                                  "${widget.tasbih == null ? "Add" : "Edit"} Tasbih",
+                                  "${widget.tasbih == null ? S.current.add : S.current.edit} ${S.current.the_tasbih}",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeightHelper.bold,
+                                    fontSize: 15,
+                                  ),
                                 ),
                         ),
                       ),
@@ -152,7 +158,13 @@ class _TasbihDialogState extends State<TasbihDialog> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: const Text("Cancel"),
+                          child: Text(
+                            S.current.cancel,
+                            style: const TextStyle(
+                              fontWeight: FontWeightHelper.bold,
+                              fontSize: 15,
+                            ),
+                          ),
                         ),
                       ),
                     ],

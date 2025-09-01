@@ -14,9 +14,9 @@ class HadithCubit extends Cubit<HadithState> {
 
   Future<void> getKitab(Kitab kitab, int page, [String? value]) async {
     if (page == 0) {
-      _hadiths.clear(); 
+      _hadiths.clear();
     }
-    final result = await hadithRepo.getKitab(kitab, page,value);
+    final result = await hadithRepo.getKitab(kitab, page, value);
     _hadiths.addAll(result);
     emit(HadithLoaded(hadiths: _hadiths));
   }

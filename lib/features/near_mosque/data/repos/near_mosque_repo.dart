@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
-import 'package:noor/core/constants/shared_preferences_keys.dart';
 import 'package:noor/core/database/mosques/mosques_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/helpers/distance_calculator.dart';
-import 'package:noor/core/networking/mosque_api_service%20.dart';
+import 'package:noor/core/networking/mosque_api_service.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/near_mosque/data/models/mosque_data.dart';
 import 'package:noor/features/near_mosque/data/models/nearby_mosques_response.dart';
+import 'package:noor/generated/l10n.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
@@ -52,7 +53,7 @@ class NearMosqueRepo {
       return NearbyMosquesSuccess(mosques);
     } catch (e) {
       debugPrint("Overpass API error: $e");
-      return NearbyMosquesError("Unknown error Has occurred");
+      return NearbyMosquesError(S.current.unknown_error);
     }
   }
 

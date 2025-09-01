@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,6 +12,8 @@ import 'package:noor/features/near_mosque/data/models/nearby_mosques_response.da
 import 'package:noor/features/near_mosque/data/repos/near_mosque_repo.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_state.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../generated/l10n.dart';
 
 @injectable
 class NearMosqueCubit extends Cubit<NearMosqueState> {
@@ -27,7 +31,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
         InternetConnectionState.disconnected) {
       emit(
         NearMosqueErrorState(
-          message: 'No internet connection',
+          message: S.current.no_internet_connection,
           errorType: NearMosqueError.noInternet,
         ),
       );
@@ -50,7 +54,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
         if (status == LocationPermission.deniedForever) {
           emit(
             NearMosqueErrorState(
-              message: 'You need to allow location permission from settings',
+              message: S.current.location_permission_settings,
               errorType: NearMosqueError.locationDenied,
               openSettings: true,
             ),
@@ -58,7 +62,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
         } else if (status == LocationPermission.denied) {
           emit(
             NearMosqueErrorState(
-              message: 'To get your current location you must accept the location permission',
+              message: S.current.location_permission,
               errorType: NearMosqueError.locationDenied,
             ),
           );
@@ -77,7 +81,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
     } else {
       emit(
         NearMosqueErrorState(
-          message: 'Location service disabled',
+          message: S.current.location_disabled,
           errorType: NearMosqueError.locationDenied,
         ),
       );
@@ -124,7 +128,7 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
     checkLocationStatus(savedLocation);
   }
 
-  Future<void> Navigate(LatLng mosqueLocation) async {
+  Future<void> navigate(LatLng mosqueLocation) async {
     final startLat = currentLocation?.latitude;
     final startLng = currentLocation?.longitude;
     final destLat = mosqueLocation.latitude;
@@ -148,5 +152,30 @@ class NearMosqueCubit extends Cubit<NearMosqueState> {
 
   void unselectMosque() {
     emit(UnselectMosque());
+  }
+
+  LatLngBounds getBounds(LatLng mosqueLocation, LatLng currentLocation) {
+    final double minLat = min(
+      mosqueLocation.latitude,
+      currentLocation.latitude,
+    );
+    final double maxLat = max(
+      mosqueLocation.latitude,
+      currentLocation.latitude,
+    );
+    final double minLng = min(
+      mosqueLocation.longitude,
+      currentLocation.longitude,
+    );
+    final double maxLng = max(
+      mosqueLocation.longitude,
+      currentLocation.longitude,
+    );
+
+    const buffer = 0.009;
+    final southwest = LatLng(minLat - buffer, minLng - buffer);
+    final northeast = LatLng(maxLat + buffer, maxLng + buffer);
+
+    return LatLngBounds(southwest: southwest, northeast: northeast);
   }
 }

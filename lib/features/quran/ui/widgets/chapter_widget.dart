@@ -6,6 +6,7 @@ import 'package:noor/core/helpers/font_weight_helper.dart'
     show FontWeightHelper;
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/generated/l10n.dart';
 
 class ChapterWidget extends StatelessWidget {
   final Verse verse;
@@ -62,7 +63,7 @@ class ChapterWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  " ${verse.surahName} - Ayah ${verse.number}",
+                  " ${verse.surahName} - ${S.current.aya} ${verse.number}",
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeightHelper.medium,

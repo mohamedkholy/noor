@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/near_mosque/data/models/mosque_data.dart';
+import 'package:noor/generated/l10n.dart';
 
 class MosqueWidget extends StatelessWidget {
   const MosqueWidget({super.key, required this.mosque});
@@ -49,7 +50,7 @@ class MosqueWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 20),
-            Text("${mosque.distance.toStringAsFixed(2)} KM"),
+            Text("${mosque.distance.toStringAsFixed(2)} ${S.current.km}"),
           ],
         ),
       ],

@@ -1,4 +1,3 @@
-import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/database/hadith/hadith_database.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/features/home/data/models/last_reading.dart';

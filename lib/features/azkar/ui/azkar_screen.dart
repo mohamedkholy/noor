@@ -6,6 +6,8 @@ import 'package:noor/features/azkar/logic/azkar_cubit.dart';
 import 'package:noor/features/azkar/logic/azkar_state.dart';
 import 'package:noor/features/azkar/ui/widgets/azkar_category_widget.dart';
 
+import '../../../generated/l10n.dart';
+
 class AzkarScreen extends StatefulWidget {
   const AzkarScreen({super.key});
 
@@ -27,7 +29,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SearchAppBar(
-        title: "Azkar",
+        title: S.current.azkar,
         onSearch: (value) {
           azkarCubit.search(value);
         },
@@ -63,10 +65,8 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       )
                     : const Center(child: Text("No result found"));
               }
-               return const Center(
-                child: CircularProgressIndicator(
-                  color: MyColors.primary,
-                ),
+              return const Center(
+                child: CircularProgressIndicator(color: MyColors.primary),
               );
             },
           ),

@@ -1,5 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -31,22 +31,25 @@ class CalenderCell extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          AutoSizeText(
+          Text(
             maxLines: 1,
-            cellDetails.date.day.toString(),
-            style: TextStyle(
+            HijriCalendar.fromDate(
+              cellDetails.date.toDateTime(),
+            ).toFormat("dd"),
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeightHelper.medium,
-              fontSize: isSelected ? 14 : 12,
+              fontSize: 15,
             ),
           ),
-          AutoSizeText(
+          Text(
             maxLines: 1,
             DateFormat.d().format(cellDetails.date.toDateTime()),
-            style: TextStyle(
+            style: const TextStyle(
+              height: 1,
               color: Colors.orange,
               fontWeight: FontWeightHelper.medium,
-              fontSize: isSelected ? 12 : 10,
+              fontSize: 13,
             ),
           ),
         ],

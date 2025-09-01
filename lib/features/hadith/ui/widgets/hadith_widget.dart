@@ -62,6 +62,7 @@ class HadithWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextHighlight(
+              textDirection: TextDirection.ltr,
               text: formatText(hadith.terjemah),
               words: {
                 searchValue: HighlightedWord(

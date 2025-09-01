@@ -34,10 +34,7 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(
-        title: widget.category,
-        fontFamily: "Amiri",
-      ),
+      appBar: MyAppBar(title: widget.category),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1000),

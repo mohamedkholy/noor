@@ -10,14 +10,13 @@ class Surahs extends Table {
   IntColumn get versesCount => integer()();
   IntColumn get pageNumber => integer()();
 
-
   @override
   Set<Column> get primaryKey => {number};
 }
 
 class Verses extends Table {
   IntColumn get surahNumber => integer()();
-  TextColumn get surahName => text()(); 
+  TextColumn get surahName => text()();
   IntColumn get number => integer()();
   TextColumn get textAr => text()();
   TextColumn get textEn => text()();
@@ -28,7 +27,6 @@ class Verses extends Table {
   @override
   Set<Column> get primaryKey => {surahNumber, number};
 }
-
 
 class DailyVerses extends Table {
   IntColumn get day => integer()();

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
-import 'package:noor/features/home/ui/widgets/Notificatios_button.dart';
 import 'package:noor/features/home/ui/widgets/ayah_of_the_day_widget.dart';
 import 'package:noor/features/home/ui/widgets/date_location_widget.dart';
 import 'package:noor/features/home/ui/widgets/features_row.dart';
 import 'package:noor/features/home/ui/widgets/hadith_of_the_day.dart';
 import 'package:noor/features/home/ui/widgets/last_read_widget.dart';
 import 'package:noor/features/home/ui/widgets/next_prayer_count_down.dart';
+import 'package:noor/features/home/ui/widgets/notifications_button.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,7 +46,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.white,
               ),
               title: const DateLocationWidget(),
-              actions: const [NotificatiosButton()],
+              actions: [
+                const NotificatiosButton(),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoutes.settings).then((
+                      value,
+                    ) {
+                      _navigationCubit.scheduleNotifications();
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                ),
+              ],
             ),
             body: SingleChildScrollView(
               child: Container(

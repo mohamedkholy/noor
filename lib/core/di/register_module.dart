@@ -7,11 +7,11 @@ abstract class RegisterModule {
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 
-
-  Dio get dio => Dio(BaseOptions(
-     sendTimeout: const Duration(seconds: 30),
-     connectTimeout: const Duration(seconds: 30),
-     receiveTimeout: const Duration(seconds: 30),
-  ));
-  
+  Dio get dio => Dio(
+    BaseOptions(
+      sendTimeout: const Duration(seconds: 30),
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+    ),
+  );
 }

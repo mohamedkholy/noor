@@ -12,7 +12,7 @@ import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 part 'hadith_database.g.dart';
 
-@DriftDatabase(tables: [Hadiths,DailyHadiths])
+@DriftDatabase(tables: [Hadiths, DailyHadiths])
 @singleton
 class HadithDatabase extends _$HadithDatabase {
   HadithDatabase() : super(_openConnection());

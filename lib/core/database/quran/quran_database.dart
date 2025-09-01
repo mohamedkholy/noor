@@ -12,7 +12,7 @@ import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 part 'quran_database.g.dart';
 
-@DriftDatabase(tables: [Surahs, Verses,DailyVerses])
+@DriftDatabase(tables: [Surahs, Verses, DailyVerses])
 @singleton
 class QuranDatabase extends _$QuranDatabase {
   QuranDatabase() : super(_openConnection());

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
+import 'package:noor/core/helpers/constants.dart';
+import 'package:noor/core/helpers/font_weight_helper.dart';
+import 'package:noor/core/helpers/language_converter.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/features/navigation/logic/navigation_state.dart';
@@ -19,9 +22,7 @@ class _DateLocationWidgetState extends State<DateLocationWidget> {
 
   @override
   void initState() {
-    _city =
-        _navigationCubit.getSavedCity() ??
-        const City(name: "Makkah", lat: 21.42664, lng: 39.82563, country: "SA");
+    _city = _navigationCubit.getSavedCity() ?? Constants.defaultCity;
     super.initState();
   }
 
@@ -45,8 +46,23 @@ class _DateLocationWidgetState extends State<DateLocationWidget> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(HijriCalendar.now().toFormat("dd MMMM yyyy")),
-              Text(_city.name),
+              Text(
+                HijriCalendar.now().toFormat("dd MMMM yyyy"),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeightHelper.medium,
+                ),
+              ),
+              Text(
+                LanguageConverter.cityDisplayName(
+                  city: _city,
+                  lang: Localizations.localeOf(context).languageCode,
+                ),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeightHelper.medium,
+                ),
+              ),
             ],
           );
         },

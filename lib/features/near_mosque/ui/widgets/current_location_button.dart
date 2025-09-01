@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noor/core/theming/my_colors.dart';
 
 class CurrentLocationButton extends StatelessWidget {
-  const CurrentLocationButton({
-    super.key,
-    required this.isLoading,
-  });
+  const CurrentLocationButton({super.key, required this.isLoading});
 
   final bool isLoading;
 
@@ -16,9 +13,7 @@ class CurrentLocationButton extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
         color: MyColors.primary,
-        borderRadius: BorderRadius.all(
-          Radius.circular(5),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
       child: isLoading
           ? const SizedBox(

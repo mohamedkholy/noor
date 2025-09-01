@@ -5,24 +5,21 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget> actions;
   final double fontSize;
-  final String fontFamily;
+
   const MyAppBar({
     super.key,
     required this.title,
     this.actions = const [],
     this.fontSize = 28,
-    this.fontFamily = "PlusJakartaSans",
   });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      actionsPadding: const EdgeInsetsDirectional.only(end: 15),
       title: Text(
         title,
-        style: MyTextStyles.appBarTextStyle.copyWith(
-          fontSize: fontSize,
-          fontFamily: fontFamily,
-        ),
+        style: MyTextStyles.appBarTextStyle.copyWith(fontSize: fontSize),
       ),
       automaticallyImplyLeading: false,
       centerTitle: true,

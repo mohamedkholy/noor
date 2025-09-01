@@ -1,17 +1,17 @@
 import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
-import 'package:noor/core/constants/shared_preferences_keys.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/notifications/notifications_manager.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @singleton
 class NavigationRepo {
   final CitiesDatabase _citiesDb;
+  final SharedPreferencesSettingsService _sp;
 
-  NavigationRepo(this._citiesDb);
+  NavigationRepo(this._citiesDb, this._sp);
 
   Future<City> findNearest(double userLat, double userLng) async {
     final latDiff = _citiesDb.cities.lat - Constant(userLat);
@@ -27,21 +27,16 @@ class NavigationRepo {
   }
 
   bool getNotificationsState() {
-    final result = getIt<SharedPreferences>().getBool(
-      SharedPreferencesKeys.notificationsState,
-    );
-    return result ?? true;
+    final result = _sp.getNotificationsState();
+    return result;
   }
 
   void saveNotificationsState(bool state) async {
-    getIt<SharedPreferences>().setBool(
-      SharedPreferencesKeys.notificationsState,
-      state,
-    );
+    _sp.saveNotificationsState(state);
     if (state && await Permission.notification.isGranted) {
-      NotificationsManager.instance.scheduleNotifications();
+      getIt<NotificationsManager>().scheduleNotifications();
     } else {
-      NotificationsManager.instance.cancelAllNotifications();
+      getIt<NotificationsManager>().cancelAllNotifications();
     }
   }
 }

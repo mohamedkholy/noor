@@ -35,7 +35,7 @@ class QiblahCompassWidget extends StatelessWidget {
           QiblaTextWidget(qibla: qiblahDirection?.offset ?? 0),
           SizedBox(
             height: MediaQuery.sizeOf(context).width < 600 ? 15 : 0,
-            width: MediaQuery.sizeOf(context).width < 600 ? 15 : 0,
+            width: MediaQuery.sizeOf(context).width < 600 ? 0 : 15,
           ),
           Expanded(
             child: Stack(
