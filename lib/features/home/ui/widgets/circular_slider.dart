@@ -28,8 +28,8 @@ class CircularSlider extends StatelessWidget {
             lang: Localizations.localeOf(context).languageCode,
           );
     return DashedCircularProgressBar(
-      width: 250,
-      height: 250,
+      width: 260,
+      height: 260,
       startAngle: 225,
       sweepAngle: 270,
       foregroundColor: MyColors.secondary,
@@ -49,9 +49,11 @@ class CircularSlider extends StatelessWidget {
           child: Text(
             textAlign: TextAlign.center,
             "$nextPrayerName ${S.of(context).in_word}\n${_formatDuration(nextPrayerDuration)}",
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 24,
+              fontSize: Localizations.localeOf(context).languageCode == "ar"
+                  ? 24
+                  : 26,
               fontWeight: FontWeightHelper.bold,
             ),
           ),

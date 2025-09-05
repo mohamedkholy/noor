@@ -36,7 +36,7 @@ class _PrayersTimeRowState extends State<PrayersTimeRow> {
               style: TextStyle(
                 color: color,
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 15,
               ),
             ),
             const SizedBox(height: 5),
@@ -47,7 +47,7 @@ class _PrayersTimeRowState extends State<PrayersTimeRow> {
               style: TextStyle(
                 color: color,
                 fontWeight: FontWeightHelper.semiBold,
-                fontSize: 16,
+                fontSize: 15,
               ),
             ),
           ],

@@ -20,4 +20,17 @@ extension KitabExtension on Kitab {
         return S.current.sahih_muslim;
     }
   }
+
+   static String getTranslatedNameFromStirng(String name) {
+    switch (name) {
+      case "Sahih Bukhari":
+        return S.current.sahih_bukhari;
+      case "Sahih Muslim":
+        return S.current.sahih_muslim;
+      default:
+        return "";
+    }
+  }
+
 }
+

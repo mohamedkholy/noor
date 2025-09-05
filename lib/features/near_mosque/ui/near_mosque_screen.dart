@@ -25,8 +25,7 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
   late final NearMosqueCubit _nearMosqueCubit = context.read();
   ValueNotifier<bool> isNerbayMosquesExpanded = ValueNotifier<bool>(false);
   ValueNotifier<bool> isLocationDeniedExpanded = ValueNotifier<bool>(true);
-  LatLng? currentLocation;
-  MosqueData? mosqueData;
+  LatLng currentLocation = const LatLng(0, 0);
   late BitmapDescriptor mosqueIcon;
   late BitmapDescriptor currentLocationIcon;
   List<MosqueData> mosques = [];
@@ -88,37 +87,37 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                   markers.clear();
                   animateCameraToCurrentLocation();
                 }
-                if (currentLocation != null) {
+                if (currentLocation != const LatLng(0, 0)) {
                   markers.add(
                     Marker(
                       markerId: const MarkerId("current_location"),
-                      position: currentLocation!,
+                      position: currentLocation,
                       infoWindow: InfoWindow(title: S.current.current_location),
                       icon: currentLocationIcon,
                     ),
                   );
                 }
                 if (state is MosqueSelected) {
-                  mosqueData = state.mosque;
+                  final mosqueData = state.mosque;
                   markers.add(
                     Marker(
-                      markerId: MarkerId(mosqueData!.name),
-                      position: mosqueData!.location,
-                      infoWindow: InfoWindow(title: mosqueData!.name),
+                      markerId: MarkerId(mosqueData.name),
+                      position: mosqueData.location,
+                      infoWindow: InfoWindow(title: mosqueData.name),
                       icon: mosqueIcon,
                     ),
                   );
                   polylines.add(
                     Polyline(
-                      polylineId: PolylineId(mosqueData!.name),
-                      points: mosqueData!.route,
+                      polylineId: PolylineId(mosqueData.name),
+                      points: mosqueData.route,
                       color: Colors.blueAccent,
                       width: 4,
                     ),
                   );
                   final bounds = _nearMosqueCubit.getBounds(
-                    mosqueData!.location,
-                    currentLocation!,
+                    mosqueData.location,
+                    currentLocation,
                   );
                   mapController?.animateCamera(
                     CameraUpdate.newLatLngBounds(bounds, 15),
@@ -130,8 +129,8 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
                     _nearMosqueCubit.initMap();
                   },
                   initialCameraPosition: CameraPosition(
-                    target: currentLocation ?? const LatLng(0, 0),
-                    zoom: currentLocation != null ? 14 : 0,
+                    target: currentLocation,
+                    zoom: currentLocation != const LatLng(0, 0) ? 14 : 0,
                   ),
                   markers: markers,
                   polylines: polylines,
@@ -245,10 +244,12 @@ class _NearMosqueScreenState extends State<NearMosqueScreen> {
   }
 
   void animateCameraToCurrentLocation() {
-    mapController?.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(target: currentLocation!, zoom: 16),
-      ),
-    );
+    if (currentLocation != const LatLng(0, 0)) {
+      mapController?.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: currentLocation, zoom: 16),
+        ),
+      );
+    }
   }
 }
