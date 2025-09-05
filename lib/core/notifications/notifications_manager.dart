@@ -109,7 +109,7 @@ class NotificationsManager {
     final city = _getSavedCity() ?? Constants.defaultCity;
     final azanNotificationsSettings = _sp.getAzanNotificationSetting();
     final azkarNotificationsSettings = _sp.getAzkarNotificationSetting();
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 9; i++) {
       final date = DateTime.now().add(Duration(days: i));
       final prayerTimes = PrayerTimesHelper.getPrayerTimes(
         city: city,
