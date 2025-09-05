@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/features/hadith/data/models/kitab.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/logic/home_state.dart';
 import 'package:noor/generated/l10n.dart';
@@ -42,7 +43,7 @@ class HadithOfTheDay extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  state.hadith.kitab,
+                  KitabExtension.getTranslatedNameFromStirng(state.hadith.kitab),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,

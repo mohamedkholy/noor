@@ -92,92 +92,106 @@ class _ReadingScreenState extends State<ReadingScreen> {
           }
         },
         builder: (context, state) {
-          return PageView.builder(
-            onPageChanged: (index) {
-              currentVerseNotifier.value = surahs[index].$2[0];
-              if (index == surahs.length - 2 && surahs.last.$1.number != 114) {
-                quranCubit.getReadingDataPagination(
-                  suraNumber: surahs.last.$1.number,
-                  isFromStart: false,
-                );
-              } else if (index == 2 && surahs.first.$1.number != 1) {
-                quranCubit.getReadingDataPagination(
-                  suraNumber: surahs.first.$1.number,
-                  isFromStart: true,
-                );
-              }
-            },
-            reverse: Localizations.localeOf(context).languageCode != "ar",
-            controller: pageController,
-            itemCount: surahs.length,
-            itemBuilder: (context, index) {
-              int page = surahs[index].$2[0].page;
-              final surahVerses = surahs[index].$2;
-              return SafeArea(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: ScrollablePositionedList.separated(
-                    minCacheExtent: 0,
-                    initialScrollIndex:
-                        currentSuraIndex == index && widget.ayaNumber != null
-                        ? widget.ayaNumber! - 1
-                        : 0,
-                    separatorBuilder: (context, index) =>
-                        const Divider(height: 50),
-                    itemCount: surahVerses.length,
-                    itemBuilder: (context, i) {
-                      final verse = surahVerses[i];
-                      final bool isNewPage =
-                          surahVerses.length - 1 == i ||
-                          verse.page != surahVerses[i + 1].page;
-                      if (isNewPage) {
-                        page = verse.page;
-                      }
-                      if (verse.number == 1) {
-                        return Column(
-                          children: [
-                            const SizedBox(height: 20),
-                            HeaderWidget(surahName: surahs[index].$1.nameAr),
-                            const SizedBox(height: 20),
-                            index == 0 || index == 8
-                                ? Container()
-                                : Basmallah(index: index),
-                            const SizedBox(height: 20),
-                            VerseWidget(verse: verse),
-                          ],
-                        );
-                      }
-                      return VisibilityDetector(
-                        onVisibilityChanged: (info) {
-                          if (info.visibleFraction == 1) {
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              currentVerseNotifier.value = verse;
-                            });
-                          }
-                        },
-                        key: UniqueKey(),
-                        child: Column(
-                          children: [
-                            VerseWidget(verse: verse),
-                            if (isNewPage)
-                              Container(
-                                margin: const EdgeInsets.only(top: 30),
-                                child: Text(
-                                  "$page",
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeightHelper.medium,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1000),
+              child: PageView.builder(
+                onPageChanged: (index) {
+                  currentVerseNotifier.value = surahs[index].$2[0];
+                  if (index == surahs.length - 2 &&
+                      surahs.last.$1.number != 114) {
+                    quranCubit.getReadingDataPagination(
+                      suraNumber: surahs.last.$1.number,
+                      isFromStart: false,
+                    );
+                  } else if (index == 2 && surahs.first.$1.number != 1) {
+                    Future.delayed(const Duration(milliseconds: 500), () {
+                      quranCubit.getReadingDataPagination(
+                        suraNumber: surahs.first.$1.number,
+                        isFromStart: true,
                       );
-                    },
-                  ),
-                ),
-              );
-            },
+                    });
+                  }
+                },
+                reverse: Localizations.localeOf(context).languageCode != "ar",
+                controller: pageController,
+                itemCount: surahs.length,
+                itemBuilder: (context, index) {
+                  int page = surahs[index].$2[0].page;
+                  final surahVerses = surahs[index].$2;
+                  return SafeArea(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      child: ScrollablePositionedList.separated(
+                        minCacheExtent: 0,
+                        initialScrollIndex:
+                            currentSuraIndex == index &&
+                                widget.ayaNumber != null
+                            ? widget.ayaNumber! - 1
+                            : 0,
+                        separatorBuilder: (context, index) =>
+                            const Divider(height: 50),
+                        itemCount: surahVerses.length,
+                        itemBuilder: (context, i) {
+                          final verse = surahVerses[i];
+                          final bool isNewPage =
+                              surahVerses.length - 1 == i ||
+                              verse.page != surahVerses[i + 1].page;
+                          if (isNewPage) {
+                            page = verse.page;
+                          }
+                          if (verse.number == 1) {
+                            return Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                HeaderWidget(
+                                  surahName: surahs[index].$1.nameAr,
+                                ),
+                                const SizedBox(height: 20),
+                                index == 0 || index == 8
+                                    ? Container()
+                                    : Basmallah(index: index),
+                                const SizedBox(height: 20),
+                                VerseWidget(verse: verse),
+                              ],
+                            );
+                          }
+                          return VisibilityDetector(
+                            onVisibilityChanged: (info) {
+                              if (info.visibleFraction == 1) {
+                                WidgetsBinding.instance.addPostFrameCallback((
+                                  _,
+                                ) {
+                                  currentVerseNotifier.value = verse;
+                                });
+                              }
+                            },
+                            key: UniqueKey(),
+                            child: Column(
+                              children: [
+                                VerseWidget(verse: verse),
+                                if (isNewPage)
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 30),
+                                    child: Text(
+                                      "$page",
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeightHelper.medium,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           );
         },
       ),
