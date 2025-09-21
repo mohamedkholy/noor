@@ -8,4 +8,6 @@ abstract class SharedPreferencesKeys {
   static const String azanNotificationSettings = "azan_notification_settings";
   static const String notificationPayload = "notification_payload";
   static const String language = "language";
+  static const String azanSound = "azan";
+
 }

@@ -100,6 +100,11 @@ class S {
     );
   }
 
+  /// `Hour before`
+  String get hour_before {
+    return Intl.message('Hour before', name: 'hour_before', desc: '', args: []);
+  }
+
   /// `Shorok`
   String get shorok {
     return Intl.message('Shorok', name: 'shorok', desc: '', args: []);
@@ -588,6 +593,26 @@ class S {
   /// `Search...`
   String get search {
     return Intl.message('Search...', name: 'search', desc: '', args: []);
+  }
+
+  /// `Azan Sounds`
+  String get azansounds {
+    return Intl.message('Azan Sounds', name: 'azansounds', desc: '', args: []);
+  }
+
+  /// `Midnight`
+  String get beforeMidNight {
+    return Intl.message('Midnight', name: 'beforeMidNight', desc: '', args: []);
+  }
+
+  /// `Sleeping Azkar`
+  String get sleepingAzkar {
+    return Intl.message(
+      'Sleeping Azkar',
+      name: 'sleepingAzkar',
+      desc: '',
+      args: [],
+    );
   }
 }
 

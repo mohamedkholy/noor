@@ -26,6 +26,7 @@ import 'package:noor/core/shared_preferences/shared_preferences_language_service
     as _i655;
 import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart'
     as _i479;
+import 'package:noor/core/shared_preferences/shared_prefs_azan.dart' as _i583;
 import 'package:noor/features/azkar/data/repos/azkar_repo.dart' as _i99;
 import 'package:noor/features/azkar/logic/azkar_cubit.dart' as _i824;
 import 'package:noor/features/hadith/data/repos/hadith_repo.dart' as _i952;
@@ -87,6 +88,9 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i655.SharedPreferencesLanguageService(gh<_i460.SharedPreferences>()),
     );
+    gh.factory<_i583.SharedPreferencesAzanService>(
+      () => _i583.SharedPreferencesAzanService(gh<_i460.SharedPreferences>()),
+    );
     gh.factory<_i1019.LanguageCubit>(
       () => _i1019.LanguageCubit(gh<_i655.SharedPreferencesLanguageService>()),
     );
@@ -136,6 +140,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i555.NotificationsManager>(
       () => _i555.NotificationsManager(
         gh<_i479.SharedPreferencesSettingsService>(),
+        gh<_i583.SharedPreferencesAzanService>(),
       ),
     );
     return this;

@@ -41,10 +41,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "azan_notifications": MessageLookupByLibrary.simpleMessage(
       "Azan Notifications",
     ),
+    "azansounds": MessageLookupByLibrary.simpleMessage("Azan Sounds"),
     "azkar": MessageLookupByLibrary.simpleMessage("Azkar"),
     "azkar_notifications": MessageLookupByLibrary.simpleMessage(
       "Azkar Notifications",
     ),
+    "beforeMidNight": MessageLookupByLibrary.simpleMessage("Midnight"),
     "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "calender": MessageLookupByLibrary.simpleMessage("Calender"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -72,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Hadith of the Day",
     ),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "hour_before": MessageLookupByLibrary.simpleMessage("Hour before"),
     "in_word": MessageLookupByLibrary.simpleMessage("in"),
     "isha": MessageLookupByLibrary.simpleMessage("Isha"),
     "juz": MessageLookupByLibrary.simpleMessage("Juz"),
@@ -124,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "shorok": MessageLookupByLibrary.simpleMessage("Shorok"),
+    "sleepingAzkar": MessageLookupByLibrary.simpleMessage("Sleeping Azkar"),
     "start_navigation": MessageLookupByLibrary.simpleMessage(
       "Start Navigation",
     ),

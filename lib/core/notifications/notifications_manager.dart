@@ -12,6 +12,7 @@ import 'package:noor/core/helpers/prayer_times_helper.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
+import 'package:noor/core/shared_preferences/shared_prefs_azan.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_type.dart';
@@ -23,24 +24,20 @@ import 'package:timezone/timezone.dart' as tz;
 @singleton
 class NotificationsManager {
   final SharedPreferencesSettingsService _sp;
-
-  NotificationsManager(this._sp);
+  final SharedPreferencesAzanService _azanSp;
+  NotificationsManager(this._sp, this._azanSp);
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final _localNotifications = FlutterLocalNotificationsPlugin();
-  static const _azanChannelId = 'azan_channel';
-  static const _azanChannelName = 'Azan Notifications';
   static const _azanChannelDescription = 'Azan Notifications';
   static const _azkarChannelId = 'azkar_channel';
   static const _azkarChannelName = 'Azkar Notifications';
   static const _azkarChannelDescription = 'Azkar Notifications';
+  static const _sleepingAzkarChannelId = 'sleeping_azkar_channel';
+  static const _sleepingAzkarChannelName = 'Azkar Notifications';
+  static const _sleepingAzkarChannelDescription = 'Azkar Notifications';
 
-  static const _azanNotificationChannel = AndroidNotificationChannel(
-    _azanChannelId,
-    _azanChannelName,
-    importance: Importance.max,
-    sound: RawResourceAndroidNotificationSound('azan'),
-  );
+  late AndroidNotificationChannel _azanNotificationChannel;
 
   static const _azkarNotificationChannel = AndroidNotificationChannel(
     _azkarChannelId,
@@ -48,6 +45,15 @@ class NotificationsManager {
     importance: Importance.max,
     sound: RawResourceAndroidNotificationSound('azkar'),
   );
+
+  static const _sleepingAzkarNotificationChannel = AndroidNotificationChannel(
+    _sleepingAzkarChannelId,
+    _sleepingAzkarChannelName,
+    importance: Importance.max,
+    sound: RawResourceAndroidNotificationSound('azkar'),
+  );
+
+  late String sound;
 
   Future<PermissionStatus> requestPermission() async {
     return await Permission.notification.request();
@@ -88,15 +94,36 @@ class NotificationsManager {
         MyRoutes.azkarCategory,
         arguments: "أذكار الصباح",
       );
+    } else if (payload == AzkarType.sleeping.name) {
+      navigatorKey.currentState?.pushNamed(
+        MyRoutes.azkarCategory,
+        arguments: "أذكار النوم",
+      );
     }
   }
 
-  Future<void> _createNotificationChannel() async {
+  Future<void> _createAzanNotificationChannel() async {
+    sound = _azanSp.getAzanSound();
+    _azanNotificationChannel = AndroidNotificationChannel(
+      sound,
+      sound.replaceAll("_", " "),
+      importance: Importance.max,
+      sound: RawResourceAndroidNotificationSound(sound),
+    );
     await _localNotifications
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
         >()
         ?.createNotificationChannel(_azanNotificationChannel);
+  }
+
+  Future<void> _createNotificationChannel() async {
+    _createAzanNotificationChannel();
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_sleepingAzkarNotificationChannel);
     await _localNotifications
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
@@ -105,17 +132,24 @@ class NotificationsManager {
   }
 
   void scheduleNotifications() {
+    _createAzanNotificationChannel();
     cancelAllNotifications();
     final city = _getSavedCity() ?? Constants.defaultCity;
     final azanNotificationsSettings = _sp.getAzanNotificationSetting();
     final azkarNotificationsSettings = _sp.getAzkarNotificationSetting();
-    for (int i = 0; i < 9; i++) {
-      final date = DateTime.now().add(Duration(days: i));
+    for (int i = 0; i < 7; i++) {
+      final date = DateUtils.dateOnly(DateTime.now()).add(Duration(days: i));
       final prayerTimes = PrayerTimesHelper.getPrayerTimes(
         city: city,
         date: date,
       );
       _scheduleAzanNotifications(prayerTimes, azanNotificationsSettings);
+      if (azkarNotificationsSettings.sleepingAzkarState) {
+        _scheduleSleepingAzkarNotifications(
+          date,
+          azkarNotificationsSettings.sleepingAzkarTime,
+        );
+      }
       if (azkarNotificationsSettings.morningAzkarState ||
           azkarNotificationsSettings.eveningAzkarState) {
         _scheduleAzkarNotifications(prayerTimes, azkarNotificationsSettings);
@@ -125,6 +159,31 @@ class NotificationsManager {
 
   void cancelAllNotifications() {
     _localNotifications.cancelAll();
+  }
+
+  void _scheduleSleepingAzkarNotifications(
+    DateTime date,
+    int sleepingAzkarTime,
+  ) async {
+    await _localNotifications.zonedSchedule(
+      sleepingAzkarTime.hashCode,
+      'حى على الفلاح',
+      'حان موعد أذكار النوم',
+      tz.TZDateTime.from(
+        date
+            .add(const Duration(days: 1))
+            .subtract(Duration(hours: sleepingAzkarTime)),
+        tz.local,
+      ),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          _sleepingAzkarChannelId,
+          _sleepingAzkarChannelName,
+          channelDescription: _sleepingAzkarChannelDescription,
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    );
   }
 
   Future<void> _scheduleAzanNotifications(
@@ -146,10 +205,10 @@ class NotificationsManager {
         'حى على الفلاح',
         'حان موعد صلاة ${e.$2}',
         tz.TZDateTime.from(e.$1, tz.local),
-        const NotificationDetails(
+        NotificationDetails(
           android: AndroidNotificationDetails(
-            _azanChannelId,
-            _azanChannelName,
+            sound,
+            sound.replaceAll("_", " "),
             channelDescription: _azanChannelDescription,
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
+import 'package:noor/core/shared_preferences/shared_prefs_azan.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 
@@ -32,5 +34,13 @@ class SettingsCubit extends Cubit {
 
   void saveAzanNotificationSetting(AzanNotificationsSettings state) {
     _sharedPreferencesSettingsService.saveAzanNotificationSetting(state);
+  }
+
+  void saveAzkarSound(String sound) {
+    getIt<SharedPreferencesAzanService>().saveAzanSound(sound);
+  }
+
+  String getAzanSound() {
+    return getIt<SharedPreferencesAzanService>().getAzanSound();
   }
 }

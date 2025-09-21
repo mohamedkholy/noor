@@ -4,6 +4,7 @@
     "azkar": "Azkar",
     "notification_time": "Notification Time",
     "minutes_before": "Minutes before",
+    "hour_before": "Hour before",
     "shorok": "Shorok",
     "maghrib": "Maghrib",
     "isha": "Isha",
@@ -72,5 +73,8 @@
     "km": "KM",
     "start_navigation": "Start Navigation",
     "calender": "Calender",
-    "search": "Search..."
+    "search": "Search...",
+    "azansounds": "Azan Sounds",
+    "beforeMidNight": "Midnight",
+    "sleepingAzkar": "Sleeping Azkar"
 }
