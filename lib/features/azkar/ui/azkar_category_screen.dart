@@ -18,6 +18,7 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
   late final AzkarCubit azkarCubit = context.read();
   final PageController pageController = PageController();
   final List<int> azkarCount = [];
+  final List<GlobalKey> azkarKeys = [];
 
   @override
   void initState() {
@@ -42,7 +43,19 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
             builder: (context, state) {
               if (state is AzkarLoaded) {
                 azkarCount.addAll(
-                  List.generate(state.azkar.length, (index) => 0),
+                  List.generate(
+                    state.azkar.length,
+                    (index) =>
+                        DateUtils.dateOnly(
+                              DateTime.now(),
+                            ).microsecondsSinceEpoch ==
+                            state.azkar[index].todayDate
+                        ? state.azkar[index].todayCount ?? 0
+                        : 0,
+                  ),
+                );
+                azkarKeys.addAll(
+                  List.generate(state.azkar.length, (index) => GlobalKey()),
                 );
                 return ListView.builder(
                   controller: pageController,
@@ -50,10 +63,23 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
                   itemBuilder: (context, index) {
                     final azkar = state.azkar[index];
                     return ZikrWidget(
+                      key: azkarKeys[index],
                       zekr: azkar,
                       count: azkarCount[index],
                       onCountChange: (count) {
                         azkarCount[index] = count;
+                        azkarCubit.updateTodayAzkarCount(
+                          azkar.category,
+                          azkar.zekr,
+                          count,
+                          todayDate: DateUtils.dateOnly(
+                            DateTime.now(),
+                          ).microsecondsSinceEpoch,
+                        );
+                        if (count == azkar.count &&
+                            index < azkarKeys.length - 1) {
+                          _scrollToZekr(azkarKeys[index + 1]);
+                        }
                       },
                     );
                   },
@@ -67,5 +93,16 @@ class _AzkarCategoryScreenState extends State<AzkarCategoryScreen> {
         ),
       ),
     );
+  }
+
+  void _scrollToZekr(GlobalKey key) {
+    final context = key.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 }

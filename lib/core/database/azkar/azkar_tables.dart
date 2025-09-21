@@ -18,4 +18,6 @@ class Azkar extends Table {
   IntColumn get count => integer().nullable()();
   TextColumn get reference => text().nullable()();
   TextColumn get search => text().nullable()();
+  IntColumn get todayCount => integer().nullable()();
+  IntColumn get todayDate => integer().nullable()();
 }

@@ -20,7 +20,7 @@ import 'package:noor/core/database/quran/quran_database.dart' as _i651;
 import 'package:noor/core/database/tasbih/tasbih_database.dart' as _i339;
 import 'package:noor/core/di/register_module.dart' as _i662;
 import 'package:noor/core/logic/language_cubit.dart' as _i1019;
-import 'package:noor/core/networking/mosque_api_service.dart' as _i543;
+import 'package:noor/core/networking/mosque_api_service.dart' as _i855;
 import 'package:noor/core/notifications/notifications_manager.dart' as _i555;
 import 'package:noor/core/shared_preferences/shared_preferences_language_service.dart'
     as _i655;
@@ -74,8 +74,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i839.LocationRepo>(
       () => _i839.LocationRepo(gh<_i502.CitiesDatabase>()),
     );
-    gh.factory<_i543.MosqueApiService>(
-      () => _i543.MosqueApiService(gh<_i361.Dio>()),
+    gh.factory<_i855.MosqueApiService>(
+      () => _i855.MosqueApiService(gh<_i361.Dio>()),
+    );
+    gh.factory<_i1051.NearMosqueRepo>(
+      () => _i1051.NearMosqueRepo(
+        gh<_i495.MosquesDatabase>(),
+        gh<_i855.MosqueApiService>(),
+      ),
     );
     gh.factory<_i655.SharedPreferencesLanguageService>(
       () =>
@@ -107,12 +113,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i803.LocationCubit>(
       () => _i803.LocationCubit(gh<_i839.LocationRepo>()),
-    );
-    gh.factory<_i1051.NearMosqueRepo>(
-      () => _i1051.NearMosqueRepo(
-        gh<_i495.MosquesDatabase>(),
-        gh<_i543.MosqueApiService>(),
-      ),
     );
     gh.factory<_i824.AzkarCubit>(() => _i824.AzkarCubit(gh<_i99.AzkarRepo>()));
     gh.factory<_i663.SettingsCubit>(
