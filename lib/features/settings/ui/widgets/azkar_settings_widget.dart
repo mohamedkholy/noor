@@ -20,27 +20,16 @@ class AzkarSettingsWidget extends StatefulWidget {
 }
 
 class _AzkarSettingsWidgetState extends State<AzkarSettingsWidget> {
-  late final TextEditingController _morningAzkarTimeController =
-      TextEditingController(
-        text: widget.azkarNotificationsSettings.morningAzkarTime.toString(),
-      );
-  late final TextEditingController _eveningAzkarTimeController =
-      TextEditingController(
-        text: widget.azkarNotificationsSettings.eveningAzkarTime.toString(),
-      );
   late bool _morningAzkarState =
       widget.azkarNotificationsSettings.morningAzkarState;
   late bool _eveningAzkarState =
       widget.azkarNotificationsSettings.eveningAzkarState;
+  late int _morningAzkarTime =
+      widget.azkarNotificationsSettings.morningAzkarTime;
+  late int _eveningAzkarTime =
+      widget.azkarNotificationsSettings.eveningAzkarTime;
 
   late final SettingsCubit _settingsCubit = context.read();
-
-  @override
-  void dispose() {
-    _morningAzkarTimeController.dispose();
-    _eveningAzkarTimeController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,30 +48,30 @@ class _AzkarSettingsWidgetState extends State<AzkarSettingsWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AzkarNotificationWidget(
+                azkarTime: _morningAzkarTime,
                 azkarType: AzkarType.morning,
                 azkarState: _morningAzkarState,
-                azkarTimeController: _morningAzkarTimeController,
                 onAzkarStateChange: (value) {
                   _morningAzkarState = value;
                   _saveAzkarNotificationSetting();
                 },
                 onAzkarTimeChange: (value) {
+                  _morningAzkarTime = value;
                   _saveAzkarNotificationSetting();
                 },
               ),
               const SizedBox(height: 30),
               AzkarNotificationWidget(
+                azkarTime: _eveningAzkarTime,
                 azkarType: AzkarType.evening,
                 azkarState: _eveningAzkarState,
-                azkarTimeController: _eveningAzkarTimeController,
                 onAzkarTimeChange: (value) {
+                  _eveningAzkarTime = value;
                   _saveAzkarNotificationSetting();
                 },
                 onAzkarStateChange: (value) {
-                  setState(() {
-                    _eveningAzkarState = value;
-                    _saveAzkarNotificationSetting();
-                  });
+                  _eveningAzkarState = value;
+                  _saveAzkarNotificationSetting();
                 },
               ),
             ],
@@ -97,8 +86,8 @@ class _AzkarSettingsWidgetState extends State<AzkarSettingsWidget> {
       AzkarNotificationsSettings(
         morningAzkarState: _morningAzkarState,
         eveningAzkarState: _eveningAzkarState,
-        morningAzkarTime: int.tryParse(_morningAzkarTimeController.text) ?? 45,
-        eveningAzkarTime: int.tryParse(_eveningAzkarTimeController.text) ?? 45,
+        morningAzkarTime: _morningAzkarTime,
+        eveningAzkarTime: _eveningAzkarTime,
       ),
     );
   }
