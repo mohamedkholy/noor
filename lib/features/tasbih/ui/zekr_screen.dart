@@ -68,18 +68,21 @@ class _ZekrScreenState extends State<ZekrScreen> {
                                 children: [
                                   TasbihCountWidget(count: count),
                                   const Spacer(),
-                                  ResetButton(
-                                    onResetPress: () {
-                                      setState(() {
-                                        count = 0;
-                                        _tasbihCubit.updateCount(
-                                          Tasbih(
-                                            zekr: widget.tasbih.zekr,
-                                            count: count,
-                                          ),
-                                        );
-                                      });
-                                    },
+                                  Directionality(
+                                    textDirection: TextDirection.ltr,
+                                    child: ResetButton(
+                                      onResetPress: () {
+                                        setState(() {
+                                          count = 0;
+                                          _tasbihCubit.updateCount(
+                                            Tasbih(
+                                              zekr: widget.tasbih.zekr,
+                                              count: count,
+                                            ),
+                                          );
+                                        });
+                                      },
+                                    ),
                                   ),
                                   CountButton(
                                     width: constraints.maxWidth / 3,

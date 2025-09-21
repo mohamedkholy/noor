@@ -73,7 +73,7 @@ class _LanguageSettingsWidgetState extends State<LanguageSettingsWidget> {
                       color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeightHelper.semiBold,
-                    ),
+                    ).copyWith(fontFamily: "cairo"),
                     underline: const SizedBox.shrink(),
                     icon: const Icon(
                       Icons.arrow_drop_down,
