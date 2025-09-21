@@ -53,15 +53,24 @@ class _DateLocationWidgetState extends State<DateLocationWidget> {
                   fontWeight: FontWeightHelper.medium,
                 ),
               ),
-              Text(
-                LanguageConverter.cityDisplayName(
-                  city: _city,
-                  lang: Localizations.localeOf(context).languageCode,
-                ),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeightHelper.medium,
-                ),
+              Row(
+                children: [
+                  Text(
+                    LanguageConverter.cityDisplayName(
+                      city: _city,
+                      lang: Localizations.localeOf(context).languageCode,
+                    ),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeightHelper.medium,
+                    ),
+                  ),
+                  const Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ],
               ),
             ],
           );

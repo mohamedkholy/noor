@@ -30,7 +30,7 @@ class _ZikrWidgetState extends State<ZikrWidget> {
   Widget build(BuildContext context) {
     final zekr = widget.zekr;
     final hasDescriptionOrReference =
-        zekr.description != null || zekr.reference != null;
+        zekr.description != null || zekr.reference != null || zekr.count != 0;
     final hasCount = zekr.count != null && zekr.count! > 0;
 
     return Container(
