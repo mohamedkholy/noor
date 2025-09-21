@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/settings/data/models/azkar_type.dart';
 import 'package:noor/generated/l10n.dart';
@@ -8,16 +6,16 @@ import 'package:noor/generated/l10n.dart';
 class AzkarNotificationWidget extends StatefulWidget {
   final AzkarType azkarType;
   final bool azkarState;
-  final TextEditingController azkarTimeController;
   final Function(bool) onAzkarStateChange;
-  final void Function(String)? onAzkarTimeChange;
+  final Function(int) onAzkarTimeChange;
+  final int azkarTime;
   const AzkarNotificationWidget({
     super.key,
     required this.azkarType,
     required this.azkarState,
-    required this.azkarTimeController,
     required this.onAzkarStateChange,
     required this.onAzkarTimeChange,
+    required this.azkarTime,
   });
 
   @override
@@ -27,6 +25,7 @@ class AzkarNotificationWidget extends StatefulWidget {
 
 class _AzkarNotificationWidgetState extends State<AzkarNotificationWidget> {
   late bool azkarState = widget.azkarState;
+  late double progress = widget.azkarTime / 90;
 
   @override
   Widget build(BuildContext context) {
@@ -64,41 +63,26 @@ class _AzkarNotificationWidgetState extends State<AzkarNotificationWidget> {
             borderRadius: BorderRadius.circular(15),
             border: Border.all(color: azkarState ? Colors.white : Colors.grey),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+          child: Column(
             children: [
-              Flexible(
-                child: TextField(
-                  enabled: azkarState,
-                  onChanged: widget.onAzkarTimeChange,
-                  controller: widget.azkarTimeController,
-                  cursorColor: Colors.white,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  maxLength: 2,
-                  keyboardType: TextInputType.number,
-                  style: TextStyle(
-                    color: azkarState ? Colors.white : Colors.grey,
-                    fontSize: 18,
-                    fontWeight: FontWeightHelper.semiBold,
-                  ),
-                  decoration: InputDecoration(
-                    counterText: '',
-                    hintStyle: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 18,
-                      fontWeight: FontWeightHelper.medium,
-                    ),
-                    hintText: S.of(context).notification_time,
-                    border: InputBorder.none,
-                  ),
-                ),
+              Slider(
+                value: progress,
+                thumbColor: MyColors.secondary,
+                onChanged: (value) {
+                  setState(() {
+                    progress = value.clamp(0.1, 1);
+                  });
+                  widget.onAzkarTimeChange((progress * 90).toInt());
+                },
+                activeColor: MyColors.secondary,
+                inactiveColor: Colors.grey,
               ),
               Text(
-                "${S.of(context).minutes_before} ${widget.azkarType == AzkarType.morning ? S.of(context).shorok : S.of(context).maghrib} ",
-                style: TextStyle(
-                  color: azkarState ? Colors.grey.shade300 : Colors.grey,
+                "${(progress * 90).toInt()} ${S.of(context).minutes_before} ${widget.azkarType == AzkarType.morning ? S.of(context).shorok : S.of(context).maghrib} ",
+                style: const TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeightHelper.medium,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
