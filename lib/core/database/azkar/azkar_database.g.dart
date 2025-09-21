@@ -344,6 +344,28 @@ class $AzkarTable extends Azkar with TableInfo<$AzkarTable, AzkarData> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _todayCountMeta = const VerificationMeta(
+    'todayCount',
+  );
+  @override
+  late final GeneratedColumn<int> todayCount = GeneratedColumn<int>(
+    'today_count',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _todayDateMeta = const VerificationMeta(
+    'todayDate',
+  );
+  @override
+  late final GeneratedColumn<int> todayDate = GeneratedColumn<int>(
+    'today_date',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     category,
@@ -352,6 +374,8 @@ class $AzkarTable extends Azkar with TableInfo<$AzkarTable, AzkarData> {
     count,
     reference,
     search,
+    todayCount,
+    todayDate,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -408,6 +432,18 @@ class $AzkarTable extends Azkar with TableInfo<$AzkarTable, AzkarData> {
         search.isAcceptableOrUnknown(data['search']!, _searchMeta),
       );
     }
+    if (data.containsKey('today_count')) {
+      context.handle(
+        _todayCountMeta,
+        todayCount.isAcceptableOrUnknown(data['today_count']!, _todayCountMeta),
+      );
+    }
+    if (data.containsKey('today_date')) {
+      context.handle(
+        _todayDateMeta,
+        todayDate.isAcceptableOrUnknown(data['today_date']!, _todayDateMeta),
+      );
+    }
     return context;
   }
 
@@ -441,6 +477,14 @@ class $AzkarTable extends Azkar with TableInfo<$AzkarTable, AzkarData> {
         DriftSqlType.string,
         data['${effectivePrefix}search'],
       ),
+      todayCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}today_count'],
+      ),
+      todayDate: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}today_date'],
+      ),
     );
   }
 
@@ -457,6 +501,8 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
   final int? count;
   final String? reference;
   final String? search;
+  final int? todayCount;
+  final int? todayDate;
   const AzkarData({
     required this.category,
     required this.zekr,
@@ -464,6 +510,8 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
     this.count,
     this.reference,
     this.search,
+    this.todayCount,
+    this.todayDate,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -481,6 +529,12 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
     }
     if (!nullToAbsent || search != null) {
       map['search'] = Variable<String>(search);
+    }
+    if (!nullToAbsent || todayCount != null) {
+      map['today_count'] = Variable<int>(todayCount);
+    }
+    if (!nullToAbsent || todayDate != null) {
+      map['today_date'] = Variable<int>(todayDate);
     }
     return map;
   }
@@ -501,6 +555,12 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
       search: search == null && nullToAbsent
           ? const Value.absent()
           : Value(search),
+      todayCount: todayCount == null && nullToAbsent
+          ? const Value.absent()
+          : Value(todayCount),
+      todayDate: todayDate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(todayDate),
     );
   }
 
@@ -516,6 +576,8 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
       count: serializer.fromJson<int?>(json['count']),
       reference: serializer.fromJson<String?>(json['reference']),
       search: serializer.fromJson<String?>(json['search']),
+      todayCount: serializer.fromJson<int?>(json['todayCount']),
+      todayDate: serializer.fromJson<int?>(json['todayDate']),
     );
   }
   @override
@@ -528,6 +590,8 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
       'count': serializer.toJson<int?>(count),
       'reference': serializer.toJson<String?>(reference),
       'search': serializer.toJson<String?>(search),
+      'todayCount': serializer.toJson<int?>(todayCount),
+      'todayDate': serializer.toJson<int?>(todayDate),
     };
   }
 
@@ -538,6 +602,8 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
     Value<int?> count = const Value.absent(),
     Value<String?> reference = const Value.absent(),
     Value<String?> search = const Value.absent(),
+    Value<int?> todayCount = const Value.absent(),
+    Value<int?> todayDate = const Value.absent(),
   }) => AzkarData(
     category: category ?? this.category,
     zekr: zekr ?? this.zekr,
@@ -545,6 +611,8 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
     count: count.present ? count.value : this.count,
     reference: reference.present ? reference.value : this.reference,
     search: search.present ? search.value : this.search,
+    todayCount: todayCount.present ? todayCount.value : this.todayCount,
+    todayDate: todayDate.present ? todayDate.value : this.todayDate,
   );
   AzkarData copyWithCompanion(AzkarCompanion data) {
     return AzkarData(
@@ -556,6 +624,10 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
       count: data.count.present ? data.count.value : this.count,
       reference: data.reference.present ? data.reference.value : this.reference,
       search: data.search.present ? data.search.value : this.search,
+      todayCount: data.todayCount.present
+          ? data.todayCount.value
+          : this.todayCount,
+      todayDate: data.todayDate.present ? data.todayDate.value : this.todayDate,
     );
   }
 
@@ -567,14 +639,24 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
           ..write('description: $description, ')
           ..write('count: $count, ')
           ..write('reference: $reference, ')
-          ..write('search: $search')
+          ..write('search: $search, ')
+          ..write('todayCount: $todayCount, ')
+          ..write('todayDate: $todayDate')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(category, zekr, description, count, reference, search);
+  int get hashCode => Object.hash(
+    category,
+    zekr,
+    description,
+    count,
+    reference,
+    search,
+    todayCount,
+    todayDate,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -584,7 +666,9 @@ class AzkarData extends DataClass implements Insertable<AzkarData> {
           other.description == this.description &&
           other.count == this.count &&
           other.reference == this.reference &&
-          other.search == this.search);
+          other.search == this.search &&
+          other.todayCount == this.todayCount &&
+          other.todayDate == this.todayDate);
 }
 
 class AzkarCompanion extends UpdateCompanion<AzkarData> {
@@ -594,6 +678,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
   final Value<int?> count;
   final Value<String?> reference;
   final Value<String?> search;
+  final Value<int?> todayCount;
+  final Value<int?> todayDate;
   final Value<int> rowid;
   const AzkarCompanion({
     this.category = const Value.absent(),
@@ -602,6 +688,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
     this.count = const Value.absent(),
     this.reference = const Value.absent(),
     this.search = const Value.absent(),
+    this.todayCount = const Value.absent(),
+    this.todayDate = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   AzkarCompanion.insert({
@@ -611,6 +699,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
     this.count = const Value.absent(),
     this.reference = const Value.absent(),
     this.search = const Value.absent(),
+    this.todayCount = const Value.absent(),
+    this.todayDate = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : category = Value(category),
        zekr = Value(zekr);
@@ -621,6 +711,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
     Expression<int>? count,
     Expression<String>? reference,
     Expression<String>? search,
+    Expression<int>? todayCount,
+    Expression<int>? todayDate,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -630,6 +722,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
       if (count != null) 'count': count,
       if (reference != null) 'reference': reference,
       if (search != null) 'search': search,
+      if (todayCount != null) 'today_count': todayCount,
+      if (todayDate != null) 'today_date': todayDate,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -641,6 +735,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
     Value<int?>? count,
     Value<String?>? reference,
     Value<String?>? search,
+    Value<int?>? todayCount,
+    Value<int?>? todayDate,
     Value<int>? rowid,
   }) {
     return AzkarCompanion(
@@ -650,6 +746,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
       count: count ?? this.count,
       reference: reference ?? this.reference,
       search: search ?? this.search,
+      todayCount: todayCount ?? this.todayCount,
+      todayDate: todayDate ?? this.todayDate,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -675,6 +773,12 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
     if (search.present) {
       map['search'] = Variable<String>(search.value);
     }
+    if (todayCount.present) {
+      map['today_count'] = Variable<int>(todayCount.value);
+    }
+    if (todayDate.present) {
+      map['today_date'] = Variable<int>(todayDate.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -690,6 +794,8 @@ class AzkarCompanion extends UpdateCompanion<AzkarData> {
           ..write('count: $count, ')
           ..write('reference: $reference, ')
           ..write('search: $search, ')
+          ..write('todayCount: $todayCount, ')
+          ..write('todayDate: $todayDate, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -989,6 +1095,8 @@ typedef $$AzkarTableCreateCompanionBuilder =
       Value<int?> count,
       Value<String?> reference,
       Value<String?> search,
+      Value<int?> todayCount,
+      Value<int?> todayDate,
       Value<int> rowid,
     });
 typedef $$AzkarTableUpdateCompanionBuilder =
@@ -999,6 +1107,8 @@ typedef $$AzkarTableUpdateCompanionBuilder =
       Value<int?> count,
       Value<String?> reference,
       Value<String?> search,
+      Value<int?> todayCount,
+      Value<int?> todayDate,
       Value<int> rowid,
     });
 
@@ -1060,6 +1170,16 @@ class $$AzkarTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<int> get todayCount => $composableBuilder(
+    column: $table.todayCount,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get todayDate => $composableBuilder(
+    column: $table.todayDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
   $$CategoryTableFilterComposer get category {
     final $$CategoryTableFilterComposer composer = $composerBuilder(
       composer: this,
@@ -1118,6 +1238,16 @@ class $$AzkarTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get todayCount => $composableBuilder(
+    column: $table.todayCount,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get todayDate => $composableBuilder(
+    column: $table.todayDate,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   $$CategoryTableOrderingComposer get category {
     final $$CategoryTableOrderingComposer composer = $composerBuilder(
       composer: this,
@@ -1167,6 +1297,14 @@ class $$AzkarTableAnnotationComposer
 
   GeneratedColumn<String> get search =>
       $composableBuilder(column: $table.search, builder: (column) => column);
+
+  GeneratedColumn<int> get todayCount => $composableBuilder(
+    column: $table.todayCount,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get todayDate =>
+      $composableBuilder(column: $table.todayDate, builder: (column) => column);
 
   $$CategoryTableAnnotationComposer get category {
     final $$CategoryTableAnnotationComposer composer = $composerBuilder(
@@ -1226,6 +1364,8 @@ class $$AzkarTableTableManager
                 Value<int?> count = const Value.absent(),
                 Value<String?> reference = const Value.absent(),
                 Value<String?> search = const Value.absent(),
+                Value<int?> todayCount = const Value.absent(),
+                Value<int?> todayDate = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => AzkarCompanion(
                 category: category,
@@ -1234,6 +1374,8 @@ class $$AzkarTableTableManager
                 count: count,
                 reference: reference,
                 search: search,
+                todayCount: todayCount,
+                todayDate: todayDate,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -1244,6 +1386,8 @@ class $$AzkarTableTableManager
                 Value<int?> count = const Value.absent(),
                 Value<String?> reference = const Value.absent(),
                 Value<String?> search = const Value.absent(),
+                Value<int?> todayCount = const Value.absent(),
+                Value<int?> todayDate = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => AzkarCompanion.insert(
                 category: category,
@@ -1252,6 +1396,8 @@ class $$AzkarTableTableManager
                 count: count,
                 reference: reference,
                 search: search,
+                todayCount: todayCount,
+                todayDate: todayDate,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0

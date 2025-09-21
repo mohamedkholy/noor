@@ -27,4 +27,10 @@ class AzkarRepo {
       const CategoryCompanion(isFavorite: Value(true)),
     );
   }
+
+  void updateTodayAzkarCount(String category, String zekr, int count, {required int todayDate}) {
+    (_db.update(_db.azkar)
+          ..where((e) => e.category.equals(category) & e.zekr.equals(zekr)))
+        .write(AzkarCompanion(todayCount: Value(count), todayDate: Value(todayDate)));
+  }
 }
