@@ -28,6 +28,10 @@ class _AzkarSettingsWidgetState extends State<AzkarSettingsWidget> {
       widget.azkarNotificationsSettings.morningAzkarTime;
   late int _eveningAzkarTime =
       widget.azkarNotificationsSettings.eveningAzkarTime;
+  late bool _sleepingAzkarState =
+      widget.azkarNotificationsSettings.sleepingAzkarState;
+  late int _sleepingAzkarTime =
+      widget.azkarNotificationsSettings.sleepingAzkarTime;
 
   late final SettingsCubit _settingsCubit = context.read();
 
@@ -74,6 +78,20 @@ class _AzkarSettingsWidgetState extends State<AzkarSettingsWidget> {
                   _saveAzkarNotificationSetting();
                 },
               ),
+              const SizedBox(height: 30),
+              AzkarNotificationWidget(
+                azkarTime: _sleepingAzkarTime,
+                azkarType: AzkarType.sleeping,
+                azkarState: _sleepingAzkarState,
+                onAzkarTimeChange: (value) {
+                  _sleepingAzkarTime = value;
+                  _saveAzkarNotificationSetting();
+                },
+                onAzkarStateChange: (value) {
+                  _sleepingAzkarState = value;
+                  _saveAzkarNotificationSetting();
+                },
+              ),
             ],
           ),
         ),
@@ -88,6 +106,8 @@ class _AzkarSettingsWidgetState extends State<AzkarSettingsWidget> {
         eveningAzkarState: _eveningAzkarState,
         morningAzkarTime: _morningAzkarTime,
         eveningAzkarTime: _eveningAzkarTime,
+        sleepingAzkarState: _sleepingAzkarState,
+        sleepingAzkarTime: _sleepingAzkarTime,
       ),
     );
   }

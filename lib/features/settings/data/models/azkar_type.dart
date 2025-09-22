@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noor/generated/l10n.dart';
 
-enum AzkarType { morning, evening }
+enum AzkarType { morning, evening, sleeping }
 
 extension AzkarTypeExtensions on AzkarType {
   String getAzkarName(BuildContext context) {
@@ -10,6 +10,8 @@ extension AzkarTypeExtensions on AzkarType {
         return S.of(context).morning_azkar;
       case AzkarType.evening:
         return S.of(context).evening_azkar;
+      case AzkarType.sleeping:
+        return S.of(context).sleepingAzkar;
     }
   }
 
@@ -19,6 +21,8 @@ extension AzkarTypeExtensions on AzkarType {
         return "Morning";
       case AzkarType.evening:
         return "Evening";
+      case AzkarType.sleeping:
+        return "Sleeping";
     }
   }
 }

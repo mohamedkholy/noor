@@ -4,6 +4,7 @@
     "azkar": "أذكار",
     "notification_time": "وقت الإشعارات",
     "minutes_before": "دقيقة قبل",
+    "hour_before": "ساعة قبل",
     "shorok": "الشروق",
     "maghrib": "المغرب",
     "isha": "العشاء",
@@ -73,5 +74,8 @@
     "km": "كم",
     "start_navigation": "بدء التنقل",
     "calender": "التقويم",
-    "search": "بحث..."
+    "search": "بحث...",
+    "azansounds": "أصوات الأذان",
+    "beforeMidNight": "منتصف الليل",
+    "sleepingAzkar": "أذكار النوم"
 }

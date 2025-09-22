@@ -31,6 +31,8 @@ class SharedPreferencesSettingsService {
         eveningAzkarState: true,
         morningAzkarTime: 45,
         eveningAzkarTime: 45,
+        sleepingAzkarState: true,
+        sleepingAzkarTime: 2,
       );
     }
     return AzkarNotificationsSettings.fromJson(jsonDecode(result));

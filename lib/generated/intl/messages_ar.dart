@@ -41,10 +41,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "azan_notifications": MessageLookupByLibrary.simpleMessage(
       "إشعارات الأذان",
     ),
+    "azansounds": MessageLookupByLibrary.simpleMessage("أصوات الأذان"),
     "azkar": MessageLookupByLibrary.simpleMessage("أذكار"),
     "azkar_notifications": MessageLookupByLibrary.simpleMessage(
       "إشعارات الأذكار",
     ),
+    "beforeMidNight": MessageLookupByLibrary.simpleMessage("منتصف الليل"),
     "calendar": MessageLookupByLibrary.simpleMessage("التقويم"),
     "calender": MessageLookupByLibrary.simpleMessage("التقويم"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
@@ -66,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hadith": MessageLookupByLibrary.simpleMessage("حديث"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage("حديث اليوم"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+    "hour_before": MessageLookupByLibrary.simpleMessage("ساعة قبل"),
     "in_word": MessageLookupByLibrary.simpleMessage("خلال"),
     "isha": MessageLookupByLibrary.simpleMessage("العشاء"),
     "juz": MessageLookupByLibrary.simpleMessage("جزء"),
@@ -114,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "search": MessageLookupByLibrary.simpleMessage("بحث..."),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "shorok": MessageLookupByLibrary.simpleMessage("الشروق"),
+    "sleepingAzkar": MessageLookupByLibrary.simpleMessage("أذكار النوم"),
     "start_navigation": MessageLookupByLibrary.simpleMessage("بدء التنقل"),
     "surah": MessageLookupByLibrary.simpleMessage("سورة"),
     "tasbih": MessageLookupByLibrary.simpleMessage("تسبيح"),

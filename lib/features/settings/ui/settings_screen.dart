@@ -5,6 +5,7 @@ import 'package:noor/features/settings/data/models/azan_notifications_settings.d
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/widgets/azkar_settings_widget.dart';
+import 'package:noor/features/settings/ui/widgets/azkar_sounds_widget.dart';
 import 'package:noor/features/settings/ui/widgets/language_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/location_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/salawat_row.dart';
@@ -60,6 +61,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     SalawatRow(
                       azanNotificationsSettings: _azanNotificationsSettings,
                     ),
+                    const SizedBox(height: 20),
+                    AzkarSoundsWidget(
+                      onSoundChanged: (String sound) {
+                        _settingsCubit.saveAzkarSound(sound);
+                      },
+                    ), 
                     const SizedBox(height: 20),
                     AzkarSettingsWidget(
                       azkarNotificationsSettings: _azkarNotificationsSettings,

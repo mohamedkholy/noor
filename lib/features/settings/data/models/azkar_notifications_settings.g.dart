@@ -13,6 +13,8 @@ AzkarNotificationsSettings _$AzkarNotificationsSettingsFromJson(
   eveningAzkarState: json['eveningAzkarState'] as bool,
   morningAzkarTime: (json['morningAzkarTime'] as num).toInt(),
   eveningAzkarTime: (json['eveningAzkarTime'] as num).toInt(),
+  sleepingAzkarState: json['sleepingAzkarState'] as bool,
+  sleepingAzkarTime: (json['sleepingAzkarTime'] as num).toInt(),
 );
 
 Map<String, dynamic> _$AzkarNotificationsSettingsToJson(
@@ -22,4 +24,6 @@ Map<String, dynamic> _$AzkarNotificationsSettingsToJson(
   'eveningAzkarState': instance.eveningAzkarState,
   'morningAzkarTime': instance.morningAzkarTime,
   'eveningAzkarTime': instance.eveningAzkarTime,
+  'sleepingAzkarState': instance.sleepingAzkarState,
+  'sleepingAzkarTime': instance.sleepingAzkarTime,
 };

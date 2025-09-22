@@ -8,12 +8,16 @@ class AzkarNotificationsSettings {
   final bool eveningAzkarState;
   final int morningAzkarTime;
   final int eveningAzkarTime;
+  final bool sleepingAzkarState;
+  final int sleepingAzkarTime;
 
   AzkarNotificationsSettings({
     required this.morningAzkarState,
     required this.eveningAzkarState,
     required this.morningAzkarTime,
     required this.eveningAzkarTime,
+    required this.sleepingAzkarState,
+    required this.sleepingAzkarTime,
   });
 
   factory AzkarNotificationsSettings.fromJson(Map<String, dynamic> json) =>

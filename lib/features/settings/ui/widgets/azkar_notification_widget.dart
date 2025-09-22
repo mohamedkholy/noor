@@ -25,7 +25,8 @@ class AzkarNotificationWidget extends StatefulWidget {
 
 class _AzkarNotificationWidgetState extends State<AzkarNotificationWidget> {
   late bool azkarState = widget.azkarState;
-  late double progress = widget.azkarTime / 90;
+  late double progress = widget.azkarTime.toDouble();
+  late int maxTime = widget.azkarType == AzkarType.sleeping ? 5 : 90;
 
   @override
   Widget build(BuildContext context) {
@@ -66,19 +67,25 @@ class _AzkarNotificationWidgetState extends State<AzkarNotificationWidget> {
           child: Column(
             children: [
               Slider(
+                max: maxTime.toDouble(),
+                divisions: maxTime,
                 value: progress,
                 thumbColor: MyColors.secondary,
                 onChanged: (value) {
                   setState(() {
-                    progress = value.clamp(0.1, 1);
+                    progress = value.clamp(1.0, maxTime.toDouble());
                   });
-                  widget.onAzkarTimeChange((progress * 90).toInt());
+                  widget.onAzkarTimeChange(progress.toInt());
                 },
                 activeColor: MyColors.secondary,
                 inactiveColor: Colors.grey,
               ),
               Text(
-                "${(progress * 90).toInt()} ${S.of(context).minutes_before} ${widget.azkarType == AzkarType.morning ? S.of(context).shorok : S.of(context).maghrib} ",
+                "${progress.toInt()} ${maxTime == 90 ? S.of(context).minutes_before : S.of(context).hour_before} ${widget.azkarType == AzkarType.morning
+                    ? S.of(context).shorok
+                    : widget.azkarType == AzkarType.evening
+                    ? S.of(context).maghrib
+                    : S.of(context).beforeMidNight}",
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
