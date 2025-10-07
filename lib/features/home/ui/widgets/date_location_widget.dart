@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/helpers/constants.dart';
-import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/core/helpers/language_converter.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
@@ -49,8 +48,8 @@ class _DateLocationWidgetState extends State<DateLocationWidget> {
               Text(
                 HijriCalendar.now().toFormat("dd MMMM yyyy"),
                 style: const TextStyle(
+                  fontFamily: "cairo",
                   color: Colors.white,
-                  fontWeight: FontWeightHelper.medium,
                 ),
               ),
               Row(
@@ -61,8 +60,8 @@ class _DateLocationWidgetState extends State<DateLocationWidget> {
                       lang: Localizations.localeOf(context).languageCode,
                     ),
                     style: const TextStyle(
+                      fontFamily: "cairo",
                       color: Colors.white,
-                      fontWeight: FontWeightHelper.medium,
                     ),
                   ),
                   const Icon(
