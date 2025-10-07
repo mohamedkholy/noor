@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/decorated_container.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
@@ -18,7 +18,6 @@ class AzkarSoundsWidget extends StatefulWidget {
 
 class _AzkarSoundsWidgetState extends State<AzkarSoundsWidget> {
   final AudioPlayer _player = AudioPlayer();
-  final soundsPath = "sounds/";
   Timer? _timer;
   late String sound = context.read<SettingsCubit>().getAzanSound();
   late String currentAsset = sound;
@@ -141,7 +140,8 @@ class _AzkarSoundsWidgetState extends State<AzkarSoundsWidget> {
 
   Future<void> _play(String assetName) async {
     await _player.stop();
-    await _player.play(AssetSource("$soundsPath$assetName.mp3"));
+    await _player.setAsset("assets/sounds/$assetName.ogg");
+    _player.play();
     _timer?.cancel();
     _timer = Timer(const Duration(seconds: 10), () {
       _player.stop();
