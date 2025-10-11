@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
@@ -59,5 +60,29 @@ class QuranCubit extends Cubit<QuranState> {
         "suraNameEn": suraNameEn,
       }),
     );
+  }
+
+  Future<void> getSurasLines(int pageNumber) async {
+    final result = await quranRepo.getSurasLines(pageNumber);
+    if (!isClosed) {
+      emit(QuranLinesLoaded(result));
+    }
+  }
+
+  Future<void> getSurasLinesPagination({
+    required int pageNumber,
+    required bool isFromStart,
+  }) async {
+    final pages = await quranRepo.getReadingDataPaginationLines(
+      pageNumber,
+      isFromStart,
+    );
+    if (!isClosed) {
+      emit(
+        isFromStart
+            ? QuranLinesLodedFromStart(pages)
+            : QuranLinesLodedFromEnd(pages),
+      );
+    }
   }
 }

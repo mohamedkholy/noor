@@ -19,7 +19,7 @@ class SurahWidget extends StatelessWidget {
         Navigator.pushNamed(
           context,
           MyRoutes.reading,
-          arguments: {'surahNumber': surah.number},
+          arguments: {'surahNumber': surah.number, 'pageNumber': surah.pageNumber},
         );
       },
       child: Row(

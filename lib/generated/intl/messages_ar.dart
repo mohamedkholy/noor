@@ -124,5 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "the_tasbih": MessageLookupByLibrary.simpleMessage("التسبيح"),
     "unknown_error": MessageLookupByLibrary.simpleMessage("حدث خطأ غير معروف"),
     "zekr": MessageLookupByLibrary.simpleMessage("ذكر"),
+    "mushafStyle": MessageLookupByLibrary.simpleMessage("مصحف"),
+    "ayatStyle": MessageLookupByLibrary.simpleMessage("آيات"),
   };
 }

@@ -97,6 +97,7 @@ class _LastReadWidgetState extends State<LastReadWidget> {
                                     'surahNumber':
                                         lastReadingData!.verse.surahNumber,
                                     'ayaNumber': lastReadingData!.verse.number,
+                                    'pageNumber': lastReadingData!.verse.page,
                                   },
                                 ).then((value) {
                                   Future.delayed(

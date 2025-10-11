@@ -613,6 +613,27 @@ class S {
       args: [],
     );
   }
+
+  String get mushafStyle {
+    return Intl.message(
+      'Mushaf Style',
+      name: 'mushafStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get ayatStyle {
+    return Intl.message(
+      'Ayat Style',
+      name: 'ayatStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+ 
+
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

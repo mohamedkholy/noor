@@ -15,7 +15,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   await getIt<NotificationsManager>().init();
-
   runApp(
     MultiBlocProvider(
       providers: [BlocProvider(create: (context) => getIt<LanguageCubit>())],

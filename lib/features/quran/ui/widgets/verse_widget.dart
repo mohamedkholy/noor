@@ -30,16 +30,18 @@ class VerseWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10),
-          Text(
-            textDirection: TextDirection.ltr,
-            verse.textEn,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeightHelper.medium,
+          if (Localizations.localeOf(context).languageCode != "ar")
+            const SizedBox(height: 10),
+          if (Localizations.localeOf(context).languageCode != "ar")
+            Text(
+              textDirection: TextDirection.ltr,
+              verse.textEn,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeightHelper.medium,
+              ),
             ),
-          ),
         ],
       ),
     );

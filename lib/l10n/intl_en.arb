@@ -76,5 +76,7 @@
     "search": "Search...",
     "azansounds": "Azan Sounds",
     "beforeMidNight": "Midnight",
-    "sleepingAzkar": "Sleeping Azkar"
+    "sleepingAzkar": "Sleeping Azkar",
+    "mushafStyle": "Mushaf Style",
+    "ayatStyle": "Ayat Style"
 }

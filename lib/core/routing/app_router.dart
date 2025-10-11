@@ -20,6 +20,7 @@ import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
 import 'package:noor/features/near_mosque/ui/near_mosque_screen.dart';
 import 'package:noor/features/qibla/ui/qibla_screen.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
+import 'package:noor/features/quran/ui/quran_ayat_screen.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
 import 'package:noor/features/quran/ui/reading_screen.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
@@ -48,6 +49,7 @@ class AppRouter {
             child: ReadingScreen(
               surahNumber: (args as Map<String, int>)['surahNumber']!,
               ayaNumber: args['ayaNumber'],
+              pageNumber: args['pageNumber']!,
             ),
           ),
           settings,

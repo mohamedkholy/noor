@@ -138,5 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Unknown error has occurred",
     ),
     "zekr": MessageLookupByLibrary.simpleMessage("Zekr"),
+    "mushafStyle": MessageLookupByLibrary.simpleMessage("Mushaf Style"),
+    "ayatStyle": MessageLookupByLibrary.simpleMessage("Ayat Style"),
   };
 }
