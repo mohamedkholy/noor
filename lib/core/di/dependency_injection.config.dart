@@ -17,8 +17,6 @@ import 'package:noor/core/database/cities/cities_database.dart' as _i502;
 import 'package:noor/core/database/hadith/hadith_database.dart' as _i928;
 import 'package:noor/core/database/mosques/mosques_database.dart' as _i495;
 import 'package:noor/core/database/quran/quran_database.dart' as _i651;
-import 'package:noor/core/database/quran_lines/quran_lines_database.dart'
-    as _i174;
 import 'package:noor/core/database/tasbih/tasbih_database.dart' as _i339;
 import 'package:noor/core/di/register_module.dart' as _i662;
 import 'package:noor/core/logic/language_cubit.dart' as _i1019;
@@ -69,14 +67,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i928.HadithDatabase>(() => _i928.HadithDatabase());
     gh.singleton<_i495.MosquesDatabase>(() => _i495.MosquesDatabase());
     gh.singleton<_i651.QuranDatabase>(() => _i651.QuranDatabase());
-    gh.singleton<_i174.QuranLinesDatabase>(() => _i174.QuranLinesDatabase());
     gh.singleton<_i339.TasbihDatabase>(() => _i339.TasbihDatabase());
-    gh.factory<_i1015.QuranRepo>(
-      () => _i1015.QuranRepo(
-        gh<_i651.QuranDatabase>(),
-        gh<_i174.QuranLinesDatabase>(),
-      ),
-    );
     gh.factory<_i298.HomeRepo>(
       () =>
           _i298.HomeRepo(gh<_i928.HadithDatabase>(), gh<_i651.QuranDatabase>()),
@@ -111,11 +102,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i99.AzkarRepo>(() => _i99.AzkarRepo(gh<_i155.AzkarDatabase>()));
     gh.factory<_i892.HomeCubit>(() => _i892.HomeCubit(gh<_i298.HomeRepo>()));
-    gh.factory<_i239.QuranCubit>(
-      () => _i239.QuranCubit(gh<_i1015.QuranRepo>()),
-    );
     gh.factory<_i501.HadithCubit>(
       () => _i501.HadithCubit(gh<_i952.HadithRepo>()),
+    );
+    gh.factory<_i1015.QuranRepo>(
+      () => _i1015.QuranRepo(gh<_i651.QuranDatabase>()),
     );
     gh.factory<_i479.SharedPreferencesSettingsService>(
       () =>
@@ -139,6 +130,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i502.CitiesDatabase>(),
         gh<_i479.SharedPreferencesSettingsService>(),
       ),
+    );
+    gh.factory<_i239.QuranCubit>(
+      () => _i239.QuranCubit(gh<_i1015.QuranRepo>()),
     );
     gh.factory<_i915.NavigationCubit>(
       () => _i915.NavigationCubit(gh<_i730.NavigationRepo>()),

@@ -1,18 +1,19 @@
 import 'package:noor/core/database/quran/quran_database.dart';
+import 'package:noor/features/quran/data/models/reading_position.dart';
 
 class LastReadingData {
-  final Verse verse;
+  final ReadingPosition readingPosition;
   final String suraNameEn;
-  LastReadingData({required this.verse, required this.suraNameEn});
+  LastReadingData({required this.readingPosition, required this.suraNameEn});
 
   factory LastReadingData.fromJson(Map<String, dynamic> json) =>
       LastReadingData(
-        verse: Verse.fromJson(json['verse']),
+        readingPosition: ReadingPosition.fromJson(json['readingPosition']),
         suraNameEn: json['suraNameEn'],
       );
 
   Map<String, dynamic> toJson() => {
-    'verse': verse.toJson(),
+    'readingPosition': readingPosition.toJson(),
     'suraNameEn': suraNameEn,
   };
 }

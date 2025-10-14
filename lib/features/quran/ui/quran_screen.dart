@@ -16,10 +16,17 @@ class QuranScreen extends StatefulWidget {
 }
 
 class _QuranScreenState extends State<QuranScreen> {
+  late final QuranCubit _quranCubit = context.read<QuranCubit>();
   @override
   void initState() {
     super.initState();
-    context.read<QuranCubit>().getSuras();
+    _quranCubit.getSuras();
+  }
+
+  @override
+  void dispose() {
+    _quranCubit.dispose();
+    super.dispose();
   }
 
   @override

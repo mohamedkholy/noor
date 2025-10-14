@@ -83,7 +83,7 @@ class _FeaturesRowState extends State<FeaturesRow> {
         const IconData(0xe821, fontFamily: "Quran"),
         () {
           Navigator.pushNamed(context, MyRoutes.quran).then((value) {
-            homeCubit.getLasReading();
+            homeCubit.getLastReading();
           });
         },
       ),

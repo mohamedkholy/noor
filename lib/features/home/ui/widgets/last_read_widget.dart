@@ -22,7 +22,7 @@ class _LastReadWidgetState extends State<LastReadWidget> {
 
   @override
   void initState() {
-    lastReadingData = homeCubit.getLasReading();
+    lastReadingData = homeCubit.getLastReading();
     super.initState();
   }
 
@@ -63,7 +63,7 @@ class _LastReadWidgetState extends State<LastReadWidget> {
                             ),
                           ),
                           Text(
-                            "${lastReadingData!.suraNameEn} ${lastReadingData!.verse.surahName}",
+                            "${lastReadingData!.suraNameEn} ${lastReadingData!.readingPosition.surahName}",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -71,7 +71,7 @@ class _LastReadWidgetState extends State<LastReadWidget> {
                             ),
                           ),
                           Text(
-                            "${S.of(context).aya} ${lastReadingData!.verse.number}",
+                            "${S.of(context).aya} ${lastReadingData!.readingPosition.verseNumber}",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,
@@ -94,16 +94,23 @@ class _LastReadWidgetState extends State<LastReadWidget> {
                                   context,
                                   MyRoutes.reading,
                                   arguments: {
-                                    'surahNumber':
-                                        lastReadingData!.verse.surahNumber,
-                                    'ayaNumber': lastReadingData!.verse.number,
-                                    'pageNumber': lastReadingData!.verse.page,
+                                    'surahNumber': lastReadingData!
+                                        .readingPosition
+                                        .surahNumber,
+                                    'ayaNumber': lastReadingData!
+                                        .readingPosition
+                                        .verseNumber,
+                                    'pageNumber': lastReadingData!
+                                        .readingPosition
+                                        .pageNumber,
+                                    'juzNumber':
+                                        lastReadingData!.readingPosition.juz,
                                   },
                                 ).then((value) {
                                   Future.delayed(
                                     const Duration(milliseconds: 500),
                                     () {
-                                      homeCubit.getLasReading();
+                                      homeCubit.getLastReading();
                                     },
                                   );
                                 });

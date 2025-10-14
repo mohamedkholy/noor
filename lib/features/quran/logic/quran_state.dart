@@ -1,5 +1,5 @@
 import 'package:noor/core/database/quran/quran_database.dart';
-import 'package:noor/core/database/quran_lines/quran_lines_database.dart';
+import 'package:noor/features/quran/data/models/line_data.dart';
 
 abstract class QuranState {}
 
@@ -28,16 +28,16 @@ class SurahsLoaded extends QuranState {
 
 
 class QuranLinesLoaded extends QuranState {
-  final List<List<(Line, List<Word>)>> pages;
+  final List<List<LineData>> pages;
   QuranLinesLoaded(this.pages);
 }
 
 class QuranLinesLodedFromStart extends QuranState {
-  final List<List<(Line, List<Word>)>> pages;
+  final List<List<LineData>> pages;
   QuranLinesLodedFromStart(this.pages);
 }
 
 class QuranLinesLodedFromEnd extends QuranState {
-  final List<List<(Line, List<Word>)>> pages;
+  final List<List<LineData>> pages;
   QuranLinesLodedFromEnd(this.pages);
 }

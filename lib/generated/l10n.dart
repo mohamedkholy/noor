@@ -614,26 +614,15 @@ class S {
     );
   }
 
+  /// `Mushaf`
   String get mushafStyle {
-    return Intl.message(
-      'Mushaf Style',
-      name: 'mushafStyle',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Mushaf', name: 'mushafStyle', desc: '', args: []);
   }
 
+  /// `Ayat`
   String get ayatStyle {
-    return Intl.message(
-      'Ayat Style',
-      name: 'ayatStyle',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Ayat', name: 'ayatStyle', desc: '', args: []);
   }
-
- 
-
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
+import 'package:noor/features/quran/data/models/reading_position.dart';
 import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/logic/quran_state.dart';
 import 'package:noor/features/quran/ui/widgets/basmallah.dart';
 import 'package:noor/features/quran/ui/widgets/header_widget.dart';
-import 'package:noor/features/quran/ui/widgets/surah_app_bar.dart';
 import 'package:noor/features/quran/ui/widgets/verse_widget.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -21,93 +21,83 @@ class QuranAyatScreen extends StatefulWidget {
 }
 
 class _QuranAyatScreenState extends State<QuranAyatScreen> {
-  late final QuranCubit quranCubit = context.read<QuranCubit>();
+  late final QuranCubit _quranCubit = context.read<QuranCubit>();
   List<(Surah, List<Verse>)> surahs = [];
   final String bismala = "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ";
   PageController pageController = PageController();
-  ValueNotifier<Verse?> currentVerseNotifier = ValueNotifier(null);
   late int currentSuraIndex = widget.surahNumber;
+  UniqueKey key = UniqueKey();
 
   @override
   void initState() {
     super.initState();
-    quranCubit.getReadingData(widget.surahNumber);
+    _quranCubit.getReadingData(widget.surahNumber);
   }
 
   @override
   void dispose() {
-    if (currentVerseNotifier.value != null) {
-      final verse = currentVerseNotifier.value;
-      if (verse != null) {
-        quranCubit.saveLastReading(
-          verse,
-          surahs
-              .where((element) => element.$1.number == verse.surahNumber)
-              .single
-              .$1
-              .nameTransliteration,
-        );
-      }
-    }
     pageController.dispose();
-    currentVerseNotifier.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: ValueListenableBuilder<Verse?>(
-          valueListenable: currentVerseNotifier,
-          builder: (context, verse, child) {
-            if (verse == null) return AppBar(automaticallyImplyLeading: false);
-            return SurahAppBar(
-              juz: verse.juz.toString(),
-              surahNumber: verse.surahNumber.toString(),
-              surahName: verse.surahName,
-            );
-          },
-        ),
-      ),
-      backgroundColor: const Color(0xFFFFF8EE),
-      body: BlocConsumer<QuranCubit, QuranState>(
+    return Container(
+      color: const Color(0xFFFFF8EE),
+      child: BlocConsumer<QuranCubit, QuranState>(
+        buildWhen: (previous, current) =>
+            current is QuranLoaded ||
+            current is QuranLodedFromStart ||
+            current is QuranLodedFromEnd,
+        listenWhen: (previous, current) =>
+            current is QuranLoaded ||
+            current is QuranLodedFromStart ||
+            current is QuranLodedFromEnd,
         listener: (context, state) {
           if (state is QuranLoaded) {
             surahs = state.surahs;
             currentSuraIndex = surahs.indexWhere(
               (element) => element.$1.number == widget.surahNumber,
             );
-            currentVerseNotifier.value = surahs[currentSuraIndex]
-                .$2[widget.ayaNumber == null ? 0 : widget.ayaNumber! - 1];
-            pageController.jumpToPage(currentSuraIndex);
+            _quranCubit.currentReadingPositionNotifier.value =
+                ReadingPosition.fromVerse(
+                  surahs[currentSuraIndex].$2[widget.ayaNumber == null
+                      ? 0
+                      : widget.ayaNumber! - 1],
+                );
+            pageController = PageController(initialPage: currentSuraIndex);
           } else if (state is QuranLodedFromStart) {
-            final currentPage =
-                pageController.page!.toInt() + state.surahs.length;
             surahs.insertAll(0, state.surahs);
-            pageController.jumpToPage(currentPage);
+            final currentPage = pageController.page!.toInt();
+            pageController = PageController(
+              initialPage: currentPage + state.surahs.length,
+            );
           } else if (state is QuranLodedFromEnd) {
             surahs.addAll(state.surahs);
           }
         },
         builder: (context, state) {
+          if (state is! QuranLodedFromEnd) {
+            key = UniqueKey();
+          }
           return Align(
             alignment: Alignment.topCenter,
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
               child: PageView.builder(
+                key: key,
                 onPageChanged: (index) {
-                  currentVerseNotifier.value = surahs[index].$2[0];
+                  _quranCubit.currentReadingPositionNotifier.value =
+                      ReadingPosition.fromVerse(surahs[index].$2[0]);
                   if (index == surahs.length - 2 &&
                       surahs.last.$1.number != 114) {
-                    quranCubit.getReadingDataPagination(
+                    _quranCubit.getReadingDataPagination(
                       suraNumber: surahs.last.$1.number,
                       isFromStart: false,
                     );
                   } else if (index == 2 && surahs.first.$1.number != 1) {
                     Future.delayed(const Duration(milliseconds: 500), () {
-                      quranCubit.getReadingDataPagination(
+                      _quranCubit.getReadingDataPagination(
                         suraNumber: surahs.first.$1.number,
                         isFromStart: true,
                       );
@@ -151,7 +141,7 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
                                 const SizedBox(height: 20),
                                 index == 0 || index == 8
                                     ? Container()
-                                    : Basmallah(index: index),
+                                    : const Basmallah(),
                                 const SizedBox(height: 20),
                                 VerseWidget(verse: verse),
                               ],
@@ -163,7 +153,11 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
                                 WidgetsBinding.instance.addPostFrameCallback((
                                   _,
                                 ) {
-                                  currentVerseNotifier.value = verse;
+                                  _quranCubit
+                                      .currentReadingPositionNotifier
+                                      .value = ReadingPosition.fromVerse(
+                                    verse,
+                                  );
                                 });
                               }
                             },

@@ -48,8 +48,9 @@ class AppRouter {
             create: (context) => getIt<QuranCubit>(),
             child: ReadingScreen(
               surahNumber: (args as Map<String, int>)['surahNumber']!,
-              ayaNumber: args['ayaNumber'],
+              ayaNumber: args['ayaNumber']!,
               pageNumber: args['pageNumber']!,
+              juzNumber: args['juzNumber']!,
             ),
           ),
           settings,

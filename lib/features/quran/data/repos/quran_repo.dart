@@ -1,14 +1,12 @@
 import 'package:drift/drift.dart';
-import 'package:flutter/material.dart' hide Page;
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
-import 'package:noor/core/database/quran_lines/quran_lines_database.dart';
+import 'package:noor/features/quran/data/models/line_data.dart';
 
 @Injectable()
 class QuranRepo {
   final QuranDatabase _db;
-  final QuranLinesDatabase _linesDb;
-  QuranRepo(this._db, this._linesDb);
+  QuranRepo(this._db);
 
   Future<List<Surah>> getSurahs() async => await (_db.select(_db.surahs)).get();
 
@@ -84,33 +82,52 @@ class QuranRepo {
     return result;
   }
 
-  Future<List<List<(Line, List<Word>)>>> getSurasLines(int pageNumber) async {
-    final lines =
-        await (_linesDb.select(_linesDb.lines)
-              ..where(
-                (t) => t.pageNumber.isBetween(
-                  Variable(pageNumber - 5),
-                  Variable(pageNumber + 5),
-                ),
-              )
-              ..orderBy([(t) => OrderingTerm(expression: t.pageNumber)]))
-            .get();
-
+  Future<List<List<LineData>>> getSurasLines(
+    int pageNumber, [
+    bool? isFromStart,
+  ]) async {
+    List<Line> lines = [];
+    if (isFromStart == null) {
+      lines =
+          await (_db.select(_db.lines)
+                ..where(
+                  (t) => t.pageNumber.isBetween(
+                    Variable(pageNumber - 5),
+                    Variable(pageNumber + 5),
+                  ),
+                )
+                ..orderBy([(t) => OrderingTerm(expression: t.pageNumber)]))
+              .get();
+    } else {
+      lines =
+          await (_db.select(_db.lines)
+                ..where(
+                  (t) => isFromStart
+                      ? t.pageNumber.isSmallerThan(Variable(pageNumber)) &
+                            t.pageNumber.isBiggerThan(Variable(pageNumber - 5))
+                      : t.pageNumber.isBiggerThan(Variable(pageNumber)) &
+                            t.pageNumber.isSmallerThan(
+                              Variable(pageNumber + 5),
+                            ),
+                )
+                ..orderBy([(t) => OrderingTerm(expression: t.pageNumber)]))
+              .get();
+    }
 
     if (lines.isEmpty) return [];
 
     final words =
-        await (_linesDb.select(_linesDb.words)
+        await (_db.select(_db.words)
               ..where(
                 (t) => t.id.isBetween(
                   Variable(
                     lines
-                        .firstWhere((page) => page.firstWordId != null)
+                        .firstWhere((line) => line.firstWordId != null)
                         .firstWordId,
                   ),
                   Variable(
                     lines
-                        .lastWhere((page) => page.lastWordId != null)
+                        .lastWhere((line) => line.lastWordId != null)
                         .lastWordId,
                   ),
                 ),
@@ -118,82 +135,33 @@ class QuranRepo {
               ..orderBy([(t) => OrderingTerm(expression: t.id)]))
             .get();
 
-    final resultLines = lines.map((page) {
-      if (page.firstWordId == null || page.lastWordId == null) {
-        return (page, <Word>[]);
+    final resultLines = lines.map((line) {
+      if (line.firstWordId == null || line.lastWordId == null) {
+        return LineData(line, <Word>[]);
       }
       final lineWords = words
           .where(
             (word) =>
-                word.id >= page.firstWordId! && word.id <= page.lastWordId!,
+                word.id >= line.firstWordId! && word.id <= line.lastWordId!,
           )
           .toList();
 
-      return (page, lineWords);
+      return LineData(line, lineWords);
     }).toList();
 
-    final result = <int, List<(Line, List<Word>)>>{};
+    final result = <int, List<LineData>>{};
     for (int i = 0; i < resultLines.length; i++) {
       result
-          .putIfAbsent(resultLines[i].$1.pageNumber, () => [])
+          .putIfAbsent(resultLines[i].info.pageNumber, () => [])
           .add(resultLines[i]);
     }
-    return result.values.toList();
-  }
-
-  Future<List<List<(Line, List<Word>)>>> getReadingDataPaginationLines(
-    int pageNumber,
-    bool isFromStart,
-  ) async {
-    final lines =
-        await (_linesDb.select(_linesDb.lines)
-              ..where(
-                (t) => isFromStart
-                    ? t.pageNumber.isSmallerThan(Variable(pageNumber))
-                    : t.pageNumber.isBiggerThan(Variable(pageNumber)),
-              )
-              ..orderBy([
-                (t) => OrderingTerm(
-                  expression: t.pageNumber,
-                  mode: isFromStart ? OrderingMode.desc : OrderingMode.asc,
-                ),
-              ])
-              ..limit(5))
-            .get();
-
-    if (lines.isEmpty) return [];
-
-    final words =
-        await (_linesDb.select(_linesDb.words)
-              ..where(
-                (t) => t.id.isBetween(
-                  Variable(lines.first.firstWordId),
-                  Variable(lines.last.lastWordId),
-                ),
-              )
-              ..orderBy([(t) => OrderingTerm(expression: t.id)]))
-            .get();
-
-    final resultLines = lines.map((page) {
-      if (page.firstWordId == null || page.lastWordId == null) {
-        return (page, <Word>[]);
-      }
-      final lineWords = words
-          .where(
-            (word) =>
-                word.id >= page.firstWordId! && word.id <= page.lastWordId!,
-          )
-          .toList();
-
-      return (page, lineWords);
-    }).toList();
-
-    final result = <int, List<(Line, List<Word>)>>{};
-    for (int i = 0; i < resultLines.length; i++) {
-      result
-          .putIfAbsent(resultLines[i].$1.pageNumber, () => [])
-          .add(resultLines[i]);
+    final finalResult = result.values.toList();
+    if (isFromStart == true) {
+      finalResult.sort(
+        (a, b) => a.first.info.pageNumber.compareTo(b.first.info.pageNumber),
+      );
     }
-    return result.values.toList();
+
+    return finalResult;
   }
 }

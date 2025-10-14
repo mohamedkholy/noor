@@ -23,6 +23,7 @@ class ChapterWidget extends StatelessWidget {
             'surahNumber': verse.surahNumber,
             'ayaNumber': verse.number,
             'pageNumber': verse.page,
+            'juzNumber': verse.juz,
           },
         );
       },

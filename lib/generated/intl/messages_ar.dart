@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "aya": MessageLookupByLibrary.simpleMessage("آية"),
     "ayah_of_the_day": MessageLookupByLibrary.simpleMessage("آية اليوم"),
+    "ayatStyle": MessageLookupByLibrary.simpleMessage("آيات"),
     "azan_notifications": MessageLookupByLibrary.simpleMessage(
       "إشعارات الأذان",
     ),
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "maghrib": MessageLookupByLibrary.simpleMessage("المغرب"),
     "minutes_before": MessageLookupByLibrary.simpleMessage("دقيقة قبل"),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("أذكار الصباح"),
+    "mushafStyle": MessageLookupByLibrary.simpleMessage("مصحف"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("أقرب مسجد"),
     "nearby_mosques": MessageLookupByLibrary.simpleMessage("المساجد القريبة"),
     "no_compass_sensor": MessageLookupByLibrary.simpleMessage(
@@ -124,7 +126,5 @@ class MessageLookup extends MessageLookupByLibrary {
     "the_tasbih": MessageLookupByLibrary.simpleMessage("التسبيح"),
     "unknown_error": MessageLookupByLibrary.simpleMessage("حدث خطأ غير معروف"),
     "zekr": MessageLookupByLibrary.simpleMessage("ذكر"),
-    "mushafStyle": MessageLookupByLibrary.simpleMessage("مصحف"),
-    "ayatStyle": MessageLookupByLibrary.simpleMessage("آيات"),
   };
 }

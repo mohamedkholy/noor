@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "aya": MessageLookupByLibrary.simpleMessage("Aya"),
     "ayah_of_the_day": MessageLookupByLibrary.simpleMessage("Ayah of the Day"),
+    "ayatStyle": MessageLookupByLibrary.simpleMessage("Ayat"),
     "azan_notifications": MessageLookupByLibrary.simpleMessage(
       "Azan Notifications",
     ),
@@ -97,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "maghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
     "minutes_before": MessageLookupByLibrary.simpleMessage("Minutes before"),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("Morning Azkar"),
+    "mushafStyle": MessageLookupByLibrary.simpleMessage("Mushaf"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("Near mosque"),
     "nearby_mosques": MessageLookupByLibrary.simpleMessage("Nearby Mosques"),
     "no_compass_sensor": MessageLookupByLibrary.simpleMessage(
@@ -138,7 +140,5 @@ class MessageLookup extends MessageLookupByLibrary {
       "Unknown error has occurred",
     ),
     "zekr": MessageLookupByLibrary.simpleMessage("Zekr"),
-    "mushafStyle": MessageLookupByLibrary.simpleMessage("Mushaf Style"),
-    "ayatStyle": MessageLookupByLibrary.simpleMessage("Ayat Style"),
   };
 }
