@@ -17,26 +17,37 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepo) : super(HomeInitial());
 
   LastReadingData? getLastReading() {
-  final String? lastReadingJsonString =
-      getIt<SharedPreferences>().getString(SharedPreferencesKeys.lastReading);
-
-  if (lastReadingJsonString != null) {
-    final Map<String, dynamic> lastReadingJson = jsonDecode(lastReadingJsonString);
-
-    final readingPosition = ReadingPosition.fromJson(lastReadingJson['readingPosition']);
-    final suraNameEn = lastReadingJson['suraNameEn'];
-
-    emit(
-      LastReadingLoaded(
-        lastReading: LastReadingData(readingPosition: readingPosition, suraNameEn: suraNameEn),
-      ),
+    final String? lastReadingJsonString = getIt<SharedPreferences>().getString(
+      SharedPreferencesKeys.lastReading,
     );
 
-    return LastReadingData(readingPosition: readingPosition, suraNameEn: suraNameEn);
-  }
+    if (lastReadingJsonString != null) {
+      final Map<String, dynamic> lastReadingJson = jsonDecode(
+        lastReadingJsonString,
+      );
 
-  return null;
-}
+      final readingPosition = ReadingPosition.fromJson(
+        lastReadingJson['readingPosition'],
+      );
+      final suraNameEn = lastReadingJson['suraNameEn'];
+
+      emit(
+        LastReadingLoaded(
+          lastReading: LastReadingData(
+            readingPosition: readingPosition,
+            suraNameEn: suraNameEn,
+          ),
+        ),
+      );
+
+      return LastReadingData(
+        readingPosition: readingPosition,
+        suraNameEn: suraNameEn,
+      );
+    }
+
+    return null;
+  }
 
   Future<void> getTodayContent() async {
     final (hadith, verse) = await _homeRepo.getTodayContent();

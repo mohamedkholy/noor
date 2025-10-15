@@ -43,7 +43,9 @@ class HadithOfTheDay extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  KitabExtension.getTranslatedNameFromStirng(state.hadith.kitab),
+                  KitabExtension.getTranslatedNameFromStirng(
+                    state.hadith.kitab,
+                  ),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,

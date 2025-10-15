@@ -136,7 +136,7 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
                               children: [
                                 const SizedBox(height: 20),
                                 HeaderWidget(
-                                  surahName: surahs[index].$1.nameAr,
+                                  surahNumber: surahs[index].$1.number,
                                 ),
                                 const SizedBox(height: 20),
                                 index == 0 || index == 8

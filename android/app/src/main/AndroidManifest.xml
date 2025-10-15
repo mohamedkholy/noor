@@ -47,6 +47,9 @@
              <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCnl4rWjwYWJ_qAq9UQ0NJgPDCftt4BwuM" />
+            <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="false" />
             
     </application>
     <!-- Required to query activities that can process text, see:

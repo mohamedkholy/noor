@@ -1,3 +1,1 @@
-enum LineType {
-  basmallah,surah_name,ayah
-}
+enum LineType { basmallah, surah_name, ayah }

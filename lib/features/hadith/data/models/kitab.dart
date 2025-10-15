@@ -21,7 +21,7 @@ extension KitabExtension on Kitab {
     }
   }
 
-   static String getTranslatedNameFromStirng(String name) {
+  static String getTranslatedNameFromStirng(String name) {
     switch (name) {
       case "Sahih Bukhari":
         return S.current.sahih_bukhari;
@@ -31,6 +31,4 @@ extension KitabExtension on Kitab {
         return "";
     }
   }
-
 }
-

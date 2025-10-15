@@ -26,7 +26,6 @@ class SurahsLoaded extends QuranState {
   SurahsLoaded({required this.surahs, required this.verses});
 }
 
-
 class QuranLinesLoaded extends QuranState {
   final List<List<LineData>> pages;
   QuranLinesLoaded(this.pages);

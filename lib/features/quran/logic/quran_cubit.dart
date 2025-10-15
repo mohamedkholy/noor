@@ -132,9 +132,4 @@ class QuranCubit extends Cubit<QuranState> {
       pageNumber: pageNumber,
     );
   }
-
-
-
-  
-
 }

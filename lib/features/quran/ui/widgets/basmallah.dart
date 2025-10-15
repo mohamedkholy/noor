@@ -11,10 +11,16 @@ class Basmallah extends StatefulWidget {
 class _BasmallahState extends State<Basmallah> {
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      height: 50,
-      Assets.assetsImagesPngBasmala,
-      color: Colors.black,
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      child: FractionallySizedBox(
+        widthFactor: 0.5,
+        child: Image.asset(
+          Assets.assetsImagesPngBasmala,
+          fit: BoxFit.cover,
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }

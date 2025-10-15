@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/mosques/mosques_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/helpers/distance_calculator.dart';
-import 'package:noor/core/networking/mosque_api_service.dart';
+import 'package:noor/core/networking/near_mosque_service/mosque_api_service.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/near_mosque/data/models/mosque_data.dart';
 import 'package:noor/features/near_mosque/data/models/nearby_mosques_response.dart';

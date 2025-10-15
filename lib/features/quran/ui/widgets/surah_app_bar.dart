@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
+import 'package:noor/core/theming/my_colors.dart';
 
 import '../../../../generated/l10n.dart';
 
@@ -17,6 +18,8 @@ class SurahAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
+      scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.baseline,

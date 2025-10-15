@@ -66,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onSoundChanged: (String sound) {
                         _settingsCubit.saveAzkarSound(sound);
                       },
-                    ), 
+                    ),
                     const SizedBox(height: 20),
                     AzkarSettingsWidget(
                       azkarNotificationsSettings: _azkarNotificationsSettings,

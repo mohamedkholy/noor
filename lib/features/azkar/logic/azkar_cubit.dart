@@ -43,7 +43,17 @@ class AzkarCubit extends Cubit<AzkarState> {
     );
   }
 
-  void updateTodayAzkarCount(String category, String zekr, int count, {required int todayDate}) {
-    azkarRepo.updateTodayAzkarCount(category, zekr, count, todayDate: todayDate);
+  void updateTodayAzkarCount(
+    String category,
+    String zekr,
+    int count, {
+    required int todayDate,
+  }) {
+    azkarRepo.updateTodayAzkarCount(
+      category,
+      zekr,
+      count,
+      todayDate: todayDate,
+    );
   }
 }
