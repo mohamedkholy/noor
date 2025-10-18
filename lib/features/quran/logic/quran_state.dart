@@ -43,6 +43,35 @@ class QuranLinesLodedFromEnd extends QuranState {
   QuranLinesLodedFromEnd(this.pages);
 }
 
+abstract class AyahSoundState extends QuranState {
+  final int surahNumber;
+  final int verseNumber;
+  AyahSoundState({required this.surahNumber, required this.verseNumber});
+}
+
+class AyahSoundPlayed extends AyahSoundState {
+  AyahSoundPlayed({required super.surahNumber, required super.verseNumber});
+}
+
+class AyahSoundLoading extends AyahSoundState {
+  AyahSoundLoading({required super.surahNumber, required super.verseNumber});
+}
+
+class AyahSoundError extends AyahSoundState {
+  final String message;
+  AyahSoundError({
+    required this.message,
+    required super.surahNumber,
+    required super.verseNumber,
+  });
+}
+
+class AudioPlayerPaused extends AyahSoundState {
+  AudioPlayerPaused({required super.surahNumber, required super.verseNumber});
+}
+
+class AudioPlayerStopped extends QuranState {}
+
 class PageSoundLoaded extends QuranState {
   final QuranPageSoundResponse sound;
   PageSoundLoaded(this.sound);
@@ -53,16 +82,4 @@ class PageSoundLoading extends QuranState {}
 class PageSoundError extends QuranState {
   final String message;
   PageSoundError(this.message);
-}
-
- class AyahSoundLoaded extends QuranState {
-  final AyahSoundResponse sound;
-  AyahSoundLoaded(this.sound);
-}
-
-class AyahSoundLoading extends QuranState {}
-
-class AyahSoundError extends QuranState {
-  final String message;
-  AyahSoundError(this.message);
 }

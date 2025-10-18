@@ -31,6 +31,7 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
   @override
   void initState() {
     super.initState();
+    print("====================${widget.surahNumber}");
     _quranCubit.getReadingData(widget.surahNumber);
   }
 
@@ -87,8 +88,10 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
               child: PageView.builder(
                 key: key,
                 onPageChanged: (index) {
+                  _quranCubit.stopPlayer();
                   _quranCubit.currentReadingPositionNotifier.value =
                       ReadingPosition.fromVerse(surahs[index].$2[0]);
+                  _quranCubit.currentSurahNotifier.value = surahs[index].$1;
                   if (index == surahs.length - 2 &&
                       surahs.last.$1.number != 114) {
                     _quranCubit.getReadingDataPagination(

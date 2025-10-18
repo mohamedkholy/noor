@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Page;
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/features/quran/data/models/line_data.dart';
 import 'package:noor/features/quran/data/models/line_type.dart';
@@ -7,6 +9,8 @@ import 'package:noor/features/quran/logic/quran_cubit.dart';
 import 'package:noor/features/quran/logic/quran_state.dart';
 import 'package:noor/features/quran/ui/widgets/basmallah.dart';
 import 'package:noor/features/quran/ui/widgets/header_widget.dart';
+import 'package:noor/features/quran/ui/widgets/page_line_widget.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 
 class MushafScreen extends StatefulWidget {
   final int pageNumber;
@@ -19,7 +23,7 @@ class MushafScreen extends StatefulWidget {
 class _MushafScreenState extends State<MushafScreen> {
   late final QuranCubit _quranCubit = context.read();
   final List<List<LineData>> pages = [];
-  PageController pageController = PageController();
+  PreloadPageController pageController = PreloadPageController();
   UniqueKey key = UniqueKey();
 
   int currentPageIndex = 1;
@@ -27,7 +31,6 @@ class _MushafScreenState extends State<MushafScreen> {
   @override
   void initState() {
     super.initState();
-    _quranCubit.getPageSound(widget.pageNumber, "ar.alafasy");
     _quranCubit.getSurasLines(widget.pageNumber);
   }
 
@@ -75,27 +78,25 @@ class _MushafScreenState extends State<MushafScreen> {
                       firstAya.words.first.juz,
                       firstAya.info.pageNumber,
                     );
-                    pageController = PageController(
+                    pageController = PreloadPageController(
                       initialPage: currentPageIndex,
                     );
                   } else if (state is QuranLinesLodedFromStart) {
                     pages.insertAll(0, state.pages);
                     currentPageIndex =
                         pageController.page!.toInt() + state.pages.length;
-                    pageController = PageController(
+                    pageController = PreloadPageController(
                       initialPage: currentPageIndex,
                     );
                   } else if (state is QuranLinesLodedFromEnd) {
                     pages.addAll(state.pages);
                   }
-                  print("cosumer $state");
                 },
                 builder: (_, state) {
                   if (state is! QuranLinesLodedFromEnd) {
                     key = UniqueKey();
                   }
-                  print("builder $state");
-                  return PageView.builder(
+                  return PreloadPageView.builder(
                     reverse:
                         Localizations.localeOf(context).languageCode != "ar",
                     key: key,
@@ -178,39 +179,17 @@ class _MushafScreenState extends State<MushafScreen> {
                                 if (line.info.lineType ==
                                     LineType.surah_name.name) {
                                   return HeaderWidget(
-                                    surahNumber:
-                                        _quranCubit
-                                            .currentReadingPositionNotifier
-                                            .value
-                                            ?.surahNumber ??
-                                        0,
+                                    surahNumber: line.info.surahNumber!,
                                   );
                                 } else if (line.info.lineType ==
                                     LineType.basmallah.name) {
                                   return const Basmallah();
                                 }
 
-                                return DefaultTextStyle(
-                                  style: TextStyle(
-                                    fontFamily:
-                                        'QCF_P${pageNumber.toString().padLeft(3, '0')}',
-                                    fontSize: pageNumber == 1 || pageNumber == 2
-                                        ? 30
-                                        : MediaQuery.sizeOf(context).width *
-                                              .06,
-                                    color: Colors.black,
-                                    height: 1.35,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  child: SizedBox(
-                                    height: lineHeight,
-                                    child: AutoSizeText.rich(
-                                      TextSpan(text: line.precomputedText),
-                                      textAlign: TextAlign.center,
-                                      maxLines: 1,
-                                      stepGranularity: 4,
-                                    ),
-                                  ),
+                                return PageLineWidget(
+                                  line: line,
+                                  pageNumber: pageNumber,
+                                  lineHeight: lineHeight!,
                                 );
                               },
                             ),
