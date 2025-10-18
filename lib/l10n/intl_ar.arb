@@ -79,5 +79,12 @@
     "beforeMidNight": "منتصف الليل",
     "sleepingAzkar": "أذكار النوم",
     "mushafStyle": "مصحف",
-    "ayatStyle": "آيات"
+    "ayatStyle": "آيات",
+    "connectionTimedOut": "انتهت مهلة الاتصال",
+  "sendTimeout": "انتهت مهلة إرسال الطلب",
+  "receiveTimeout": "انتهت مهلة الاستقبال",
+  "serverError": "خطأ في الخادم: ",
+  "requestCancelled": "تم إلغاء الطلب",
+  "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+  "unexpectedError": "حدث خطأ غير متوقع"
 }

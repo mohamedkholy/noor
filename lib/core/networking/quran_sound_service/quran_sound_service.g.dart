@@ -12,7 +12,7 @@ part of 'quran_sound_service.dart';
 
 class _QuranSoundService implements QuranSoundService {
   _QuranSoundService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'https://apis-prelive.quran.foundation/content/api/v4';
+    baseUrl ??= 'http://api.alquran.cloud/v1/';
   }
 
   final Dio _dio;
@@ -22,25 +22,25 @@ class _QuranSoundService implements QuranSoundService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<QuranSoundResponse> getAyaSound(int ayaPosition) async {
+  Future<AyahSoundResponse> getAyaSound(String ayaPosition, String qari) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<QuranSoundResponse>(
+    final _options = _setStreamType<AyahSoundResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'recitations/1/by_ayah/${ayaPosition}',
+            'ayah/${ayaPosition}/${qari}',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late QuranSoundResponse _value;
+    late AyahSoundResponse _value;
     try {
-      _value = QuranSoundResponse.fromJson(_result.data!);
+      _value = AyahSoundResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -49,25 +49,28 @@ class _QuranSoundService implements QuranSoundService {
   }
 
   @override
-  Future<QuranSoundResponse> getPageSound(int pageNumber) async {
+  Future<QuranPageSoundResponse> getPageSound(
+    int pageNumber,
+    String qari,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<QuranSoundResponse>(
+    final _options = _setStreamType<QuranPageSoundResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'recitations/1/by_page/${pageNumber}',
+            'page/${pageNumber}/${qari}',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late QuranSoundResponse _value;
+    late QuranPageSoundResponse _value;
     try {
-      _value = QuranSoundResponse.fromJson(_result.data!);
+      _value = QuranPageSoundResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

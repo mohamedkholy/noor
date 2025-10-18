@@ -12,6 +12,7 @@ dependencies:
   auto_size_text: ^3.0.0
   connectivity_plus: ^6.1.5
   cupertino_icons: ^1.0.8
+  dart_either: ^2.0.0
   dashed_circular_progress_bar: ^0.0.6
   dio: ^5.9.0
   dotted_border: ^3.1.0

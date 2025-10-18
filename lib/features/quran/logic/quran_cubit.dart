@@ -132,4 +132,24 @@ class QuranCubit extends Cubit<QuranState> {
       pageNumber: pageNumber,
     );
   }
+
+  Future<void> getAyaSound(String ayaPosition, String qari) async {
+    final result = await _quranRepo.getAyaSound(ayaPosition, qari);
+    if (!isClosed) {
+      result.fold(
+        ifLeft: (failure) => emit(AyahSoundError(failure.message)),
+        ifRight: (sound) => emit(AyahSoundLoaded(sound)),
+      );
+    }
+  }
+
+  Future<void> getPageSound(int pageNumber, String qari) async {
+    final result = await _quranRepo.getPageSound(pageNumber, qari);
+    if (!isClosed) {
+      result.fold(
+        ifLeft: (failure) => emit(PageSoundError(failure.message)),
+        ifRight: (sound) => emit(PageSoundLoaded(sound)),
+      );
+    }
+  }
 }

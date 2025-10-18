@@ -51,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendar": MessageLookupByLibrary.simpleMessage("التقويم"),
     "calender": MessageLookupByLibrary.simpleMessage("التقويم"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة الاتصال",
+    ),
     "continue_word": MessageLookupByLibrary.simpleMessage("أكمل"),
     "count_optional": MessageLookupByLibrary.simpleMessage("العدد (اختياري)"),
     "current_location": MessageLookupByLibrary.simpleMessage("الموقع الحالي"),
@@ -93,6 +96,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "mushafStyle": MessageLookupByLibrary.simpleMessage("مصحف"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("أقرب مسجد"),
     "nearby_mosques": MessageLookupByLibrary.simpleMessage("المساجد القريبة"),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد اتصال بالإنترنت",
+    ),
     "no_compass_sensor": MessageLookupByLibrary.simpleMessage(
       "جهازك لا يدعم مستشعر البوصلة",
     ),
@@ -106,7 +112,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "open_settings": MessageLookupByLibrary.simpleMessage("فتح الإعدادات"),
     "qibla": MessageLookupByLibrary.simpleMessage("القبلة"),
     "quran": MessageLookupByLibrary.simpleMessage("قرآن"),
+    "receiveTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة الاستقبال",
+    ),
     "repetition": MessageLookupByLibrary.simpleMessage("التكرار"),
+    "requestCancelled": MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
     "reset": MessageLookupByLibrary.simpleMessage("إعادة تعيين"),
     "reset_confirmation": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد أنك تريد إعادة تعيين العداد؟ لا يمكن التراجع عن هذا الإجراء.",
@@ -117,6 +127,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "sahih_bukhari": MessageLookupByLibrary.simpleMessage("صحيح البخاري"),
     "sahih_muslim": MessageLookupByLibrary.simpleMessage("صحيح مسلم"),
     "search": MessageLookupByLibrary.simpleMessage("بحث..."),
+    "sendTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة إرسال الطلب",
+    ),
+    "serverError": MessageLookupByLibrary.simpleMessage("خطأ في الخادم: "),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "shorok": MessageLookupByLibrary.simpleMessage("الشروق"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("أذكار النوم"),
@@ -124,6 +138,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "surah": MessageLookupByLibrary.simpleMessage("سورة"),
     "tasbih": MessageLookupByLibrary.simpleMessage("تسبيح"),
     "the_tasbih": MessageLookupByLibrary.simpleMessage("التسبيح"),
+    "unexpectedError": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ غير متوقع",
+    ),
     "unknown_error": MessageLookupByLibrary.simpleMessage("حدث خطأ غير معروف"),
     "zekr": MessageLookupByLibrary.simpleMessage("ذكر"),
   };

@@ -1,12 +1,21 @@
+import 'package:dart_either/dart_either.dart';
+import 'package:dio/dio.dart';
 import 'package:drift/drift.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
+import 'package:noor/core/models/failure.dart';
+import 'package:noor/core/networking/api_constants.dart';
+import 'package:noor/core/networking/quran_sound_service/quran_sound_service.dart';
+import 'package:noor/features/quran/data/models/ayah_sound_response/ayah_sound_response.dart';
 import 'package:noor/features/quran/data/models/line_data.dart';
+import 'package:noor/features/quran/data/models/quran_page_sound_response/quran_page_sound_response.dart';
 
 @Injectable()
 class QuranRepo {
   final QuranDatabase _db;
-  QuranRepo(this._db);
+  final QuranSoundService _quranSoundService;
+  QuranRepo(this._db, this._quranSoundService);
 
   Future<List<Surah>> getSurahs() async => await (_db.select(_db.surahs)).get();
 
@@ -163,5 +172,37 @@ class QuranRepo {
     }
 
     return finalResult;
+  }
+
+  Future<Either<Failure, AyahSoundResponse>> getAyaSound(
+    String ayaPosition,
+    String qari,
+  ) async {
+    try {
+      final response = await _quranSoundService.getAyaSound(ayaPosition, qari);
+      return Right(response);
+    } catch (e) {
+      debugPrint(e.toString());
+      if (e is DioException) {
+        return Left(Failure(ApiConstants.mapDioError(e)));
+      }
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, QuranPageSoundResponse>> getPageSound(
+    int pageNumber,
+    String qari,
+  ) async {
+    try {
+      final response = await _quranSoundService.getPageSound(pageNumber, qari);
+      return Right(response);
+    } catch (e) {
+      debugPrint(e.toString());
+      if (e is DioException) {
+        return Left(Failure(ApiConstants.mapDioError(e)));
+      }
+      return Left(Failure(e.toString()));
+    }
   }
 }

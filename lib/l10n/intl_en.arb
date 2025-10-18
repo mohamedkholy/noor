@@ -78,5 +78,12 @@
     "beforeMidNight": "Midnight",
     "sleepingAzkar": "Sleeping Azkar",
     "mushafStyle": "Mushaf",
-    "ayatStyle": "Ayat"
+    "ayatStyle": "Ayat",
+    "connectionTimedOut": "Connection timed out",
+    "sendTimeout": "Send request timeout",
+    "receiveTimeout": "Receive timeout",
+    "serverError": "Server error:",
+    "requestCancelled": "Request was cancelled",
+    "noInternetConnection": "No internet connection",
+    "unexpectedError": "Unexpected error occurred"
 }

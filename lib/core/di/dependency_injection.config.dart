@@ -1,5 +1,5 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
 
 // **************************************************************************
 // InjectableConfigGenerator
@@ -79,7 +79,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i839.LocationRepo(gh<_i502.CitiesDatabase>()),
     );
     gh.factory<_i819.QuranSoundService>(
-      () => _i819.QuranSoundService.new(gh<_i361.Dio>()),
+      () => _i819.QuranSoundService(gh<_i361.Dio>()),
     );
     gh.factory<_i327.MosqueApiService>(
       () => _i327.MosqueApiService(gh<_i361.Dio>()),
@@ -90,6 +90,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i583.SharedPreferencesAzanService>(
       () => _i583.SharedPreferencesAzanService(gh<_i460.SharedPreferences>()),
+    );
+    gh.factory<_i1015.QuranRepo>(
+      () => _i1015.QuranRepo(
+        gh<_i651.QuranDatabase>(),
+        gh<_i819.QuranSoundService>(),
+      ),
     );
     gh.factory<_i1019.LanguageCubit>(
       () => _i1019.LanguageCubit(gh<_i655.SharedPreferencesLanguageService>()),
@@ -104,9 +110,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i892.HomeCubit>(() => _i892.HomeCubit(gh<_i298.HomeRepo>()));
     gh.factory<_i501.HadithCubit>(
       () => _i501.HadithCubit(gh<_i952.HadithRepo>()),
-    );
-    gh.factory<_i1015.QuranRepo>(
-      () => _i1015.QuranRepo(gh<_i651.QuranDatabase>()),
     );
     gh.factory<_i479.SharedPreferencesSettingsService>(
       () =>

@@ -51,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "calender": MessageLookupByLibrary.simpleMessage("Calender"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
+      "Connection timed out",
+    ),
     "continue_word": MessageLookupByLibrary.simpleMessage("Continue"),
     "count_optional": MessageLookupByLibrary.simpleMessage("Count (optional)"),
     "current_location": MessageLookupByLibrary.simpleMessage(
@@ -101,6 +104,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "mushafStyle": MessageLookupByLibrary.simpleMessage("Mushaf"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("Near mosque"),
     "nearby_mosques": MessageLookupByLibrary.simpleMessage("Nearby Mosques"),
+    "noInternetConnection": MessageLookupByLibrary.simpleMessage(
+      "No internet connection",
+    ),
     "no_compass_sensor": MessageLookupByLibrary.simpleMessage(
       "Your device doesn\'t support compass sensor",
     ),
@@ -116,7 +122,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "open_settings": MessageLookupByLibrary.simpleMessage("Open Settings"),
     "qibla": MessageLookupByLibrary.simpleMessage("Qibla"),
     "quran": MessageLookupByLibrary.simpleMessage("Quran"),
+    "receiveTimeout": MessageLookupByLibrary.simpleMessage("Receive timeout"),
     "repetition": MessageLookupByLibrary.simpleMessage("Count"),
+    "requestCancelled": MessageLookupByLibrary.simpleMessage(
+      "Request was cancelled",
+    ),
     "reset": MessageLookupByLibrary.simpleMessage("Reset"),
     "reset_confirmation": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to reset the count? This action cannot be undone.",
@@ -127,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "sahih_bukhari": MessageLookupByLibrary.simpleMessage("Sahih Bukhari"),
     "sahih_muslim": MessageLookupByLibrary.simpleMessage("Sahih Muslim"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
+    "sendTimeout": MessageLookupByLibrary.simpleMessage("Send request timeout"),
+    "serverError": MessageLookupByLibrary.simpleMessage("Server error:"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "shorok": MessageLookupByLibrary.simpleMessage("Shorok"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("Sleeping Azkar"),
@@ -136,6 +148,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "surah": MessageLookupByLibrary.simpleMessage("Surah"),
     "tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
     "the_tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
+    "unexpectedError": MessageLookupByLibrary.simpleMessage(
+      "Unexpected error occurred",
+    ),
     "unknown_error": MessageLookupByLibrary.simpleMessage(
       "Unknown error has occurred",
     ),

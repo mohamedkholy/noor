@@ -27,6 +27,7 @@ class _MushafScreenState extends State<MushafScreen> {
   @override
   void initState() {
     super.initState();
+    _quranCubit.getPageSound(widget.pageNumber, "ar.alafasy");
     _quranCubit.getSurasLines(widget.pageNumber);
   }
 

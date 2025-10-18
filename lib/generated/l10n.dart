@@ -623,6 +623,76 @@ class S {
   String get ayatStyle {
     return Intl.message('Ayat', name: 'ayatStyle', desc: '', args: []);
   }
+
+  /// `Connection timed out`
+  String get connectionTimedOut {
+    return Intl.message(
+      'Connection timed out',
+      name: 'connectionTimedOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send request timeout`
+  String get sendTimeout {
+    return Intl.message(
+      'Send request timeout',
+      name: 'sendTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receive timeout`
+  String get receiveTimeout {
+    return Intl.message(
+      'Receive timeout',
+      name: 'receiveTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Server error:`
+  String get serverError {
+    return Intl.message(
+      'Server error:',
+      name: 'serverError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request was cancelled`
+  String get requestCancelled {
+    return Intl.message(
+      'Request was cancelled',
+      name: 'requestCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No internet connection`
+  String get noInternetConnection {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unexpected error occurred`
+  String get unexpectedError {
+    return Intl.message(
+      'Unexpected error occurred',
+      name: 'unexpectedError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

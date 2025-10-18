@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:noor/generated/l10n.dart';
 
 class ApiConstants {
   static const String overpassApiUrl =
@@ -14,6 +16,24 @@ out 10;
 """;
   static String osrmApiUrl(String pathParams) =>
       'https://router.project-osrm.org/route/v1/driving/$pathParams?overview=full&geometries=geojson';
-      static const String quranSoundUrl = "https://apis-prelive.quran.foundation/content/api/v4";
+  static const String quranSoundUrl = "http://api.alquran.cloud/v1/";
 
+  static String mapDioError(DioException e) {
+    switch (e.type) {
+      case DioExceptionType.connectionTimeout:
+        return S.current.connectionTimedOut;
+      case DioExceptionType.sendTimeout:
+        return S.current.sendTimeout;
+      case DioExceptionType.receiveTimeout:
+        return S.current.receiveTimeout;
+      case DioExceptionType.badResponse:
+        return "${S.current.serverError} ${e.response?.statusCode}";
+      case DioExceptionType.cancel:
+        return S.current.requestCancelled;
+      case DioExceptionType.connectionError:
+        return S.current.noInternetConnection;
+      default:
+        return S.current.unexpectedError;
+    }
+  }
 }
