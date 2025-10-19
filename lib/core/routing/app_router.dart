@@ -19,7 +19,7 @@ import 'package:noor/features/navigation/ui/navigation_screen.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
 import 'package:noor/features/near_mosque/ui/near_mosque_screen.dart';
 import 'package:noor/features/qibla/ui/qibla_screen.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/quran_ayat_screen.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
 import 'package:noor/features/quran/ui/reading_screen.dart';

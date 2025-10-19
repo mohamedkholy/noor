@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/helpers/arabic_numbers_converter.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
-import 'package:noor/features/quran/logic/quran_state.dart';
+import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart';
+import 'package:noor/features/quran/logic/ayat_cubit/ayat_state.dart';
 import 'package:noor/features/quran/ui/widgets/playing_row.dart';
 
 class VerseWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class VerseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<QuranCubit, QuranState>(
+    return BlocConsumer<AyatCubit, AyatState>(
       buildWhen: (previous, current) =>
           current is AyahSoundPlayed ||
           current is AyahSoundLoading ||
@@ -45,7 +45,7 @@ class VerseWidget extends StatelessWidget {
         return GestureDetector(
           onLongPress: () {
             if (state is! AyahSoundLoading) {
-              context.read<QuranCubit>().getAyaSound(
+              context.read<AyatCubit>().getAyaSound(
                 surahNumber: verse.surahNumber,
                 verseNumber: verse.number,
                 qari: "ar.alafasy",

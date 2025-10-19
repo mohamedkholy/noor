@@ -9,7 +9,7 @@ import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/features/navigation/logic/navigation_state.dart';
 import 'package:noor/features/navigation/ui/widgets/bottom_nav_layout.dart';
 import 'package:noor/features/navigation/ui/widgets/navigation_rail_layout.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/tasbih_screen.dart';

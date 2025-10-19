@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
-import 'package:noor/core/theming/my_colors.dart';
 
 import '../../../../generated/l10n.dart';
 

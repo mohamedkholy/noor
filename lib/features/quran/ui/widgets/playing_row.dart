@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
+import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 
 class PlayingRow extends StatefulWidget {
   final bool isPlaying;
@@ -33,7 +34,7 @@ class _PlayingRowState extends State<PlayingRow> {
                 onPressed: widget.verse.number == 1
                     ? null
                     : () {
-                        context.read<QuranCubit>().getAyaSound(
+                        context.read<AyatCubit>().getAyaSound(
                           surahNumber: widget.verse.surahNumber,
                           verseNumber: widget.verse.number - 1,
                           qari: "ar.alafasy",
@@ -44,12 +45,12 @@ class _PlayingRowState extends State<PlayingRow> {
               IconButton(
                 onPressed: () {
                   if (widget.isPlaying) {
-                    context.read<QuranCubit>().pausePlayer((
+                    context.read<AyatCubit>().pausePlayer((
                       widget.verse.surahNumber,
                       widget.verse.number,
                     ));
                   } else {
-                    context.read<QuranCubit>().continuePlaying();
+                    context.read<AyatCubit>().continuePlaying();
                   }
                 },
                 icon: Icon(
@@ -65,7 +66,7 @@ class _PlayingRowState extends State<PlayingRow> {
                     onPressed: (surah?.versesCount ?? 1) == widget.verse.number
                         ? null
                         : () {
-                            context.read<QuranCubit>().getAyaSound(
+                            context.read<AyatCubit>().getAyaSound(
                               surahNumber: widget.verse.surahNumber,
                               verseNumber: widget.verse.number + 1,
                               qari: "ar.alafasy",
@@ -81,7 +82,7 @@ class _PlayingRowState extends State<PlayingRow> {
             alignment: AlignmentDirectional.centerEnd,
             child: IconButton(
               onPressed: () {
-                context.read<QuranCubit>().stopPlayer();
+                context.read<AyatCubit>().stopPlayer();
               },
               icon: const Icon(Icons.close, size: 28),
             ),

@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/features/quran/data/models/reading_position.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
-import 'package:noor/features/quran/logic/quran_state.dart';
+import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart';
+import 'package:noor/features/quran/logic/ayat_cubit/ayat_state.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/widgets/basmallah.dart';
 import 'package:noor/features/quran/ui/widgets/header_widget.dart';
 import 'package:noor/features/quran/ui/widgets/verse_widget.dart';
@@ -22,6 +23,7 @@ class QuranAyatScreen extends StatefulWidget {
 
 class _QuranAyatScreenState extends State<QuranAyatScreen> {
   late final QuranCubit _quranCubit = context.read<QuranCubit>();
+  late final AyatCubit _ayatCubit = context.read<AyatCubit>();
   List<(Surah, List<Verse>)> surahs = [];
   final String bismala = "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ";
   PageController pageController = PageController();
@@ -31,13 +33,17 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
   @override
   void initState() {
     super.initState();
-    print("====================${widget.surahNumber}");
-    _quranCubit.getReadingData(widget.surahNumber);
+    _ayatCubit.getReadingData(widget.surahNumber);
+    _ayatCubit.init();
+    _quranCubit.currentTabNotifier.addListener(() {
+      _ayatCubit.stopPlayer();
+    });
   }
 
   @override
   void dispose() {
     pageController.dispose();
+    _ayatCubit.dispose();
     super.dispose();
   }
 
@@ -45,7 +51,7 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: const Color(0xFFFFF8EE),
-      child: BlocConsumer<QuranCubit, QuranState>(
+      child: BlocConsumer<AyatCubit, AyatState>(
         buildWhen: (previous, current) =>
             current is QuranLoaded ||
             current is QuranLodedFromStart ||
@@ -88,19 +94,19 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
               child: PageView.builder(
                 key: key,
                 onPageChanged: (index) {
-                  _quranCubit.stopPlayer();
+                  _ayatCubit.stopPlayer();
                   _quranCubit.currentReadingPositionNotifier.value =
                       ReadingPosition.fromVerse(surahs[index].$2[0]);
                   _quranCubit.currentSurahNotifier.value = surahs[index].$1;
                   if (index == surahs.length - 2 &&
                       surahs.last.$1.number != 114) {
-                    _quranCubit.getReadingDataPagination(
+                    _ayatCubit.getReadingDataPagination(
                       suraNumber: surahs.last.$1.number,
                       isFromStart: false,
                     );
                   } else if (index == 2 && surahs.first.$1.number != 1) {
                     Future.delayed(const Duration(milliseconds: 500), () {
-                      _quranCubit.getReadingDataPagination(
+                      _ayatCubit.getReadingDataPagination(
                         suraNumber: surahs.first.$1.number,
                         isFromStart: true,
                       );

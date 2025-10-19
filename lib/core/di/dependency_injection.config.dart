@@ -46,7 +46,11 @@ import 'package:noor/features/near_mosque/data/repos/near_mosque_repo.dart'
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart'
     as _i881;
 import 'package:noor/features/quran/data/repos/quran_repo.dart' as _i1015;
-import 'package:noor/features/quran/logic/quran_cubit.dart' as _i239;
+import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart' as _i999;
+import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart'
+    as _i75;
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart'
+    as _i422;
 import 'package:noor/features/settings/logic/settings_cubit.dart' as _i663;
 import 'package:noor/features/tasbih/data/repos/tasbih_repo.dart' as _i966;
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart' as _i434;
@@ -140,8 +144,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i479.SharedPreferencesSettingsService>(),
       ),
     );
-    gh.factory<_i239.QuranCubit>(
-      () => _i239.QuranCubit(gh<_i1015.QuranRepo>()),
+    gh.factory<_i999.AyatCubit>(() => _i999.AyatCubit(gh<_i1015.QuranRepo>()));
+    gh.factory<_i75.MushafCubit>(
+      () => _i75.MushafCubit(gh<_i1015.QuranRepo>()),
+    );
+    gh.factory<_i422.QuranCubit>(
+      () => _i422.QuranCubit(gh<_i1015.QuranRepo>()),
     );
     gh.factory<_i915.NavigationCubit>(
       () => _i915.NavigationCubit(gh<_i730.NavigationRepo>()),

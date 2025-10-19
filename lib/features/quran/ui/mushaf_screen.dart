@@ -1,12 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Page;
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/features/quran/data/models/line_data.dart';
 import 'package:noor/features/quran/data/models/line_type.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
-import 'package:noor/features/quran/logic/quran_state.dart';
+import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart';
+import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_state.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/widgets/basmallah.dart';
 import 'package:noor/features/quran/ui/widgets/header_widget.dart';
 import 'package:noor/features/quran/ui/widgets/page_line_widget.dart';
@@ -22,6 +20,7 @@ class MushafScreen extends StatefulWidget {
 
 class _MushafScreenState extends State<MushafScreen> {
   late final QuranCubit _quranCubit = context.read();
+  late final MushafCubit _mushafCubit = context.read();
   final List<List<LineData>> pages = [];
   PreloadPageController pageController = PreloadPageController();
   UniqueKey key = UniqueKey();
@@ -31,7 +30,10 @@ class _MushafScreenState extends State<MushafScreen> {
   @override
   void initState() {
     super.initState();
-    _quranCubit.getSurasLines(widget.pageNumber);
+    _mushafCubit.getSurasLines(widget.pageNumber);
+    _quranCubit.currentTabNotifier.addListener(() {
+      _mushafCubit.stopPlayer();
+    });
   }
 
   @override
@@ -53,7 +55,7 @@ class _MushafScreenState extends State<MushafScreen> {
           child: LayoutBuilder(
             builder: (_, constraints) {
               final isSmallScreen = MediaQuery.sizeOf(context).height < 500;
-              return BlocConsumer<QuranCubit, QuranState>(
+              return BlocConsumer<MushafCubit, MushafState>(
                 buildWhen: (previous, current) =>
                     current is QuranLinesLoaded ||
                     current is QuranLinesLodedFromStart ||
@@ -103,6 +105,7 @@ class _MushafScreenState extends State<MushafScreen> {
                     controller: pageController,
                     itemCount: pages.length,
                     onPageChanged: (value) {
+                      _mushafCubit.stopPlayer();
                       final firstAyaLine = pages[value].firstWhere(
                         (element) =>
                             element.info.lineType == LineType.ayah.name,
@@ -129,13 +132,13 @@ class _MushafScreenState extends State<MushafScreen> {
                         firstAyaLine.info.pageNumber,
                       );
                       if (value == pages.length - 2 && lastPageNumber != 604) {
-                        _quranCubit.getSurasLinesPagination(
+                        _mushafCubit.getSurasLinesPagination(
                           pageNumber: lastPageNumber,
                           isFromStart: false,
                         );
                       } else if (value == 2 && firstPageNumber != 1) {
                         Future.delayed(const Duration(milliseconds: 500), () {
-                          _quranCubit.getSurasLinesPagination(
+                          _mushafCubit.getSurasLinesPagination(
                             pageNumber: firstPageNumber,
                             isFromStart: true,
                           );

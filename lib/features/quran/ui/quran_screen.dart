@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
-import 'package:noor/features/quran/logic/quran_state.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_state.dart';
 import 'package:noor/features/quran/ui/chapters_screen.dart';
 import 'package:noor/features/quran/ui/surahs_screen.dart';
 import 'package:noor/generated/l10n.dart';
@@ -17,6 +17,7 @@ class QuranScreen extends StatefulWidget {
 
 class _QuranScreenState extends State<QuranScreen> {
   late final QuranCubit _quranCubit = context.read<QuranCubit>();
+  
   @override
   void initState() {
     super.initState();

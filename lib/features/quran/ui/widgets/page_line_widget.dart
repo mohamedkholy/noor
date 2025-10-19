@@ -2,8 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/features/quran/data/models/line_data.dart';
-import 'package:noor/features/quran/logic/quran_cubit.dart';
-import 'package:noor/features/quran/logic/quran_state.dart';
+import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart';
+import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_state.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 
 class PageLineWidget extends StatelessWidget {
   final int pageNumber;
@@ -18,7 +19,7 @@ class PageLineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<QuranCubit, QuranState>(
+    return BlocConsumer<MushafCubit, MushafState>(
       buildWhen: (previous, current) =>
           current is PageSoundError ||
           current is PageSoundLoaded ||
