@@ -122,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "open_settings": MessageLookupByLibrary.simpleMessage("Open Settings"),
     "qibla": MessageLookupByLibrary.simpleMessage("Qibla"),
     "quran": MessageLookupByLibrary.simpleMessage("Quran"),
+    "radio": MessageLookupByLibrary.simpleMessage("Radio"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage("Receive timeout"),
     "repetition": MessageLookupByLibrary.simpleMessage("Count"),
     "requestCancelled": MessageLookupByLibrary.simpleMessage(

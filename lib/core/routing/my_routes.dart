@@ -13,4 +13,5 @@ abstract class MyRoutes {
   static const String nearMosque = '/nearMosque';
   static const String location = '/location';
   static const String settings = '/settings';
+  static const String radio = '/radio';
 }

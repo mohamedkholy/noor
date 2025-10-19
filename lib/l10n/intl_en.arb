@@ -85,5 +85,6 @@
     "serverError": "Server error:",
     "requestCancelled": "Request was cancelled",
     "noInternetConnection": "No internet connection",
-    "unexpectedError": "Unexpected error occurred"
+    "unexpectedError": "Unexpected error occurred",
+    "radio": "Radio"
 }

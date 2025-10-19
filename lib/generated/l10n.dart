@@ -693,6 +693,11 @@ class S {
       args: [],
     );
   }
+
+  /// `Radio`
+  String get radio {
+    return Intl.message('Radio', name: 'radio', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

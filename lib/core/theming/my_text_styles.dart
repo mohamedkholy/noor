@@ -42,4 +42,11 @@ abstract class MyTextStyles {
     fontSize: 24,
     fontWeight: FontWeightHelper.bold,
   );
+
+  static const TextStyle f18CairoSemiBoldPrimary = TextStyle(
+    color: MyColors.primary,
+    fontSize: 18,
+    fontWeight: FontWeightHelper.semiBold,
+  );
+
 }

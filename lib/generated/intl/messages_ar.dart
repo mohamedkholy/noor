@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "open_settings": MessageLookupByLibrary.simpleMessage("فتح الإعدادات"),
     "qibla": MessageLookupByLibrary.simpleMessage("القبلة"),
     "quran": MessageLookupByLibrary.simpleMessage("قرآن"),
+    "radio": MessageLookupByLibrary.simpleMessage("الإذاعات"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage(
       "انتهت مهلة الاستقبال",
     ),

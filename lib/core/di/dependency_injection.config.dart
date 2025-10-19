@@ -24,6 +24,8 @@ import 'package:noor/core/networking/near_mosque_service/mosque_api_service.dart
     as _i327;
 import 'package:noor/core/networking/quran_sound_service/quran_sound_service.dart'
     as _i819;
+import 'package:noor/core/networking/radio_api_service/radio_api_service.dart'
+    as _i891;
 import 'package:noor/core/notifications/notifications_manager.dart' as _i555;
 import 'package:noor/core/shared_preferences/shared_preferences_language_service.dart'
     as _i655;
@@ -51,6 +53,9 @@ import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart'
     as _i75;
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart'
     as _i422;
+import 'package:noor/features/radio/data/repo/radio_repo.dart' as _i873;
+import 'package:noor/features/radio/presentation/manager/cubit/radio_cubit.dart'
+    as _i328;
 import 'package:noor/features/settings/logic/settings_cubit.dart' as _i663;
 import 'package:noor/features/tasbih/data/repos/tasbih_repo.dart' as _i966;
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart' as _i434;
@@ -85,8 +90,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i819.QuranSoundService>(
       () => _i819.QuranSoundService(gh<_i361.Dio>()),
     );
+    gh.factory<_i891.RadioApiService>(
+      () => _i891.RadioApiService(gh<_i361.Dio>()),
+    );
     gh.factory<_i327.MosqueApiService>(
       () => _i327.MosqueApiService(gh<_i361.Dio>()),
+    );
+    gh.factory<_i873.RadioRepo>(
+      () => _i873.RadioRepo(gh<_i891.RadioApiService>()),
     );
     gh.factory<_i655.SharedPreferencesLanguageService>(
       () =>
@@ -122,6 +133,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i434.TasbihCubit>(
       () => _i434.TasbihCubit(gh<_i966.TasbihRepo>()),
     );
+    gh.factory<_i328.RadioCubit>(() => _i328.RadioCubit(gh<_i873.RadioRepo>()));
     gh.factory<_i803.LocationCubit>(
       () => _i803.LocationCubit(gh<_i839.LocationRepo>()),
     );

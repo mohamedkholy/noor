@@ -86,5 +86,6 @@
   "serverError": "خطأ في الخادم: ",
   "requestCancelled": "تم إلغاء الطلب",
   "noInternetConnection": "لا يوجد اتصال بالإنترنت",
-  "unexpectedError": "حدث خطأ غير متوقع"
+  "unexpectedError": "حدث خطأ غير متوقع",
+  "radio": "الإذاعات"
 }

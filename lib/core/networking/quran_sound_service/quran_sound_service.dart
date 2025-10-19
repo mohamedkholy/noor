@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:noor/core/networking/api_constants.dart';
 import 'package:noor/features/quran/data/models/ayah_sound_response/ayah_sound_response.dart';
 import 'package:noor/features/quran/data/models/quran_page_sound_response/quran_page_sound_response.dart';
+import 'package:noor/features/radio/data/model/radio_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 

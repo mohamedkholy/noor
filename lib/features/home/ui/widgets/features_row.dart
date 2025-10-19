@@ -129,6 +129,13 @@ class _FeaturesRowState extends State<FeaturesRow> {
           Navigator.pushNamed(context, MyRoutes.calender);
         },
       ),
+      (
+        S.of(context).radio,
+        FontAwesomeIcons.radio,
+        () {
+          Navigator.pushNamed(context, MyRoutes.radio);
+        },
+      ),
     ];
   }
 }
