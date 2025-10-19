@@ -148,7 +148,7 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
                                   surahNumber: surahs[index].$1.number,
                                 ),
                                 const SizedBox(height: 20),
-                                index == 0 || index == 8
+                                index == 0 || surahs[index].$1.number == 9
                                     ? Container()
                                     : const Basmallah(),
                                 const SizedBox(height: 20),

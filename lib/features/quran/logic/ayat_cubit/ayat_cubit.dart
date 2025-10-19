@@ -15,7 +15,6 @@ class AyatCubit extends Cubit<AyatState> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   AyatCubit(this._quranRepo) : super(AyatInitial());
   (int, int)? _currcetPosition;
-  ValueNotifier<Surah?> currentSurahNotifier = ValueNotifier(null);
 
   void init() {
     _audioPlayer.playerStateStream.listen((state) {
@@ -119,6 +118,5 @@ class AyatCubit extends Cubit<AyatState> {
 
   void dispose() {
     _audioPlayer.dispose();
-    currentSurahNotifier.dispose();
   }
 }

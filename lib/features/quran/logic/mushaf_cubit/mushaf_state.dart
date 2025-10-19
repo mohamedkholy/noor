@@ -20,23 +20,50 @@ class QuranLinesLodedFromEnd extends MushafState {
   QuranLinesLodedFromEnd(this.pages);
 }
 
+abstract class AudioPlayerState extends MushafState {
+  final int pageNumber;
+  final int suraNumber;
+  final int ayaNumber;
+  AudioPlayerState({
+    required this.pageNumber,
+    required this.suraNumber,
+    required this.ayaNumber,
+  });
+}
 
-class AudioPlayerPaused extends MushafState {
-  final int surahNumber;
-  final int verseNumber;
-  AudioPlayerPaused({required this.surahNumber, required this.verseNumber});
+class AudioPlayerPlaying extends AudioPlayerState {
+  AudioPlayerPlaying({
+    required super.pageNumber,
+    required super.suraNumber,
+    required super.ayaNumber,
+  });
+}
+
+class AudioPlayerPaused extends AudioPlayerState {
+  AudioPlayerPaused({
+    required super.pageNumber,
+    required super.suraNumber,
+    required super.ayaNumber,
+  });
 }
 
 class AudioPlayerStopped extends MushafState {}
 
-class PageSoundLoaded extends MushafState {
-  final QuranPageSoundResponse sound;
-  PageSoundLoaded(this.sound);
+class PageSoundLoading extends AudioPlayerState {
+  PageSoundLoading({
+    required super.pageNumber,
+    required super.suraNumber,
+    required super.ayaNumber,
+  });
 }
-
-class PageSoundLoading extends MushafState {}
 
 class PageSoundError extends MushafState {
   final String message;
-  PageSoundError(this.message);
+  final int suraNumber;
+  final int ayaNumber;
+  PageSoundError({
+    required this.message,
+    required this.suraNumber,
+    required this.ayaNumber,
+  });
 }

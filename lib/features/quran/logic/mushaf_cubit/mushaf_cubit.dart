@@ -1,52 +1,69 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:noor/core/database/quran/quran_database.dart';
-import 'package:noor/core/di/dependency_injection.dart';
-import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
-import 'package:noor/features/quran/data/models/reading_position.dart';
+import 'package:noor/features/quran/data/models/quran_page_sound_response/ayah.dart';
 import 'package:noor/features/quran/data/repos/quran_repo.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
 class MushafCubit extends Cubit<MushafState> {
   final QuranRepo _quranRepo;
-  ValueNotifier<ReadingPosition?> currentReadingPositionNotifier =
-      ValueNotifier(null);
   final AudioPlayer _audioPlayer = AudioPlayer();
-  MushafCubit(this._quranRepo) : super(MushafInitial());
-  (int, int)? _currcetPosition;  
+  ValueNotifier<bool> lastPositionNotifier = ValueNotifier(false);
+  int _currcetPosition = -1;
+  List<Ayah> _pageAyat = [];
+  MushafCubit(this._quranRepo) : super(MushafInitial()) {
+    stream.listen((state) {
+      print("mushaf state $state");
+    });
+  }
 
-  // void init() {
-  //   _audioPlayer.playerStateStream.listen((state) {
-  //     if (state.processingState == ProcessingState.completed &&
-  //         _currcetPosition != null) {
-  //       emit(
-  //         AudioPlayerPaused(
-  //           surahNumber: _currcetPosition!.$1,
-  //           verseNumber: _currcetPosition!.$2,
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
+  void init() {
+    _audioPlayer.playerStateStream.listen((state) {
+      if (state.processingState == ProcessingState.completed &&
+          _currcetPosition != -1) {
+        _currcetPosition++;
+        if (_currcetPosition < _pageAyat.length) {
+          playAyah(_currcetPosition);
+          emit(
+            AudioPlayerPlaying(
+              pageNumber: _pageAyat[_currcetPosition].page ?? 0,
+              suraNumber: _pageAyat[_currcetPosition].surah?.number ?? 0,
+              ayaNumber: _pageAyat[_currcetPosition].numberInSurah ?? 0,
+            ),
+          );
+        }
+        if (_currcetPosition == _pageAyat.length) {
+          emit(
+            AudioPlayerPaused(
+              pageNumber: _pageAyat[_currcetPosition - 1].page ?? 0,
+              suraNumber: _pageAyat[_currcetPosition - 1].surah?.number ?? 0,
+              ayaNumber: _pageAyat[_currcetPosition - 1].numberInSurah ?? 0,
+            ),
+          );
+        }
+      }
+    });
+  }
 
   void stopPlayer() {
     _audioPlayer.stop();
     emit(AudioPlayerStopped());
-    _currcetPosition = null;
+    _currcetPosition = -1;
   }
 
-  void pausePlayer((int, int) currentPosition) {
+  void pausePlayer({
+    required int pageNumber,
+    required int suraNumber,
+    required int ayaNumber,
+  }) {
     _audioPlayer.pause();
     emit(
       AudioPlayerPaused(
-        surahNumber: currentPosition.$1,
-        verseNumber: currentPosition.$2,
+        pageNumber: pageNumber,
+        suraNumber: suraNumber,
+        ayaNumber: ayaNumber,
       ),
     );
   }
@@ -57,14 +74,14 @@ class MushafCubit extends Cubit<MushafState> {
       _audioPlayer.seek(Duration.zero);
     }
     _audioPlayer.play();
-    // emit(
-    //   AyahSoundPlayed(
-    //     surahNumber: _currcetPosition!.$1,
-    //     verseNumber: _currcetPosition!.$2,
-    //   ),
-    // );
+    emit(
+      AudioPlayerPlaying(
+        pageNumber: _pageAyat[_currcetPosition].page ?? 0,
+        suraNumber: _pageAyat[_currcetPosition].surah?.number ?? 0,
+        ayaNumber: _pageAyat[_currcetPosition].numberInSurah ?? 0,
+      ),
+    );
   }
-
 
   Future<void> getSurasLines(int pageNumber) async {
     final result = await _quranRepo.getSurasLines(pageNumber);
@@ -87,14 +104,72 @@ class MushafCubit extends Cubit<MushafState> {
     }
   }
 
+  Future<void> playAyah(
+    int position, {
+    int? suraNumber,
+    int? verseNumber,
+  }) async {
+    _currcetPosition = position;
+    if (suraNumber != null && verseNumber != null) {
+      _currcetPosition = _pageAyat.indexWhere(
+        (element) =>
+            element.numberInSurah == verseNumber &&
+            element.surah?.number == suraNumber,
+      );
+    }
+    await _audioPlayer.setUrl(
+      _pageAyat[_currcetPosition].audio ??
+          _pageAyat[_currcetPosition].audioSecondary?.first ??
+          "",
+    );
+    _audioPlayer.play();
+    lastPositionNotifier.value = _currcetPosition == _pageAyat.length - 1;
+    emit(
+      AudioPlayerPlaying(
+        pageNumber: _pageAyat[_currcetPosition].page ?? 0,
+        suraNumber: _pageAyat[_currcetPosition].surah?.number ?? 0,
+        ayaNumber: _pageAyat[_currcetPosition].numberInSurah ?? 0,
+      ),
+    );
+  }
 
-  Future<void> getPageSound(int pageNumber, String qari) async {
+  Future<void> getPageSound(
+    int pageNumber,
+    int verseNumber,
+    int suraNumber,
+    String qari,
+  ) async {
+    emit(
+      PageSoundLoading(
+        pageNumber: pageNumber,
+        suraNumber: suraNumber,
+        ayaNumber: verseNumber,
+      ),
+    );
     final result = await _quranRepo.getPageSound(pageNumber, qari);
     if (!isClosed) {
       result.fold(
-        ifLeft: (failure) => emit(PageSoundError(failure.message)),
-        ifRight: (sound) => emit(PageSoundLoaded(sound)),
+        ifLeft: (failure) => emit(
+          PageSoundError(
+            message: failure.message,
+            suraNumber: suraNumber,
+            ayaNumber: verseNumber,
+          ),
+        ),
+        ifRight: (r) {
+          _pageAyat = r.data!.ayahs!;
+          _currcetPosition = _pageAyat.indexWhere(
+            (e) =>
+                e.numberInSurah == verseNumber && e.surah?.number == suraNumber,
+          );
+          lastPositionNotifier.value = _currcetPosition == _pageAyat.length - 1;
+          playAyah(_currcetPosition);
+        },
       );
     }
+  }
+
+  void dispose() {
+    _audioPlayer.dispose();
   }
 }

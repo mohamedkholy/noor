@@ -5,7 +5,7 @@ import 'package:noor/core/helpers/arabic_numbers_converter.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_state.dart';
-import 'package:noor/features/quran/ui/widgets/playing_row.dart';
+import 'package:noor/features/quran/ui/widgets/ayat_playing_row.dart';
 
 class VerseWidget extends StatelessWidget {
   final Verse verse;

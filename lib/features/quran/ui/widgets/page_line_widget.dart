@@ -1,14 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/features/quran/data/models/line_data.dart';
+import 'package:noor/features/quran/data/models/line_type.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_state.dart';
-import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 
 class PageLineWidget extends StatelessWidget {
   final int pageNumber;
-  final double lineHeight;
+  final double? lineHeight;
   final LineData line;
   const PageLineWidget({
     super.key,
@@ -21,11 +22,19 @@ class PageLineWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<MushafCubit, MushafState>(
       buildWhen: (previous, current) =>
-          current is PageSoundError ||
-          current is PageSoundLoaded ||
-          current is PageSoundLoading,
-          listenWhen: (previous, current) => current is PageSoundError,
-      listener: (context, state) {},
+          current is AudioPlayerState &&
+              current.suraNumber == line.words.firstOrNull?.surah &&
+              current.ayaNumber == line.words.firstOrNull?.ayah ||
+          current is PageSoundError,
+      listener: (context, state) {
+        if (state is PageSoundError &&
+            state.suraNumber == line.words.firstOrNull?.surah &&
+            state.ayaNumber == line.words.firstOrNull?.ayah) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
       builder: (context, state) {
         return DefaultTextStyle(
           style: TextStyle(
@@ -34,15 +43,40 @@ class PageLineWidget extends StatelessWidget {
                 ? 30
                 : MediaQuery.sizeOf(context).width * .06,
             color: Colors.black,
-            height: 1.35,
+            height: pageNumber == 1 || pageNumber == 2 ? 1.7 : 1.35,
             fontWeight: FontWeight.bold,
           ),
           child: SizedBox(
             height: lineHeight,
             child: AutoSizeText.rich(
               TextSpan(
-                children: line.precomputedText
-                    .map((e) => TextSpan(text: e))
+                children: line.data
+                    .map(
+                      (e) => TextSpan(
+                        text: e.$1,
+                        style: TextStyle(
+                          color:
+                              state is AudioPlayerState &&
+                                  state.suraNumber ==
+                                      line.words.firstOrNull?.surah &&
+                                  state.ayaNumber == e.$2
+                              ? Colors.red
+                              : Colors.black,
+                        ),
+                        recognizer: LongPressGestureRecognizer()
+                          ..onLongPress = () {
+                            if (line.info.lineType == LineType.ayah.name &&
+                                (state is! AudioPlayerState)) {
+                              context.read<MushafCubit>().getPageSound(
+                                pageNumber,
+                                e.$2,
+                                line.words.first.surah,
+                                "ar.alafasy",
+                              );
+                            }
+                          },
+                      ),
+                    )
                     .toList(),
               ),
               textAlign: TextAlign.center,
