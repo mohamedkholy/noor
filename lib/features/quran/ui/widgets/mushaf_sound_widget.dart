@@ -85,6 +85,8 @@ class MushafSoundWidget extends StatelessWidget {
                             .lastPositionNotifier,
                         builder: (context, ayahCount, child) {
                           return IconButton(
+                            disabledColor: Colors.grey,
+                            color: Colors.white,
                             onPressed: ayahCount
                                 ? null
                                 : () {
@@ -94,11 +96,7 @@ class MushafSoundWidget extends StatelessWidget {
                                       verseNumber: ayaNumber + 1,
                                     );
                                   },
-                            icon: const Icon(
-                              Icons.skip_next_sharp,
-                              size: 28,
-                              color: Colors.white,
-                            ),
+                            icon: const Icon(Icons.skip_next_sharp, size: 28),
                           );
                         },
                       ),
@@ -122,8 +120,7 @@ class MushafSoundWidget extends StatelessWidget {
             ),
             QariDropdownWidget(
               onChanged: (value) {
-                context.read<QuranCubit>().currentQuranReaderNotifier =
-                    value;
+                context.read<QuranCubit>().currentQuranReaderNotifier = value;
                 context.read<MushafCubit>().getPageSound(
                   pageNumber: pageNumber,
                   verseNumber: ayaNumber,

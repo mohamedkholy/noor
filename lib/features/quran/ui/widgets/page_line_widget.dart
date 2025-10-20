@@ -39,8 +39,13 @@ class PageLineWidget extends StatelessWidget {
                 ? 30
                 : MediaQuery.sizeOf(context).width * .06,
             color: Colors.black,
-            height: pageNumber == 1 || pageNumber == 2 ? 1.7 : 1.35,
-            fontWeight: FontWeight.bold,
+            height:
+                pageNumber == 1 ||
+                    pageNumber == 2 ||
+                    MediaQuery.sizeOf(context).height < 600
+                ? 1.7
+                : 1.35,
+            fontWeight: FontWeight.w100,
           ),
           child: SizedBox(
             height: lineHeight,
@@ -70,7 +75,6 @@ class PageLineWidget extends StatelessWidget {
                                 qari: context
                                     .read<QuranCubit>()
                                     .currentQuranReaderNotifier
-                                    
                                     .url,
                               );
                             }

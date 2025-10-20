@@ -90,6 +90,8 @@ class _PlayingRowState extends State<PlayingRow> {
                       valueListenable: _cubit.currentSurahNotifier,
                       builder: (context, surah, child) {
                         return IconButton(
+                          disabledColor: Colors.grey,
+                          color: Colors.white,
                           onPressed:
                               (surah?.versesCount ?? 1) == widget.verse.number
                               ? null
@@ -97,17 +99,10 @@ class _PlayingRowState extends State<PlayingRow> {
                                   context.read<AyatCubit>().getAyaSound(
                                     surahNumber: widget.verse.surahNumber,
                                     verseNumber: widget.verse.number + 1,
-                                    qari: _cubit
-                                        .currentQuranReaderNotifier
-                                        
-                                        .url,
+                                    qari: _cubit.currentQuranReaderNotifier.url,
                                   );
                                 },
-                          icon: const Icon(
-                            Icons.skip_next_sharp,
-                            size: 28,
-                            color: Colors.white,
-                          ),
+                          icon: const Icon(Icons.skip_next_sharp, size: 28),
                         );
                       },
                     ),

@@ -9,7 +9,6 @@ import 'package:noor/features/quran/ui/widgets/basmallah.dart';
 import 'package:noor/features/quran/ui/widgets/header_widget.dart';
 import 'package:noor/features/quran/ui/widgets/mushaf_sound_widget.dart';
 import 'package:noor/features/quran/ui/widgets/page_line_widget.dart';
-import 'package:preload_page_view/preload_page_view.dart';
 
 class MushafScreen extends StatefulWidget {
   final int pageNumber;
@@ -23,7 +22,7 @@ class _MushafScreenState extends State<MushafScreen> {
   late final QuranCubit _quranCubit = context.read();
   late final MushafCubit _mushafCubit = context.read();
   final List<List<LineData>> pages = [];
-  PreloadPageController pageController = PreloadPageController();
+  PageController pageController = PageController();
   UniqueKey key = UniqueKey();
 
   int currentPageIndex = 1;
@@ -96,7 +95,7 @@ class _MushafScreenState extends State<MushafScreen> {
                           pages.insertAll(0, state.pages);
                           currentPageIndex =
                               pageController.page!.toInt() + state.pages.length;
-                          pageController = PreloadPageController(
+                          pageController = PageController(
                             initialPage: currentPageIndex,
                           );
                         } else if (state is QuranLinesLodedFromEnd) {
@@ -113,7 +112,7 @@ class _MushafScreenState extends State<MushafScreen> {
                                       ?.pageNumber ??
                                   widget.pageNumber),
                         );
-                        pageController = PreloadPageController(
+                        pageController = PageController(
                           initialPage: currentPageIndex,
                         );
                         if (state is! QuranLinesLodedFromEnd) {
@@ -129,7 +128,7 @@ class _MushafScreenState extends State<MushafScreen> {
                             }
                             return true;
                           },
-                          child: PreloadPageView.builder(
+                          child: PageView.builder(
                             reverse:
                                 Localizations.localeOf(context).languageCode !=
                                 "ar",
@@ -231,7 +230,6 @@ class _MushafScreenState extends State<MushafScreen> {
                                             LineType.basmallah.name) {
                                           return const Basmallah();
                                         }
-
                                         return PageLineWidget(
                                           line: line,
                                           pageNumber: pageNumber,
