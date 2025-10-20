@@ -116,7 +116,14 @@ class AyatCubit extends Cubit<AyatState> {
     }
   }
 
-  void dispose() {
+  void _dispose() {
     _audioPlayer.dispose();
+  }
+
+
+  @override
+  Future<void> close() {
+    _dispose();
+    return super.close();
   }
 }

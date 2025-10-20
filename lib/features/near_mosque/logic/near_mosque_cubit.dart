@@ -19,11 +19,7 @@ import '../../../generated/l10n.dart';
 class NearMosqueCubit extends Cubit<NearMosqueState> {
   final NearMosqueRepo nearMosqueRepo;
   LatLng? currentLocation;
-  NearMosqueCubit(this.nearMosqueRepo) : super(NearMosqueInitial()) {
-    stream.listen((event) {
-      debugPrint("event $event");
-    });
-  }
+  NearMosqueCubit(this.nearMosqueRepo) : super(NearMosqueInitial());
 
   Future<void> checkLocationStatus(LatLng? savedLocation) async {
     emit(NearMosqueLoading());

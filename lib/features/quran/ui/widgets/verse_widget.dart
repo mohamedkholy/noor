@@ -5,6 +5,7 @@ import 'package:noor/core/helpers/arabic_numbers_converter.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_state.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/widgets/ayat_playing_row.dart';
 
 class VerseWidget extends StatelessWidget {
@@ -37,18 +38,13 @@ class VerseWidget extends StatelessWidget {
             state.surahNumber == verse.surahNumber &&
             state.verseNumber == verse.number;
 
-        final isPaused =
-            state is AudioPlayerPaused &&
-            state.surahNumber == verse.surahNumber &&
-            state.verseNumber == verse.number;
-
         return GestureDetector(
           onLongPress: () {
             if (state is! AyahSoundLoading) {
               context.read<AyatCubit>().getAyaSound(
                 surahNumber: verse.surahNumber,
                 verseNumber: verse.number,
-                qari: "ar.alafasy",
+                qari: context.read<QuranCubit>().currentQuranReaderNotifier.url,
               );
             }
           },
@@ -56,7 +52,10 @@ class VerseWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: isPlaying || isPaused
+              color:
+                  state is AyahSoundState &&
+                      state.surahNumber == verse.surahNumber &&
+                      state.verseNumber == verse.number
                   ? Colors.green.shade100
                   : Colors.transparent,
             ),
@@ -64,10 +63,6 @@ class VerseWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (state is AyahSoundLoading &&
-                    state.surahNumber == verse.surahNumber &&
-                    state.verseNumber == verse.number)
-                  const Center(child: CircularProgressIndicator()),
                 SizedBox(
                   width: double.infinity,
                   child: RichText(
@@ -96,7 +91,9 @@ class VerseWidget extends StatelessWidget {
                     ),
                   ),
                 const SizedBox(height: 20),
-                if (isPlaying || isPaused)
+                if (state is AyahSoundState &&
+                    state.surahNumber == verse.surahNumber &&
+                    state.verseNumber == verse.number)
                   PlayingRow(isPlaying: isPlaying, verse: verse),
               ],
             ),

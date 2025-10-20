@@ -13,11 +13,7 @@ class MushafCubit extends Cubit<MushafState> {
   ValueNotifier<bool> lastPositionNotifier = ValueNotifier(false);
   int _currcetPosition = -1;
   List<Ayah> _pageAyat = [];
-  MushafCubit(this._quranRepo) : super(MushafInitial()) {
-    stream.listen((state) {
-      print("mushaf state $state");
-    });
-  }
+  MushafCubit(this._quranRepo) : super(MushafInitial());
 
   void init() {
     _audioPlayer.playerStateStream.listen((state) {
@@ -133,12 +129,12 @@ class MushafCubit extends Cubit<MushafState> {
     );
   }
 
-  Future<void> getPageSound(
-    int pageNumber,
-    int verseNumber,
-    int suraNumber,
-    String qari,
-  ) async {
+  Future<void> getPageSound({
+    required int pageNumber,
+    required int verseNumber,
+    required int suraNumber,
+    required String qari,
+  }) async {
     emit(
       PageSoundLoading(
         pageNumber: pageNumber,
@@ -169,7 +165,16 @@ class MushafCubit extends Cubit<MushafState> {
     }
   }
 
-  void dispose() {
+  void _dispose() async {
+    print("dispose");
+    lastPositionNotifier.dispose();
+    await _audioPlayer.stop();
     _audioPlayer.dispose();
+  }
+
+  @override
+  Future<void> close() {
+    _dispose();
+    return super.close();
   }
 }

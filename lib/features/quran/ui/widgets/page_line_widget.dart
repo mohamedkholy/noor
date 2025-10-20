@@ -6,6 +6,7 @@ import 'package:noor/features/quran/data/models/line_data.dart';
 import 'package:noor/features/quran/data/models/line_type.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_state.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 
 class PageLineWidget extends StatelessWidget {
   final int pageNumber;
@@ -21,11 +22,6 @@ class PageLineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MushafCubit, MushafState>(
-      buildWhen: (previous, current) =>
-          current is AudioPlayerState &&
-              current.suraNumber == line.words.firstOrNull?.surah &&
-              current.ayaNumber == line.words.firstOrNull?.ayah ||
-          current is PageSoundError,
       listener: (context, state) {
         if (state is PageSoundError &&
             state.suraNumber == line.words.firstOrNull?.surah &&
@@ -68,10 +64,14 @@ class PageLineWidget extends StatelessWidget {
                             if (line.info.lineType == LineType.ayah.name &&
                                 (state is! AudioPlayerState)) {
                               context.read<MushafCubit>().getPageSound(
-                                pageNumber,
-                                e.$2,
-                                line.words.first.surah,
-                                "ar.alafasy",
+                                pageNumber: pageNumber,
+                                verseNumber: e.$2,
+                                suraNumber: line.words.first.surah,
+                                qari: context
+                                    .read<QuranCubit>()
+                                    .currentQuranReaderNotifier
+                                    
+                                    .url,
                               );
                             }
                           },

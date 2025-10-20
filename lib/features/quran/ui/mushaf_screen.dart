@@ -41,7 +41,6 @@ class _MushafScreenState extends State<MushafScreen> {
   @override
   void dispose() {
     pageController.dispose();
-    _mushafCubit.dispose();
     super.dispose();
   }
 
@@ -60,9 +59,6 @@ class _MushafScreenState extends State<MushafScreen> {
               Expanded(
                 child: LayoutBuilder(
                   builder: (_, constraints) {
-                    print(
-                      "LayoutBuilder widget.pageNumber ${widget.pageNumber} ${_quranCubit.currentReadingPositionNotifier.value?.pageNumber}",
-                    );
                     final isSmallScreen =
                         MediaQuery.sizeOf(context).height < 500;
                     return BlocConsumer<MushafCubit, MushafState>(
@@ -125,7 +121,10 @@ class _MushafScreenState extends State<MushafScreen> {
                         }
                         return NotificationListener<ScrollNotification>(
                           onNotification: (notification) {
-                            if (notification is ScrollStartNotification) {
+                            if (notification is ScrollUpdateNotification &&
+                                notification.scrollDelta != null &&
+                                notification.scrollDelta!.abs() > 2 &&
+                                notification.metrics.axis == Axis.horizontal) {
                               _mushafCubit.stopPlayer();
                             }
                             return true;
@@ -138,6 +137,9 @@ class _MushafScreenState extends State<MushafScreen> {
                             controller: pageController,
                             itemCount: pages.length,
                             onPageChanged: (value) {
+                              if (pages.isEmpty) {
+                                return;
+                              }
                               final firstAyaLine = pages[value].firstWhere(
                                 (element) =>
                                     element.info.lineType == LineType.ayah.name,
@@ -236,7 +238,7 @@ class _MushafScreenState extends State<MushafScreen> {
                                           lineHeight:
                                               pageNumber == 1 || pageNumber == 2
                                               ? null
-                                              : lineHeight!,
+                                              : lineHeight,
                                         );
                                       },
                                     ),
@@ -255,7 +257,6 @@ class _MushafScreenState extends State<MushafScreen> {
               BlocBuilder<MushafCubit, MushafState>(
                 builder: (context, state) {
                   if (state is AudioPlayerState) {
-                    print(state);
                     return MushafSoundWidget(
                       pageNumber: state.pageNumber,
                       suraNumber: state.suraNumber,

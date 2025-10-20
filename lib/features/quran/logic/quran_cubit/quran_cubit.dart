@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
+import 'package:noor/features/quran/data/models/quran_reader.dart';
 import 'package:noor/features/quran/data/models/reading_position.dart';
 import 'package:noor/features/quran/data/repos/quran_repo.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_state.dart';
@@ -19,6 +19,7 @@ class QuranCubit extends Cubit<QuranState> {
       ValueNotifier(null);
   ValueNotifier<Surah?> currentSurahNotifier = ValueNotifier(null);
   ValueNotifier<int> currentTabNotifier = ValueNotifier(0);
+  QuranReader currentQuranReaderNotifier = QuranCubit.quranReader.first;
   QuranCubit(this._quranRepo) : super(QuranInitial());
 
   Future<void> getSuras() async {
@@ -88,6 +89,71 @@ class QuranCubit extends Cubit<QuranState> {
         readingPosition.juz,
       );
     }
+    currentSurahNotifier.dispose();
+    currentTabNotifier.dispose();
     currentReadingPositionNotifier.dispose();
   }
+
+  static List<QuranReader> quranReader = [
+  QuranReader(
+    nameAr: 'مشاري راشد العفاسي',
+    nameEn: 'Mishary Rashid Alafasy',
+    url: 'ar.alafasy',
+    number: 128,
+  ),
+  QuranReader(
+    nameAr: 'محمود خليل الحصري',
+    nameEn: 'Mahmoud Khalil Al-Husary',
+    url: 'ar.husary',
+    number: 128,
+  ),
+  QuranReader(
+    nameAr: 'محمد صديق المنشاوي',
+    nameEn: 'Mohammad Siddiq Al-Minshawi',
+    url: 'ar.minshawi',
+    number: 128,
+  ),
+  QuranReader(
+    nameAr: 'أبو بكر الشاطري',
+    nameEn: 'Abu Bakr Al-Shatri',
+    url: 'ar.shaatree',
+    number: 128,
+  ),
+  QuranReader(
+    nameAr: 'عبد الله بصفر',
+    nameEn: 'Abdullah Basfar',
+    url: 'ar.abdullahbasfar',
+    number: 192,
+  ),
+  QuranReader(
+    nameAr: 'عبد الرحمن السديس',
+    nameEn: 'Abdur-Rahman As-Sudais',
+    url: 'ar.abdurrahmaansudais',
+    number: 192,
+  ),
+  QuranReader(
+    nameAr: 'عبد الباسط عبد الصمد (مرتل)',
+    nameEn: 'Abdul Basit Abdus Samad (Murattal)',
+    url: 'ar.abdulbasitmurattal',
+    number: 192,
+  ),
+  QuranReader(
+    nameAr: 'علي الحذيفي',
+    nameEn: 'Ali Al-Hudhaify',
+    url: 'ar.hudhaify',
+    number: 128,
+  ),
+  QuranReader(
+    nameAr: 'ماهر المعيقلي',
+    nameEn: 'Maher Al-Muaiqly',
+    url: 'ar.mahermuaiqly',
+    number: 128,
+  ),
+  QuranReader(
+    nameAr: 'محمد جبريل',
+    nameEn: 'Mohammad Jibreel',
+    url: 'ar.muhammadjibreel',
+    number: 128,
+  ),
+];
 }

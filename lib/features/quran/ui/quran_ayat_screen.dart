@@ -43,7 +43,6 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
   @override
   void dispose() {
     pageController.dispose();
-    _ayatCubit.dispose();
     super.dispose();
   }
 
@@ -66,6 +65,8 @@ class _QuranAyatScreenState extends State<QuranAyatScreen> {
             currentSuraIndex = surahs.indexWhere(
               (element) => element.$1.number == widget.surahNumber,
             );
+            _quranCubit.currentSurahNotifier.value =
+                surahs[currentSuraIndex].$1;
             _quranCubit.currentReadingPositionNotifier.value =
                 ReadingPosition.fromVerse(
                   surahs[currentSuraIndex].$2[widget.ayaNumber == null
