@@ -95,65 +95,65 @@ class QuranCubit extends Cubit<QuranState> {
   }
 
   static List<QuranReader> quranReader = [
-  QuranReader(
-    nameAr: 'مشاري راشد العفاسي',
-    nameEn: 'Mishary Rashid Alafasy',
-    url: 'ar.alafasy',
-    number: 128,
-  ),
-  QuranReader(
-    nameAr: 'محمود خليل الحصري',
-    nameEn: 'Mahmoud Khalil Al-Husary',
-    url: 'ar.husary',
-    number: 128,
-  ),
-  QuranReader(
-    nameAr: 'محمد صديق المنشاوي',
-    nameEn: 'Mohammad Siddiq Al-Minshawi',
-    url: 'ar.minshawi',
-    number: 128,
-  ),
-  QuranReader(
-    nameAr: 'أبو بكر الشاطري',
-    nameEn: 'Abu Bakr Al-Shatri',
-    url: 'ar.shaatree',
-    number: 128,
-  ),
-  QuranReader(
-    nameAr: 'عبد الله بصفر',
-    nameEn: 'Abdullah Basfar',
-    url: 'ar.abdullahbasfar',
-    number: 192,
-  ),
-  QuranReader(
-    nameAr: 'عبد الرحمن السديس',
-    nameEn: 'Abdur-Rahman As-Sudais',
-    url: 'ar.abdurrahmaansudais',
-    number: 192,
-  ),
-  QuranReader(
-    nameAr: 'عبد الباسط عبد الصمد (مرتل)',
-    nameEn: 'Abdul Basit Abdus Samad (Murattal)',
-    url: 'ar.abdulbasitmurattal',
-    number: 192,
-  ),
-  QuranReader(
-    nameAr: 'علي الحذيفي',
-    nameEn: 'Ali Al-Hudhaify',
-    url: 'ar.hudhaify',
-    number: 128,
-  ),
-  QuranReader(
-    nameAr: 'ماهر المعيقلي',
-    nameEn: 'Maher Al-Muaiqly',
-    url: 'ar.mahermuaiqly',
-    number: 128,
-  ),
-  QuranReader(
-    nameAr: 'محمد جبريل',
-    nameEn: 'Mohammad Jibreel',
-    url: 'ar.muhammadjibreel',
-    number: 128,
-  ),
-];
+    QuranReader(
+      nameAr: 'مشاري راشد العفاسي',
+      nameEn: 'Mishary Rashid Alafasy',
+      url: 'ar.alafasy',
+      number: 128,
+    ),
+    QuranReader(
+      nameAr: 'محمود خليل الحصري',
+      nameEn: 'Mahmoud Khalil Al-Husary',
+      url: 'ar.husary',
+      number: 128,
+    ),
+    QuranReader(
+      nameAr: 'محمد صديق المنشاوي',
+      nameEn: 'Mohammad Siddiq Al-Minshawi',
+      url: 'ar.minshawi',
+      number: 128,
+    ),
+    QuranReader(
+      nameAr: 'أبو بكر الشاطري',
+      nameEn: 'Abu Bakr Al-Shatri',
+      url: 'ar.shaatree',
+      number: 128,
+    ),
+    QuranReader(
+      nameAr: 'عبد الله بصفر',
+      nameEn: 'Abdullah Basfar',
+      url: 'ar.abdullahbasfar',
+      number: 192,
+    ),
+    QuranReader(
+      nameAr: 'عبد الرحمن السديس',
+      nameEn: 'Abdur-Rahman As-Sudais',
+      url: 'ar.abdurrahmaansudais',
+      number: 192,
+    ),
+    QuranReader(
+      nameAr: 'عبد الباسط عبد الصمد (مرتل)',
+      nameEn: 'Abdul Basit Abdus Samad (Murattal)',
+      url: 'ar.abdulbasitmurattal',
+      number: 192,
+    ),
+    QuranReader(
+      nameAr: 'علي الحذيفي',
+      nameEn: 'Ali Al-Hudhaify',
+      url: 'ar.hudhaify',
+      number: 128,
+    ),
+    QuranReader(
+      nameAr: 'ماهر المعيقلي',
+      nameEn: 'Maher Al-Muaiqly',
+      url: 'ar.mahermuaiqly',
+      number: 128,
+    ),
+    QuranReader(
+      nameAr: 'محمد جبريل',
+      nameEn: 'Mohammad Jibreel',
+      url: 'ar.muhammadjibreel',
+      number: 128,
+    ),
+  ];
 }

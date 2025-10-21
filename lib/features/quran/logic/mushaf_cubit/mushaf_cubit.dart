@@ -13,6 +13,7 @@ class MushafCubit extends Cubit<MushafState> {
   ValueNotifier<bool> lastPositionNotifier = ValueNotifier(false);
   int _currcetPosition = -1;
   List<Ayah> _pageAyat = [];
+  Duration delay = const Duration(seconds: 1);
   MushafCubit(this._quranRepo) : super(QuranLinesLoading()) {
     _init();
   }
@@ -83,6 +84,7 @@ class MushafCubit extends Cubit<MushafState> {
   }
 
   Future<void> getSurasLines(int pageNumber) async {
+    delay = Duration.zero;
     final result = await _quranRepo.getSurasLines(pageNumber);
     if (!isClosed) {
       emit(QuranLinesLoaded(result));

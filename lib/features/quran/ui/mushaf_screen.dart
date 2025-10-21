@@ -35,7 +35,7 @@ class _MushafScreenState extends State<MushafScreen> {
       _mushafCubit.stopPlayer();
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(_mushafCubit.delay, () {
         _mushafCubit.getSurasLines(widget.pageNumber);
       });
     });
