@@ -31,7 +31,6 @@ class _MushafScreenState extends State<MushafScreen> {
   @override
   void initState() {
     super.initState();
-    _mushafCubit.init();
     _quranCubit.currentTabNotifier.addListener(() {
       _mushafCubit.stopPlayer();
     });
@@ -270,6 +269,7 @@ class _MushafScreenState extends State<MushafScreen> {
               BlocBuilder<MushafCubit, MushafState>(
                 builder: (context, state) {
                   if (state is AudioPlayerState) {
+                    print("state $state");
                     return MushafSoundWidget(
                       pageNumber: state.pageNumber,
                       suraNumber: state.suraNumber,

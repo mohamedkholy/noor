@@ -13,9 +13,11 @@ class MushafCubit extends Cubit<MushafState> {
   ValueNotifier<bool> lastPositionNotifier = ValueNotifier(false);
   int _currcetPosition = -1;
   List<Ayah> _pageAyat = [];
-  MushafCubit(this._quranRepo) : super(QuranLinesLoading());
+  MushafCubit(this._quranRepo) : super(QuranLinesLoading()) {
+    _init();
+  }
 
-  void init() {
+  void _init() {
     _audioPlayer.playerStateStream.listen((state) {
       if (state.processingState == ProcessingState.completed &&
           _currcetPosition != -1) {
@@ -31,11 +33,12 @@ class MushafCubit extends Cubit<MushafState> {
           );
         }
         if (_currcetPosition == _pageAyat.length) {
+          _currcetPosition--;
           emit(
             AudioPlayerPaused(
-              pageNumber: _pageAyat[_currcetPosition - 1].page ?? 0,
-              suraNumber: _pageAyat[_currcetPosition - 1].surah?.number ?? 0,
-              ayaNumber: _pageAyat[_currcetPosition - 1].numberInSurah ?? 0,
+              pageNumber: _pageAyat[_currcetPosition].page ?? 0,
+              suraNumber: _pageAyat[_currcetPosition].surah?.number ?? 0,
+              ayaNumber: _pageAyat[_currcetPosition].numberInSurah ?? 0,
             ),
           );
         }
@@ -65,11 +68,6 @@ class MushafCubit extends Cubit<MushafState> {
   }
 
   void continuePlaying() async {
-    if ((await _audioPlayer.playerStateStream.first).processingState ==
-        ProcessingState.completed) {
-      _audioPlayer.seek(Duration.zero);
-    }
-    _audioPlayer.play();
     emit(
       AudioPlayerPlaying(
         pageNumber: _pageAyat[_currcetPosition].page ?? 0,
@@ -77,6 +75,11 @@ class MushafCubit extends Cubit<MushafState> {
         ayaNumber: _pageAyat[_currcetPosition].numberInSurah ?? 0,
       ),
     );
+    if ((await _audioPlayer.playerStateStream.first).processingState ==
+        ProcessingState.completed) {
+      _audioPlayer.seek(Duration.zero);
+    }
+    _audioPlayer.play();
   }
 
   Future<void> getSurasLines(int pageNumber) async {
