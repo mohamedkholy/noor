@@ -22,7 +22,6 @@ Ayah _$AyahFromJson(Map<String, dynamic> json) => Ayah(
   page: (json['page'] as num?)?.toInt(),
   ruku: (json['ruku'] as num?)?.toInt(),
   hizbQuarter: (json['hizbQuarter'] as num?)?.toInt(),
-  sajda: json['sajda'] as bool?,
 );
 
 Map<String, dynamic> _$AyahToJson(Ayah instance) => <String, dynamic>{
@@ -37,5 +36,4 @@ Map<String, dynamic> _$AyahToJson(Ayah instance) => <String, dynamic>{
   'page': instance.page,
   'ruku': instance.ruku,
   'hizbQuarter': instance.hizbQuarter,
-  'sajda': instance.sajda,
 };

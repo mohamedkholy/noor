@@ -17,7 +17,6 @@ class Ayah {
   int? page;
   int? ruku;
   int? hizbQuarter;
-  bool? sajda;
 
   Ayah({
     this.number,
@@ -31,12 +30,11 @@ class Ayah {
     this.page,
     this.ruku,
     this.hizbQuarter,
-    this.sajda,
   });
 
   @override
   String toString() {
-    return 'Ayah(number: $number, audio: $audio, audioSecondary: $audioSecondary, text: $text, surah: $surah, numberInSurah: $numberInSurah, juz: $juz, manzil: $manzil, page: $page, ruku: $ruku, hizbQuarter: $hizbQuarter, sajda: $sajda)';
+    return 'Ayah(number: $number, audio: $audio, audioSecondary: $audioSecondary, text: $text, surah: $surah, numberInSurah: $numberInSurah, juz: $juz, manzil: $manzil, page: $page, ruku: $ruku, hizbQuarter: $hizbQuarter)';
   }
 
   factory Ayah.fromJson(Map<String, dynamic> json) => _$AyahFromJson(json);
@@ -55,7 +53,6 @@ class Ayah {
     int? page,
     int? ruku,
     int? hizbQuarter,
-    bool? sajda,
   }) {
     return Ayah(
       number: number ?? this.number,
@@ -69,7 +66,6 @@ class Ayah {
       page: page ?? this.page,
       ruku: ruku ?? this.ruku,
       hizbQuarter: hizbQuarter ?? this.hizbQuarter,
-      sajda: sajda ?? this.sajda,
     );
   }
 }

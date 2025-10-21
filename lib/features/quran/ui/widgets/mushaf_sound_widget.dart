@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/decorated_container.dart';
-import 'package:noor/features/quran/data/models/quran_reader.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/widgets/qari_dropdown_widget.dart';

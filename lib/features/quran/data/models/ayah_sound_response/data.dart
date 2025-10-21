@@ -19,7 +19,6 @@ class Data {
   int? page;
   int? ruku;
   int? hizbQuarter;
-  bool? sajda;
 
   Data({
     this.number,
@@ -34,12 +33,11 @@ class Data {
     this.page,
     this.ruku,
     this.hizbQuarter,
-    this.sajda,
   });
 
   @override
   String toString() {
-    return 'Data(number: $number, audio: $audio, audioSecondary: $audioSecondary, text: $text, edition: $edition, surah: $surah, numberInSurah: $numberInSurah, juz: $juz, manzil: $manzil, page: $page, ruku: $ruku, hizbQuarter: $hizbQuarter, sajda: $sajda)';
+    return 'Data(number: $number, audio: $audio, audioSecondary: $audioSecondary, text: $text, edition: $edition, surah: $surah, numberInSurah: $numberInSurah, juz: $juz, manzil: $manzil, page: $page, ruku: $ruku, hizbQuarter: $hizbQuarter)';
   }
 
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
@@ -59,7 +57,6 @@ class Data {
     int? page,
     int? ruku,
     int? hizbQuarter,
-    bool? sajda,
   }) {
     return Data(
       number: number ?? this.number,
@@ -74,7 +71,6 @@ class Data {
       page: page ?? this.page,
       ruku: ruku ?? this.ruku,
       hizbQuarter: hizbQuarter ?? this.hizbQuarter,
-      sajda: sajda ?? this.sajda,
     );
   }
 }

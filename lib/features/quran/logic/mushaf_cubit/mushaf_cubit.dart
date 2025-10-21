@@ -13,7 +13,7 @@ class MushafCubit extends Cubit<MushafState> {
   ValueNotifier<bool> lastPositionNotifier = ValueNotifier(false);
   int _currcetPosition = -1;
   List<Ayah> _pageAyat = [];
-  MushafCubit(this._quranRepo) : super(MushafInitial());
+  MushafCubit(this._quranRepo) : super(QuranLinesLoading());
 
   void init() {
     _audioPlayer.playerStateStream.listen((state) {

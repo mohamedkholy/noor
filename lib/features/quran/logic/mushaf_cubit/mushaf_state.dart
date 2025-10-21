@@ -5,6 +5,8 @@ abstract class MushafState {}
 
 class MushafInitial extends MushafState {}
 
+class QuranLinesLoading extends MushafState {}
+
 class QuranLinesLoaded extends MushafState {
   final List<List<LineData>> pages;
   QuranLinesLoaded(this.pages);

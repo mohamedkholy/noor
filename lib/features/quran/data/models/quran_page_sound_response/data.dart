@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:noor/core/database/quran/quran_tables.dart';
 
 import 'ayah.dart';
 import 'edition.dart';
