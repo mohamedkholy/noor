@@ -47,7 +47,7 @@ class _LocationSettingsWidgetState extends State<LocationSettingsWidget> {
               ),
               Switch(
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                activeColor: MyColors.secondary,
+                activeThumbColor: MyColors.secondary,
                 value: locationState,
                 onChanged: (value) {
                   setState(() {

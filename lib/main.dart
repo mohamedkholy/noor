@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
             fontFamily: "Cairo",
-            appBarTheme: const AppBarTheme(color: MyColors.primary),
+            appBarTheme: const AppBarTheme(backgroundColor: MyColors.primary),
             scaffoldBackgroundColor: Colors.white,
           ),
         );

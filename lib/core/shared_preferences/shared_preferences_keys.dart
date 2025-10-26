@@ -9,4 +9,5 @@ abstract class SharedPreferencesKeys {
   static const String notificationPayload = "notification_payload";
   static const String language = "language";
   static const String azanSound = "azan";
+  static const String perodicAzkarSettings = "perodic_azkar_settings";
 }

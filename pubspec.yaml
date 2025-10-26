@@ -127,6 +127,9 @@ flutter:
     - family: ScheherazadeNew-Regular
       fonts:
         - asset: assets/fonts/ScheherazadeNew-Regular.ttf
+    - family: KFGQPCNastaleeq
+      fonts:
+        - asset: assets/fonts/KFGQPCNastaleeq-Regular.ttf    
     - family: Tasbih
       fonts:
         - asset: assets/fonts/font_icons/Sibha.ttf
@@ -145,6 +148,9 @@ flutter:
     - family: DS-DIGI
       fonts:
         - asset: assets/fonts/DS-DIGI.TTF
+    - family: DigitalKhattV2
+      fonts:
+        - asset: assets/fonts/DigitalKhattV2.otf    
     - family: QCF_P001
       fonts:
         - asset: assets/fonts/quran_font/p1.ttf

@@ -46,7 +46,7 @@ class _AzkarNotificationWidgetState extends State<AzkarNotificationWidget> {
             ),
             Switch(
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              activeColor: MyColors.secondary,
+              activeThumbColor: MyColors.secondary,
               value: azkarState,
               onChanged: (value) {
                 setState(() {

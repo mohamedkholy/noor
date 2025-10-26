@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
+import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/widgets/azkar_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/azkar_sounds_widget.dart';
 import 'package:noor/features/settings/ui/widgets/language_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/location_settings_widget.dart';
+import 'package:noor/features/settings/ui/widgets/perodic_azkar_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/salawat_row.dart';
 import 'package:noor/generated/l10n.dart';
 
@@ -23,12 +25,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late final AzkarNotificationsSettings _azkarNotificationsSettings;
   late final AzanNotificationsSettings _azanNotificationsSettings;
   late final bool _locationUpdateSetting;
+  late final PerodicAzkarSettings _perodicAzkarSetting;
 
   @override
   void initState() {
     super.initState();
     _azkarNotificationsSettings = _settingsCubit.getAzkarNotificationSetting();
     _azanNotificationsSettings = _settingsCubit.getAzanNotificationSetting();
+    _perodicAzkarSetting = _settingsCubit.getPerodicAzkarSetting();
     _locationUpdateSetting = _settingsCubit.getLocationUpdateSetting();
   }
 
@@ -74,6 +78,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     const SizedBox(height: 20),
                     LocationSettingsWidget(
                       locationUpdateSetting: _locationUpdateSetting,
+                    ),
+                    const SizedBox(height: 20),
+                    PerodicAzkarSettingsWidget(
+                      perodicAzkarSettings: _perodicAzkarSetting,
                     ),
                     const SizedBox(height: 20),
                     const LanguageSettingsWidget(),

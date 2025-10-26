@@ -87,5 +87,11 @@
   "requestCancelled": "تم إلغاء الطلب",
   "noInternetConnection": "لا يوجد اتصال بالإنترنت",
   "unexpectedError": "حدث خطأ غير متوقع",
-  "radio": "الإذاعات"
+  "radio": "الإذاعات",
+  "perodicAzkarSettings": "إعدادات الأذكار المتكررة",
+  "activatePerodicAzkar": "تفعيل الأذكار المتكررة",
+  "minutes": "دقيقة",
+  "every": "كل",
+  "hourly": "كل ساعة",
+  "everyMinute": "كل دقيقة"
 }

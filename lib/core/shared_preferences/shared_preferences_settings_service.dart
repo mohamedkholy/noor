@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
+import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
@@ -73,5 +74,25 @@ class SharedPreferencesSettingsService {
 
   void saveNotificationsState(bool state) async {
     sp.setBool(SharedPreferencesKeys.notificationsState, state);
+  }
+
+  void savePerodicAzkarSetting(PerodicAzkarSettings value) {
+    sp.setString(
+      SharedPreferencesKeys.perodicAzkarSettings,
+      jsonEncode(value.toJson()),
+    );
+  }
+
+  PerodicAzkarSettings getPerodicAzkarSetting() {
+    final result = sp.getString(SharedPreferencesKeys.perodicAzkarSettings);
+    if (result == null) {
+      return PerodicAzkarSettings(
+        isActive: true,
+        perodicAzkarTime: 1,
+        sound: "prophet_salah",
+        text: "صلي علي نبينا محمد",
+      );
+    }
+    return PerodicAzkarSettings.fromJson(jsonDecode(result));
   }
 }

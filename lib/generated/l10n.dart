@@ -698,6 +698,51 @@ class S {
   String get radio {
     return Intl.message('Radio', name: 'radio', desc: '', args: []);
   }
+
+  /// `Perodic Azkar Settings`
+  String get perodicAzkarSettings {
+    return Intl.message(
+      'Perodic Azkar Settings',
+      name: 'perodicAzkarSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activate Perodic Azkar`
+  String get activatePerodicAzkar {
+    return Intl.message(
+      'Activate Perodic Azkar',
+      name: 'activatePerodicAzkar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minutes`
+  String get minutes {
+    return Intl.message('Minutes', name: 'minutes', desc: '', args: []);
+  }
+
+  /// `Every`
+  String get every {
+    return Intl.message('Every', name: 'every', desc: '', args: []);
+  }
+
+  /// `Hourly`
+  String get hourly {
+    return Intl.message('Hourly', name: 'hourly', desc: '', args: []);
+  }
+
+  /// `Every Minute`
+  String get everyMinute {
+    return Intl.message(
+      'Every Minute',
+      name: 'everyMinute',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

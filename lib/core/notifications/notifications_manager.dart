@@ -36,6 +36,9 @@ class NotificationsManager {
   static const _sleepingAzkarChannelId = 'sleeping_azkar_channel';
   static const _sleepingAzkarChannelName = 'Azkar Notifications';
   static const _sleepingAzkarChannelDescription = 'Azkar Notifications';
+  late String _perodicAzkarChannelId;
+  late String _perodicAzkarChannelName;
+  static const _perodicAzkarChannelDescription = 'Perodic Azkar Notifications';
 
   late AndroidNotificationChannel _azanNotificationChannel;
 
@@ -53,7 +56,9 @@ class NotificationsManager {
     sound: RawResourceAndroidNotificationSound('azkar'),
   );
 
-  late String sound;
+  late AndroidNotificationChannel _perodicAzkarNotificationChannel;
+
+  late String azanSound;
 
   Future<PermissionStatus> requestPermission() async {
     return await Permission.notification.request();
@@ -103,12 +108,12 @@ class NotificationsManager {
   }
 
   Future<void> _createAzanNotificationChannel() async {
-    sound = _azanSp.getAzanSound();
+    azanSound = _azanSp.getAzanSound();
     _azanNotificationChannel = AndroidNotificationChannel(
-      sound,
-      sound.replaceAll("_", " "),
+      azanSound,
+      azanSound.replaceAll("_", " "),
       importance: Importance.max,
-      sound: RawResourceAndroidNotificationSound(sound),
+      sound: RawResourceAndroidNotificationSound(azanSound),
     );
     await _localNotifications
         .resolvePlatformSpecificImplementation<
@@ -117,8 +122,27 @@ class NotificationsManager {
         ?.createNotificationChannel(_azanNotificationChannel);
   }
 
+  Future<void> _createPerodicAzkarNotificationChannel() async {
+    final sound = _sp.getPerodicAzkarSetting().sound;
+    _perodicAzkarChannelId = sound;
+    _perodicAzkarChannelName =
+        "${sound.replaceAll("_", " ")} Perodic Notification";
+    _perodicAzkarNotificationChannel = AndroidNotificationChannel(
+      _perodicAzkarChannelId,
+      _perodicAzkarChannelName,
+      importance: Importance.max,
+      sound: RawResourceAndroidNotificationSound(sound),
+    );
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_perodicAzkarNotificationChannel);
+  }
+
   Future<void> _createNotificationChannel() async {
-    _createAzanNotificationChannel();
+    await _createAzanNotificationChannel();
+    await _createPerodicAzkarNotificationChannel();
     await _localNotifications
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
@@ -131,12 +155,14 @@ class NotificationsManager {
         ?.createNotificationChannel(_azkarNotificationChannel);
   }
 
-  void scheduleNotifications() {
-    _createAzanNotificationChannel();
+  Future<void> scheduleNotifications() async {
+    await _createAzanNotificationChannel();
+    await _createPerodicAzkarNotificationChannel();
     cancelAllNotifications();
     final city = _getSavedCity() ?? Constants.defaultCity;
     final azanNotificationsSettings = _sp.getAzanNotificationSetting();
     final azkarNotificationsSettings = _sp.getAzkarNotificationSetting();
+    final perodicAzkarSettings = _sp.getPerodicAzkarSetting();
     for (int i = 0; i < 7; i++) {
       final date = DateUtils.dateOnly(DateTime.now()).add(Duration(days: i));
       final prayerTimes = PrayerTimesHelper.getPrayerTimes(
@@ -154,6 +180,12 @@ class NotificationsManager {
           azkarNotificationsSettings.eveningAzkarState) {
         _scheduleAzkarNotifications(prayerTimes, azkarNotificationsSettings);
       }
+    }
+    if (perodicAzkarSettings.isActive) {
+      _schedulePerodicAzkarNotifications(
+        perodicAzkarSettings.perodicAzkarTime,
+        perodicAzkarSettings.text,
+      );
     }
   }
 
@@ -207,8 +239,8 @@ class NotificationsManager {
         tz.TZDateTime.from(e.$1, tz.local),
         NotificationDetails(
           android: AndroidNotificationDetails(
-            sound,
-            sound.replaceAll("_", " "),
+            azanSound,
+            azanSound.replaceAll("_", " "),
             channelDescription: _azanChannelDescription,
           ),
         ),
@@ -276,6 +308,25 @@ class NotificationsManager {
       return notificationAppLaunchDetails?.notificationResponse?.payload;
     }
     return null;
+  }
+
+  void _schedulePerodicAzkarNotifications(int perodicAzkarTime, String text) {
+    _localNotifications.periodicallyShow(
+      perodicAzkarTime.hashCode,
+      'أذكر الله',
+      text,
+      perodicAzkarTime == 1
+          ? RepeatInterval.everyMinute
+          : RepeatInterval.hourly,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          _perodicAzkarChannelId,
+          _perodicAzkarChannelName,
+          channelDescription: _perodicAzkarChannelDescription,
+        ),
+      ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+    );
   }
 
   // void testNotification() {

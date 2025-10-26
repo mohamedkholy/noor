@@ -23,6 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "Relocate": MessageLookupByLibrary.simpleMessage("Relocate"),
+    "activatePerodicAzkar": MessageLookupByLibrary.simpleMessage(
+      "Activate Perodic Azkar",
+    ),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "aerial_distance": MessageLookupByLibrary.simpleMessage("Aerial Distance"),
     "already_added": MessageLookupByLibrary.simpleMessage("Already added"),
@@ -69,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "english": MessageLookupByLibrary.simpleMessage("English"),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
     "evening_azkar": MessageLookupByLibrary.simpleMessage("Evening Azkar"),
+    "every": MessageLookupByLibrary.simpleMessage("Every"),
+    "everyMinute": MessageLookupByLibrary.simpleMessage("Every Minute"),
     "fajr": MessageLookupByLibrary.simpleMessage("Fajr"),
     "field_is_required": MessageLookupByLibrary.simpleMessage(
       "Field is required",
@@ -79,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "hour_before": MessageLookupByLibrary.simpleMessage("Hour before"),
+    "hourly": MessageLookupByLibrary.simpleMessage("Hourly"),
     "in_word": MessageLookupByLibrary.simpleMessage("in"),
     "isha": MessageLookupByLibrary.simpleMessage("Isha"),
     "juz": MessageLookupByLibrary.simpleMessage("Juz"),
@@ -99,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Location Settings",
     ),
     "maghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
+    "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
     "minutes_before": MessageLookupByLibrary.simpleMessage("Minutes before"),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("Morning Azkar"),
     "mushafStyle": MessageLookupByLibrary.simpleMessage("Mushaf"),
@@ -120,6 +127,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Notification Time",
     ),
     "open_settings": MessageLookupByLibrary.simpleMessage("Open Settings"),
+    "perodicAzkarSettings": MessageLookupByLibrary.simpleMessage(
+      "Perodic Azkar Settings",
+    ),
     "qibla": MessageLookupByLibrary.simpleMessage("Qibla"),
     "quran": MessageLookupByLibrary.simpleMessage("Quran"),
     "radio": MessageLookupByLibrary.simpleMessage("Radio"),

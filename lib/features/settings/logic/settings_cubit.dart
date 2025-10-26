@@ -5,6 +5,7 @@ import 'package:noor/core/shared_preferences/shared_preferences_settings_service
 import 'package:noor/core/shared_preferences/shared_prefs_azan.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
+import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
 
 @Injectable()
 class SettingsCubit extends Cubit {
@@ -42,5 +43,13 @@ class SettingsCubit extends Cubit {
 
   String getAzanSound() {
     return getIt<SharedPreferencesAzanService>().getAzanSound();
+  }
+
+  void savePerodicAzkarSetting(PerodicAzkarSettings value) {
+    _sharedPreferencesSettingsService.savePerodicAzkarSetting(value);
+  }
+
+  PerodicAzkarSettings getPerodicAzkarSetting() {
+    return _sharedPreferencesSettingsService.getPerodicAzkarSetting();
   }
 }

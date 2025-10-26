@@ -23,6 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "Relocate": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "activatePerodicAzkar": MessageLookupByLibrary.simpleMessage(
+      "تفعيل الأذكار المتكررة",
+    ),
     "add": MessageLookupByLibrary.simpleMessage("إضافة"),
     "aerial_distance": MessageLookupByLibrary.simpleMessage("المسافة الخطية"),
     "already_added": MessageLookupByLibrary.simpleMessage("تمت الإضافة مسبقًا"),
@@ -67,12 +70,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
     "error": MessageLookupByLibrary.simpleMessage("خطأ"),
     "evening_azkar": MessageLookupByLibrary.simpleMessage("أذكار المساء"),
+    "every": MessageLookupByLibrary.simpleMessage("كل"),
+    "everyMinute": MessageLookupByLibrary.simpleMessage("كل دقيقة"),
     "fajr": MessageLookupByLibrary.simpleMessage("الفجر"),
     "field_is_required": MessageLookupByLibrary.simpleMessage("الحقل مطلوب"),
     "hadith": MessageLookupByLibrary.simpleMessage("حديث"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage("حديث اليوم"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "hour_before": MessageLookupByLibrary.simpleMessage("ساعة قبل"),
+    "hourly": MessageLookupByLibrary.simpleMessage("كل ساعة"),
     "in_word": MessageLookupByLibrary.simpleMessage("خلال"),
     "isha": MessageLookupByLibrary.simpleMessage("العشاء"),
     "juz": MessageLookupByLibrary.simpleMessage("جزء"),
@@ -91,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "location_settings": MessageLookupByLibrary.simpleMessage("إعدادات الموقع"),
     "maghrib": MessageLookupByLibrary.simpleMessage("المغرب"),
+    "minutes": MessageLookupByLibrary.simpleMessage("دقيقة"),
     "minutes_before": MessageLookupByLibrary.simpleMessage("دقيقة قبل"),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("أذكار الصباح"),
     "mushafStyle": MessageLookupByLibrary.simpleMessage("مصحف"),
@@ -110,6 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "notification_time": MessageLookupByLibrary.simpleMessage("وقت الإشعارات"),
     "open_settings": MessageLookupByLibrary.simpleMessage("فتح الإعدادات"),
+    "perodicAzkarSettings": MessageLookupByLibrary.simpleMessage(
+      "إعدادات الأذكار المتكررة",
+    ),
     "qibla": MessageLookupByLibrary.simpleMessage("القبلة"),
     "quran": MessageLookupByLibrary.simpleMessage("قرآن"),
     "radio": MessageLookupByLibrary.simpleMessage("الإذاعات"),
