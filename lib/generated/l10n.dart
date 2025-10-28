@@ -743,6 +743,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Daily Target`
+  String get daily_target {
+    return Intl.message(
+      'Daily Target',
+      name: 'daily_target',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Target (optional)`
+  String get daily_target_optional {
+    return Intl.message(
+      'Daily Target (optional)',
+      name: 'daily_target_optional',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/tasbih/tasbih_database.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/core/widgets/decorated_container.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/widgets/count_button.dart';
 import 'package:noor/features/tasbih/ui/widgets/reset_button.dart';
 import 'package:noor/features/tasbih/ui/widgets/shape.dart';
 import 'package:noor/features/tasbih/ui/widgets/tasbih_count_widget.dart';
+import 'package:noor/generated/l10n.dart';
 
 class ZekrScreen extends StatefulWidget {
   final Tasbih tasbih;
@@ -21,6 +23,9 @@ class ZekrScreen extends StatefulWidget {
 class _ZekrScreenState extends State<ZekrScreen> {
   late final TasbihCubit _tasbihCubit = context.read();
   late int count = widget.tasbih.count;
+  late int dailyCount = DateUtils.dateOnly(DateTime.now()) == widget.tasbih.date
+      ? (widget.tasbih.dailyCount ?? 0)
+      : 0;
 
   @override
   Widget build(BuildContext context) {
@@ -53,58 +58,110 @@ class _ZekrScreenState extends State<ZekrScreen> {
                 ),
                 Align(
                   child: SingleChildScrollView(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        return Container(
-                          margin: EdgeInsets.symmetric(
-                            vertical: (constraints.maxWidth * .15),
-                          ),
-                          child: CustomPaint(
-                            painter: Shape(),
-                            child: SizedBox(
-                              width: constraints.maxWidth,
-                              height: constraints.maxWidth,
-                              child: Column(
-                                children: [
-                                  TasbihCountWidget(count: count),
-                                  const Spacer(),
-                                  Directionality(
-                                    textDirection: TextDirection.ltr,
-                                    child: ResetButton(
-                                      onResetPress: () {
-                                        setState(() {
-                                          count = 0;
-                                          _tasbihCubit.updateCount(
-                                            Tasbih(
-                                              zekr: widget.tasbih.zekr,
-                                              count: count,
-                                            ),
-                                          );
-                                        });
-                                      },
-                                    ),
+                    child: Column(
+                      children: [
+                        if (widget.tasbih.dailyTarget != null &&
+                            widget.tasbih.dailyTarget != 0)
+                          DecoratedContainer(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 30,
+                            ),
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 30,
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  S.of(context).daily_target,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                  CountButton(
-                                    width: constraints.maxWidth / 3,
-                                    height: constraints.maxWidth / 3,
-                                    onTap: () {
-                                      setState(() {
-                                        count++;
-                                        _tasbihCubit.updateCount(
-                                          Tasbih(
-                                            zekr: widget.tasbih.zekr,
-                                            count: count,
-                                          ),
-                                        );
-                                      });
-                                    },
+                                ),
+                                Text(
+                                  "${widget.tasbih.dailyTarget}/$dailyCount",
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      },
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            return Container(
+                              margin: EdgeInsets.symmetric(
+                                vertical: (constraints.maxWidth * .15),
+                              ),
+                              child: CustomPaint(
+                                painter: Shape(),
+                                child: SizedBox(
+                                  width: constraints.maxWidth,
+                                  height: constraints.maxWidth,
+                                  child: Column(
+                                    children: [
+                                      TasbihCountWidget(count: count),
+                                      const Spacer(),
+                                      Directionality(
+                                        textDirection: TextDirection.ltr,
+                                        child: ResetButton(
+                                          onResetPress: () {
+                                            setState(() {
+                                              count = 0;
+                                              dailyCount = 0;
+                                              _tasbihCubit.updateCount(
+                                                Tasbih(
+                                                  zekr: widget.tasbih.zekr,
+                                                  count: count,
+                                                  date: DateUtils.dateOnly(
+                                                    DateTime.now(),
+                                                  ),
+                                                  dailyTarget:
+                                                      widget.tasbih.dailyTarget,
+                                                  dailyCount: 0,
+                                                ),
+                                              );
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      CountButton(
+                                        width: constraints.maxWidth / 3,
+                                        height: constraints.maxWidth / 3,
+                                        onTap: () {
+                                          setState(() {
+                                            count++;
+                                            dailyCount++;
+                                            _tasbihCubit.updateCount(
+                                              Tasbih(
+                                                zekr: widget.tasbih.zekr,
+                                                count: count,
+                                                date: DateUtils.dateOnly(
+                                                  DateTime.now(),
+                                                ),
+                                                dailyTarget:
+                                                    widget.tasbih.dailyTarget,
+                                                dailyCount: dailyCount,
+                                              ),
+                                            );
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),

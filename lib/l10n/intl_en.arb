@@ -92,6 +92,8 @@
     "minutes": "Minutes",
     "every": "Every",
     "hourly": "Hourly",
-    "everyMinute": "Every Minute"
+    "everyMinute": "Every Minute",
+    "daily_target": "Daily Target",
+    "daily_target_optional": "Daily Target (optional)"
 
 }

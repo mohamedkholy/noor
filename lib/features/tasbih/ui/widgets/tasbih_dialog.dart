@@ -22,6 +22,7 @@ class _TasbihDialogState extends State<TasbihDialog> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController zekrController = TextEditingController();
   final TextEditingController countController = TextEditingController();
+  final TextEditingController dailyTargetController = TextEditingController();
   bool isSaving = false;
   bool isAlreadyAdded = false;
 
@@ -31,6 +32,7 @@ class _TasbihDialogState extends State<TasbihDialog> {
     if (widget.tasbih != null) {
       zekrController.text = widget.tasbih!.zekr;
       countController.text = widget.tasbih!.count.toString();
+      dailyTargetController.text = (widget.tasbih!.dailyTarget ?? 0).toString();
     }
   }
 
@@ -38,6 +40,7 @@ class _TasbihDialogState extends State<TasbihDialog> {
   void dispose() {
     zekrController.dispose();
     countController.dispose();
+    dailyTargetController.dispose();
     super.dispose();
   }
 
@@ -83,6 +86,14 @@ class _TasbihDialogState extends State<TasbihDialog> {
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 ),
+                const SizedBox(height: 15),
+                MyTextFormField(
+                  maxLength: 10,
+                  hintText: S.current.daily_target_optional,
+                  controller: dailyTargetController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                ),
                 const SizedBox(height: 30),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -100,12 +111,19 @@ class _TasbihDialogState extends State<TasbihDialog> {
                               setState(() {
                                 isSaving = true;
                               });
+                              final int? dailyTarget =
+                                  dailyTargetController.text.isEmpty
+                                  ? null
+                                  : int.parse(dailyTargetController.text);
                               final int result;
                               final Tasbih tasbih = Tasbih(
                                 zekr: zekrController.text,
                                 count: countController.text.isEmpty
                                     ? 0
                                     : int.parse(countController.text),
+                                date: DateUtils.dateOnly(DateTime.now()),
+                                dailyTarget: dailyTarget,
+                                dailyCount: widget.tasbih?.dailyCount,
                               );
                               if (widget.tasbih == null) {
                                 result = await _tasbihCubit.insertTasbih(

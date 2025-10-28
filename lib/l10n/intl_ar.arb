@@ -93,5 +93,7 @@
   "minutes": "دقيقة",
   "every": "كل",
   "hourly": "كل ساعة",
-  "everyMinute": "كل دقيقة"
+  "everyMinute": "كل دقيقة",
+   "daily_target": "الهدف اليومي",
+  "daily_target_optional": "الهدف اليومي (اختياري)"
 }

@@ -60,6 +60,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "continue_word": MessageLookupByLibrary.simpleMessage("أكمل"),
     "count_optional": MessageLookupByLibrary.simpleMessage("العدد (اختياري)"),
     "current_location": MessageLookupByLibrary.simpleMessage("الموقع الحالي"),
+    "daily_target": MessageLookupByLibrary.simpleMessage("الهدف اليومي"),
+    "daily_target_optional": MessageLookupByLibrary.simpleMessage(
+      "الهدف اليومي (اختياري)",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
     "dhuhr": MessageLookupByLibrary.simpleMessage("الظهر"),

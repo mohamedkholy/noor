@@ -8,15 +8,15 @@ import 'package:noor/core/widgets/decorated_container.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/generated/l10n.dart';
 
-class AzkarSoundsWidget extends StatefulWidget {
+class AzanSoundsWidget extends StatefulWidget {
   final Function(String) onSoundChanged;
-  const AzkarSoundsWidget({super.key, required this.onSoundChanged});
+  const AzanSoundsWidget({super.key, required this.onSoundChanged});
 
   @override
-  State<AzkarSoundsWidget> createState() => _AzkarSoundsWidgetState();
+  State<AzanSoundsWidget> createState() => _AzanSoundsWidgetState();
 }
 
-class _AzkarSoundsWidgetState extends State<AzkarSoundsWidget> {
+class _AzanSoundsWidgetState extends State<AzanSoundsWidget> {
   final AudioPlayer _player = AudioPlayer();
   Timer? _timer;
   late String sound = context.read<SettingsCubit>().getAzanSound();

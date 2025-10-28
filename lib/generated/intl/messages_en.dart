@@ -62,6 +62,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "current_location": MessageLookupByLibrary.simpleMessage(
       "Current Location",
     ),
+    "daily_target": MessageLookupByLibrary.simpleMessage("Daily Target"),
+    "daily_target_optional": MessageLookupByLibrary.simpleMessage(
+      "Daily Target (optional)",
+    ),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
     "dhuhr": MessageLookupByLibrary.simpleMessage("Dhuhr"),

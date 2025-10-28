@@ -26,8 +26,45 @@ class $TasbihsTable extends Tasbihs with TableInfo<$TasbihsTable, Tasbih> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
-  List<GeneratedColumn> get $columns => [zekr, count];
+  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
+    'date',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _dailyTargetMeta = const VerificationMeta(
+    'dailyTarget',
+  );
+  @override
+  late final GeneratedColumn<int> dailyTarget = GeneratedColumn<int>(
+    'daily_target',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _dailyCountMeta = const VerificationMeta(
+    'dailyCount',
+  );
+  @override
+  late final GeneratedColumn<int> dailyCount = GeneratedColumn<int>(
+    'daily_count',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    zekr,
+    count,
+    date,
+    dailyTarget,
+    dailyCount,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -56,6 +93,27 @@ class $TasbihsTable extends Tasbihs with TableInfo<$TasbihsTable, Tasbih> {
     } else if (isInserting) {
       context.missing(_countMeta);
     }
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    }
+    if (data.containsKey('daily_target')) {
+      context.handle(
+        _dailyTargetMeta,
+        dailyTarget.isAcceptableOrUnknown(
+          data['daily_target']!,
+          _dailyTargetMeta,
+        ),
+      );
+    }
+    if (data.containsKey('daily_count')) {
+      context.handle(
+        _dailyCountMeta,
+        dailyCount.isAcceptableOrUnknown(data['daily_count']!, _dailyCountMeta),
+      );
+    }
     return context;
   }
 
@@ -73,6 +131,18 @@ class $TasbihsTable extends Tasbihs with TableInfo<$TasbihsTable, Tasbih> {
         DriftSqlType.int,
         data['${effectivePrefix}count'],
       )!,
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date'],
+      ),
+      dailyTarget: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}daily_target'],
+      ),
+      dailyCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}daily_count'],
+      ),
     );
   }
 
@@ -85,17 +155,45 @@ class $TasbihsTable extends Tasbihs with TableInfo<$TasbihsTable, Tasbih> {
 class Tasbih extends DataClass implements Insertable<Tasbih> {
   final String zekr;
   final int count;
-  const Tasbih({required this.zekr, required this.count});
+  final DateTime? date;
+  final int? dailyTarget;
+  final int? dailyCount;
+  const Tasbih({
+    required this.zekr,
+    required this.count,
+    this.date,
+    this.dailyTarget,
+    this.dailyCount,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['zekr'] = Variable<String>(zekr);
     map['count'] = Variable<int>(count);
+    if (!nullToAbsent || date != null) {
+      map['date'] = Variable<DateTime>(date);
+    }
+    if (!nullToAbsent || dailyTarget != null) {
+      map['daily_target'] = Variable<int>(dailyTarget);
+    }
+    if (!nullToAbsent || dailyCount != null) {
+      map['daily_count'] = Variable<int>(dailyCount);
+    }
     return map;
   }
 
   TasbihsCompanion toCompanion(bool nullToAbsent) {
-    return TasbihsCompanion(zekr: Value(zekr), count: Value(count));
+    return TasbihsCompanion(
+      zekr: Value(zekr),
+      count: Value(count),
+      date: date == null && nullToAbsent ? const Value.absent() : Value(date),
+      dailyTarget: dailyTarget == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dailyTarget),
+      dailyCount: dailyCount == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dailyCount),
+    );
   }
 
   factory Tasbih.fromJson(
@@ -106,6 +204,9 @@ class Tasbih extends DataClass implements Insertable<Tasbih> {
     return Tasbih(
       zekr: serializer.fromJson<String>(json['zekr']),
       count: serializer.fromJson<int>(json['count']),
+      date: serializer.fromJson<DateTime?>(json['date']),
+      dailyTarget: serializer.fromJson<int?>(json['dailyTarget']),
+      dailyCount: serializer.fromJson<int?>(json['dailyCount']),
     );
   }
   @override
@@ -114,15 +215,36 @@ class Tasbih extends DataClass implements Insertable<Tasbih> {
     return <String, dynamic>{
       'zekr': serializer.toJson<String>(zekr),
       'count': serializer.toJson<int>(count),
+      'date': serializer.toJson<DateTime?>(date),
+      'dailyTarget': serializer.toJson<int?>(dailyTarget),
+      'dailyCount': serializer.toJson<int?>(dailyCount),
     };
   }
 
-  Tasbih copyWith({String? zekr, int? count}) =>
-      Tasbih(zekr: zekr ?? this.zekr, count: count ?? this.count);
+  Tasbih copyWith({
+    String? zekr,
+    int? count,
+    Value<DateTime?> date = const Value.absent(),
+    Value<int?> dailyTarget = const Value.absent(),
+    Value<int?> dailyCount = const Value.absent(),
+  }) => Tasbih(
+    zekr: zekr ?? this.zekr,
+    count: count ?? this.count,
+    date: date.present ? date.value : this.date,
+    dailyTarget: dailyTarget.present ? dailyTarget.value : this.dailyTarget,
+    dailyCount: dailyCount.present ? dailyCount.value : this.dailyCount,
+  );
   Tasbih copyWithCompanion(TasbihsCompanion data) {
     return Tasbih(
       zekr: data.zekr.present ? data.zekr.value : this.zekr,
       count: data.count.present ? data.count.value : this.count,
+      date: data.date.present ? data.date.value : this.date,
+      dailyTarget: data.dailyTarget.present
+          ? data.dailyTarget.value
+          : this.dailyTarget,
+      dailyCount: data.dailyCount.present
+          ? data.dailyCount.value
+          : this.dailyCount,
     );
   }
 
@@ -130,42 +252,65 @@ class Tasbih extends DataClass implements Insertable<Tasbih> {
   String toString() {
     return (StringBuffer('Tasbih(')
           ..write('zekr: $zekr, ')
-          ..write('count: $count')
+          ..write('count: $count, ')
+          ..write('date: $date, ')
+          ..write('dailyTarget: $dailyTarget, ')
+          ..write('dailyCount: $dailyCount')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(zekr, count);
+  int get hashCode => Object.hash(zekr, count, date, dailyTarget, dailyCount);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Tasbih && other.zekr == this.zekr && other.count == this.count);
+      (other is Tasbih &&
+          other.zekr == this.zekr &&
+          other.count == this.count &&
+          other.date == this.date &&
+          other.dailyTarget == this.dailyTarget &&
+          other.dailyCount == this.dailyCount);
 }
 
 class TasbihsCompanion extends UpdateCompanion<Tasbih> {
   final Value<String> zekr;
   final Value<int> count;
+  final Value<DateTime?> date;
+  final Value<int?> dailyTarget;
+  final Value<int?> dailyCount;
   final Value<int> rowid;
   const TasbihsCompanion({
     this.zekr = const Value.absent(),
     this.count = const Value.absent(),
+    this.date = const Value.absent(),
+    this.dailyTarget = const Value.absent(),
+    this.dailyCount = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   TasbihsCompanion.insert({
     required String zekr,
     required int count,
+    this.date = const Value.absent(),
+    this.dailyTarget = const Value.absent(),
+    this.dailyCount = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : zekr = Value(zekr),
        count = Value(count);
   static Insertable<Tasbih> custom({
     Expression<String>? zekr,
     Expression<int>? count,
+    Expression<DateTime>? date,
+    Expression<int>? dailyTarget,
+    Expression<int>? dailyCount,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (zekr != null) 'zekr': zekr,
       if (count != null) 'count': count,
+      if (date != null) 'date': date,
+      if (dailyTarget != null) 'daily_target': dailyTarget,
+      if (dailyCount != null) 'daily_count': dailyCount,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -173,11 +318,17 @@ class TasbihsCompanion extends UpdateCompanion<Tasbih> {
   TasbihsCompanion copyWith({
     Value<String>? zekr,
     Value<int>? count,
+    Value<DateTime?>? date,
+    Value<int?>? dailyTarget,
+    Value<int?>? dailyCount,
     Value<int>? rowid,
   }) {
     return TasbihsCompanion(
       zekr: zekr ?? this.zekr,
       count: count ?? this.count,
+      date: date ?? this.date,
+      dailyTarget: dailyTarget ?? this.dailyTarget,
+      dailyCount: dailyCount ?? this.dailyCount,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -191,6 +342,15 @@ class TasbihsCompanion extends UpdateCompanion<Tasbih> {
     if (count.present) {
       map['count'] = Variable<int>(count.value);
     }
+    if (date.present) {
+      map['date'] = Variable<DateTime>(date.value);
+    }
+    if (dailyTarget.present) {
+      map['daily_target'] = Variable<int>(dailyTarget.value);
+    }
+    if (dailyCount.present) {
+      map['daily_count'] = Variable<int>(dailyCount.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -202,6 +362,9 @@ class TasbihsCompanion extends UpdateCompanion<Tasbih> {
     return (StringBuffer('TasbihsCompanion(')
           ..write('zekr: $zekr, ')
           ..write('count: $count, ')
+          ..write('date: $date, ')
+          ..write('dailyTarget: $dailyTarget, ')
+          ..write('dailyCount: $dailyCount, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -223,12 +386,18 @@ typedef $$TasbihsTableCreateCompanionBuilder =
     TasbihsCompanion Function({
       required String zekr,
       required int count,
+      Value<DateTime?> date,
+      Value<int?> dailyTarget,
+      Value<int?> dailyCount,
       Value<int> rowid,
     });
 typedef $$TasbihsTableUpdateCompanionBuilder =
     TasbihsCompanion Function({
       Value<String> zekr,
       Value<int> count,
+      Value<DateTime?> date,
+      Value<int?> dailyTarget,
+      Value<int?> dailyCount,
       Value<int> rowid,
     });
 
@@ -248,6 +417,21 @@ class $$TasbihsTableFilterComposer
 
   ColumnFilters<int> get count => $composableBuilder(
     column: $table.count,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get dailyTarget => $composableBuilder(
+    column: $table.dailyTarget,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get dailyCount => $composableBuilder(
+    column: $table.dailyCount,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -270,6 +454,21 @@ class $$TasbihsTableOrderingComposer
     column: $table.count,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get dailyTarget => $composableBuilder(
+    column: $table.dailyTarget,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get dailyCount => $composableBuilder(
+    column: $table.dailyCount,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$TasbihsTableAnnotationComposer
@@ -286,6 +485,19 @@ class $$TasbihsTableAnnotationComposer
 
   GeneratedColumn<int> get count =>
       $composableBuilder(column: $table.count, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<int> get dailyTarget => $composableBuilder(
+    column: $table.dailyTarget,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get dailyCount => $composableBuilder(
+    column: $table.dailyCount,
+    builder: (column) => column,
+  );
 }
 
 class $$TasbihsTableTableManager
@@ -318,16 +530,32 @@ class $$TasbihsTableTableManager
               ({
                 Value<String> zekr = const Value.absent(),
                 Value<int> count = const Value.absent(),
+                Value<DateTime?> date = const Value.absent(),
+                Value<int?> dailyTarget = const Value.absent(),
+                Value<int?> dailyCount = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
-              }) => TasbihsCompanion(zekr: zekr, count: count, rowid: rowid),
+              }) => TasbihsCompanion(
+                zekr: zekr,
+                count: count,
+                date: date,
+                dailyTarget: dailyTarget,
+                dailyCount: dailyCount,
+                rowid: rowid,
+              ),
           createCompanionCallback:
               ({
                 required String zekr,
                 required int count,
+                Value<DateTime?> date = const Value.absent(),
+                Value<int?> dailyTarget = const Value.absent(),
+                Value<int?> dailyCount = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => TasbihsCompanion.insert(
                 zekr: zekr,
                 count: count,
+                date: date,
+                dailyTarget: dailyTarget,
+                dailyCount: dailyCount,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
