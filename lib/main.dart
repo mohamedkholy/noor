@@ -9,6 +9,7 @@ import 'package:noor/core/logic/language_cubit.dart';
 import 'package:noor/core/notifications/notifications_manager.dart';
 import 'package:noor/core/routing/app_router.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/generated/l10n.dart';
 
 void main() async {
@@ -17,7 +18,14 @@ void main() async {
   await getIt<NotificationsManager>().init();
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => getIt<LanguageCubit>())],
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<LanguageCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<NavigationCubit>(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );

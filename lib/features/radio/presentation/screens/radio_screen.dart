@@ -24,9 +24,9 @@ class _RadioScreenState extends State<RadioScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: MyAppBar(title: S.of(context).radio),
-      body: SafeArea(
+      body: const SafeArea(
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [SizedBox(height: 24), RadioReaderListView()],
           ),

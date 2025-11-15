@@ -37,10 +37,7 @@ class AppRouter {
     switch (settings.name) {
       case MyRoutes.navigation:
         return _createRoute(
-          BlocProvider(
-            create: (context) => getIt<NavigationCubit>(),
-            child: const NavigationScreen(),
-          ),
+          const NavigationScreen(),
           settings,
         );
       case MyRoutes.reading:

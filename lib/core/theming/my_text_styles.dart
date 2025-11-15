@@ -11,7 +11,7 @@ abstract class MyTextStyles {
 
   static const fontAmiriBold = TextStyle(
     fontFamily: "Amiri",
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.bold,  
   );
 
   static const font15RegularGrey = TextStyle(

@@ -4,6 +4,7 @@ import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/widgets/ayah_of_the_day_widget.dart';
+import 'package:noor/features/home/ui/widgets/current_radio_track_widget.dart';
 import 'package:noor/features/home/ui/widgets/date_location_widget.dart';
 import 'package:noor/features/home/ui/widgets/features_row.dart';
 import 'package:noor/features/home/ui/widgets/hadith_of_the_day.dart';
@@ -69,6 +70,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: MyColors.primary,
                 child: Column(
                   children: [
+                    ValueListenableBuilder(
+                      valueListenable: _navigationCubit.isPlaying,
+                      builder: (context, value, child) {
+                        return value
+                            ? const CurrentRadioTrackWidget()
+                            : const SizedBox();
+                      },
+                    ),
                     const NextPrayerCountDown(),
                     IntrinsicHeight(
                       child: Container(

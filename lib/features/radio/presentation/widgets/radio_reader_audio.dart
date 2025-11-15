@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/features/radio/data/model/radio_data.dart';
 import 'package:noor/features/radio/presentation/widgets/svg_icon.dart';
 
@@ -23,7 +25,7 @@ class RadioReaderAudio extends StatefulWidget {
 }
 
 class _RadioReaderAudioState extends State<RadioReaderAudio> {
-  final AudioPlayer audioPlayer = AudioPlayer();
+  late final AudioPlayer audioPlayer = context.read<NavigationCubit>().audioPlayer;
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
@@ -34,7 +36,7 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
   @override
   void initState() {
     super.initState();
-
+    context.read<NavigationCubit>().track = widget.radioData;
     togglePlayPause(widget.radioData.url!, false);
 
     durationSub = audioPlayer.durationStream.listen((d) {
@@ -76,7 +78,6 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
     durationSub?.cancel();
     positionSub?.cancel();
     completeSub?.cancel();
-    audioPlayer.dispose();
     super.dispose();
   }
 

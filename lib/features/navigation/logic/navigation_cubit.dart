@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/notifications/notifications_manager.dart';
@@ -12,6 +13,7 @@ import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
 import 'package:noor/features/navigation/data/repos/navigation_repo.dart';
 import 'package:noor/features/navigation/logic/navigation_state.dart';
+import 'package:noor/features/radio/data/model/radio_data.dart';
 import 'package:noor/features/settings/data/models/azkar_type.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,8 +21,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 @injectable
 class NavigationCubit extends Cubit<NavigationState> {
   final NavigationRepo _navigationRepo;
+  final AudioPlayer audioPlayer = AudioPlayer();
+  RadioData track = RadioData(name: "", url: "");
+  final ValueNotifier<bool> isPlaying = ValueNotifier(false);
 
-  NavigationCubit(this._navigationRepo) : super(NavigationInitial());
+  NavigationCubit(this._navigationRepo) : super(NavigationInitial()) {
+    audioPlayer.playerStateStream.listen((state) {
+      isPlaying.value = state.playing;
+    });
+  }
 
   Future<void> askForPermissions() async {
     await getIt<NotificationsManager>().requestPermission();
