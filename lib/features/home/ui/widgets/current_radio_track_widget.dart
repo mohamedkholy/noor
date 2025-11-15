@@ -15,6 +15,11 @@ class _CurrentRadioTrackWidgetState extends State<CurrentRadioTrackWidget> {
   late final NavigationCubit _navigationCubit = context.read();
 
   void _togglePlayPause() {
+    if (isPlaying) {
+      _navigationCubit.audioPlayer.pause();
+    } else {
+      _navigationCubit.audioPlayer.play();
+    }
     setState(() {
       isPlaying = !isPlaying;
     });
@@ -74,18 +79,19 @@ class _CurrentRadioTrackWidgetState extends State<CurrentRadioTrackWidget> {
             ),
           ),
 
-          // IconButton(
-          //   onPressed: _togglePlayPause,
-          //   icon: Icon(
-          //     isPlaying ? Icons.pause_circle_filled : Icons.play_circle_filled,
-          //   ),
-          //   color: Colors.white,
-          //   iconSize: 40,
-          // ),
-          // const SizedBox(width: 12),
+          IconButton(
+            onPressed: _togglePlayPause,
+            icon: Icon(
+              isPlaying ? Icons.pause_circle_filled : Icons.play_circle_filled,
+            ),
+            color: Colors.white,
+            iconSize: 40,
+          ),
+          const SizedBox(width: 12),
           IconButton(
             onPressed: () {
               _navigationCubit.audioPlayer.stop();
+              _navigationCubit.isPlaying.value = false;
               _togglePlayPause();
             },
             icon: const Icon(Icons.close, color: Colors.white, size: 25),

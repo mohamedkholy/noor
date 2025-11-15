@@ -27,7 +27,9 @@ class NavigationCubit extends Cubit<NavigationState> {
 
   NavigationCubit(this._navigationRepo) : super(NavigationInitial()) {
     audioPlayer.playerStateStream.listen((state) {
-      isPlaying.value = state.playing;
+      if (state.playing) {
+        isPlaying.value = true;
+      }
     });
   }
 

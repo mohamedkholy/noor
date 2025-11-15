@@ -1,11 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:flutter/material.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/features/radio/data/model/radio_data.dart';
-import 'package:noor/features/radio/presentation/widgets/svg_icon.dart';
 
 class RadioReaderAudio extends StatefulWidget {
   final RadioData radioData;
@@ -25,7 +24,9 @@ class RadioReaderAudio extends StatefulWidget {
 }
 
 class _RadioReaderAudioState extends State<RadioReaderAudio> {
-  late final AudioPlayer audioPlayer = context.read<NavigationCubit>().audioPlayer;
+  late final AudioPlayer audioPlayer = context
+      .read<NavigationCubit>()
+      .audioPlayer;
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
@@ -50,7 +51,7 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
     });
 
     completeSub = audioPlayer.playerStateStream.listen((event) {
-      if(event.processingState == ProcessingState.ready){
+      if (event.processingState == ProcessingState.ready) {
         setState(() {
           isPlaying = true;
         });
@@ -91,6 +92,7 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
         });
       } else {
         if (isPlaying) {
+          context.read<NavigationCubit>().isPlaying.value = false;
           await audioPlayer.pause();
           setState(() => isPlaying = false);
         } else {
@@ -138,9 +140,9 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
               onTap: () {
                 changeRadioRight(widget.radioData);
               },
-              child: Icon(Icons.skip_previous),
+              child: const Icon(Icons.skip_previous),
             ),
-            SizedBox(width: 24),
+            const SizedBox(width: 24),
             InkWell(
               onTap: () {
                 togglePlayPause(widget.radioData.url!, false);
@@ -166,17 +168,17 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
                 ),
               ),
             ),
-            SizedBox(width: 24),
+            const SizedBox(width: 24),
             InkWell(
               onTap: () {
                 changeRadioLeft(widget.radioData);
               },
-              child: Icon(Icons.skip_next),
+              child: const Icon(Icons.skip_next),
             ),
           ],
         ),
 
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
 
         // شريط الوقت
         // Slider(
@@ -188,12 +190,12 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
         //     // await audioPlayer.seek(newPosition);
         //   },
         // ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Divider(color: Colors.black, height: 5, thickness: 2),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [Text(formatTime(position)), Text(formatTime(duration))],
@@ -203,17 +205,15 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.volume_down, color: Colors.black),
+            const Icon(Icons.volume_down, color: Colors.black),
             Slider(
               value: volume,
-              min: 0,
-              max: 1,
               onChanged: (value) {
                 setState(() => volume = value);
                 audioPlayer.setVolume(value);
               },
             ),
-            Icon(Icons.volume_up, color: Colors.black),
+            const Icon(Icons.volume_up, color: Colors.black),
           ],
         ),
       ],
