@@ -95,5 +95,6 @@
   "hourly": "كل ساعة",
   "everyMinute": "كل دقيقة",
    "daily_target": "الهدف اليومي",
-  "daily_target_optional": "الهدف اليومي (اختياري)"
+  "daily_target_optional": "الهدف اليومي (اختياري)",
+  "settingsSaved": "تم حفظ الإعدادات"
 }

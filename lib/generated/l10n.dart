@@ -763,6 +763,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Settings saved`
+  String get settingsSaved {
+    return Intl.message(
+      'Settings saved',
+      name: 'settingsSaved',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

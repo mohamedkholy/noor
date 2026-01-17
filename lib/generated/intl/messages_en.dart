@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendTimeout": MessageLookupByLibrary.simpleMessage("Send request timeout"),
     "serverError": MessageLookupByLibrary.simpleMessage("Server error:"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+    "settingsSaved": MessageLookupByLibrary.simpleMessage("Settings saved"),
     "shorok": MessageLookupByLibrary.simpleMessage("Shorok"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("Sleeping Azkar"),
     "start_navigation": MessageLookupByLibrary.simpleMessage(

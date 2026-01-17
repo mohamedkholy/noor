@@ -62,7 +62,7 @@ dependencies:
   visibility_detector: ^0.4.0+2
   shimmer: ^3.0.0
   skeletonizer: ^2.1.0+1
-  assets_cleaner: ^0.1.5+12
+  fluttertoast: ^9.0.0
 
 dev_dependencies:
   build_runner: ^2.6.0

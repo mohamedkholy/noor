@@ -94,6 +94,7 @@
     "hourly": "Hourly",
     "everyMinute": "Every Minute",
     "daily_target": "Daily Target",
-    "daily_target_optional": "Daily Target (optional)"
+    "daily_target_optional": "Daily Target (optional)",
+    "settingsSaved": "Settings saved"
 
 }

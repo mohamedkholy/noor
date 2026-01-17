@@ -147,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "serverError": MessageLookupByLibrary.simpleMessage("خطأ في الخادم: "),
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+    "settingsSaved": MessageLookupByLibrary.simpleMessage("تم حفظ الإعدادات"),
     "shorok": MessageLookupByLibrary.simpleMessage("الشروق"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("أذكار النوم"),
     "start_navigation": MessageLookupByLibrary.simpleMessage("بدء التنقل"),

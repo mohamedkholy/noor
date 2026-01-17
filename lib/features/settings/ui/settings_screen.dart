@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/helpers/ui_helper.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
@@ -45,6 +46,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           IconButton(
             icon: const Icon(Icons.save, color: Colors.white, size: 30),
             onPressed: () {
+              UiHelper.showToast(
+                text: S.of(context).settingsSaved,
+                state: ToastStates.success,
+              );
               Navigator.pop(context);
             },
           ),
