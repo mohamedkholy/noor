@@ -82,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "field_is_required": MessageLookupByLibrary.simpleMessage(
       "Field is required",
     ),
+    "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "hadith": MessageLookupByLibrary.simpleMessage("Hadith"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage(
       "Hadith of the Day",
@@ -95,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "km": MessageLookupByLibrary.simpleMessage("KM"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last_read": MessageLookupByLibrary.simpleMessage("Last Read"),
+    "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
     "location": MessageLookupByLibrary.simpleMessage("Location"),
     "location_disabled": MessageLookupByLibrary.simpleMessage(
       "Location service disabled",
@@ -115,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mushafStyle": MessageLookupByLibrary.simpleMessage("Mushaf"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("Near mosque"),
     "nearby_mosques": MessageLookupByLibrary.simpleMessage("Nearby Mosques"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
     "noInternetConnection": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
@@ -130,10 +133,130 @@ class MessageLookup extends MessageLookupByLibrary {
     "notification_time": MessageLookupByLibrary.simpleMessage(
       "Notification Time",
     ),
+    "onboarding_access_settings_desc": MessageLookupByLibrary.simpleMessage(
+      "Access settings from the main menu",
+    ),
+    "onboarding_automatic_location_desc": MessageLookupByLibrary.simpleMessage(
+      "Automatic location for accurate prayer times",
+    ),
+    "onboarding_azan_sound_desc1": MessageLookupByLibrary.simpleMessage(
+      "Makkah & Madinah masjid recitations",
+    ),
+    "onboarding_azan_sound_desc2": MessageLookupByLibrary.simpleMessage(
+      "Famous reciters like Mishary Alafasy",
+    ),
+    "onboarding_azan_sound_desc3": MessageLookupByLibrary.simpleMessage(
+      "Different regional styles available",
+    ),
+    "onboarding_azan_sound_desc4": MessageLookupByLibrary.simpleMessage(
+      "Preview sounds before selecting",
+    ),
+    "onboarding_azan_sound_label": MessageLookupByLibrary.simpleMessage(
+      "Azan Sound",
+    ),
+    "onboarding_azan_sounds_description": MessageLookupByLibrary.simpleMessage(
+      "Choose your favorite azan recitation",
+    ),
+    "onboarding_azan_sounds_title": MessageLookupByLibrary.simpleMessage(
+      "Azan Sounds",
+    ),
+    "onboarding_customizable_settings_desc":
+        MessageLookupByLibrary.simpleMessage(
+          "All settings are customizable anytime",
+        ),
+    "onboarding_customizable_timing_desc": MessageLookupByLibrary.simpleMessage(
+      "Customizable timing for your routine",
+    ),
+    "onboarding_daily_azkar_description": MessageLookupByLibrary.simpleMessage(
+      "Schedule morning, evening, and sleeping remembrances",
+    ),
+    "onboarding_daily_azkar_title": MessageLookupByLibrary.simpleMessage(
+      "Daily Azkar",
+    ),
+    "onboarding_different_remembrance_types_desc":
+        MessageLookupByLibrary.simpleMessage(
+          "Choose from different remembrance types",
+        ),
+    "onboarding_evening_azkar_desc": MessageLookupByLibrary.simpleMessage(
+      "Evening Azkar - End your day with remembrance",
+    ),
+    "onboarding_every_minute_dhikr_desc": MessageLookupByLibrary.simpleMessage(
+      "Every-minute dhikr options",
+    ),
+    "onboarding_hourly_reminders_desc": MessageLookupByLibrary.simpleMessage(
+      "Hourly reminders for spiritual connection",
+    ),
+    "onboarding_language_label": MessageLookupByLibrary.simpleMessage(
+      "Language",
+    ),
+    "onboarding_language_setup_description":
+        MessageLookupByLibrary.simpleMessage("Customize your app experience"),
+    "onboarding_language_setup_title": MessageLookupByLibrary.simpleMessage(
+      "Language & Settings",
+    ),
+    "onboarding_morning_azkar_desc": MessageLookupByLibrary.simpleMessage(
+      "Morning Azkar - Start your day with gratitude",
+    ),
+    "onboarding_periodic_azkar_label": MessageLookupByLibrary.simpleMessage(
+      "Periodic Azkar",
+    ),
+    "onboarding_periodic_reminders_description":
+        MessageLookupByLibrary.simpleMessage(
+          "Stay connected throughout the day with periodic dhikr",
+        ),
+    "onboarding_periodic_reminders_title": MessageLookupByLibrary.simpleMessage(
+      "Periodic Reminders",
+    ),
+    "onboarding_prayer_asr_desc": MessageLookupByLibrary.simpleMessage(
+      "Asr (Afternoon) - Late afternoon prayer",
+    ),
+    "onboarding_prayer_dhuhr_desc": MessageLookupByLibrary.simpleMessage(
+      "Dhuhr (Noon) - Midday prayer reminder",
+    ),
+    "onboarding_prayer_fajr_desc": MessageLookupByLibrary.simpleMessage(
+      "Fajr (Dawn) - Start your day with prayer",
+    ),
+    "onboarding_prayer_isha_desc": MessageLookupByLibrary.simpleMessage(
+      "Isha (Night) - Complete your daily prayers",
+    ),
+    "onboarding_prayer_maghrib_desc": MessageLookupByLibrary.simpleMessage(
+      "Maghrib (Sunset) - Evening prayer time",
+    ),
+    "onboarding_prayer_notifications_description":
+        MessageLookupByLibrary.simpleMessage(
+          "Enable notifications for all five daily prayers",
+        ),
+    "onboarding_prayer_notifications_title":
+        MessageLookupByLibrary.simpleMessage("Prayer Notifications"),
+    "onboarding_preferences_saved_desc": MessageLookupByLibrary.simpleMessage(
+      "Your preferences are saved automatically",
+    ),
+    "onboarding_sleeping_azkar_desc": MessageLookupByLibrary.simpleMessage(
+      "Sleeping Azkar - Protection before sleep",
+    ),
+    "onboarding_switch_languages_desc": MessageLookupByLibrary.simpleMessage(
+      "Switch between English and Arabic",
+    ),
+    "onboarding_welcome_description": MessageLookupByLibrary.simpleMessage(
+      "Your companion for prayer times and daily remembrances",
+    ),
+    "onboarding_welcome_point1": MessageLookupByLibrary.simpleMessage(
+      "Never miss prayer times with accurate notifications",
+    ),
+    "onboarding_welcome_point2": MessageLookupByLibrary.simpleMessage(
+      "Customize your azan sounds from renowned reciters",
+    ),
+    "onboarding_welcome_point3": MessageLookupByLibrary.simpleMessage(
+      "Stay connected with daily azkar reminders",
+    ),
+    "onboarding_welcome_title": MessageLookupByLibrary.simpleMessage(
+      "Welcome to Noor",
+    ),
     "open_settings": MessageLookupByLibrary.simpleMessage("Open Settings"),
     "perodicAzkarSettings": MessageLookupByLibrary.simpleMessage(
       "Perodic Azkar Settings",
     ),
+    "previous": MessageLookupByLibrary.simpleMessage("Previous"),
     "qibla": MessageLookupByLibrary.simpleMessage("Qibla"),
     "quran": MessageLookupByLibrary.simpleMessage("Quran"),
     "radio": MessageLookupByLibrary.simpleMessage("Radio"),
@@ -157,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "settingsSaved": MessageLookupByLibrary.simpleMessage("Settings saved"),
     "shorok": MessageLookupByLibrary.simpleMessage("Shorok"),
+    "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("Sleeping Azkar"),
     "start_navigation": MessageLookupByLibrary.simpleMessage(
       "Start Navigation",

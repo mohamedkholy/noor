@@ -1,5 +1,6 @@
 abstract class MyRoutes {
   static const String navigation = '/';
+  static const String onboarding = '/onboarding';
   static const String quran = '/quran';
   static const String reading = '/reading';
   static const String azkar = '/azkar';

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/tasbih/tasbih_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/routing/my_routes.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/azkar/logic/azkar_cubit.dart';
 import 'package:noor/features/azkar/ui/azkar_category_screen.dart';
 import 'package:noor/features/azkar/ui/azkar_screen.dart';
@@ -14,10 +15,11 @@ import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
 import 'package:noor/features/hadith/ui/hadith_screen.dart';
 import 'package:noor/features/location/logic/location_cubit.dart';
 import 'package:noor/features/location/ui/location_screen.dart';
-import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/features/navigation/ui/navigation_screen.dart';
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
 import 'package:noor/features/near_mosque/ui/near_mosque_screen.dart';
+import 'package:noor/features/onboarding/logic/onboarding_cubit.dart';
+import 'package:noor/features/onboarding/ui/onboarding_screen.dart';
 import 'package:noor/features/qibla/ui/qibla_screen.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
@@ -29,17 +31,37 @@ import 'package:noor/features/settings/ui/settings_screen.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/tasbih_screen.dart';
 import 'package:noor/features/tasbih/ui/zekr_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppRouter {
   Route? getRoutes(RouteSettings settings) {
     final args = settings.arguments;
 
+    if (settings.name == '/' &&
+        (getIt<SharedPreferences>().getBool(
+              SharedPreferencesKeys.onboardingCompleted,
+            ) ==
+            null)) {
+      return _createRoute(
+        BlocProvider(
+          create: (context) => getIt<OnboardingCubit>(),
+          child: const OnboardingScreen(),
+        ),
+        settings,
+      );
+    }
+
     switch (settings.name) {
-      case MyRoutes.navigation:
+      case MyRoutes.onboarding:
         return _createRoute(
-          const NavigationScreen(),
+          BlocProvider(
+            create: (context) => getIt<OnboardingCubit>(),
+            child: const OnboardingScreen(),
+          ),
           settings,
         );
+      case MyRoutes.navigation:
+        return _createRoute(const NavigationScreen(), settings);
       case MyRoutes.reading:
         return _createRoute(
           BlocProvider(

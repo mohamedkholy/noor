@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "everyMinute": MessageLookupByLibrary.simpleMessage("كل دقيقة"),
     "fajr": MessageLookupByLibrary.simpleMessage("الفجر"),
     "field_is_required": MessageLookupByLibrary.simpleMessage("الحقل مطلوب"),
+    "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
     "hadith": MessageLookupByLibrary.simpleMessage("حديث"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage("حديث اليوم"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "km": MessageLookupByLibrary.simpleMessage("كم"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "last_read": MessageLookupByLibrary.simpleMessage("آخر تلاوة"),
+    "loading": MessageLookupByLibrary.simpleMessage("جاري التحميل..."),
     "location": MessageLookupByLibrary.simpleMessage("الموقع"),
     "location_disabled": MessageLookupByLibrary.simpleMessage(
       "خدمة الموقع معطلة",
@@ -107,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mushafStyle": MessageLookupByLibrary.simpleMessage("مصحف"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("أقرب مسجد"),
     "nearby_mosques": MessageLookupByLibrary.simpleMessage("المساجد القريبة"),
+    "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "noInternetConnection": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
@@ -120,10 +123,126 @@ class MessageLookup extends MessageLookupByLibrary {
       "لم يتم العثور على مساجد قريبة",
     ),
     "notification_time": MessageLookupByLibrary.simpleMessage("وقت الإشعارات"),
+    "onboarding_access_settings_desc": MessageLookupByLibrary.simpleMessage(
+      "الوصول إلى الإعدادات من القائمة الرئيسية",
+    ),
+    "onboarding_automatic_location_desc": MessageLookupByLibrary.simpleMessage(
+      "موقع تلقائي لمواقيت الصلاة الدقيقة",
+    ),
+    "onboarding_azan_sound_desc1": MessageLookupByLibrary.simpleMessage(
+      "تلاوات من مكة والمدينة المنورة",
+    ),
+    "onboarding_azan_sound_desc2": MessageLookupByLibrary.simpleMessage(
+      "قراء مشهورون مثل مشاري العفاسي",
+    ),
+    "onboarding_azan_sound_desc3": MessageLookupByLibrary.simpleMessage(
+      "أنماط إقليمية مختلفة متاحة",
+    ),
+    "onboarding_azan_sound_desc4": MessageLookupByLibrary.simpleMessage(
+      "معاينة الأصوات قبل الاختيار",
+    ),
+    "onboarding_azan_sound_label": MessageLookupByLibrary.simpleMessage(
+      "صوت الأذان",
+    ),
+    "onboarding_azan_sounds_description": MessageLookupByLibrary.simpleMessage(
+      "اختر تلاوة الأذان المفضلة لديك",
+    ),
+    "onboarding_azan_sounds_title": MessageLookupByLibrary.simpleMessage(
+      "أصوات الأذان",
+    ),
+    "onboarding_customizable_settings_desc":
+        MessageLookupByLibrary.simpleMessage(
+          "جميع الإعدادات قابلة للتخصيص في أي وقت",
+        ),
+    "onboarding_customizable_timing_desc": MessageLookupByLibrary.simpleMessage(
+      "توقيت قابل للتخصيص لروتينك",
+    ),
+    "onboarding_daily_azkar_description": MessageLookupByLibrary.simpleMessage(
+      "جدولة أذكار الصباح والمساء والنوم",
+    ),
+    "onboarding_daily_azkar_title": MessageLookupByLibrary.simpleMessage(
+      "الأذكار اليومية",
+    ),
+    "onboarding_different_remembrance_types_desc":
+        MessageLookupByLibrary.simpleMessage("اختر من أنواع الأذكار المختلفة"),
+    "onboarding_evening_azkar_desc": MessageLookupByLibrary.simpleMessage(
+      "أذكار المساء - أنهِ يومك بالذكر",
+    ),
+    "onboarding_every_minute_dhikr_desc": MessageLookupByLibrary.simpleMessage(
+      "خيارات الذكر كل دقيقة",
+    ),
+    "onboarding_hourly_reminders_desc": MessageLookupByLibrary.simpleMessage(
+      "تذكيرات ساعية للاتصال الروحي",
+    ),
+    "onboarding_language_label": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "onboarding_language_setup_description":
+        MessageLookupByLibrary.simpleMessage("خصص تجربة التطبيق الخاصة بك"),
+    "onboarding_language_setup_title": MessageLookupByLibrary.simpleMessage(
+      "اللغة والإعدادات",
+    ),
+    "onboarding_morning_azkar_desc": MessageLookupByLibrary.simpleMessage(
+      "أذكار الصباح - ابدأ يومك بالشكر",
+    ),
+    "onboarding_periodic_azkar_label": MessageLookupByLibrary.simpleMessage(
+      "الأذكار المتكررة",
+    ),
+    "onboarding_periodic_reminders_description":
+        MessageLookupByLibrary.simpleMessage(
+          "ابقَ ذاكراً طوال اليوم بالأذكار المتكررة",
+        ),
+    "onboarding_periodic_reminders_title": MessageLookupByLibrary.simpleMessage(
+      "تذكيرات متكررة",
+    ),
+    "onboarding_prayer_asr_desc": MessageLookupByLibrary.simpleMessage(
+      "العصر - صلاة العصر المتأخرة",
+    ),
+    "onboarding_prayer_dhuhr_desc": MessageLookupByLibrary.simpleMessage(
+      "الظهر - تذكير صلاة الظهر",
+    ),
+    "onboarding_prayer_fajr_desc": MessageLookupByLibrary.simpleMessage(
+      "الفجر - ابدأ يومك بالصلاة",
+    ),
+    "onboarding_prayer_isha_desc": MessageLookupByLibrary.simpleMessage(
+      "العشاء - أكمل صلواتك اليومية",
+    ),
+    "onboarding_prayer_maghrib_desc": MessageLookupByLibrary.simpleMessage(
+      "المغرب - وقت صلاة المغرب",
+    ),
+    "onboarding_prayer_notifications_description":
+        MessageLookupByLibrary.simpleMessage(
+          "تفعيل الإشعارات للصلوات الخمس اليومية",
+        ),
+    "onboarding_prayer_notifications_title":
+        MessageLookupByLibrary.simpleMessage("إشعارات الصلاة"),
+    "onboarding_preferences_saved_desc": MessageLookupByLibrary.simpleMessage(
+      "يتم حفظ تفضيلاتك تلقائياً",
+    ),
+    "onboarding_sleeping_azkar_desc": MessageLookupByLibrary.simpleMessage(
+      "أذكار النوم - حماية قبل النوم",
+    ),
+    "onboarding_switch_languages_desc": MessageLookupByLibrary.simpleMessage(
+      "التبديل بين الإنجليزية والعربية",
+    ),
+    "onboarding_welcome_description": MessageLookupByLibrary.simpleMessage(
+      "رفيقك لمواقيت الصلاة والأذكار اليومية",
+    ),
+    "onboarding_welcome_point1": MessageLookupByLibrary.simpleMessage(
+      "لا تفوّتك مواقيت الصلاة مع الإشعارات الدقيقة",
+    ),
+    "onboarding_welcome_point2": MessageLookupByLibrary.simpleMessage(
+      "خصص أصوات الأذان من القراء المشهورين",
+    ),
+    "onboarding_welcome_point3": MessageLookupByLibrary.simpleMessage(
+      "ابقَ متصلاً بتذكيرات الأذكار اليومية",
+    ),
+    "onboarding_welcome_title": MessageLookupByLibrary.simpleMessage(
+      "مرحباً بك في نور",
+    ),
     "open_settings": MessageLookupByLibrary.simpleMessage("فتح الإعدادات"),
     "perodicAzkarSettings": MessageLookupByLibrary.simpleMessage(
       "إعدادات الأذكار المتكررة",
     ),
+    "previous": MessageLookupByLibrary.simpleMessage("السابق"),
     "qibla": MessageLookupByLibrary.simpleMessage("القبلة"),
     "quran": MessageLookupByLibrary.simpleMessage("قرآن"),
     "radio": MessageLookupByLibrary.simpleMessage("الإذاعات"),
@@ -149,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "settingsSaved": MessageLookupByLibrary.simpleMessage("تم حفظ الإعدادات"),
     "shorok": MessageLookupByLibrary.simpleMessage("الشروق"),
+    "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("أذكار النوم"),
     "start_navigation": MessageLookupByLibrary.simpleMessage("بدء التنقل"),
     "surah": MessageLookupByLibrary.simpleMessage("سورة"),

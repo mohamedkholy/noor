@@ -773,6 +773,421 @@ class S {
       args: [],
     );
   }
+
+  /// `Previous`
+  String get previous {
+    return Intl.message('Previous', name: 'previous', desc: '', args: []);
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message('Next', name: 'next', desc: '', args: []);
+  }
+
+  /// `Get Started`
+  String get getStarted {
+    return Intl.message('Get Started', name: 'getStarted', desc: '', args: []);
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message('Skip', name: 'skip', desc: '', args: []);
+  }
+
+  /// `Loading...`
+  String get loading {
+    return Intl.message('Loading...', name: 'loading', desc: '', args: []);
+  }
+
+  /// `Welcome to Noor`
+  String get onboarding_welcome_title {
+    return Intl.message(
+      'Welcome to Noor',
+      name: 'onboarding_welcome_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your companion for prayer times and daily remembrances`
+  String get onboarding_welcome_description {
+    return Intl.message(
+      'Your companion for prayer times and daily remembrances',
+      name: 'onboarding_welcome_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Never miss prayer times with accurate notifications`
+  String get onboarding_welcome_point1 {
+    return Intl.message(
+      'Never miss prayer times with accurate notifications',
+      name: 'onboarding_welcome_point1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customize your azan sounds from renowned reciters`
+  String get onboarding_welcome_point2 {
+    return Intl.message(
+      'Customize your azan sounds from renowned reciters',
+      name: 'onboarding_welcome_point2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stay connected with daily azkar reminders`
+  String get onboarding_welcome_point3 {
+    return Intl.message(
+      'Stay connected with daily azkar reminders',
+      name: 'onboarding_welcome_point3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prayer Notifications`
+  String get onboarding_prayer_notifications_title {
+    return Intl.message(
+      'Prayer Notifications',
+      name: 'onboarding_prayer_notifications_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable notifications for all five daily prayers`
+  String get onboarding_prayer_notifications_description {
+    return Intl.message(
+      'Enable notifications for all five daily prayers',
+      name: 'onboarding_prayer_notifications_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fajr (Dawn) - Start your day with prayer`
+  String get onboarding_prayer_fajr_desc {
+    return Intl.message(
+      'Fajr (Dawn) - Start your day with prayer',
+      name: 'onboarding_prayer_fajr_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dhuhr (Noon) - Midday prayer reminder`
+  String get onboarding_prayer_dhuhr_desc {
+    return Intl.message(
+      'Dhuhr (Noon) - Midday prayer reminder',
+      name: 'onboarding_prayer_dhuhr_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asr (Afternoon) - Late afternoon prayer`
+  String get onboarding_prayer_asr_desc {
+    return Intl.message(
+      'Asr (Afternoon) - Late afternoon prayer',
+      name: 'onboarding_prayer_asr_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maghrib (Sunset) - Evening prayer time`
+  String get onboarding_prayer_maghrib_desc {
+    return Intl.message(
+      'Maghrib (Sunset) - Evening prayer time',
+      name: 'onboarding_prayer_maghrib_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Isha (Night) - Complete your daily prayers`
+  String get onboarding_prayer_isha_desc {
+    return Intl.message(
+      'Isha (Night) - Complete your daily prayers',
+      name: 'onboarding_prayer_isha_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Azan Sounds`
+  String get onboarding_azan_sounds_title {
+    return Intl.message(
+      'Azan Sounds',
+      name: 'onboarding_azan_sounds_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose your favorite azan recitation`
+  String get onboarding_azan_sounds_description {
+    return Intl.message(
+      'Choose your favorite azan recitation',
+      name: 'onboarding_azan_sounds_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Makkah & Madinah masjid recitations`
+  String get onboarding_azan_sound_desc1 {
+    return Intl.message(
+      'Makkah & Madinah masjid recitations',
+      name: 'onboarding_azan_sound_desc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Famous reciters like Mishary Alafasy`
+  String get onboarding_azan_sound_desc2 {
+    return Intl.message(
+      'Famous reciters like Mishary Alafasy',
+      name: 'onboarding_azan_sound_desc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Different regional styles available`
+  String get onboarding_azan_sound_desc3 {
+    return Intl.message(
+      'Different regional styles available',
+      name: 'onboarding_azan_sound_desc3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preview sounds before selecting`
+  String get onboarding_azan_sound_desc4 {
+    return Intl.message(
+      'Preview sounds before selecting',
+      name: 'onboarding_azan_sound_desc4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily Azkar`
+  String get onboarding_daily_azkar_title {
+    return Intl.message(
+      'Daily Azkar',
+      name: 'onboarding_daily_azkar_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Schedule morning, evening, and sleeping remembrances`
+  String get onboarding_daily_azkar_description {
+    return Intl.message(
+      'Schedule morning, evening, and sleeping remembrances',
+      name: 'onboarding_daily_azkar_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Morning Azkar - Start your day with gratitude`
+  String get onboarding_morning_azkar_desc {
+    return Intl.message(
+      'Morning Azkar - Start your day with gratitude',
+      name: 'onboarding_morning_azkar_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Evening Azkar - End your day with remembrance`
+  String get onboarding_evening_azkar_desc {
+    return Intl.message(
+      'Evening Azkar - End your day with remembrance',
+      name: 'onboarding_evening_azkar_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sleeping Azkar - Protection before sleep`
+  String get onboarding_sleeping_azkar_desc {
+    return Intl.message(
+      'Sleeping Azkar - Protection before sleep',
+      name: 'onboarding_sleeping_azkar_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customizable timing for your routine`
+  String get onboarding_customizable_timing_desc {
+    return Intl.message(
+      'Customizable timing for your routine',
+      name: 'onboarding_customizable_timing_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Periodic Reminders`
+  String get onboarding_periodic_reminders_title {
+    return Intl.message(
+      'Periodic Reminders',
+      name: 'onboarding_periodic_reminders_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stay connected throughout the day with periodic dhikr`
+  String get onboarding_periodic_reminders_description {
+    return Intl.message(
+      'Stay connected throughout the day with periodic dhikr',
+      name: 'onboarding_periodic_reminders_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hourly reminders for spiritual connection`
+  String get onboarding_hourly_reminders_desc {
+    return Intl.message(
+      'Hourly reminders for spiritual connection',
+      name: 'onboarding_hourly_reminders_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Every-minute dhikr options`
+  String get onboarding_every_minute_dhikr_desc {
+    return Intl.message(
+      'Every-minute dhikr options',
+      name: 'onboarding_every_minute_dhikr_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose from different remembrance types`
+  String get onboarding_different_remembrance_types_desc {
+    return Intl.message(
+      'Choose from different remembrance types',
+      name: 'onboarding_different_remembrance_types_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Automatic location for accurate prayer times`
+  String get onboarding_automatic_location_desc {
+    return Intl.message(
+      'Automatic location for accurate prayer times',
+      name: 'onboarding_automatic_location_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language & Settings`
+  String get onboarding_language_setup_title {
+    return Intl.message(
+      'Language & Settings',
+      name: 'onboarding_language_setup_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customize your app experience`
+  String get onboarding_language_setup_description {
+    return Intl.message(
+      'Customize your app experience',
+      name: 'onboarding_language_setup_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch between English and Arabic`
+  String get onboarding_switch_languages_desc {
+    return Intl.message(
+      'Switch between English and Arabic',
+      name: 'onboarding_switch_languages_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All settings are customizable anytime`
+  String get onboarding_customizable_settings_desc {
+    return Intl.message(
+      'All settings are customizable anytime',
+      name: 'onboarding_customizable_settings_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Access settings from the main menu`
+  String get onboarding_access_settings_desc {
+    return Intl.message(
+      'Access settings from the main menu',
+      name: 'onboarding_access_settings_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your preferences are saved automatically`
+  String get onboarding_preferences_saved_desc {
+    return Intl.message(
+      'Your preferences are saved automatically',
+      name: 'onboarding_preferences_saved_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Azan Sound`
+  String get onboarding_azan_sound_label {
+    return Intl.message(
+      'Azan Sound',
+      name: 'onboarding_azan_sound_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Periodic Azkar`
+  String get onboarding_periodic_azkar_label {
+    return Intl.message(
+      'Periodic Azkar',
+      name: 'onboarding_periodic_azkar_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get onboarding_language_label {
+    return Intl.message(
+      'Language',
+      name: 'onboarding_language_label',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -95,4 +95,13 @@ class SharedPreferencesSettingsService {
     }
     return PerodicAzkarSettings.fromJson(jsonDecode(result));
   }
+
+  bool getOnboardingCompleted() {
+    final result = sp.getBool(SharedPreferencesKeys.onboardingCompleted);
+    return result ?? false;
+  }
+
+   Future<void> setOnboardingCompleted() async {
+    await sp.setBool(SharedPreferencesKeys.onboardingCompleted, true);
+  }
 }
