@@ -146,5 +146,13 @@
    "iqama_prayer": "إقامة الصلاة",
     "remember_allah": "أذكر الله",
     "hayya_alal_falah": "حي على الفلاح",
-    "time_of": "حان موعد "
+    "time_of": "حان موعد ",
+    "the_hereafter_store": "متجر الآخرة",
+    "sunnah_prayers": "صلوات السنن",
+    "sunnah":"سنة",
+    "fajr_sunnah":"سنة الفجر",
+    "before_dhuhr_sunnah":"سنة الظهر القبلية",
+    "after_dhuhr_sunnah":"سنة الظهر البعدية",
+    "maghrib_sunnah":"سنة المغرب",
+    "isha_sunnah":"سنة العشاء"
 }

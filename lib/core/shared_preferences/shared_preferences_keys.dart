@@ -13,4 +13,6 @@ abstract class SharedPreferencesKeys {
   static const String onboardingCompleted = "onboarding_completed";
   static const String zekrCounter = "zekr_counter";
   static const String iqamaNotificationSettings = "iqama_notification_settings";
+  static const String propertiesCount = "properties_count";
+  static const String sunanSetting = "sunan_setting";
 }

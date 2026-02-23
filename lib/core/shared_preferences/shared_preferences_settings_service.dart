@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
+import 'package:noor/features/properties/data/models/sunan_setting.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
@@ -128,5 +130,48 @@ class SharedPreferencesSettingsService {
       SharedPreferencesKeys.iqamaNotificationSettings,
       jsonEncode(state.toJson()),
     );
+  }
+
+  void saveSunanSetting(SunanSetting sunanSetting) {
+    sp.setString(
+      SharedPreferencesKeys.sunanSetting,
+      jsonEncode(sunanSetting.toJson()),
+    );
+  }
+
+  SunanSetting getSunanSetting() {
+    final result = sp.getString(SharedPreferencesKeys.sunanSetting);
+    if (result == null) {
+      return SunanSetting(
+        date: DateTime.now(),
+        fajrSunnah: false,
+        beforeDhuhrSunnah: false,
+        afterDhuhrSunnah: false,
+        maghribSunnah: false,
+        ishaSunnah: false,
+      );
+    }
+    final sunanSetting = SunanSetting.fromJson(jsonDecode(result));
+    if (DateUtils.dateOnly(sunanSetting.date) !=
+        DateUtils.dateOnly(DateTime.now())) {
+      return SunanSetting(
+        date: DateTime.now(),
+        fajrSunnah: false,
+        beforeDhuhrSunnah: false,
+        afterDhuhrSunnah: false,
+        maghribSunnah: false,
+        ishaSunnah: false,
+      );
+    }
+    return sunanSetting;
+  }
+
+  void savePropertiesCount(int value) {
+    sp.setInt(SharedPreferencesKeys.propertiesCount, value);
+  }
+
+  int getPropertiesCount() {
+    final result = sp.getInt(SharedPreferencesKeys.propertiesCount);
+    return result ?? 0;
   }
 }

@@ -109,6 +109,13 @@ class _FeaturesRowState extends State<FeaturesRow> {
         },
       ),
       (
+        S.of(context).the_hereafter_store,
+        Icons.store,
+        () {
+          Navigator.pushNamed(context, MyRoutes.store);
+        },
+      ),
+      (
         S.of(context).qibla,
         FontAwesomeIcons.compass,
         () {

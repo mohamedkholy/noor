@@ -1238,6 +1238,71 @@ class S {
   String get time_of {
     return Intl.message('Time of', name: 'time_of', desc: '', args: []);
   }
+
+  /// `The Hereafter Store`
+  String get the_hereafter_store {
+    return Intl.message(
+      'The Hereafter Store',
+      name: 'the_hereafter_store',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sunnah Prayers`
+  String get sunnah_prayers {
+    return Intl.message(
+      'Sunnah Prayers',
+      name: 'sunnah_prayers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sunnah`
+  String get sunnah {
+    return Intl.message('Sunnah', name: 'sunnah', desc: '', args: []);
+  }
+
+  /// `Fajr Sunnah`
+  String get fajr_sunnah {
+    return Intl.message('Fajr Sunnah', name: 'fajr_sunnah', desc: '', args: []);
+  }
+
+  /// `Before Dhuhr Sunnah`
+  String get before_dhuhr_sunnah {
+    return Intl.message(
+      'Before Dhuhr Sunnah',
+      name: 'before_dhuhr_sunnah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After Dhuhr Sunnah`
+  String get after_dhuhr_sunnah {
+    return Intl.message(
+      'After Dhuhr Sunnah',
+      name: 'after_dhuhr_sunnah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maghrib Sunnah`
+  String get maghrib_sunnah {
+    return Intl.message(
+      'Maghrib Sunnah',
+      name: 'maghrib_sunnah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Isha Sunnah`
+  String get isha_sunnah {
+    return Intl.message('Isha Sunnah', name: 'isha_sunnah', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -20,6 +20,8 @@ import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart';
 import 'package:noor/features/near_mosque/ui/near_mosque_screen.dart';
 import 'package:noor/features/onboarding/logic/onboarding_cubit.dart';
 import 'package:noor/features/onboarding/ui/onboarding_screen.dart';
+import 'package:noor/features/properties/logic/properties_cubit.dart';
+import 'package:noor/features/properties/ui/properties_screen.dart';
 import 'package:noor/features/qibla/ui/qibla_screen.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/quran_screen.dart';
@@ -28,6 +30,8 @@ import 'package:noor/features/radio/presentation/manager/cubit/radio_cubit.dart'
 import 'package:noor/features/radio/presentation/screens/radio_screen.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/settings_screen.dart';
+import 'package:noor/features/store/logic/store_cubit.dart';
+import 'package:noor/features/store/ui/store_screen.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/tasbih_screen.dart';
 import 'package:noor/features/tasbih/ui/zekr_screen.dart';
@@ -170,6 +174,22 @@ class AppRouter {
           BlocProvider(
             create: (context) => getIt<RadioCubit>(),
             child: const RadioScreen(),
+          ),
+          settings,
+        );
+      case MyRoutes.store:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<StoreCubit>(),
+            child: const StoreScreen(),
+          ),
+          settings,
+        );
+      case MyRoutes.properties:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<PropertiesCubit>(),
+            child: const PropertiesScreen(),
           ),
           settings,
         );

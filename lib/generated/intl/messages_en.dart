@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "aerial_distance": MessageLookupByLibrary.simpleMessage("Aerial Distance"),
+    "after_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
+      "After Dhuhr Sunnah",
+    ),
     "already_added": MessageLookupByLibrary.simpleMessage("Already added"),
     "app_language": MessageLookupByLibrary.simpleMessage("App Language"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
@@ -51,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Azkar Notifications",
     ),
     "beforeMidNight": MessageLookupByLibrary.simpleMessage("Midnight"),
+    "before_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
+      "Before Dhuhr Sunnah",
+    ),
     "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "calender": MessageLookupByLibrary.simpleMessage("Calender"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -82,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "every": MessageLookupByLibrary.simpleMessage("Every"),
     "everyMinute": MessageLookupByLibrary.simpleMessage("Every Minute"),
     "fajr": MessageLookupByLibrary.simpleMessage("Fajr"),
+    "fajr_sunnah": MessageLookupByLibrary.simpleMessage("Fajr Sunnah"),
     "field_is_required": MessageLookupByLibrary.simpleMessage(
       "Field is required",
     ),
@@ -100,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "iqama_prayer": MessageLookupByLibrary.simpleMessage("Iqama"),
     "isha": MessageLookupByLibrary.simpleMessage("Isha"),
+    "isha_sunnah": MessageLookupByLibrary.simpleMessage("Isha Sunnah"),
     "juz": MessageLookupByLibrary.simpleMessage("Juz"),
     "km": MessageLookupByLibrary.simpleMessage("KM"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -119,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Location Settings",
     ),
     "maghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
+    "maghrib_sunnah": MessageLookupByLibrary.simpleMessage("Maghrib Sunnah"),
     "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
     "minutes_before": MessageLookupByLibrary.simpleMessage("Minutes before"),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("Morning Azkar"),
@@ -294,8 +303,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "start_navigation": MessageLookupByLibrary.simpleMessage(
       "Start Navigation",
     ),
+    "sunnah": MessageLookupByLibrary.simpleMessage("Sunnah"),
+    "sunnah_prayers": MessageLookupByLibrary.simpleMessage("Sunnah Prayers"),
     "surah": MessageLookupByLibrary.simpleMessage("Surah"),
     "tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
+    "the_hereafter_store": MessageLookupByLibrary.simpleMessage(
+      "The Hereafter Store",
+    ),
     "the_tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
     "time_of": MessageLookupByLibrary.simpleMessage("Time of"),
     "unexpectedError": MessageLookupByLibrary.simpleMessage(

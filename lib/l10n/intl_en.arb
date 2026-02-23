@@ -145,5 +145,13 @@
     "iqama_prayer": "Iqama",
     "remember_allah": "Remember Allah",
     "hayya_alal_falah": "Hayyaalal Falah",
-    "time_of": "Time of"
+    "time_of": "Time of",
+    "the_hereafter_store": "The Hereafter Store",
+    "sunnah_prayers": "Sunnah Prayers",
+    "sunnah":"Sunnah",
+    "fajr_sunnah":"Fajr Sunnah",
+    "before_dhuhr_sunnah":"Before Dhuhr Sunnah",
+    "after_dhuhr_sunnah":"After Dhuhr Sunnah",
+    "maghrib_sunnah":"Maghrib Sunnah",
+    "isha_sunnah":"Isha Sunnah"
 }

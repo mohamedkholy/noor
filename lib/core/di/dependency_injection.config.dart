@@ -48,6 +48,9 @@ import 'package:noor/features/near_mosque/data/repos/near_mosque_repo.dart'
 import 'package:noor/features/near_mosque/logic/near_mosque_cubit.dart'
     as _i881;
 import 'package:noor/features/onboarding/logic/onboarding_cubit.dart' as _i287;
+import 'package:noor/features/properties/data/repos/properties_repo.dart'
+    as _i308;
+import 'package:noor/features/properties/logic/properties_cubit.dart' as _i406;
 import 'package:noor/features/quran/data/repos/quran_repo.dart' as _i1015;
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart' as _i999;
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart'
@@ -58,6 +61,8 @@ import 'package:noor/features/radio/data/repo/radio_repo.dart' as _i873;
 import 'package:noor/features/radio/presentation/manager/cubit/radio_cubit.dart'
     as _i328;
 import 'package:noor/features/settings/logic/settings_cubit.dart' as _i663;
+import 'package:noor/features/store/data/repos/store_repo.dart' as _i108;
+import 'package:noor/features/store/logic/store_cubit.dart' as _i555;
 import 'package:noor/features/tasbih/data/repos/tasbih_repo.dart' as _i966;
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart' as _i434;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -75,6 +80,8 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i361.Dio>(() => registerModule.dio);
+    gh.factory<_i308.PropertiesRepo>(() => _i308.PropertiesRepo());
+    gh.factory<_i108.StoreRepo>(() => _i108.StoreRepo());
     gh.singleton<_i155.AzkarDatabase>(() => _i155.AzkarDatabase());
     gh.singleton<_i502.CitiesDatabase>(() => _i502.CitiesDatabase());
     gh.singleton<_i928.HadithDatabase>(() => _i928.HadithDatabase());
@@ -127,6 +134,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i501.HadithCubit>(
       () => _i501.HadithCubit(gh<_i952.HadithRepo>()),
     );
+    gh.factory<_i555.StoreCubit>(() => _i555.StoreCubit(gh<_i108.StoreRepo>()));
     gh.factory<_i479.SharedPreferencesSettingsService>(
       () =>
           _i479.SharedPreferencesSettingsService(gh<_i460.SharedPreferences>()),
@@ -139,6 +147,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i803.LocationCubit(gh<_i839.LocationRepo>()),
     );
     gh.factory<_i824.AzkarCubit>(() => _i824.AzkarCubit(gh<_i99.AzkarRepo>()));
+    gh.factory<_i406.PropertiesCubit>(
+      () => _i406.PropertiesCubit(
+        gh<_i308.PropertiesRepo>(),
+        gh<_i479.SharedPreferencesSettingsService>(),
+      ),
+    );
     gh.factory<_i663.SettingsCubit>(
       () => _i663.SettingsCubit(gh<_i479.SharedPreferencesSettingsService>()),
     );
