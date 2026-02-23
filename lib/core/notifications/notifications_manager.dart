@@ -16,6 +16,8 @@ import 'package:noor/core/shared_preferences/shared_prefs_azan.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_type.dart';
+import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
+import 'package:noor/generated/l10n.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -39,8 +41,12 @@ class NotificationsManager {
   late String _perodicAzkarChannelId;
   late String _perodicAzkarChannelName;
   static const _perodicAzkarChannelDescription = 'Perodic Azkar Notifications';
+  static const _iqamaChannelId = 'iqama_channel';
+  static const _iqamaChannelName = 'Iqama Notifications';
+  static const _iqamaChannelDescription = 'Iqama Notifications';
 
   late AndroidNotificationChannel _azanNotificationChannel;
+  late AndroidNotificationChannel _iqamaNotificationChannel;
 
   static const _azkarNotificationChannel = AndroidNotificationChannel(
     _azkarChannelId,
@@ -122,6 +128,20 @@ class NotificationsManager {
         ?.createNotificationChannel(_azanNotificationChannel);
   }
 
+  Future<void> _createIqamaNotificationChannel() async {
+    _iqamaNotificationChannel = const AndroidNotificationChannel(
+      _iqamaChannelId,
+      _iqamaChannelName,
+      importance: Importance.max,
+      sound: RawResourceAndroidNotificationSound("iqama"),
+    );
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_iqamaNotificationChannel);
+  }
+
   Future<void> _createPerodicAzkarNotificationChannel() async {
     final sound = _sp.getPerodicAzkarSetting().sound;
     _perodicAzkarChannelId = sound;
@@ -143,6 +163,7 @@ class NotificationsManager {
   Future<void> _createNotificationChannel() async {
     await _createAzanNotificationChannel();
     await _createPerodicAzkarNotificationChannel();
+    await _createIqamaNotificationChannel();
     await _localNotifications
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
@@ -153,6 +174,11 @@ class NotificationsManager {
           AndroidFlutterLocalNotificationsPlugin
         >()
         ?.createNotificationChannel(_azkarNotificationChannel);
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_iqamaNotificationChannel);
   }
 
   Future<void> scheduleNotifications() async {
@@ -162,6 +188,8 @@ class NotificationsManager {
     final city = _getSavedCity() ?? Constants.defaultCity;
     final azanNotificationsSettings = _sp.getAzanNotificationSetting();
     final azkarNotificationsSettings = _sp.getAzkarNotificationSetting();
+    final iqamaNotificationsSettings = _sp.getIqamaNotificationSetting();
+
     final perodicAzkarSettings = _sp.getPerodicAzkarSetting();
     for (int i = 0; i < 7; i++) {
       final date = DateUtils.dateOnly(DateTime.now()).add(Duration(days: i));
@@ -180,7 +208,11 @@ class NotificationsManager {
           azkarNotificationsSettings.eveningAzkarState) {
         _scheduleAzkarNotifications(prayerTimes, azkarNotificationsSettings);
       }
+      if (iqamaNotificationsSettings.isEnabled) {
+        _scheduleIqamaNotifications(prayerTimes, iqamaNotificationsSettings);
+      }
     }
+
     if (perodicAzkarSettings.isActive) {
       _schedulePerodicAzkarNotifications(
         perodicAzkarSettings.perodicAzkarTime,
@@ -199,8 +231,8 @@ class NotificationsManager {
   ) async {
     await _localNotifications.zonedSchedule(
       sleepingAzkarTime.hashCode,
-      'حى على الفلاح',
-      'حان موعد أذكار النوم',
+      S.current.hayya_alal_falah,
+      '${S.current.time_of} ${S.current.sleepingAzkar}',
       tz.TZDateTime.from(
         date
             .add(const Duration(days: 1))
@@ -223,19 +255,27 @@ class NotificationsManager {
     AzanNotificationsSettings azanNotificationsSettings,
   ) async {
     final List<(DateTime, String, bool)> prayerTimesList = [
-      (prayerTimes.fajr, "الفجر", azanNotificationsSettings.fajrState),
-      (prayerTimes.dhuhr, "الظهر", azanNotificationsSettings.dhuhrState),
-      (prayerTimes.asr, "العصر", azanNotificationsSettings.asrState),
-      (prayerTimes.maghrib, "المغرب", azanNotificationsSettings.maghribState),
-      (prayerTimes.isha, "العشاء", azanNotificationsSettings.ishaState),
+      (prayerTimes.fajr, S.current.fajr, azanNotificationsSettings.fajrState),
+      (
+        prayerTimes.dhuhr,
+        S.current.dhuhr,
+        azanNotificationsSettings.dhuhrState,
+      ),
+      (prayerTimes.asr, S.current.asr, azanNotificationsSettings.asrState),
+      (
+        prayerTimes.maghrib,
+        S.current.maghrib,
+        azanNotificationsSettings.maghribState,
+      ),
+      (prayerTimes.isha, S.current.isha, azanNotificationsSettings.ishaState),
     ];
 
     for (var e in prayerTimesList) {
       if (e.$1.isBefore(DateTime.now()) || !e.$3) continue;
       await _localNotifications.zonedSchedule(
         e.hashCode,
-        'حى على الفلاح',
-        'حان موعد صلاة ${e.$2}',
+        S.current.hayya_alal_falah,
+        '${S.current.time_of} ${e.$2}',
         tz.TZDateTime.from(e.$1, tz.local),
         NotificationDetails(
           android: AndroidNotificationDetails(
@@ -260,13 +300,13 @@ class NotificationsManager {
     final azkarTimes = [
       (
         prayerTimes.sunrise.subtract(Duration(minutes: azkarMorningTime)),
-        "أذكار الصباح",
+        S.current.morning_azkar,
         azkarMorningState,
         AzkarType.morning,
       ),
       (
         prayerTimes.maghrib.subtract(Duration(minutes: azkarEveningTime)),
-        "أذكار المساء",
+        S.current.evening_azkar,
         azkarEveningState,
         AzkarType.evening,
       ),
@@ -276,8 +316,8 @@ class NotificationsManager {
       if (e.$1.isBefore(DateTime.now()) || !e.$3) continue;
       await _localNotifications.zonedSchedule(
         e.hashCode,
-        'حى على الفلاح',
-        'حان موعد ${e.$2}',
+        S.current.hayya_alal_falah,
+        '${S.current.time_of} ${e.$2}',
         tz.TZDateTime.from(e.$1, tz.local),
         const NotificationDetails(
           android: AndroidNotificationDetails(
@@ -313,7 +353,7 @@ class NotificationsManager {
   void _schedulePerodicAzkarNotifications(int perodicAzkarTime, String text) {
     _localNotifications.periodicallyShow(
       perodicAzkarTime.hashCode,
-      'أذكر الله',
+      S.current.remember_allah,
       text,
       perodicAzkarTime == 1
           ? RepeatInterval.everyMinute
@@ -327,6 +367,44 @@ class NotificationsManager {
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );
+  }
+
+  void _scheduleIqamaNotifications(
+    PrayerTimes prayerTimes,
+    IqamaNotificationsSettings iqamaNotificationsSettings,
+  ) {
+    final List<(DateTime, String, int)> prayerTimesList = [
+      (prayerTimes.fajr, S.current.fajr, iqamaNotificationsSettings.fajrTime),
+      (
+        prayerTimes.dhuhr,
+        S.current.dhuhr,
+        iqamaNotificationsSettings.dhuhrTime,
+      ),
+      (prayerTimes.asr, S.current.asr, iqamaNotificationsSettings.asrTime),
+      (
+        prayerTimes.maghrib,
+        S.current.maghrib,
+        iqamaNotificationsSettings.maghribTime,
+      ),
+      (prayerTimes.isha, S.current.isha, iqamaNotificationsSettings.ishaTime),
+    ];
+    for (var e in prayerTimesList) {
+      _localNotifications.zonedSchedule(
+        e.$1.hashCode,
+        S.current.iqama_prayer,
+        '${S.current.iqama_prayer} ${e.$2}',
+        tz.TZDateTime.from(e.$1.add(Duration(minutes: e.$3)), tz.local),
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+            _iqamaChannelId,
+            _iqamaChannelName,
+            channelDescription: _iqamaChannelDescription,
+            sound: RawResourceAndroidNotificationSound("iqama"),
+          ),
+        ),
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      );
+    }
   }
 
   // void testNotification() {

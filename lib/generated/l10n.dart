@@ -1059,10 +1059,10 @@ class S {
     );
   }
 
-  /// `Hourly reminders for spiritual connection`
+  /// `Periodic reminders`
   String get onboarding_hourly_reminders_desc {
     return Intl.message(
-      'Hourly reminders for spiritual connection',
+      'Periodic reminders',
       name: 'onboarding_hourly_reminders_desc',
       desc: '',
       args: [],
@@ -1187,6 +1187,56 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Iqama Notifications`
+  String get iqama_notifications {
+    return Intl.message(
+      'Iqama Notifications',
+      name: 'iqama_notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Time After Azan`
+  String get chooseTimeAfterAzan {
+    return Intl.message(
+      'Choose Time After Azan',
+      name: 'chooseTimeAfterAzan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Iqama`
+  String get iqama_prayer {
+    return Intl.message('Iqama', name: 'iqama_prayer', desc: '', args: []);
+  }
+
+  /// `Remember Allah`
+  String get remember_allah {
+    return Intl.message(
+      'Remember Allah',
+      name: 'remember_allah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hayyaalal Falah`
+  String get hayya_alal_falah {
+    return Intl.message(
+      'Hayyaalal Falah',
+      name: 'hayya_alal_falah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time of`
+  String get time_of {
+    return Intl.message('Time of', name: 'time_of', desc: '', args: []);
   }
 }
 

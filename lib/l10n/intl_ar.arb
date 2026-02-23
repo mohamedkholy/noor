@@ -128,7 +128,7 @@
    "onboarding_customizable_timing_desc": "توقيت قابل للتخصيص لروتينك",
    "onboarding_periodic_reminders_title": "تذكيرات متكررة",
    "onboarding_periodic_reminders_description": "ابقَ ذاكراً طوال اليوم بالأذكار المتكررة",
-   "onboarding_hourly_reminders_desc": "تذكيرات ساعية للاتصال الروحي",
+   "onboarding_hourly_reminders_desc": "تذكيرات متكررة",
    "onboarding_every_minute_dhikr_desc": "خيارات الذكر كل دقيقة",
    "onboarding_different_remembrance_types_desc": "اختر من أنواع الأذكار المختلفة",
    "onboarding_automatic_location_desc": "موقع تلقائي لمواقيت الصلاة الدقيقة",
@@ -140,5 +140,11 @@
    "onboarding_preferences_saved_desc": "يتم حفظ تفضيلاتك تلقائياً",
    "onboarding_azan_sound_label": "صوت الأذان",
    "onboarding_periodic_azkar_label": "الأذكار المتكررة",
-   "onboarding_language_label": "اللغة"
+   "onboarding_language_label": "اللغة",
+   "iqama_notifications": "إشعارات الإقامة",
+   "chooseTimeAfterAzan": "اختر الوقت بعد الأذان",
+   "iqama_prayer": "إقامة الصلاة",
+    "remember_allah": "أذكر الله",
+    "hayya_alal_falah": "حي على الفلاح",
+    "time_of": "حان موعد "
 }

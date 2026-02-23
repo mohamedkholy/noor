@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
+import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -101,7 +102,31 @@ class SharedPreferencesSettingsService {
     return result ?? false;
   }
 
-   Future<void> setOnboardingCompleted() async {
+  Future<void> setOnboardingCompleted() async {
     await sp.setBool(SharedPreferencesKeys.onboardingCompleted, true);
+  }
+
+  IqamaNotificationsSettings getIqamaNotificationSetting() {
+    final result = sp.getString(
+      SharedPreferencesKeys.iqamaNotificationSettings,
+    );
+    if (result == null) {
+      return IqamaNotificationsSettings(
+        isEnabled: true,
+        fajrTime: 10,
+        dhuhrTime: 20,
+        asrTime: 20,
+        maghribTime: 10,
+        ishaTime: 15,
+      );
+    }
+    return IqamaNotificationsSettings.fromJson(jsonDecode(result));
+  }
+
+  void saveIqamaNotificationSetting(IqamaNotificationsSettings state) {
+    sp.setString(
+      SharedPreferencesKeys.iqamaNotificationSettings,
+      jsonEncode(state.toJson()),
+    );
   }
 }

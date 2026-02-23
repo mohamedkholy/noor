@@ -4,10 +4,12 @@ import 'package:noor/core/helpers/ui_helper.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
+import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/widgets/azan_sounds_widget.dart';
 import 'package:noor/features/settings/ui/widgets/azkar_settings_widget.dart';
+import 'package:noor/features/settings/ui/widgets/iqama_setting_widget.dart';
 import 'package:noor/features/settings/ui/widgets/language_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/location_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/perodic_azkar_settings_widget.dart';
@@ -27,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late final AzanNotificationsSettings _azanNotificationsSettings;
   late final bool _locationUpdateSetting;
   late final PerodicAzkarSettings _perodicAzkarSetting;
+  late final IqamaNotificationsSettings _iqamaNotificationsSettings;
 
   @override
   void initState() {
@@ -35,6 +38,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _azanNotificationsSettings = _settingsCubit.getAzanNotificationSetting();
     _perodicAzkarSetting = _settingsCubit.getPerodicAzkarSetting();
     _locationUpdateSetting = _settingsCubit.getLocationUpdateSetting();
+    _iqamaNotificationsSettings = _settingsCubit.getIqamaNotificationSetting();
   }
 
   @override
@@ -69,6 +73,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     const SizedBox(height: 20),
                     SalawatRow(
                       azanNotificationsSettings: _azanNotificationsSettings,
+                    ),
+                    const SizedBox(height: 20),
+                    IqamaSettingWidget(
+                      iqamaNotificationsSettings: _iqamaNotificationsSettings,
                     ),
                     const SizedBox(height: 20),
                     AzanSoundsWidget(

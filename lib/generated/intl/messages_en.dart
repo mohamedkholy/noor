@@ -54,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "calender": MessageLookupByLibrary.simpleMessage("Calender"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "chooseTimeAfterAzan": MessageLookupByLibrary.simpleMessage(
+      "Choose Time After Azan",
+    ),
     "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
       "Connection timed out",
     ),
@@ -87,10 +90,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage(
       "Hadith of the Day",
     ),
+    "hayya_alal_falah": MessageLookupByLibrary.simpleMessage("Hayyaalal Falah"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "hour_before": MessageLookupByLibrary.simpleMessage("Hour before"),
     "hourly": MessageLookupByLibrary.simpleMessage("Hourly"),
     "in_word": MessageLookupByLibrary.simpleMessage("in"),
+    "iqama_notifications": MessageLookupByLibrary.simpleMessage(
+      "Iqama Notifications",
+    ),
+    "iqama_prayer": MessageLookupByLibrary.simpleMessage("Iqama"),
     "isha": MessageLookupByLibrary.simpleMessage("Isha"),
     "juz": MessageLookupByLibrary.simpleMessage("Juz"),
     "km": MessageLookupByLibrary.simpleMessage("KM"),
@@ -184,7 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Every-minute dhikr options",
     ),
     "onboarding_hourly_reminders_desc": MessageLookupByLibrary.simpleMessage(
-      "Hourly reminders for spiritual connection",
+      "Periodic reminders",
     ),
     "onboarding_language_label": MessageLookupByLibrary.simpleMessage(
       "Language",
@@ -261,6 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "quran": MessageLookupByLibrary.simpleMessage("Quran"),
     "radio": MessageLookupByLibrary.simpleMessage("Radio"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage("Receive timeout"),
+    "remember_allah": MessageLookupByLibrary.simpleMessage("Remember Allah"),
     "repetition": MessageLookupByLibrary.simpleMessage("Count"),
     "requestCancelled": MessageLookupByLibrary.simpleMessage(
       "Request was cancelled",
@@ -288,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "surah": MessageLookupByLibrary.simpleMessage("Surah"),
     "tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
     "the_tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
+    "time_of": MessageLookupByLibrary.simpleMessage("Time of"),
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "Unexpected error occurred",
     ),

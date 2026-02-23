@@ -68,48 +68,54 @@ class _SalawatRowState extends State<SalawatRow> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ...List.generate(prayers.length, (i) {
-                return Column(
-                  children: [
-                    Text(
-                      prayers[i].$1,
-                      style: TextStyle(
+                return Expanded(
+                  child: Column(
+                    children: [
+                      Text(
+                        prayers[i].$1,
+                        style: TextStyle(
+                          color: prayers[i].$3
+                              ? Colors.white
+                              : Colors.grey.shade400,
+                          fontWeight: FontWeightHelper.medium,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Icon(
+                        prayers[i].$2,
                         color: prayers[i].$3
                             ? Colors.white
                             : Colors.grey.shade400,
-                        fontWeight: FontWeightHelper.medium,
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Icon(
-                      prayers[i].$2,
-                      color: prayers[i].$3
-                          ? Colors.white
-                          : Colors.grey.shade400,
-                    ),
-                    const SizedBox(height: 15),
-                    Transform.scale(
-                      scale: 1.3,
-                      child: Checkbox(
-                        checkColor: MyColors.primary,
-                        activeColor: MyColors.secondary,
-                        value: prayers[i].$3,
-                        onChanged: (value) {
-                          setState(() {
-                            prayers[i] = (prayers[i].$1, prayers[i].$2, value!);
-                          });
-                          _settingsCubit.saveAzanNotificationSetting(
-                            AzanNotificationsSettings(
-                              fajrState: prayers[0].$3,
-                              dhuhrState: prayers[1].$3,
-                              asrState: prayers[2].$3,
-                              maghribState: prayers[3].$3,
-                              ishaState: prayers[4].$3,
-                            ),
-                          );
-                        },
+                      const SizedBox(height: 15),
+                      Transform.scale(
+                        scale: 1.3,
+                        child: Checkbox(
+                          checkColor: MyColors.primary,
+                          activeColor: MyColors.secondary,
+                          value: prayers[i].$3,
+                          onChanged: (value) {
+                            setState(() {
+                              prayers[i] = (
+                                prayers[i].$1,
+                                prayers[i].$2,
+                                value!,
+                              );
+                            });
+                            _settingsCubit.saveAzanNotificationSetting(
+                              AzanNotificationsSettings(
+                                fajrState: prayers[0].$3,
+                                dhuhrState: prayers[1].$3,
+                                asrState: prayers[2].$3,
+                                maghribState: prayers[3].$3,
+                                ishaState: prayers[4].$3,
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }),
             ],

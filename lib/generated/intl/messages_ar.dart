@@ -54,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendar": MessageLookupByLibrary.simpleMessage("التقويم"),
     "calender": MessageLookupByLibrary.simpleMessage("التقويم"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "chooseTimeAfterAzan": MessageLookupByLibrary.simpleMessage(
+      "اختر الوقت بعد الأذان",
+    ),
     "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
       "انتهت مهلة الاتصال",
     ),
@@ -81,10 +84,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
     "hadith": MessageLookupByLibrary.simpleMessage("حديث"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage("حديث اليوم"),
+    "hayya_alal_falah": MessageLookupByLibrary.simpleMessage("حي على الفلاح"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "hour_before": MessageLookupByLibrary.simpleMessage("ساعة قبل"),
     "hourly": MessageLookupByLibrary.simpleMessage("كل ساعة"),
     "in_word": MessageLookupByLibrary.simpleMessage("خلال"),
+    "iqama_notifications": MessageLookupByLibrary.simpleMessage(
+      "إشعارات الإقامة",
+    ),
+    "iqama_prayer": MessageLookupByLibrary.simpleMessage("إقامة الصلاة"),
     "isha": MessageLookupByLibrary.simpleMessage("العشاء"),
     "juz": MessageLookupByLibrary.simpleMessage("جزء"),
     "km": MessageLookupByLibrary.simpleMessage("كم"),
@@ -172,7 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "خيارات الذكر كل دقيقة",
     ),
     "onboarding_hourly_reminders_desc": MessageLookupByLibrary.simpleMessage(
-      "تذكيرات ساعية للاتصال الروحي",
+      "تذكيرات متكررة",
     ),
     "onboarding_language_label": MessageLookupByLibrary.simpleMessage("اللغة"),
     "onboarding_language_setup_description":
@@ -249,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "receiveTimeout": MessageLookupByLibrary.simpleMessage(
       "انتهت مهلة الاستقبال",
     ),
+    "remember_allah": MessageLookupByLibrary.simpleMessage("أذكر الله"),
     "repetition": MessageLookupByLibrary.simpleMessage("التكرار"),
     "requestCancelled": MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
     "reset": MessageLookupByLibrary.simpleMessage("إعادة تعيين"),
@@ -274,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "surah": MessageLookupByLibrary.simpleMessage("سورة"),
     "tasbih": MessageLookupByLibrary.simpleMessage("تسبيح"),
     "the_tasbih": MessageLookupByLibrary.simpleMessage("التسبيح"),
+    "time_of": MessageLookupByLibrary.simpleMessage("حان موعد "),
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ غير متوقع",
     ),

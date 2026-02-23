@@ -127,7 +127,7 @@
     "onboarding_customizable_timing_desc": "Customizable timing for your routine",
     "onboarding_periodic_reminders_title": "Periodic Reminders",
     "onboarding_periodic_reminders_description": "Stay connected throughout the day with periodic dhikr",
-    "onboarding_hourly_reminders_desc": "Hourly reminders for spiritual connection",
+    "onboarding_hourly_reminders_desc": "Periodic reminders",
     "onboarding_every_minute_dhikr_desc": "Every-minute dhikr options",
     "onboarding_different_remembrance_types_desc": "Choose from different remembrance types",
     "onboarding_automatic_location_desc": "Automatic location for accurate prayer times",
@@ -139,6 +139,11 @@
     "onboarding_preferences_saved_desc": "Your preferences are saved automatically",
     "onboarding_azan_sound_label": "Azan Sound",
     "onboarding_periodic_azkar_label": "Periodic Azkar",
-    "onboarding_language_label": "Language"
-
+    "onboarding_language_label": "Language",
+    "iqama_notifications": "Iqama Notifications",
+    "chooseTimeAfterAzan": "Choose Time After Azan",
+    "iqama_prayer": "Iqama",
+    "remember_allah": "Remember Allah",
+    "hayya_alal_falah": "Hayyaalal Falah",
+    "time_of": "Time of"
 }
