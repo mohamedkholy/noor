@@ -17,9 +17,9 @@ class RadioReaderListView extends StatelessWidget {
           return const LoadingListView();
         }
         if (state is RadioError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.failure)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.failure)));
         }
         return ListView.builder(
           shrinkWrap: true,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/di/dependency_injection.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/quran/data/models/line_data.dart';
 import 'package:noor/features/quran/data/models/line_type.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart';
@@ -10,6 +12,9 @@ import 'package:noor/features/quran/ui/widgets/header_widget.dart';
 import 'package:noor/features/quran/ui/widgets/mushaf_sound_widget.dart';
 import 'package:noor/features/quran/ui/widgets/page_line_widget.dart';
 import 'package:noor/features/quran/ui/widgets/quran_lines_loading_widget.dart';
+import 'package:noor/generated/l10n.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class MushafScreen extends StatefulWidget {
   final int pageNumber;
@@ -25,12 +30,42 @@ class _MushafScreenState extends State<MushafScreen> {
   final List<List<LineData>> pages = [];
   PageController pageController = PageController();
   UniqueKey key = UniqueKey();
+  final GlobalKey _showCaseKey = GlobalKey();
 
   int currentPageIndex = 1;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ShowcaseView.register(
+        globalFloatingActionWidget: (showcaseContext) => FloatingActionWidget(
+          left: 16,
+          bottom: 16,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () => ShowcaseView.get().dismiss(),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xffEE5366),
+              ),
+              child: Text(
+                S.of(context).skip,
+                style: const TextStyle(color: Colors.white, fontSize: 15),
+              ),
+            ),
+          ),
+        ),
+        blurValue: 1,
+        disableBarrierInteraction: true,
+        onDismiss: (dismissedAt) async {
+          await getIt<SharedPreferences>().setBool(
+            SharedPreferencesKeys.showCaseDone,
+            true,
+          );
+        },
+      );
+    });
     _quranCubit.currentTabNotifier.addListener(() {
       _mushafCubit.stopPlayer();
     });
@@ -43,6 +78,7 @@ class _MushafScreenState extends State<MushafScreen> {
 
   @override
   void dispose() {
+    ShowcaseView.get().unregister();
     pageController.dispose();
     super.dispose();
   }
@@ -95,6 +131,21 @@ class _MushafScreenState extends State<MushafScreen> {
                             firstAya.words.first.juz,
                             firstAya.info.pageNumber,
                           );
+                          if (getIt<SharedPreferences>().getBool(
+                                SharedPreferencesKeys.showCaseDone,
+                              ) !=
+                              true) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              Future.delayed(
+                                const Duration(milliseconds: 500),
+                                () {
+                                  ShowcaseView.get().startShowCase([
+                                    _showCaseKey,
+                                  ]);
+                                },
+                              );
+                            });
+                          }
                         } else if (state is QuranLinesLodedFromStart) {
                           pages.insertAll(0, state.pages);
                           currentPageIndex =
@@ -233,6 +284,13 @@ class _MushafScreenState extends State<MushafScreen> {
                                             itemCount: page.length,
                                             itemBuilder: (_, i) {
                                               final line = page[i];
+                                              final firstAyaIndex = page
+                                                  .indexWhere(
+                                                    (element) =>
+                                                        element.info.lineType ==
+                                                        LineType.ayah.name,
+                                                  );
+
                                               if (line.info.lineType ==
                                                   LineType.surah_name.name) {
                                                 return HeaderWidget(
@@ -242,6 +300,23 @@ class _MushafScreenState extends State<MushafScreen> {
                                               } else if (line.info.lineType ==
                                                   LineType.basmallah.name) {
                                                 return const Basmallah();
+                                              }
+                                              if (i == firstAyaIndex) {
+                                                return Showcase(
+                                                  key: _showCaseKey,
+                                                  description: S
+                                                      .of(context)
+                                                      .pressToShowOptions,
+                                                  child: PageLineWidget(
+                                                    line: line,
+                                                    pageNumber: pageNumber,
+                                                    lineHeight:
+                                                        pageNumber == 1 ||
+                                                            pageNumber == 2
+                                                        ? null
+                                                        : lineHeight,
+                                                  ),
+                                                );
                                               }
                                               return PageLineWidget(
                                                 line: line,
@@ -269,7 +344,6 @@ class _MushafScreenState extends State<MushafScreen> {
               BlocBuilder<MushafCubit, MushafState>(
                 builder: (context, state) {
                   if (state is AudioPlayerState) {
-                    print("state $state");
                     return MushafSoundWidget(
                       pageNumber: state.pageNumber,
                       suraNumber: state.suraNumber,

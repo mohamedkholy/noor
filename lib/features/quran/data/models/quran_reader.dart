@@ -1,4 +1,3 @@
-
 class QuranReader {
   final String nameAr;
   final String nameEn;

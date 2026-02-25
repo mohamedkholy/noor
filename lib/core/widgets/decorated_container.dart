@@ -10,6 +10,7 @@ class DecoratedContainer extends StatelessWidget {
   final BorderRadius? borderRadius;
   final Color? color;
   final bool? fullWidth;
+  final BoxShape? shape;
   const DecoratedContainer({
     super.key,
     this.image,
@@ -19,6 +20,7 @@ class DecoratedContainer extends StatelessWidget {
     this.borderRadius,
     this.color,
     this.fullWidth = true,
+    this.shape,
   });
 
   @override
@@ -29,6 +31,7 @@ class DecoratedContainer extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: color,
+        shape: shape ?? BoxShape.rectangle,
         image:
             image ??
             const DecorationImage(
@@ -44,7 +47,9 @@ class DecoratedContainer extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: borderRadius ?? BorderRadius.circular(25),
+        borderRadius:
+            borderRadius ??
+            (shape == BoxShape.circle ? null : BorderRadius.circular(25)),
         boxShadow: [
           BoxShadow(
             color: MyColors.primary.withValues(alpha: 0.4),

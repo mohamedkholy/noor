@@ -1,6 +1,6 @@
 import 'package:dynamic_height_list_view/dynamic_height_view.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/store/ui/widgets/section_widget.dart';
@@ -14,14 +14,44 @@ class StoreScreen extends StatefulWidget {
 }
 
 class _StoreScreenState extends State<StoreScreen> {
-  final sections = [
-    ("قسم العقارات", FluentIcons.building_24_regular, MyRoutes.properties),
-    ("قسم الأراضى", FluentIcons.globe_surface_24_regular, MyRoutes.properties),
-    ("قسم الزراعة", FluentIcons.leaf_one_16_filled, MyRoutes.properties),
-    ("قسم الكنوز", FluentIcons.trophy_24_regular, MyRoutes.properties),
-    ("قسم الحج", FluentIcons.building_mosque_24_regular, MyRoutes.properties),
-    ("قسم العمرة", FluentIcons.building_mosque_24_filled, MyRoutes.properties),
-  ];
+  late final List<(String, String, String)> sections;
+
+  @override
+  void didChangeDependencies() {
+    sections = [
+      (
+        S.of(context).sRealEstateSection,
+        Assets.assetsImagesPngPalace,
+        MyRoutes.properties,
+      ),
+      (
+        S.of(context).sLandsSection,
+        Assets.assetsImagesPngField,
+        MyRoutes.lands,
+      ),
+      (
+        S.of(context).sAgricultureSection,
+        Assets.assetsImagesPngForest,
+        MyRoutes.agri,
+      ),
+      (
+        S.of(context).sTreasuresSection,
+        Assets.assetsImagesPngTreasure,
+        MyRoutes.treasures,
+      ),
+      (
+        S.of(context).sHajjSection,
+        Assets.assetsImagesPngPalace,
+        MyRoutes.properties,
+      ),
+      (
+        S.of(context).sUmrahSection,
+        Assets.assetsImagesPngPalace,
+        MyRoutes.properties,
+      ),
+    ];
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -17,4 +17,8 @@ abstract class MyRoutes {
   static const String radio = '/radio';
   static const String store = '/store';
   static const String properties = '/properties';
+  static const String lands = '/lands';
+  static const String agri = '/agri';
+  static const String treasures = '/treasures';
+  static const String tafsir = '/tafsir';
 }

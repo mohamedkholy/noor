@@ -20,6 +20,8 @@ out 10;
 
   static const String radio = "https://data-rosy.vercel.app/";
 
+  static const String tafsirApiUrl = "http://api.quran-tafseer.com/";
+
   static String mapDioError(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:

@@ -1,4 +1,4 @@
-class SunanSetting {
+class SunanData {
   final DateTime date;
   final bool fajrSunnah;
   final bool beforeDhuhrSunnah;
@@ -6,7 +6,7 @@ class SunanSetting {
   final bool maghribSunnah;
   final bool ishaSunnah;
 
-  const SunanSetting({
+  const SunanData({
     required this.date,
     required this.fajrSunnah,
     required this.beforeDhuhrSunnah,
@@ -15,8 +15,8 @@ class SunanSetting {
     required this.ishaSunnah,
   });
 
-  factory SunanSetting.fromJson(Map<String, dynamic> json) {
-    return SunanSetting(
+  factory SunanData.fromJson(Map<String, dynamic> json) {
+    return SunanData(
       date: DateTime.parse(json['date']),
       fajrSunnah: json['fajr_sunnah'],
       beforeDhuhrSunnah: json['before_dhuhr_sunnah'],

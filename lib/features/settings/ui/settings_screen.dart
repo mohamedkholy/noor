@@ -6,6 +6,7 @@ import 'package:noor/features/settings/data/models/azan_notifications_settings.d
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
+import 'package:noor/features/settings/data/models/sunan_settings.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/widgets/azan_sounds_widget.dart';
 import 'package:noor/features/settings/ui/widgets/azkar_settings_widget.dart';
@@ -14,6 +15,7 @@ import 'package:noor/features/settings/ui/widgets/language_settings_widget.dart'
 import 'package:noor/features/settings/ui/widgets/location_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/perodic_azkar_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/salawat_row.dart';
+import 'package:noor/features/settings/ui/widgets/sunan_row.dart';
 import 'package:noor/generated/l10n.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -30,6 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late final bool _locationUpdateSetting;
   late final PerodicAzkarSettings _perodicAzkarSetting;
   late final IqamaNotificationsSettings _iqamaNotificationsSettings;
+  late final SunanSettings _sunanSetting;
 
   @override
   void initState() {
@@ -39,6 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _perodicAzkarSetting = _settingsCubit.getPerodicAzkarSetting();
     _locationUpdateSetting = _settingsCubit.getLocationUpdateSetting();
     _iqamaNotificationsSettings = _settingsCubit.getIqamaNotificationSetting();
+    _sunanSetting = _settingsCubit.getSunanSetting();
   }
 
   @override
@@ -73,6 +77,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     const SizedBox(height: 20),
                     SalawatRow(
                       azanNotificationsSettings: _azanNotificationsSettings,
+                    ),
+                    const SizedBox(height: 20),
+                    SunanRow(
+                      sunanSettings: _sunanSetting,
                     ),
                     const SizedBox(height: 20),
                     IqamaSettingWidget(

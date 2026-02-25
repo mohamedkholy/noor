@@ -30,6 +30,18 @@ class Assets {
   static const String assetsImagesPngCurrentMosque =
       "assets/images/png/current_mosque.png";
 
+  /// Assets for assetsImagesPngDuaaa
+  /// assets/images/png/duaaa.png
+  static const String assetsImagesPngDuaaa = "assets/images/png/duaaa.png";
+
+  /// Assets for assetsImagesPngField
+  /// assets/images/png/field.png
+  static const String assetsImagesPngField = "assets/images/png/field.png";
+
+  /// Assets for assetsImagesPngForest
+  /// assets/images/png/forest.png
+  static const String assetsImagesPngForest = "assets/images/png/forest.png";
+
   /// Assets for assetsImagesPngHeadOfSurah
   /// assets/images/png/head_of_surah.png
   static const String assetsImagesPngHeadOfSurah =
@@ -76,6 +88,10 @@ class Assets {
   static const String assetsImagesPngMosqueIstanbul =
       "assets/images/png/mosque_istanbul.png";
 
+  /// Assets for assetsImagesPngPalace
+  /// assets/images/png/palace.png
+  static const String assetsImagesPngPalace = "assets/images/png/palace.png";
+
   /// Assets for assetsImagesPngPattern
   /// assets/images/png/pattern.png
   static const String assetsImagesPngPattern = "assets/images/png/pattern.png";
@@ -89,6 +105,15 @@ class Assets {
   /// assets/images/png/sahih_muslim.png
   static const String assetsImagesPngSahihMuslim =
       "assets/images/png/sahih_muslim.png";
+
+  /// Assets for assetsImagesPngShovel
+  /// assets/images/png/shovel.png
+  static const String assetsImagesPngShovel = "assets/images/png/shovel.png";
+
+  /// Assets for assetsImagesPngTreasure
+  /// assets/images/png/treasure.png
+  static const String assetsImagesPngTreasure =
+      "assets/images/png/treasure.png";
 
   /// Assets for assetsImagesPngWindow
   /// assets/images/png/window.png

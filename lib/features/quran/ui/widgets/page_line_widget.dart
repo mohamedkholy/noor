@@ -7,6 +7,7 @@ import 'package:noor/features/quran/data/models/line_type.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_cubit.dart';
 import 'package:noor/features/quran/logic/mushaf_cubit/mushaf_state.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
+import 'package:noor/features/quran/ui/widgets/aya_options_dialog.dart';
 
 class PageLineWidget extends StatelessWidget {
   final int pageNumber;
@@ -24,6 +25,7 @@ class PageLineWidget extends StatelessWidget {
     return BlocConsumer<MushafCubit, MushafState>(
       listener: (context, state) {
         if (state is PageSoundError &&
+            state.lineNumber == line.info.lineNumber &&
             state.suraNumber == line.words.firstOrNull?.surah &&
             state.ayaNumber == line.words.firstOrNull?.ayah) {
           ScaffoldMessenger.of(
@@ -65,17 +67,43 @@ class PageLineWidget extends StatelessWidget {
                               : Colors.black,
                         ),
                         recognizer: LongPressGestureRecognizer()
-                          ..onLongPress = () {
-                            if (line.info.lineType == LineType.ayah.name &&
-                                (state is! AudioPlayerState)) {
-                              context.read<MushafCubit>().getPageSound(
-                                pageNumber: pageNumber,
-                                verseNumber: e.$2,
-                                suraNumber: line.words.first.surah,
-                                qari: context
-                                    .read<QuranCubit>()
-                                    .currentQuranReaderNotifier
-                                    .url,
+                          ..onLongPress = () async {
+                            final ayaText = await context
+                                .read<MushafCubit>()
+                                .getAyaText(
+                                  suraNumber:
+                                      line.words.firstOrNull?.surah ?? 0,
+                                  ayaNumber: e.$2,
+                                );
+                            if (context.mounted) {
+                              showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                isScrollControlled: true,
+                                builder: (_) => AyaBottomSheet(
+                                  ayaText: ayaText,
+                                  suraNumber:
+                                      line.words.firstOrNull?.surah ?? 0,
+                                  ayaNumber: e.$2,
+                                  pageNumber: pageNumber,
+                                  fontFamily: "KFGQPC_Uthmanic",
+                                  onPlaySound: () {
+                                    if (line.info.lineType ==
+                                            LineType.ayah.name &&
+                                        (state is! AudioPlayerState)) {
+                                      context.read<MushafCubit>().getPageSound(
+                                        pageNumber: pageNumber,
+                                        verseNumber: e.$2,
+                                        suraNumber: line.words.first.surah,
+                                        lineNumber: line.info.lineNumber,
+                                        qari: context
+                                            .read<QuranCubit>()
+                                            .currentQuranReaderNotifier
+                                            .url,
+                                      );
+                                    }
+                                  },
+                                ),
                               );
                             }
                           },

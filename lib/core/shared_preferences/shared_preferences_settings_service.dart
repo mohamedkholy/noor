@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
-import 'package:noor/features/properties/data/models/sunan_setting.dart';
+import 'package:noor/features/properties/data/models/sunan_data.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
+import 'package:noor/features/settings/data/models/sunan_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
@@ -132,17 +133,17 @@ class SharedPreferencesSettingsService {
     );
   }
 
-  void saveSunanSetting(SunanSetting sunanSetting) {
+  void saveSunanData(SunanData sunanSetting) {
     sp.setString(
-      SharedPreferencesKeys.sunanSetting,
+      SharedPreferencesKeys.sunanData,
       jsonEncode(sunanSetting.toJson()),
     );
   }
 
-  SunanSetting getSunanSetting() {
-    final result = sp.getString(SharedPreferencesKeys.sunanSetting);
+  SunanData getSunanData() {
+    final result = sp.getString(SharedPreferencesKeys.sunanData);
     if (result == null) {
-      return SunanSetting(
+      return SunanData(
         date: DateTime.now(),
         fajrSunnah: false,
         beforeDhuhrSunnah: false,
@@ -151,10 +152,10 @@ class SharedPreferencesSettingsService {
         ishaSunnah: false,
       );
     }
-    final sunanSetting = SunanSetting.fromJson(jsonDecode(result));
+    final sunanSetting = SunanData.fromJson(jsonDecode(result));
     if (DateUtils.dateOnly(sunanSetting.date) !=
         DateUtils.dateOnly(DateTime.now())) {
-      return SunanSetting(
+      return SunanData(
         date: DateTime.now(),
         fajrSunnah: false,
         beforeDhuhrSunnah: false,
@@ -173,5 +174,53 @@ class SharedPreferencesSettingsService {
   int getPropertiesCount() {
     final result = sp.getInt(SharedPreferencesKeys.propertiesCount);
     return result ?? 0;
+  }
+
+  void saveLandsCount(int value) {
+    sp.setInt(SharedPreferencesKeys.landsCount, value);
+  }
+
+  int getLandsCount() {
+    final result = sp.getInt(SharedPreferencesKeys.landsCount);
+    return result ?? 0;
+  }
+
+  int getTreesCount() {
+    final result = sp.getInt(SharedPreferencesKeys.treesCount);
+    return result ?? 0;
+  }
+
+  void saveTreesCount(int i) {
+    sp.setInt(SharedPreferencesKeys.treesCount, i);
+  }
+
+  int getTreasuresCount() {
+    final result = sp.getInt(SharedPreferencesKeys.treasuresCount);
+    return result ?? 0;
+  }
+
+  void saveTreasuresCount(int i) {
+    sp.setInt(SharedPreferencesKeys.treasuresCount, i);
+  }
+
+  SunanSettings getSunanSetting() {
+    final result = sp.getString(SharedPreferencesKeys.sunanSettings);
+    if (result == null) {
+      return const SunanSettings(
+        isEnabled: true,
+        fajrSunnah: true,
+        dhuhrSunan: true,
+        maghribSunnah: true,
+        ishaSunnah: true,
+      );
+    }
+    return SunanSettings.fromJson(jsonDecode(result));
+  }
+
+  void saveSunanSettigs(SunanSettings sunanSettings) {
+    sp.setString(
+      SharedPreferencesKeys.sunanSettings,
+      jsonEncode(sunanSettings.toJson()),
+    );
   }
 }

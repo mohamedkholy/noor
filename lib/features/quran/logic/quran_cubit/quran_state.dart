@@ -12,4 +12,3 @@ class SurahsLoaded extends QuranState {
   final List<Verse> verses;
   SurahsLoaded({required this.surahs, required this.verses});
 }
-

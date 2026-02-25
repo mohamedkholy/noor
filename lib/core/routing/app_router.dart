@@ -4,6 +4,8 @@ import 'package:noor/core/database/tasbih/tasbih_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
+import 'package:noor/features/agri/logic/agri_cubit.dart';
+import 'package:noor/features/agri/ui/agri_screen.dart';
 import 'package:noor/features/azkar/logic/azkar_cubit.dart';
 import 'package:noor/features/azkar/ui/azkar_category_screen.dart';
 import 'package:noor/features/azkar/ui/azkar_screen.dart';
@@ -13,6 +15,8 @@ import 'package:noor/features/hadith/data/models/kitab.dart';
 import 'package:noor/features/hadith/logic/hadith_cubit.dart';
 import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
 import 'package:noor/features/hadith/ui/hadith_screen.dart';
+import 'package:noor/features/lands/logic/lands_cubit.dart';
+import 'package:noor/features/lands/ui/lands_screen.dart';
 import 'package:noor/features/location/logic/location_cubit.dart';
 import 'package:noor/features/location/ui/location_screen.dart';
 import 'package:noor/features/navigation/ui/navigation_screen.dart';
@@ -32,9 +36,13 @@ import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/settings_screen.dart';
 import 'package:noor/features/store/logic/store_cubit.dart';
 import 'package:noor/features/store/ui/store_screen.dart';
+import 'package:noor/features/tafsir/presentation/manager/cubit/tafsir_cubit.dart';
+import 'package:noor/features/tafsir/presentation/screens/tafsir_screen.dart';
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart';
 import 'package:noor/features/tasbih/ui/tasbih_screen.dart';
 import 'package:noor/features/tasbih/ui/zekr_screen.dart';
+import 'package:noor/features/treasures/logic/treasures_cubit.dart';
+import 'package:noor/features/treasures/ui/treasures_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppRouter {
@@ -190,6 +198,41 @@ class AppRouter {
           BlocProvider(
             create: (context) => getIt<PropertiesCubit>(),
             child: const PropertiesScreen(),
+          ),
+          settings,
+        );
+      case MyRoutes.lands:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<LandsCubit>(),
+            child: const LandsScreen(),
+          ),
+          settings,
+        );
+      case MyRoutes.agri:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<AgriCubit>(),
+            child: const AgriScreen(),
+          ),
+          settings,
+        );
+      case MyRoutes.treasures:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<TreasuresCubit>(),
+            child: const TreasuresScreen(),
+          ),
+          settings,
+        );
+      case MyRoutes.tafsir:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<TafsirCubit>(),
+            child: TafsirScreen(
+              surahNumber: (args as (int, int)).$1,
+              ayaNumber: args.$2,
+            ),
           ),
           settings,
         );

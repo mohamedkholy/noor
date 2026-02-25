@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:just_audio/just_audio.dart';
@@ -119,7 +116,6 @@ class AyatCubit extends Cubit<AyatState> {
   void _dispose() {
     _audioPlayer.dispose();
   }
-
 
   @override
   Future<void> close() {

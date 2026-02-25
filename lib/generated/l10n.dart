@@ -1303,6 +1303,316 @@ class S {
   String get isha_sunnah {
     return Intl.message('Isha Sunnah', name: 'isha_sunnah', desc: '', args: []);
   }
+
+  /// `Properties Count`
+  String get properties_count_title {
+    return Intl.message(
+      'Properties Count',
+      name: 'properties_count_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The Rewards`
+  String get properties_reward_title {
+    return Intl.message(
+      'The Rewards',
+      name: 'properties_reward_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations! You have completed the Sunan Rawatib for today, and a house has been built for you in Paradise.`
+  String get complete_sunan_message {
+    return Intl.message(
+      'Congratulations! You have completed the Sunan Rawatib for today, and a house has been built for you in Paradise.',
+      name: 'complete_sunan_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Umm Habibah (May Allah be pleased with her) the Mother of the Believers reported: I heard the Messenger of Allah (ﷺ) saying, "A house will be built in Jannah for every Muslim who offers twelve Rak'ah of optional Salat other than the obligatory Salat in a day and a night (to seek the Pleasure of Allah)." (Muslim).`
+  String get properties_reward_hadith {
+    return Intl.message(
+      'Umm Habibah (May Allah be pleased with her) the Mother of the Believers reported: I heard the Messenger of Allah (ﷺ) saying, "A house will be built in Jannah for every Muslim who offers twelve Rak\'ah of optional Salat other than the obligatory Salat in a day and a night (to seek the Pleasure of Allah)." (Muslim).',
+      name: 'properties_reward_hadith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations! You have completed the funeral until burial, and you have earned two qirats.`
+  String get complete_jinaazah_until_burial_message {
+    return Intl.message(
+      'Congratulations! You have completed the funeral until burial, and you have earned two qirats.',
+      name: 'complete_jinaazah_until_burial_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations! You have completed the funeral until prayer, and you have earned one qirat.`
+  String get complete_jinaazah_until_prayer_message {
+    return Intl.message(
+      'Congratulations! You have completed the funeral until prayer, and you have earned one qirat.',
+      name: 'complete_jinaazah_until_prayer_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It was narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings of Allah be upon him) said: Whoever attends the funeral until the prayer is offered, he will have one qirat, and whoever attends until the deceased is buried, he will have two qirats. They said: What are the two qirats? He said: Like two great mountains. (Narrated by Muslim).`
+  String get complete_jinaazah_hadith {
+    return Intl.message(
+      'It was narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings of Allah be upon him) said: Whoever attends the funeral until the prayer is offered, he will have one qirat, and whoever attends until the deceased is buried, he will have two qirats. They said: What are the two qirats? He said: Like two great mountains. (Narrated by Muslim).',
+      name: 'complete_jinaazah_hadith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `qirat`
+  String get qirat {
+    return Intl.message('qirat', name: 'qirat', desc: '', args: []);
+  }
+
+  /// `qirats count`
+  String get lands_count {
+    return Intl.message(
+      'qirats count',
+      name: 'lands_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Until burial`
+  String get until_burial {
+    return Intl.message(
+      'Until burial',
+      name: 'until_burial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Until prayer`
+  String get until_prayer {
+    return Intl.message(
+      'Until prayer',
+      name: 'until_prayer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow Jinaazah`
+  String get follow_jinaazah {
+    return Intl.message(
+      'Follow Jinaazah',
+      name: 'follow_jinaazah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Real Estate Section`
+  String get sRealEstateSection {
+    return Intl.message(
+      'Real Estate Section',
+      name: 'sRealEstateSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lands Section`
+  String get sLandsSection {
+    return Intl.message(
+      'Lands Section',
+      name: 'sLandsSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agriculture Section`
+  String get sAgricultureSection {
+    return Intl.message(
+      'Agriculture Section',
+      name: 'sAgricultureSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Treasures Section`
+  String get sTreasuresSection {
+    return Intl.message(
+      'Treasures Section',
+      name: 'sTreasuresSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hajj Section`
+  String get sHajjSection {
+    return Intl.message(
+      'Hajj Section',
+      name: 'sHajjSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Umrah Section`
+  String get sUmrahSection {
+    return Intl.message(
+      'Umrah Section',
+      name: 'sUmrahSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Al-Tirmidhi narrated from Jabir (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) said: “Whoever says Subhan Allahi Al-‘Azim wa bihamdih (Glory be to Allah the Most Great and praise be to Him), a palm tree will be planted for him in Paradise,” and Ibn Majah narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) passed by him while he was planting and said, “O Abu Hurairah, what are you planting?” He said, “Something for myself.” He said, “Shall I guide you to something better than this? Say: Subhan Allah, Alhamdulillah, La ilaha illa Allah, and Allahu Akbar, for with each one, a tree will be planted for you in Paradise.”`
+  String get agriculture_hadith {
+    return Intl.message(
+      'Al-Tirmidhi narrated from Jabir (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) said: “Whoever says Subhan Allahi Al-‘Azim wa bihamdih (Glory be to Allah the Most Great and praise be to Him), a palm tree will be planted for him in Paradise,” and Ibn Majah narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) passed by him while he was planting and said, “O Abu Hurairah, what are you planting?” He said, “Something for myself.” He said, “Shall I guide you to something better than this? Say: Subhan Allah, Alhamdulillah, La ilaha illa Allah, and Allahu Akbar, for with each one, a tree will be planted for you in Paradise.”',
+      name: 'agriculture_hadith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of trees`
+  String get tree_count {
+    return Intl.message(
+      'Number of trees',
+      name: 'tree_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plant Tree`
+  String get plant_tree {
+    return Intl.message('Plant Tree', name: 'plant_tree', desc: '', args: []);
+  }
+
+  /// `TreasuresCount`
+  String get treasures_count {
+    return Intl.message(
+      'TreasuresCount',
+      name: 'treasures_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It was narrated that Abu Musa said:"The Prophet (saas) heard me saying: 'La hawla wa la quwwata illa billah (there is no power and no strength except with Allah).' He said: 'O 'Abdullah bin Qais! Shall I not tell you of a word which is one of the treasures of Paradise?' I said: 'Yes, O Messenger of Allah.' He said: 'Say: La hawla wa la quwwata illa billah (There is no power and no strength except with Allah).'"`
+  String get treasures_reward_hadith {
+    return Intl.message(
+      'It was narrated that Abu Musa said:"The Prophet (saas) heard me saying: \'La hawla wa la quwwata illa billah (there is no power and no strength except with Allah).\' He said: \'O \'Abdullah bin Qais! Shall I not tell you of a word which is one of the treasures of Paradise?\' I said: \'Yes, O Messenger of Allah.\' He said: \'Say: La hawla wa la quwwata illa billah (There is no power and no strength except with Allah).\'"',
+      name: 'treasures_reward_hadith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `win a treasure`
+  String get win_treasure {
+    return Intl.message(
+      'win a treasure',
+      name: 'win_treasure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tafsir`
+  String get tafsir {
+    return Intl.message('Tafsir', name: 'tafsir', desc: '', args: []);
+  }
+
+  /// `Options`
+  String get options {
+    return Intl.message('Options', name: 'options', desc: '', args: []);
+  }
+
+  /// `Play Aya`
+  String get playAya {
+    return Intl.message('Play Aya', name: 'playAya', desc: '', args: []);
+  }
+
+  /// `Listen to recitation`
+  String get playAyaSublabel {
+    return Intl.message(
+      'Listen to recitation',
+      name: 'playAyaSublabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read interpretation`
+  String get tafsirSublabel {
+    return Intl.message(
+      'Read interpretation',
+      name: 'tafsirSublabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press on aya and hold to show options`
+  String get pressToShowOptions {
+    return Intl.message(
+      'Press on aya and hold to show options',
+      name: 'pressToShowOptions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sunan Notifications`
+  String get sunan_notifications {
+    return Intl.message(
+      'Sunan Notifications',
+      name: 'sunan_notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Did you pray`
+  String get did_you_pray {
+    return Intl.message(
+      'Did you pray',
+      name: 'did_you_pray',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `check your houses in paradise`
+  String get sunan_message {
+    return Intl.message(
+      'check your houses in paradise',
+      name: 'sunan_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dhuhr Sunan`
+  String get dhuhrSunan {
+    return Intl.message('Dhuhr Sunan', name: 'dhuhrSunan', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

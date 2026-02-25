@@ -1,8 +1,9 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/widgets/decorated_container.dart';
 import 'package:noor/features/properties/logic/properties_cubit.dart';
+import 'package:noor/generated/l10n.dart';
 
 class PropertiesCountWidget extends StatelessWidget {
   const PropertiesCountWidget({super.key});
@@ -13,9 +14,9 @@ class PropertiesCountWidget extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          const Text(
-            "عدد الممتلكات",
-            style: TextStyle(
+          Text(
+            S.of(context).properties_count_title,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -25,24 +26,23 @@ class PropertiesCountWidget extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                context
+              ValueListenableBuilder(
+                valueListenable: context
                     .read<PropertiesCubit>()
-                    .propertiesCount
-                    .value
-                    .toString(),
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+                    .propertiesCount,
+                builder: (context, value, child) {
+                  return Text(
+                    value.toString(),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  );
+                },
               ),
               const SizedBox(width: 10),
-              const Icon(
-                FluentIcons.building_24_regular,
-                color: Colors.white,
-                size: 35,
-              ),
+              Image.asset(Assets.assetsImagesPngPalace, width: 35, height: 35),
             ],
           ),
         ],

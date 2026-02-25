@@ -139,6 +139,7 @@ class MushafCubit extends Cubit<MushafState> {
     required int verseNumber,
     required int suraNumber,
     required String qari,
+    required int lineNumber,
   }) async {
     emit(
       PageSoundLoading(
@@ -155,6 +156,7 @@ class MushafCubit extends Cubit<MushafState> {
             message: failure.message,
             suraNumber: suraNumber,
             ayaNumber: verseNumber,
+            lineNumber: lineNumber,
           ),
         ),
         ifRight: (r) {
@@ -181,5 +183,9 @@ class MushafCubit extends Cubit<MushafState> {
   Future<void> close() {
     _dispose();
     return super.close();
+  }
+
+  Future<String> getAyaText({required int suraNumber, required int ayaNumber}) async {
+    return await _quranRepo.getAyaText(suraNumber, ayaNumber);
   }
 }

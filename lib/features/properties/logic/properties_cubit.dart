@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
-import 'package:noor/features/properties/data/models/sunan_setting.dart';
+import 'package:noor/features/properties/data/models/sunan_data.dart';
 import 'package:noor/features/properties/data/repos/properties_repo.dart';
 import 'package:noor/features/properties/logic/properties_state.dart';
 
@@ -18,12 +18,12 @@ class PropertiesCubit extends Cubit<PropertiesState> {
         .getPropertiesCount();
   }
 
-  void saveSunanSetting(SunanSetting sunanSetting) {
-    _sharedPreferencesSettingsService.saveSunanSetting(sunanSetting);
+  void saveSunanSetting(SunanData sunanSetting) {
+    _sharedPreferencesSettingsService.saveSunanData(sunanSetting);
   }
 
-  SunanSetting getSunanSetting() {
-    return _sharedPreferencesSettingsService.getSunanSetting();
+  SunanData getSunanSetting() {
+    return _sharedPreferencesSettingsService.getSunanData();
   }
 
   void changePropertiesCount(int value) {

@@ -14,5 +14,11 @@ abstract class SharedPreferencesKeys {
   static const String zekrCounter = "zekr_counter";
   static const String iqamaNotificationSettings = "iqama_notification_settings";
   static const String propertiesCount = "properties_count";
-  static const String sunanSetting = "sunan_setting";
+  static const String sunanData = "sunan_setting";
+  static const String landsSetting = "lands_setting";
+  static const String landsCount = "lands_count";
+  static const String treesCount = "trees_count";
+  static const String treasuresCount = "treasures_count";
+  static const String showCaseDone = "show_case_done";
+  static const String sunanSettings = "sunan_settings";
 }

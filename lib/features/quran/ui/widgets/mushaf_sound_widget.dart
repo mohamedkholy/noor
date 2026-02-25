@@ -124,6 +124,7 @@ class MushafSoundWidget extends StatelessWidget {
                   verseNumber: ayaNumber,
                   suraNumber: suraNumber,
                   qari: value.url,
+                  lineNumber: 1,
                 );
               },
             ),

@@ -6,6 +6,7 @@ import 'package:noor/core/helpers/font_weight_helper.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_state.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
+import 'package:noor/features/quran/ui/widgets/aya_options_dialog.dart';
 import 'package:noor/features/quran/ui/widgets/ayat_playing_row.dart';
 
 class VerseWidget extends StatelessWidget {
@@ -41,10 +42,27 @@ class VerseWidget extends StatelessWidget {
         return GestureDetector(
           onLongPress: () {
             if (state is! AyahSoundLoading) {
-              context.read<AyatCubit>().getAyaSound(
-                surahNumber: verse.surahNumber,
-                verseNumber: verse.number,
-                qari: context.read<QuranCubit>().currentQuranReaderNotifier.url,
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
+                builder: (_) => AyaBottomSheet(
+                  ayaText: verse.textAr,
+                  suraNumber: verse.surahNumber,
+                  ayaNumber: verse.number,
+                  pageNumber: verse.page,
+                  fontFamily: "KFGQPC_Uthmanic",
+                  onPlaySound: () {
+                    context.read<AyatCubit>().getAyaSound(
+                      surahNumber: verse.surahNumber,
+                      verseNumber: verse.number,
+                      qari: context
+                          .read<QuranCubit>()
+                          .currentQuranReaderNotifier
+                          .url,
+                    );
+                  },
+                ),
               );
             }
           },

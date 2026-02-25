@@ -17,7 +17,7 @@ class QuranScreen extends StatefulWidget {
 
 class _QuranScreenState extends State<QuranScreen> {
   late final QuranCubit _quranCubit = context.read<QuranCubit>();
-  
+
   @override
   void initState() {
     super.initState();

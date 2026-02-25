@@ -7,6 +7,7 @@ import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/models/failure.dart';
 import 'package:noor/core/networking/api_constants.dart';
 import 'package:noor/core/networking/quran_sound_service/quran_sound_service.dart';
+import 'package:noor/core/networking/tafsir_api_service/tafsir_api_service.dart';
 import 'package:noor/features/quran/data/models/ayah_sound_response/ayah_sound_response.dart';
 import 'package:noor/features/quran/data/models/line_data.dart';
 import 'package:noor/features/quran/data/models/quran_page_sound_response/quran_page_sound_response.dart';
@@ -15,7 +16,8 @@ import 'package:noor/features/quran/data/models/quran_page_sound_response/quran_
 class QuranRepo {
   final QuranDatabase _db;
   final QuranSoundService _quranSoundService;
-  QuranRepo(this._db, this._quranSoundService);
+  final TafsirApiService _tafsirApiService;
+  QuranRepo(this._db, this._quranSoundService, this._tafsirApiService);
 
   Future<List<Surah>> getSurahs() async => await (_db.select(_db.surahs)).get();
 
@@ -204,5 +206,15 @@ class QuranRepo {
       }
       return Left(Failure(e.toString()));
     }
+  }
+
+  Future<String> getAyaText(int suraNumber, int ayaNumber) async {
+    final verse =
+        await (_db.select(_db.verses)..where(
+              (t) =>
+                  t.surahNumber.equals(suraNumber) & t.number.equals(ayaNumber),
+            ))
+            .getSingleOrNull();
+    return verse?.textAr ?? "";
   }
 }

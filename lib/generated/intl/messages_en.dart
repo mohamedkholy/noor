@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "after_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
       "After Dhuhr Sunnah",
     ),
+    "agriculture_hadith": MessageLookupByLibrary.simpleMessage(
+      "Al-Tirmidhi narrated from Jabir (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) said: “Whoever says Subhan Allahi Al-‘Azim wa bihamdih (Glory be to Allah the Most Great and praise be to Him), a palm tree will be planted for him in Paradise,” and Ibn Majah narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) passed by him while he was planting and said, “O Abu Hurairah, what are you planting?” He said, “Something for myself.” He said, “Shall I guide you to something better than this? Say: Subhan Allah, Alhamdulillah, La ilaha illa Allah, and Allahu Akbar, for with each one, a tree will be planted for you in Paradise.”",
+    ),
     "already_added": MessageLookupByLibrary.simpleMessage("Already added"),
     "app_language": MessageLookupByLibrary.simpleMessage("App Language"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
@@ -63,6 +66,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseTimeAfterAzan": MessageLookupByLibrary.simpleMessage(
       "Choose Time After Azan",
     ),
+    "complete_jinaazah_hadith": MessageLookupByLibrary.simpleMessage(
+      "It was narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings of Allah be upon him) said: Whoever attends the funeral until the prayer is offered, he will have one qirat, and whoever attends until the deceased is buried, he will have two qirats. They said: What are the two qirats? He said: Like two great mountains. (Narrated by Muslim).",
+    ),
+    "complete_jinaazah_until_burial_message": MessageLookupByLibrary.simpleMessage(
+      "Congratulations! You have completed the funeral until burial, and you have earned two qirats.",
+    ),
+    "complete_jinaazah_until_prayer_message": MessageLookupByLibrary.simpleMessage(
+      "Congratulations! You have completed the funeral until prayer, and you have earned one qirat.",
+    ),
+    "complete_sunan_message": MessageLookupByLibrary.simpleMessage(
+      "Congratulations! You have completed the Sunan Rawatib for today, and a house has been built for you in Paradise.",
+    ),
     "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
       "Connection timed out",
     ),
@@ -78,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
     "dhuhr": MessageLookupByLibrary.simpleMessage("Dhuhr"),
+    "dhuhrSunan": MessageLookupByLibrary.simpleMessage("Dhuhr Sunan"),
+    "did_you_pray": MessageLookupByLibrary.simpleMessage("Did you pray"),
     "edit": MessageLookupByLibrary.simpleMessage("Edit"),
     "enable_location_service": MessageLookupByLibrary.simpleMessage(
       "Please enable Location service",
@@ -92,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "field_is_required": MessageLookupByLibrary.simpleMessage(
       "Field is required",
     ),
+    "follow_jinaazah": MessageLookupByLibrary.simpleMessage("Follow Jinaazah"),
     "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
     "hadith": MessageLookupByLibrary.simpleMessage("Hadith"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage(
@@ -110,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "isha_sunnah": MessageLookupByLibrary.simpleMessage("Isha Sunnah"),
     "juz": MessageLookupByLibrary.simpleMessage("Juz"),
     "km": MessageLookupByLibrary.simpleMessage("KM"),
+    "lands_count": MessageLookupByLibrary.simpleMessage("qirats count"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last_read": MessageLookupByLibrary.simpleMessage("Last Read"),
     "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
@@ -270,11 +289,30 @@ class MessageLookup extends MessageLookupByLibrary {
       "Welcome to Noor",
     ),
     "open_settings": MessageLookupByLibrary.simpleMessage("Open Settings"),
+    "options": MessageLookupByLibrary.simpleMessage("Options"),
     "perodicAzkarSettings": MessageLookupByLibrary.simpleMessage(
       "Perodic Azkar Settings",
     ),
+    "plant_tree": MessageLookupByLibrary.simpleMessage("Plant Tree"),
+    "playAya": MessageLookupByLibrary.simpleMessage("Play Aya"),
+    "playAyaSublabel": MessageLookupByLibrary.simpleMessage(
+      "Listen to recitation",
+    ),
+    "pressToShowOptions": MessageLookupByLibrary.simpleMessage(
+      "Press on aya and hold to show options",
+    ),
     "previous": MessageLookupByLibrary.simpleMessage("Previous"),
+    "properties_count_title": MessageLookupByLibrary.simpleMessage(
+      "Properties Count",
+    ),
+    "properties_reward_hadith": MessageLookupByLibrary.simpleMessage(
+      "Umm Habibah (May Allah be pleased with her) the Mother of the Believers reported: I heard the Messenger of Allah (ﷺ) saying, \"A house will be built in Jannah for every Muslim who offers twelve Rak\'ah of optional Salat other than the obligatory Salat in a day and a night (to seek the Pleasure of Allah).\" (Muslim).",
+    ),
+    "properties_reward_title": MessageLookupByLibrary.simpleMessage(
+      "The Rewards",
+    ),
     "qibla": MessageLookupByLibrary.simpleMessage("Qibla"),
+    "qirat": MessageLookupByLibrary.simpleMessage("qirat"),
     "quran": MessageLookupByLibrary.simpleMessage("Quran"),
     "radio": MessageLookupByLibrary.simpleMessage("Radio"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage("Receive timeout"),
@@ -290,6 +328,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "reset_tasbih": MessageLookupByLibrary.simpleMessage("Reset Tasbih"),
     "retry": MessageLookupByLibrary.simpleMessage("Retry"),
     "road_distance": MessageLookupByLibrary.simpleMessage("Road Distance"),
+    "sAgricultureSection": MessageLookupByLibrary.simpleMessage(
+      "Agriculture Section",
+    ),
+    "sHajjSection": MessageLookupByLibrary.simpleMessage("Hajj Section"),
+    "sLandsSection": MessageLookupByLibrary.simpleMessage("Lands Section"),
+    "sRealEstateSection": MessageLookupByLibrary.simpleMessage(
+      "Real Estate Section",
+    ),
+    "sTreasuresSection": MessageLookupByLibrary.simpleMessage(
+      "Treasures Section",
+    ),
+    "sUmrahSection": MessageLookupByLibrary.simpleMessage("Umrah Section"),
     "sahih_bukhari": MessageLookupByLibrary.simpleMessage("Sahih Bukhari"),
     "sahih_muslim": MessageLookupByLibrary.simpleMessage("Sahih Muslim"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),
@@ -303,21 +353,39 @@ class MessageLookup extends MessageLookupByLibrary {
     "start_navigation": MessageLookupByLibrary.simpleMessage(
       "Start Navigation",
     ),
+    "sunan_message": MessageLookupByLibrary.simpleMessage(
+      "check your houses in paradise",
+    ),
+    "sunan_notifications": MessageLookupByLibrary.simpleMessage(
+      "Sunan Notifications",
+    ),
     "sunnah": MessageLookupByLibrary.simpleMessage("Sunnah"),
     "sunnah_prayers": MessageLookupByLibrary.simpleMessage("Sunnah Prayers"),
     "surah": MessageLookupByLibrary.simpleMessage("Surah"),
+    "tafsir": MessageLookupByLibrary.simpleMessage("Tafsir"),
+    "tafsirSublabel": MessageLookupByLibrary.simpleMessage(
+      "Read interpretation",
+    ),
     "tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
     "the_hereafter_store": MessageLookupByLibrary.simpleMessage(
       "The Hereafter Store",
     ),
     "the_tasbih": MessageLookupByLibrary.simpleMessage("Tasbih"),
     "time_of": MessageLookupByLibrary.simpleMessage("Time of"),
+    "treasures_count": MessageLookupByLibrary.simpleMessage("TreasuresCount"),
+    "treasures_reward_hadith": MessageLookupByLibrary.simpleMessage(
+      "It was narrated that Abu Musa said:\"The Prophet (saas) heard me saying: \'La hawla wa la quwwata illa billah (there is no power and no strength except with Allah).\' He said: \'O \'Abdullah bin Qais! Shall I not tell you of a word which is one of the treasures of Paradise?\' I said: \'Yes, O Messenger of Allah.\' He said: \'Say: La hawla wa la quwwata illa billah (There is no power and no strength except with Allah).\'\"",
+    ),
+    "tree_count": MessageLookupByLibrary.simpleMessage("Number of trees"),
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "Unexpected error occurred",
     ),
     "unknown_error": MessageLookupByLibrary.simpleMessage(
       "Unknown error has occurred",
     ),
+    "until_burial": MessageLookupByLibrary.simpleMessage("Until burial"),
+    "until_prayer": MessageLookupByLibrary.simpleMessage("Until prayer"),
+    "win_treasure": MessageLookupByLibrary.simpleMessage("win a treasure"),
     "zekr": MessageLookupByLibrary.simpleMessage("Zekr"),
   };
 }

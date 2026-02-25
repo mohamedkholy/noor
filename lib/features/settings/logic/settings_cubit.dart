@@ -7,6 +7,7 @@ import 'package:noor/features/settings/data/models/azan_notifications_settings.d
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
+import 'package:noor/features/settings/data/models/sunan_settings.dart';
 
 @Injectable()
 class SettingsCubit extends Cubit {
@@ -64,5 +65,13 @@ class SettingsCubit extends Cubit {
     _sharedPreferencesSettingsService.saveIqamaNotificationSetting(
       iqamaNotificationsSettings,
     );
+  }
+
+  SunanSettings getSunanSetting() {
+    return _sharedPreferencesSettingsService.getSunanSetting();
+  }
+
+  void saveSunanSetting(SunanSettings sunanSettings) {
+    _sharedPreferencesSettingsService.saveSunanSettigs(sunanSettings);
   }
 }

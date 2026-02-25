@@ -19,12 +19,8 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => getIt<LanguageCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<NavigationCubit>(),
-        ),
+        BlocProvider(create: (context) => getIt<LanguageCubit>()),
+        BlocProvider(create: (context) => getIt<NavigationCubit>()),
       ],
       child: const MyApp(),
     ),

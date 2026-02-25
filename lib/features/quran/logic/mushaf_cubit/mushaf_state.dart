@@ -1,5 +1,4 @@
 import 'package:noor/features/quran/data/models/line_data.dart';
-import 'package:noor/features/quran/data/models/quran_page_sound_response/quran_page_sound_response.dart';
 
 abstract class MushafState {}
 
@@ -63,9 +62,11 @@ class PageSoundError extends MushafState {
   final String message;
   final int suraNumber;
   final int ayaNumber;
+  final int lineNumber;
   PageSoundError({
     required this.message,
     required this.suraNumber,
     required this.ayaNumber,
+    required this.lineNumber,
   });
 }

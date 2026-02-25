@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "after_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
       "سنة الظهر البعدية",
     ),
+    "agriculture_hadith": MessageLookupByLibrary.simpleMessage(
+      "روى الترمذي عن جابر رضي الله عنه، أن رسول الله صلى الله عليه وسلم قال: من قال سبحان الله العظيم وبحمده غرست له نخلة في الجنة. وأخرج ابن ماجه من حديث أبي هريرة رضي الله عنه، أن رسول الله صلى الله عليه وسلم مرَّ به وهو يغرس غرسًا، فقال: يا أبا هريرة ما الذي تغرس؟ قلت: غراسًا لي. قال: ألا أدلك على غراس خير لك من هذا؟ قال: بلى يا رسول الله. قال: قل سبحان الله والحمد لله، ولا إله إلا الله، والله أكبر يغرس لك بكل واحدة شجرة في الجنة.",
+    ),
     "already_added": MessageLookupByLibrary.simpleMessage("تمت الإضافة مسبقًا"),
     "app_language": MessageLookupByLibrary.simpleMessage("لغة التطبيق"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
@@ -63,6 +66,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseTimeAfterAzan": MessageLookupByLibrary.simpleMessage(
       "اختر الوقت بعد الأذان",
     ),
+    "complete_jinaazah_hadith": MessageLookupByLibrary.simpleMessage(
+      "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: من شهد الجنازة حتى يصلى عليها فله قيراط، ومن شهدها حتى تدفن فله قيراطان. قالوا: وما القيراطان؟ قال: مثل الجبلين العظيمين. ((رواه مسلم)).",
+    ),
+    "complete_jinaazah_until_burial_message":
+        MessageLookupByLibrary.simpleMessage(
+          "تهانينا! لقد أكملت الجنازة حتي الدفن، حصلت علي قيراطان .",
+        ),
+    "complete_jinaazah_until_prayer_message":
+        MessageLookupByLibrary.simpleMessage(
+          "تهانينا! لقد أكملت الجنازة حتي الصلاة، حصلت علي قيراط .",
+        ),
+    "complete_sunan_message": MessageLookupByLibrary.simpleMessage(
+      "تهانينا! لقد أكملت السنن الرواتب لهذا اليوم، وبني لك بيت في الجنة.",
+    ),
     "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
       "انتهت مهلة الاتصال",
     ),
@@ -76,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "details": MessageLookupByLibrary.simpleMessage("التفاصيل"),
     "dhuhr": MessageLookupByLibrary.simpleMessage("الظهر"),
+    "dhuhrSunan": MessageLookupByLibrary.simpleMessage("سنن الظهر"),
+    "did_you_pray": MessageLookupByLibrary.simpleMessage("هل صليت"),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
     "enable_location_service": MessageLookupByLibrary.simpleMessage(
       "يرجى تفعيل خدمة الموقع",
@@ -88,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "fajr": MessageLookupByLibrary.simpleMessage("الفجر"),
     "fajr_sunnah": MessageLookupByLibrary.simpleMessage("سنة الفجر"),
     "field_is_required": MessageLookupByLibrary.simpleMessage("الحقل مطلوب"),
+    "follow_jinaazah": MessageLookupByLibrary.simpleMessage("اتباع الجنازة"),
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
     "hadith": MessageLookupByLibrary.simpleMessage("حديث"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage("حديث اليوم"),
@@ -104,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "isha_sunnah": MessageLookupByLibrary.simpleMessage("سنة العشاء"),
     "juz": MessageLookupByLibrary.simpleMessage("جزء"),
     "km": MessageLookupByLibrary.simpleMessage("كم"),
+    "lands_count": MessageLookupByLibrary.simpleMessage("عدد القراريط"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "last_read": MessageLookupByLibrary.simpleMessage("آخر تلاوة"),
     "loading": MessageLookupByLibrary.simpleMessage("جاري التحميل..."),
@@ -256,10 +277,26 @@ class MessageLookup extends MessageLookupByLibrary {
       "مرحباً بك في نور",
     ),
     "open_settings": MessageLookupByLibrary.simpleMessage("فتح الإعدادات"),
+    "options": MessageLookupByLibrary.simpleMessage("الخيارات"),
     "perodicAzkarSettings": MessageLookupByLibrary.simpleMessage(
       "إعدادات الأذكار المتكررة",
     ),
+    "plant_tree": MessageLookupByLibrary.simpleMessage("ازرع شجرة"),
+    "playAya": MessageLookupByLibrary.simpleMessage("تشغيل الآية"),
+    "playAyaSublabel": MessageLookupByLibrary.simpleMessage(
+      "استمع إلى التلاوة",
+    ),
+    "pressToShowOptions": MessageLookupByLibrary.simpleMessage(
+      "اضغط على الآية مطولاً لعرض الخيارات",
+    ),
     "previous": MessageLookupByLibrary.simpleMessage("السابق"),
+    "properties_count_title": MessageLookupByLibrary.simpleMessage(
+      "عدد الممتلكات",
+    ),
+    "properties_reward_hadith": MessageLookupByLibrary.simpleMessage(
+      "عن أم المؤمنين أم حبيبة رملة بنت أبي سفيان، رضي الله عنهما، قالت سمعت رسول الله صلى الله عليه وسلم، يقول: ما من عبد مسلم يصلي لله تعالى كل يوم ثنتي عشرة ركعة تطوعًا غير الفريضة، إلا بنى الله له بيتًا في الجنة أو: إلا بني له بيت في الجنة ((رواه مسلم)).",
+    ),
+    "properties_reward_title": MessageLookupByLibrary.simpleMessage("الجوائز"),
     "qibla": MessageLookupByLibrary.simpleMessage("القبلة"),
     "quran": MessageLookupByLibrary.simpleMessage("قرآن"),
     "radio": MessageLookupByLibrary.simpleMessage("الإذاعات"),
@@ -276,6 +313,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "reset_tasbih": MessageLookupByLibrary.simpleMessage("إعادة تعيين التسبيح"),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "road_distance": MessageLookupByLibrary.simpleMessage("مسافة الطريق"),
+    "sAgricultureSection": MessageLookupByLibrary.simpleMessage("قسم الزراعة"),
+    "sHajjSection": MessageLookupByLibrary.simpleMessage("قسم الحج"),
+    "sLandsSection": MessageLookupByLibrary.simpleMessage("قسم الأراضى"),
+    "sRealEstateSection": MessageLookupByLibrary.simpleMessage("قسم العقارات"),
+    "sTreasuresSection": MessageLookupByLibrary.simpleMessage("قسم الكنوز"),
+    "sUmrahSection": MessageLookupByLibrary.simpleMessage("قسم العمرة"),
     "sahih_bukhari": MessageLookupByLibrary.simpleMessage("صحيح البخاري"),
     "sahih_muslim": MessageLookupByLibrary.simpleMessage("صحيح مسلم"),
     "search": MessageLookupByLibrary.simpleMessage("بحث..."),
@@ -289,17 +332,33 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("أذكار النوم"),
     "start_navigation": MessageLookupByLibrary.simpleMessage("بدء التنقل"),
+    "sunan_message": MessageLookupByLibrary.simpleMessage(
+      "تفقد منازلك في الجنة",
+    ),
+    "sunan_notifications": MessageLookupByLibrary.simpleMessage(
+      "إشعارات السنن",
+    ),
     "sunnah": MessageLookupByLibrary.simpleMessage("سنة"),
     "sunnah_prayers": MessageLookupByLibrary.simpleMessage("صلوات السنن"),
     "surah": MessageLookupByLibrary.simpleMessage("سورة"),
+    "tafsir": MessageLookupByLibrary.simpleMessage("التفسير"),
+    "tafsirSublabel": MessageLookupByLibrary.simpleMessage("اقرأ التفسير"),
     "tasbih": MessageLookupByLibrary.simpleMessage("تسبيح"),
     "the_hereafter_store": MessageLookupByLibrary.simpleMessage("متجر الآخرة"),
     "the_tasbih": MessageLookupByLibrary.simpleMessage("التسبيح"),
     "time_of": MessageLookupByLibrary.simpleMessage("حان موعد "),
+    "treasures_count": MessageLookupByLibrary.simpleMessage("عدد الكنوز"),
+    "treasures_reward_hadith": MessageLookupByLibrary.simpleMessage(
+      "روى أحمد في المسند عن أبي هريرة رضي الله عنه، أن النبي صلى الله عليه وسلم قال: أكثروا من قول: لا حول ولا قوة إلا بالله، فإنها كنز من كنوز الجنة.",
+    ),
+    "tree_count": MessageLookupByLibrary.simpleMessage("عدد الأشجار"),
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ غير متوقع",
     ),
     "unknown_error": MessageLookupByLibrary.simpleMessage("حدث خطأ غير معروف"),
+    "until_burial": MessageLookupByLibrary.simpleMessage("حتي الدفن"),
+    "until_prayer": MessageLookupByLibrary.simpleMessage("حتى الصلاة"),
+    "win_treasure": MessageLookupByLibrary.simpleMessage("اربح كنز"),
     "zekr": MessageLookupByLibrary.simpleMessage("ذكر"),
   };
 }

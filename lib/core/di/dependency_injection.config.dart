@@ -26,18 +26,22 @@ import 'package:noor/core/networking/quran_sound_service/quran_sound_service.dar
     as _i819;
 import 'package:noor/core/networking/radio_api_service/radio_api_service.dart'
     as _i891;
+import 'package:noor/core/networking/tafsir_api_service/tafsir_api_service.dart'
+    as _i815;
 import 'package:noor/core/notifications/notifications_manager.dart' as _i555;
 import 'package:noor/core/shared_preferences/shared_preferences_language_service.dart'
     as _i655;
 import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart'
     as _i479;
 import 'package:noor/core/shared_preferences/shared_prefs_azan.dart' as _i583;
+import 'package:noor/features/agri/logic/agri_cubit.dart' as _i179;
 import 'package:noor/features/azkar/data/repos/azkar_repo.dart' as _i99;
 import 'package:noor/features/azkar/logic/azkar_cubit.dart' as _i824;
 import 'package:noor/features/hadith/data/repos/hadith_repo.dart' as _i952;
 import 'package:noor/features/hadith/logic/hadith_cubit.dart' as _i501;
 import 'package:noor/features/home/data/repos/home_repo.dart' as _i298;
 import 'package:noor/features/home/logic/home_cubit.dart' as _i892;
+import 'package:noor/features/lands/logic/lands_cubit.dart' as _i262;
 import 'package:noor/features/location/data/repos/location_repo.dart' as _i839;
 import 'package:noor/features/location/logic/location_cubit.dart' as _i803;
 import 'package:noor/features/navigation/data/repos/navigation_repo.dart'
@@ -63,8 +67,14 @@ import 'package:noor/features/radio/presentation/manager/cubit/radio_cubit.dart'
 import 'package:noor/features/settings/logic/settings_cubit.dart' as _i663;
 import 'package:noor/features/store/data/repos/store_repo.dart' as _i108;
 import 'package:noor/features/store/logic/store_cubit.dart' as _i555;
+import 'package:noor/features/tafsir/data/repo/tafsir_repo.dart' as _i288;
+import 'package:noor/features/tafsir/presentation/manager/cubit/aya_tafsir_cubit.dart'
+    as _i825;
+import 'package:noor/features/tafsir/presentation/manager/cubit/tafsir_cubit.dart'
+    as _i225;
 import 'package:noor/features/tasbih/data/repos/tasbih_repo.dart' as _i966;
 import 'package:noor/features/tasbih/logic/tasbih_cubit.dart' as _i434;
+import 'package:noor/features/treasures/logic/treasures_cubit.dart' as _i881;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -101,6 +111,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i891.RadioApiService>(
       () => _i891.RadioApiService(gh<_i361.Dio>()),
     );
+    gh.factory<_i815.TafsirApiService>(
+      () => _i815.TafsirApiService(gh<_i361.Dio>()),
+    );
     gh.factory<_i327.MosqueApiService>(
       () => _i327.MosqueApiService(gh<_i361.Dio>()),
     );
@@ -113,12 +126,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i583.SharedPreferencesAzanService>(
       () => _i583.SharedPreferencesAzanService(gh<_i460.SharedPreferences>()),
-    );
-    gh.factory<_i1015.QuranRepo>(
-      () => _i1015.QuranRepo(
-        gh<_i651.QuranDatabase>(),
-        gh<_i819.QuranSoundService>(),
-      ),
     );
     gh.factory<_i1019.LanguageCubit>(
       () => _i1019.LanguageCubit(gh<_i655.SharedPreferencesLanguageService>()),
@@ -146,6 +153,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i803.LocationCubit>(
       () => _i803.LocationCubit(gh<_i839.LocationRepo>()),
     );
+    gh.factory<_i288.TafsirRepo>(
+      () => _i288.TafsirRepo(gh<_i815.TafsirApiService>()),
+    );
+    gh.factory<_i1015.QuranRepo>(
+      () => _i1015.QuranRepo(
+        gh<_i651.QuranDatabase>(),
+        gh<_i819.QuranSoundService>(),
+        gh<_i815.TafsirApiService>(),
+      ),
+    );
     gh.factory<_i824.AzkarCubit>(() => _i824.AzkarCubit(gh<_i99.AzkarRepo>()));
     gh.factory<_i406.PropertiesCubit>(
       () => _i406.PropertiesCubit(
@@ -153,8 +170,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i479.SharedPreferencesSettingsService>(),
       ),
     );
+    gh.factory<_i262.LandsCubit>(
+      () => _i262.LandsCubit(gh<_i479.SharedPreferencesSettingsService>()),
+    );
     gh.factory<_i663.SettingsCubit>(
       () => _i663.SettingsCubit(gh<_i479.SharedPreferencesSettingsService>()),
+    );
+    gh.factory<_i179.AgriCubit>(
+      () => _i179.AgriCubit(gh<_i479.SharedPreferencesSettingsService>()),
+    );
+    gh.factory<_i881.TreasuresCubit>(
+      () => _i881.TreasuresCubit(gh<_i479.SharedPreferencesSettingsService>()),
     );
     gh.factory<_i1051.NearMosqueRepo>(
       () => _i1051.NearMosqueRepo(
@@ -183,6 +209,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i915.NavigationCubit>(
       () => _i915.NavigationCubit(gh<_i730.NavigationRepo>()),
+    );
+    gh.factory<_i825.AyaTafsirCubit>(
+      () => _i825.AyaTafsirCubit(gh<_i288.TafsirRepo>()),
+    );
+    gh.factory<_i225.TafsirCubit>(
+      () => _i225.TafsirCubit(gh<_i288.TafsirRepo>()),
     );
     gh.singleton<_i555.NotificationsManager>(
       () => _i555.NotificationsManager(
