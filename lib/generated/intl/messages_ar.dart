@@ -66,6 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseTimeAfterAzan": MessageLookupByLibrary.simpleMessage(
       "اختر الوقت بعد الأذان",
     ),
+    "complete_hajj_umrah_message": MessageLookupByLibrary.simpleMessage(
+      "تهانينا! لقد حصلت على أجر الحج والعمرة .",
+    ),
     "complete_jinaazah_hadith": MessageLookupByLibrary.simpleMessage(
       "عن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: من شهد الجنازة حتى يصلى عليها فله قيراط، ومن شهدها حتى تدفن فله قيراطان. قالوا: وما القيراطان؟ قال: مثل الجبلين العظيمين. ((رواه مسلم)).",
     ),
@@ -79,6 +82,9 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "complete_sunan_message": MessageLookupByLibrary.simpleMessage(
       "تهانينا! لقد أكملت السنن الرواتب لهذا اليوم، وبني لك بيت في الجنة.",
+    ),
+    "completed_hajj_umrah": MessageLookupByLibrary.simpleMessage(
+      "أكملت أجر الحج والعمرة",
     ),
     "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
       "انتهت مهلة الاتصال",
@@ -111,6 +117,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "getStarted": MessageLookupByLibrary.simpleMessage("ابدأ"),
     "hadith": MessageLookupByLibrary.simpleMessage("حديث"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage("حديث اليوم"),
+    "hajj_umrah_count": MessageLookupByLibrary.simpleMessage(
+      "عدد الحج والعمرة",
+    ),
+    "hajj_umrah_hadith": MessageLookupByLibrary.simpleMessage(
+      "مَن صلى الفجرَ في جماعةٍ، ثم قَعَد يَذْكُرُ اللهَ حتى تَطْلُعَ الشمسُ، ثم صلى ركعتينِ، كانت له كأجرِ حَجَّةٍ وعُمْرَةٍ تامَّةٍ، تامَّةٍ، تامَّةٍ. الراوي: أنس بن مالك",
+    ),
     "hayya_alal_falah": MessageLookupByLibrary.simpleMessage("حي على الفلاح"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "hour_before": MessageLookupByLibrary.simpleMessage("ساعة قبل"),
@@ -314,11 +326,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "road_distance": MessageLookupByLibrary.simpleMessage("مسافة الطريق"),
     "sAgricultureSection": MessageLookupByLibrary.simpleMessage("قسم الزراعة"),
-    "sHajjSection": MessageLookupByLibrary.simpleMessage("قسم الحج"),
+    "sHajjAndUmrahSection": MessageLookupByLibrary.simpleMessage(
+      "قسم الحج والعمرة",
+    ),
     "sLandsSection": MessageLookupByLibrary.simpleMessage("قسم الأراضى"),
     "sRealEstateSection": MessageLookupByLibrary.simpleMessage("قسم العقارات"),
     "sTreasuresSection": MessageLookupByLibrary.simpleMessage("قسم الكنوز"),
-    "sUmrahSection": MessageLookupByLibrary.simpleMessage("قسم العمرة"),
     "sahih_bukhari": MessageLookupByLibrary.simpleMessage("صحيح البخاري"),
     "sahih_muslim": MessageLookupByLibrary.simpleMessage("صحيح مسلم"),
     "search": MessageLookupByLibrary.simpleMessage("بحث..."),

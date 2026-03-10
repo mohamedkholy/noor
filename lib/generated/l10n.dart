@@ -1459,21 +1459,11 @@ class S {
     );
   }
 
-  /// `Hajj Section`
-  String get sHajjSection {
+  /// `Hajj and Umrah Section`
+  String get sHajjAndUmrahSection {
     return Intl.message(
-      'Hajj Section',
-      name: 'sHajjSection',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Umrah Section`
-  String get sUmrahSection {
-    return Intl.message(
-      'Umrah Section',
-      name: 'sUmrahSection',
+      'Hajj and Umrah Section',
+      name: 'sHajjAndUmrahSection',
       desc: '',
       args: [],
     );
@@ -1612,6 +1602,46 @@ class S {
   /// `Dhuhr Sunan`
   String get dhuhrSunan {
     return Intl.message('Dhuhr Sunan', name: 'dhuhrSunan', desc: '', args: []);
+  }
+
+  /// `Hajj and Umrah Count`
+  String get hajj_umrah_count {
+    return Intl.message(
+      'Hajj and Umrah Count',
+      name: 'hajj_umrah_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Whoever prays Fajr in congregation, then sits remembering Allah until the sun rises, then prays two rak‘ahs, will have a reward like that of a complete Hajj and a complete Umrah — complete, complete, complete. Narrated by Anas ibn Malik.`
+  String get hajj_umrah_hadith {
+    return Intl.message(
+      'Whoever prays Fajr in congregation, then sits remembering Allah until the sun rises, then prays two rak‘ahs, will have a reward like that of a complete Hajj and a complete Umrah — complete, complete, complete. Narrated by Anas ibn Malik.',
+      name: 'hajj_umrah_hadith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations! You have received the reward of the Hajj and Umrah`
+  String get complete_hajj_umrah_message {
+    return Intl.message(
+      'Congratulations! You have received the reward of the Hajj and Umrah',
+      name: 'complete_hajj_umrah_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed Hajj and Umrah reward`
+  String get completed_hajj_umrah {
+    return Intl.message(
+      'Completed Hajj and Umrah reward',
+      name: 'completed_hajj_umrah',
+      desc: '',
+      args: [],
+    );
   }
 }
 

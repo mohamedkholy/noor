@@ -18,11 +18,11 @@ class PropertiesCubit extends Cubit<PropertiesState> {
         .getPropertiesCount();
   }
 
-  void saveSunanSetting(SunanData sunanSetting) {
-    _sharedPreferencesSettingsService.saveSunanData(sunanSetting);
+  void saveSunanData(SunanData sunanData) {
+    _sharedPreferencesSettingsService.saveSunanData(sunanData);
   }
 
-  SunanData getSunanSetting() {
+  SunanData getSunanData() {
     return _sharedPreferencesSettingsService.getSunanData();
   }
 

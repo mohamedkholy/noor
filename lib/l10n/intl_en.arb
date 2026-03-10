@@ -170,8 +170,7 @@
     "sLandsSection": "Lands Section",
     "sAgricultureSection": "Agriculture Section",
     "sTreasuresSection": "Treasures Section",
-    "sHajjSection": "Hajj Section",
-    "sUmrahSection": "Umrah Section",
+    "sHajjAndUmrahSection": "Hajj and Umrah Section",
     "agriculture_hadith": "Al-Tirmidhi narrated from Jabir (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) said: “Whoever says Subhan Allahi Al-‘Azim wa bihamdih (Glory be to Allah the Most Great and praise be to Him), a palm tree will be planted for him in Paradise,” and Ibn Majah narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings be upon him) passed by him while he was planting and said, “O Abu Hurairah, what are you planting?” He said, “Something for myself.” He said, “Shall I guide you to something better than this? Say: Subhan Allah, Alhamdulillah, La ilaha illa Allah, and Allahu Akbar, for with each one, a tree will be planted for you in Paradise.”",
     "tree_count": "Number of trees",
     "plant_tree": "Plant Tree",
@@ -187,5 +186,11 @@
     "sunan_notifications": "Sunan Notifications",
     "did_you_pray": "Did you pray",
     "sunan_message": "check your houses in paradise",
-    "dhuhrSunan": "Dhuhr Sunan"
+    "dhuhrSunan": "Dhuhr Sunan",
+    "hajj_umrah_count": "Hajj and Umrah Count",
+    "hajj_umrah_hadith": "Whoever prays Fajr in congregation, then sits remembering Allah until the sun rises, then prays two rak‘ahs, will have a reward like that of a complete Hajj and a complete Umrah — complete, complete, complete. Narrated by Anas ibn Malik.",
+    "complete_hajj_umrah_message": "Congratulations! You have received the reward of the Hajj and Umrah",
+    "completed_hajj_umrah": "Completed Hajj and Umrah reward"
+
+
 }

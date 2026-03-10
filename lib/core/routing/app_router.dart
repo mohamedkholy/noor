@@ -15,6 +15,8 @@ import 'package:noor/features/hadith/data/models/kitab.dart';
 import 'package:noor/features/hadith/logic/hadith_cubit.dart';
 import 'package:noor/features/hadith/ui/hadith_list_screen.dart';
 import 'package:noor/features/hadith/ui/hadith_screen.dart';
+import 'package:noor/features/hajj_umrah/logic/hajj_umrah_cubit.dart';
+import 'package:noor/features/hajj_umrah/ui/hajj_umrah_screen.dart';
 import 'package:noor/features/lands/logic/lands_cubit.dart';
 import 'package:noor/features/lands/ui/lands_screen.dart';
 import 'package:noor/features/location/logic/location_cubit.dart';
@@ -233,6 +235,14 @@ class AppRouter {
               surahNumber: (args as (int, int)).$1,
               ayaNumber: args.$2,
             ),
+          ),
+          settings,
+        );
+      case MyRoutes.hajjUmrah:
+        return _createRoute(
+          BlocProvider(
+            create: (context) => getIt<HajjUmrahCubit>(),
+            child: const HajjUmrahScreen(),
           ),
           settings,
         );

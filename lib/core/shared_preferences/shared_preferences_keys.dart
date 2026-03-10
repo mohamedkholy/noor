@@ -21,4 +21,6 @@ abstract class SharedPreferencesKeys {
   static const String treasuresCount = "treasures_count";
   static const String showCaseDone = "show_case_done";
   static const String sunanSettings = "sunan_settings";
+  static const String hajjUmrahCount = "hajj_umrah_count";
+  static const String hajjUmrahData = "hajj_umrah_data";
 }

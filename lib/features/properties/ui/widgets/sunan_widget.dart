@@ -20,7 +20,7 @@ class SunanWidget extends StatefulWidget {
 class _SunanWidgetState extends State<SunanWidget> {
   late List<(String, IconData, bool)> prayers;
   late final PropertiesCubit _propertiesCubit = context.read();
-  late SunanData sunanSetting = _propertiesCubit.getSunanSetting();
+  late SunanData sunanSetting = _propertiesCubit.getSunanData();
 
   @override
   void didChangeDependencies() {
@@ -94,7 +94,7 @@ class _SunanWidgetState extends State<SunanWidget> {
                       setState(() {
                         prayers[i] = (prayers[i].$1, prayers[i].$2, value!);
                       });
-                      _propertiesCubit.saveSunanSetting(
+                      _propertiesCubit.saveSunanData(
                         SunanData(
                           fajrSunnah: prayers[0].$3,
                           beforeDhuhrSunnah: prayers[1].$3,

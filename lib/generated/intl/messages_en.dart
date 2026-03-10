@@ -66,6 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "chooseTimeAfterAzan": MessageLookupByLibrary.simpleMessage(
       "Choose Time After Azan",
     ),
+    "complete_hajj_umrah_message": MessageLookupByLibrary.simpleMessage(
+      "Congratulations! You have received the reward of the Hajj and Umrah",
+    ),
     "complete_jinaazah_hadith": MessageLookupByLibrary.simpleMessage(
       "It was narrated from Abu Hurairah (may Allah be pleased with him) that the Messenger of Allah (peace and blessings of Allah be upon him) said: Whoever attends the funeral until the prayer is offered, he will have one qirat, and whoever attends until the deceased is buried, he will have two qirats. They said: What are the two qirats? He said: Like two great mountains. (Narrated by Muslim).",
     ),
@@ -77,6 +80,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "complete_sunan_message": MessageLookupByLibrary.simpleMessage(
       "Congratulations! You have completed the Sunan Rawatib for today, and a house has been built for you in Paradise.",
+    ),
+    "completed_hajj_umrah": MessageLookupByLibrary.simpleMessage(
+      "Completed Hajj and Umrah reward",
     ),
     "connectionTimedOut": MessageLookupByLibrary.simpleMessage(
       "Connection timed out",
@@ -114,6 +120,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "hadith": MessageLookupByLibrary.simpleMessage("Hadith"),
     "hadith_of_the_day": MessageLookupByLibrary.simpleMessage(
       "Hadith of the Day",
+    ),
+    "hajj_umrah_count": MessageLookupByLibrary.simpleMessage(
+      "Hajj and Umrah Count",
+    ),
+    "hajj_umrah_hadith": MessageLookupByLibrary.simpleMessage(
+      "Whoever prays Fajr in congregation, then sits remembering Allah until the sun rises, then prays two rak‘ahs, will have a reward like that of a complete Hajj and a complete Umrah — complete, complete, complete. Narrated by Anas ibn Malik.",
     ),
     "hayya_alal_falah": MessageLookupByLibrary.simpleMessage("Hayyaalal Falah"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -331,7 +343,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sAgricultureSection": MessageLookupByLibrary.simpleMessage(
       "Agriculture Section",
     ),
-    "sHajjSection": MessageLookupByLibrary.simpleMessage("Hajj Section"),
+    "sHajjAndUmrahSection": MessageLookupByLibrary.simpleMessage(
+      "Hajj and Umrah Section",
+    ),
     "sLandsSection": MessageLookupByLibrary.simpleMessage("Lands Section"),
     "sRealEstateSection": MessageLookupByLibrary.simpleMessage(
       "Real Estate Section",
@@ -339,7 +353,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "sTreasuresSection": MessageLookupByLibrary.simpleMessage(
       "Treasures Section",
     ),
-    "sUmrahSection": MessageLookupByLibrary.simpleMessage("Umrah Section"),
     "sahih_bukhari": MessageLookupByLibrary.simpleMessage("Sahih Bukhari"),
     "sahih_muslim": MessageLookupByLibrary.simpleMessage("Sahih Muslim"),
     "search": MessageLookupByLibrary.simpleMessage("Search..."),

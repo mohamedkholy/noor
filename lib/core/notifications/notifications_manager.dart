@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
@@ -449,7 +450,7 @@ class NotificationsManager {
         continue;
       }
       _localNotifications.zonedSchedule(
-        e.$1.hashCode,
+        Random().nextInt(1000000),
         S.current.iqama_prayer,
         '${S.current.iqama_prayer} ${e.$2}',
         tz.TZDateTime.from(e.$1.add(Duration(minutes: e.$3)), tz.local),
@@ -498,8 +499,9 @@ class NotificationsManager {
           !e.$3) {
         continue;
       }
+
       await _localNotifications.zonedSchedule(
-        e.hashCode,
+        Random().nextInt(1000000),
         S.current.hayya_alal_falah,
         '${S.current.did_you_pray} ${e.$2}${Intl.getCurrentLocale() == "ar" ? "؟" : "?"} ${S.current.sunan_message}',
         tz.TZDateTime.from(e.$1.add(const Duration(minutes: 35)), tz.local),

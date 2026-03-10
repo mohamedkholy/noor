@@ -21,4 +21,5 @@ abstract class MyRoutes {
   static const String agri = '/agri';
   static const String treasures = '/treasures';
   static const String tafsir = '/tafsir';
+  static const String hajjUmrah = '/hajjUmrah';
 }

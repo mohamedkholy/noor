@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
+import 'package:noor/features/hajj_umrah/data/models/sunan_data.dart';
 import 'package:noor/features/properties/data/models/sunan_data.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
@@ -222,5 +223,40 @@ class SharedPreferencesSettingsService {
       SharedPreferencesKeys.sunanSettings,
       jsonEncode(sunanSettings.toJson()),
     );
+  }
+
+  int getHajjUmrahCount() {
+    final result = sp.getInt(SharedPreferencesKeys.hajjUmrahCount);
+    return result ?? 0;
+  }
+
+  void saveHajjUmrahCount(int i) {
+    sp.setInt(SharedPreferencesKeys.hajjUmrahCount, i);
+  }
+
+  void saveHajjUmrahData(HajjUmrahData hajjUmrahData) {
+    sp.setString(
+      SharedPreferencesKeys.hajjUmrahData,
+      jsonEncode(hajjUmrahData.toJson()),
+    );
+  }
+
+  HajjUmrahData getHajjUmrahData() {
+    final result = sp.getString(SharedPreferencesKeys.hajjUmrahData);
+    if (result == null) {
+      return HajjUmrahData(
+        date: DateTime.now(),
+        isCompleted: false,
+      );
+    }
+    final hajjUmrahData = HajjUmrahData.fromJson(jsonDecode(result));
+    if (DateUtils.dateOnly(hajjUmrahData.date) !=
+        DateUtils.dateOnly(DateTime.now())) {
+      return HajjUmrahData(
+        date: DateTime.now(),
+        isCompleted: false,
+      );
+    }
+    return hajjUmrahData;
   }
 }

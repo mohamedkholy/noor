@@ -39,6 +39,7 @@ import 'package:noor/features/azkar/data/repos/azkar_repo.dart' as _i99;
 import 'package:noor/features/azkar/logic/azkar_cubit.dart' as _i824;
 import 'package:noor/features/hadith/data/repos/hadith_repo.dart' as _i952;
 import 'package:noor/features/hadith/logic/hadith_cubit.dart' as _i501;
+import 'package:noor/features/hajj_umrah/logic/hajj_umrah_cubit.dart' as _i228;
 import 'package:noor/features/home/data/repos/home_repo.dart' as _i298;
 import 'package:noor/features/home/logic/home_cubit.dart' as _i892;
 import 'package:noor/features/lands/logic/lands_cubit.dart' as _i262;
@@ -170,14 +171,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i479.SharedPreferencesSettingsService>(),
       ),
     );
+    gh.factory<_i179.AgriCubit>(
+      () => _i179.AgriCubit(gh<_i479.SharedPreferencesSettingsService>()),
+    );
+    gh.factory<_i228.HajjUmrahCubit>(
+      () => _i228.HajjUmrahCubit(gh<_i479.SharedPreferencesSettingsService>()),
+    );
     gh.factory<_i262.LandsCubit>(
       () => _i262.LandsCubit(gh<_i479.SharedPreferencesSettingsService>()),
     );
     gh.factory<_i663.SettingsCubit>(
       () => _i663.SettingsCubit(gh<_i479.SharedPreferencesSettingsService>()),
-    );
-    gh.factory<_i179.AgriCubit>(
-      () => _i179.AgriCubit(gh<_i479.SharedPreferencesSettingsService>()),
     );
     gh.factory<_i881.TreasuresCubit>(
       () => _i881.TreasuresCubit(gh<_i479.SharedPreferencesSettingsService>()),

@@ -40,14 +40,9 @@ class _StoreScreenState extends State<StoreScreen> {
         MyRoutes.treasures,
       ),
       (
-        S.of(context).sHajjSection,
+        S.of(context).sHajjAndUmrahSection,
         Assets.assetsImagesPngPalace,
-        MyRoutes.properties,
-      ),
-      (
-        S.of(context).sUmrahSection,
-        Assets.assetsImagesPngPalace,
-        MyRoutes.properties,
+        MyRoutes.hajjUmrah,
       ),
     ];
     super.didChangeDependencies();
@@ -74,7 +69,7 @@ class _StoreScreenState extends State<StoreScreen> {
                   icon: sections[index].$2,
                 );
               },
-              itemCount: 6,
+              itemCount: 5,
               crossAxisCount: 2,
             ),
           ),
