@@ -265,9 +265,18 @@ class SharedPreferencesSettingsService {
   }
 
   void saveBookMark(Bookmark bookmark) {
-    sp.setString(
-      SharedPreferencesKeys.bookMark,
-      jsonEncode(bookmark.toJson()),
-    );
+    sp.setString(SharedPreferencesKeys.bookMark, jsonEncode(bookmark.toJson()));
+  }
+
+  Color getReadingBackgroundColor() {
+    final result = sp.getInt(SharedPreferencesKeys.readingBackgroundColor);
+    if (result == null) {
+      return const Color(0xFFFFF8EE);
+    }
+    return Color(result);
+  }
+
+  void saveReadingBackgroundColor(Color color) {
+    sp.setInt(SharedPreferencesKeys.readingBackgroundColor, color.toARGB32());
   }
 }

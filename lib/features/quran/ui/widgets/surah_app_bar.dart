@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/helpers/font_weight_helper.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 
 import '../../../../generated/l10n.dart';
 
@@ -51,41 +53,49 @@ class SurahAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      color: const Color(0xFFFFF8EE),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.baseline,
-        textBaseline: TextBaseline.alphabetic,
-        children: [
-          Expanded(
-            child: Text(
-              " ${S.current.juz_2} ${Localizations.localeOf(context).languageCode == 'ar' ? arabicOrdinals[int.parse(juz)] : juz}",
-              style: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeightHelper.medium,
+    final quranCubit = context.read<QuranCubit>();
+    return ValueListenableBuilder(
+      valueListenable: quranCubit.readingBackgroundColorNotifier,
+      builder: (context, value, child) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          color: value,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Expanded(
+                child: Text(
+                  " ${S.current.juz_2} ${Localizations.localeOf(context).languageCode == 'ar' ? arabicOrdinals[int.parse(juz)] : juz}",
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: quranCubit.getVerseTextColor(value),
+                    fontWeight: FontWeightHelper.medium,
+                  ),
+                ),
               ),
-            ),
-          ),
 
-          // Text(
-          //   surahNumber,
-          //   style: const TextStyle(
-          //     fontSize: 17,
-          //     color: Colors.white,
-          //     fontWeight: FontWeightHelper.medium,
-          //   ),
-          // ),
-          Text(
-            " $surahName",
-            style: const TextStyle(
-              fontSize: 23,
-              fontFamily: "KFGQPC_Uthmanic",
-              fontWeight: FontWeightHelper.medium,
-            ),
+              // Text(
+              //   surahNumber,
+              //   style: const TextStyle(
+              //     fontSize: 17,
+              //     color: Colors.white,
+              //     fontWeight: FontWeightHelper.medium,
+              //   ),
+              // ),
+              Text(
+                " $surahName",
+                style: TextStyle(
+                  fontSize: 23,
+                  fontFamily: "KFGQPC_Uthmanic",
+                  color: quranCubit.getVerseTextColor(value),
+                  fontWeight: FontWeightHelper.medium,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

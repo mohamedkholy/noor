@@ -24,4 +24,5 @@ abstract class SharedPreferencesKeys {
   static const String hajjUmrahCount = "hajj_umrah_count";
   static const String hajjUmrahData = "hajj_umrah_data";
   static const String bookMark = "book_mark";
+  static const String readingBackgroundColor = "reading_background_color";
 }

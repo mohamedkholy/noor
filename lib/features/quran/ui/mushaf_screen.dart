@@ -85,79 +85,30 @@ class _MushafScreenState extends State<MushafScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xFFFFF8EE),
-      child: SafeArea(
-        top: false,
-        right: false,
-        left: false,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (_, constraints) {
-                    final isSmallScreen =
-                        MediaQuery.sizeOf(context).height < 500;
-                    return BlocConsumer<MushafCubit, MushafState>(
-                      buildWhen: (previous, current) =>
-                          current is QuranLinesLoaded ||
-                          current is QuranLinesLodedFromStart ||
-                          current is QuranLinesLodedFromEnd,
-                      listenWhen: (previous, current) =>
-                          current is QuranLinesLoaded ||
-                          current is QuranLinesLodedFromStart ||
-                          current is QuranLinesLodedFromEnd,
-                      listener: (context, state) {
-                        if (state is QuranLinesLoaded) {
-                          pages.addAll(state.pages);
-                          currentPageIndex = pages.indexWhere(
-                            (element) =>
-                                element.last.info.pageNumber ==
-                                (_quranCubit
-                                        .currentReadingPositionNotifier
-                                        .value
-                                        ?.pageNumber ??
-                                    widget.pageNumber),
-                          );
-                          final firstAya = pages[currentPageIndex].firstWhere(
-                            (element) =>
-                                element.info.lineType == LineType.ayah.name,
-                          );
-                          _quranCubit.updateReadingPosition(
-                            firstAya.words.first.surah,
-                            firstAya.words.first.ayah,
-                            firstAya.words.first.juz,
-                            firstAya.info.pageNumber,
-                          );
-                          if (getIt<SharedPreferences>().getBool(
-                                SharedPreferencesKeys.showCaseDone,
-                              ) !=
-                              true) {
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              Future.delayed(
-                                const Duration(milliseconds: 500),
-                                () {
-                                  ShowcaseView.get().startShowCase([
-                                    _showCaseKey,
-                                  ]);
-                                },
-                              );
-                            });
-                          }
-                        } else if (state is QuranLinesLodedFromStart) {
-                          pages.insertAll(0, state.pages);
-                          currentPageIndex =
-                              pageController.page!.toInt() + state.pages.length;
-                          pageController = PageController(
-                            initialPage: currentPageIndex,
-                          );
-                        } else if (state is QuranLinesLodedFromEnd) {
-                          pages.addAll(state.pages);
-                        }
-                      },
-                      builder: (_, state) {
+    return SafeArea(
+      top: false,
+      right: false,
+      left: false,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Expanded(
+              child: LayoutBuilder(
+                builder: (_, constraints) {
+                  final isSmallScreen = MediaQuery.sizeOf(context).height < 500;
+                  return BlocConsumer<MushafCubit, MushafState>(
+                    buildWhen: (previous, current) =>
+                        current is QuranLinesLoaded ||
+                        current is QuranLinesLodedFromStart ||
+                        current is QuranLinesLodedFromEnd,
+                    listenWhen: (previous, current) =>
+                        current is QuranLinesLoaded ||
+                        current is QuranLinesLodedFromStart ||
+                        current is QuranLinesLodedFromEnd,
+                    listener: (context, state) {
+                      if (state is QuranLinesLoaded) {
+                        pages.addAll(state.pages);
                         currentPageIndex = pages.indexWhere(
                           (element) =>
                               element.last.info.pageNumber ==
@@ -167,196 +118,240 @@ class _MushafScreenState extends State<MushafScreen> {
                                       ?.pageNumber ??
                                   widget.pageNumber),
                         );
+                        final firstAya = pages[currentPageIndex].firstWhere(
+                          (element) =>
+                              element.info.lineType == LineType.ayah.name,
+                        );
+                        _quranCubit.updateReadingPosition(
+                          firstAya.words.first.surah,
+                          firstAya.words.first.ayah,
+                          firstAya.words.first.juz,
+                          firstAya.info.pageNumber,
+                        );
+                        if (getIt<SharedPreferences>().getBool(
+                              SharedPreferencesKeys.showCaseDone,
+                            ) !=
+                            true) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            Future.delayed(
+                              const Duration(milliseconds: 500),
+                              () {
+                                ShowcaseView.get().startShowCase([
+                                  _showCaseKey,
+                                ]);
+                              },
+                            );
+                          });
+                        }
+                      } else if (state is QuranLinesLodedFromStart) {
+                        pages.insertAll(0, state.pages);
+                        currentPageIndex =
+                            pageController.page!.toInt() + state.pages.length;
                         pageController = PageController(
                           initialPage: currentPageIndex,
                         );
-                        if (state is! QuranLinesLodedFromEnd) {
-                          key = UniqueKey();
-                        }
-                        return NotificationListener<ScrollNotification>(
-                          onNotification: (notification) {
-                            if (notification is ScrollUpdateNotification &&
-                                notification.scrollDelta != null &&
-                                notification.scrollDelta!.abs() > 2 &&
-                                notification.metrics.axis == Axis.horizontal) {
-                              _mushafCubit.stopPlayer();
-                            }
-                            return true;
-                          },
-                          child: state is QuranLinesLoading
-                              ? const QuranLinesLoadingWidget()
-                              : PageView.builder(
-                                  reverse:
-                                      Localizations.localeOf(
-                                        context,
-                                      ).languageCode !=
-                                      "ar",
-                                  key: key,
-                                  controller: pageController,
-                                  itemCount: pages.length,
-                                  onPageChanged: (value) {
-                                    if (pages.isEmpty) {
-                                      return;
-                                    }
-                                    final firstAyaLine = pages[value]
-                                        .firstWhere(
-                                          (element) =>
-                                              element.info.lineType ==
-                                              LineType.ayah.name,
+                      } else if (state is QuranLinesLodedFromEnd) {
+                        pages.addAll(state.pages);
+                      }
+                    },
+                    builder: (_, state) {
+                      currentPageIndex = pages.indexWhere(
+                        (element) =>
+                            element.last.info.pageNumber ==
+                            (_quranCubit
+                                    .currentReadingPositionNotifier
+                                    .value
+                                    ?.pageNumber ??
+                                widget.pageNumber),
+                      );
+                      pageController = PageController(
+                        initialPage: currentPageIndex,
+                      );
+                      if (state is! QuranLinesLodedFromEnd) {
+                        key = UniqueKey();
+                      }
+                      return NotificationListener<ScrollNotification>(
+                        onNotification: (notification) {
+                          if (notification is ScrollUpdateNotification &&
+                              notification.scrollDelta != null &&
+                              notification.scrollDelta!.abs() > 2 &&
+                              notification.metrics.axis == Axis.horizontal) {
+                            _mushafCubit.stopPlayer();
+                          }
+                          return true;
+                        },
+                        child: state is QuranLinesLoading
+                            ? const QuranLinesLoadingWidget()
+                            : PageView.builder(
+                                reverse:
+                                    Localizations.localeOf(
+                                      context,
+                                    ).languageCode !=
+                                    "ar",
+                                key: key,
+                                controller: pageController,
+                                itemCount: pages.length,
+                                onPageChanged: (value) {
+                                  if (pages.isEmpty) {
+                                    return;
+                                  }
+                                  final firstAyaLine = pages[value].firstWhere(
+                                    (element) =>
+                                        element.info.lineType ==
+                                        LineType.ayah.name,
+                                  );
+                                  final firstPageNumber = pages.first
+                                      .firstWhere(
+                                        (element) =>
+                                            element.info.lineType ==
+                                            LineType.ayah.name,
+                                      )
+                                      .info
+                                      .pageNumber;
+                                  final lastPageNumber = pages.last
+                                      .firstWhere(
+                                        (element) =>
+                                            element.info.lineType ==
+                                            LineType.ayah.name,
+                                      )
+                                      .info
+                                      .pageNumber;
+
+                                  _quranCubit.updateReadingPosition(
+                                    firstAyaLine.words.first.surah,
+                                    firstAyaLine.words.first.ayah,
+                                    firstAyaLine.words.first.juz,
+                                    firstAyaLine.info.pageNumber,
+                                  );
+                                  if (value == pages.length - 2 &&
+                                      lastPageNumber != 604) {
+                                    _mushafCubit.getSurasLinesPagination(
+                                      pageNumber: lastPageNumber,
+                                      isFromStart: false,
+                                    );
+                                  } else if (value == 2 &&
+                                      firstPageNumber != 1) {
+                                    Future.delayed(
+                                      const Duration(milliseconds: 500),
+                                      () {
+                                        _mushafCubit.getSurasLinesPagination(
+                                          pageNumber: firstPageNumber,
+                                          isFromStart: true,
                                         );
-                                    final firstPageNumber = pages.first
-                                        .firstWhere(
-                                          (element) =>
-                                              element.info.lineType ==
-                                              LineType.ayah.name,
-                                        )
-                                        .info
-                                        .pageNumber;
-                                    final lastPageNumber = pages.last
-                                        .firstWhere(
-                                          (element) =>
-                                              element.info.lineType ==
-                                              LineType.ayah.name,
-                                        )
-                                        .info
-                                        .pageNumber;
-
-                                    _quranCubit.updateReadingPosition(
-                                      firstAyaLine.words.first.surah,
-                                      firstAyaLine.words.first.ayah,
-                                      firstAyaLine.words.first.juz,
-                                      firstAyaLine.info.pageNumber,
+                                      },
                                     );
-                                    if (value == pages.length - 2 &&
-                                        lastPageNumber != 604) {
-                                      _mushafCubit.getSurasLinesPagination(
-                                        pageNumber: lastPageNumber,
-                                        isFromStart: false,
-                                      );
-                                    } else if (value == 2 &&
-                                        firstPageNumber != 1) {
-                                      Future.delayed(
-                                        const Duration(milliseconds: 500),
-                                        () {
-                                          _mushafCubit.getSurasLinesPagination(
-                                            pageNumber: firstPageNumber,
-                                            isFromStart: true,
-                                          );
-                                        },
-                                      );
+                                  }
+                                },
+                                itemBuilder: (context, index) {
+                                  final page = pages[index];
+
+                                  int notAyaCount = 0;
+
+                                  for (var element in pages[index]) {
+                                    if (element.info.lineType ==
+                                            LineType.basmallah.name ||
+                                        element.info.lineType ==
+                                            LineType.surah_name.name) {
+                                      notAyaCount++;
                                     }
-                                  },
-                                  itemBuilder: (context, index) {
-                                    final page = pages[index];
+                                  }
 
-                                    int notAyaCount = 0;
-
-                                    for (var element in pages[index]) {
-                                      if (element.info.lineType ==
-                                              LineType.basmallah.name ||
-                                          element.info.lineType ==
-                                              LineType.surah_name.name) {
-                                        notAyaCount++;
-                                      }
-                                    }
-
-                                    final lineHeight = isSmallScreen
-                                        ? null
-                                        : (constraints.maxHeight -
-                                                  (30 + (notAyaCount) * 50)) /
-                                              (pages[index].length -
-                                                  (notAyaCount));
-                                    final pageNumber = page
-                                        .firstWhere(
-                                          (element) =>
-                                              element.info.lineType ==
-                                              LineType.ayah.name,
-                                        )
-                                        .info
-                                        .pageNumber;
-                                    return Column(
-                                      children: [
-                                        Expanded(
-                                          child: ListView.builder(
-                                            physics: isSmallScreen
-                                                ? const AlwaysScrollableScrollPhysics()
-                                                : const NeverScrollableScrollPhysics(),
-                                            itemCount: page.length,
-                                            itemBuilder: (_, i) {
-                                              final line = page[i];
-                                              final firstAyaIndex = page
-                                                  .indexWhere(
-                                                    (element) =>
-                                                        element.info.lineType ==
-                                                        LineType.ayah.name,
-                                                  );
-
-                                              if (line.info.lineType ==
-                                                  LineType.surah_name.name) {
-                                                return HeaderWidget(
-                                                  surahNumber:
-                                                      line.info.surahNumber!,
+                                  final lineHeight = isSmallScreen
+                                      ? null
+                                      : (constraints.maxHeight -
+                                                (30 + (notAyaCount) * 50)) /
+                                            (pages[index].length -
+                                                (notAyaCount));
+                                  final pageNumber = page
+                                      .firstWhere(
+                                        (element) =>
+                                            element.info.lineType ==
+                                            LineType.ayah.name,
+                                      )
+                                      .info
+                                      .pageNumber;
+                                  return Column(
+                                    children: [
+                                      Expanded(
+                                        child: ListView.builder(
+                                          physics: isSmallScreen
+                                              ? const AlwaysScrollableScrollPhysics()
+                                              : const NeverScrollableScrollPhysics(),
+                                          itemCount: page.length,
+                                          itemBuilder: (_, i) {
+                                            final line = page[i];
+                                            final firstAyaIndex = page
+                                                .indexWhere(
+                                                  (element) =>
+                                                      element.info.lineType ==
+                                                      LineType.ayah.name,
                                                 );
-                                              } else if (line.info.lineType ==
-                                                  LineType.basmallah.name) {
-                                                return const Basmallah();
-                                              }
-                                              if (i == firstAyaIndex) {
-                                                return Showcase(
-                                                  key: _showCaseKey,
-                                                  description: S
-                                                      .of(context)
-                                                      .pressToShowOptions,
-                                                  child: PageLineWidget(
-                                                    line: line,
-                                                    pageNumber: pageNumber,
-                                                    lineHeight:
-                                                        pageNumber == 1 ||
-                                                            pageNumber == 2
-                                                        ? null
-                                                        : lineHeight,
-                                                  ),
-                                                );
-                                              }
-                                              return PageLineWidget(
-                                                line: line,
-                                                pageNumber: pageNumber,
-                                                lineHeight:
-                                                    pageNumber == 1 ||
-                                                        pageNumber == 2
-                                                    ? null
-                                                    : lineHeight,
+
+                                            if (line.info.lineType ==
+                                                LineType.surah_name.name) {
+                                              return HeaderWidget(
+                                                surahNumber:
+                                                    line.info.surahNumber!,
                                               );
-                                            },
-                                          ),
+                                            } else if (line.info.lineType ==
+                                                LineType.basmallah.name) {
+                                              return const Basmallah();
+                                            }
+                                            if (i == firstAyaIndex) {
+                                              return Showcase(
+                                                key: _showCaseKey,
+                                                description: S
+                                                    .of(context)
+                                                    .pressToShowOptions,
+                                                child: PageLineWidget(
+                                                  line: line,
+                                                  pageNumber: pageNumber,
+                                                  lineHeight:
+                                                      pageNumber == 1 ||
+                                                          pageNumber == 2
+                                                      ? null
+                                                      : lineHeight,
+                                                ),
+                                              );
+                                            }
+                                            return PageLineWidget(
+                                              line: line,
+                                              pageNumber: pageNumber,
+                                              lineHeight:
+                                                  pageNumber == 1 ||
+                                                      pageNumber == 2
+                                                  ? null
+                                                  : lineHeight,
+                                            );
+                                          },
                                         ),
-                                        Text(pageNumber.toString()),
-                                      ],
-                                    );
-                                  },
-                                ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              BlocBuilder<MushafCubit, MushafState>(
-                builder: (context, state) {
-                  if (state is AudioPlayerState) {
-                    return MushafSoundWidget(
-                      pageNumber: state.pageNumber,
-                      suraNumber: state.suraNumber,
-                      ayaNumber: state.ayaNumber,
-                      isPlaying: state is AudioPlayerPlaying,
-                      isLoading: state is PageSoundLoading,
-                    );
-                  }
-                  return const SizedBox.shrink();
+                                      ),
+                                      Text(pageNumber.toString()),
+                                    ],
+                                  );
+                                },
+                              ),
+                      );
+                    },
+                  );
                 },
               ),
-            ],
-          ),
+            ),
+            BlocBuilder<MushafCubit, MushafState>(
+              builder: (context, state) {
+                if (state is AudioPlayerState) {
+                  return MushafSoundWidget(
+                    pageNumber: state.pageNumber,
+                    suraNumber: state.suraNumber,
+                    ayaNumber: state.ayaNumber,
+                    isPlaying: state is AudioPlayerPlaying,
+                    isLoading: state is PageSoundLoading,
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+          ],
         ),
       ),
     );

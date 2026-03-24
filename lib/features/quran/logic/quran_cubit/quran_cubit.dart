@@ -17,6 +17,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 @Injectable()
 class QuranCubit extends Cubit<QuranState> {
   final QuranRepo _quranRepo;
+  final SharedPreferencesSettingsService _settingsService =
+      SharedPreferencesSettingsService();
   ValueNotifier<ReadingPosition?> currentReadingPositionNotifier =
       ValueNotifier(null);
   ValueNotifier<Surah?> currentSurahNotifier = ValueNotifier(null);
@@ -24,6 +26,9 @@ class QuranCubit extends Cubit<QuranState> {
   QuranReader currentQuranReaderNotifier = QuranCubit.quranReader.first;
   ValueNotifier<Bookmark?> bookMarkNotifier = ValueNotifier(
     SharedPreferencesSettingsService().getBookMark(),
+  );
+  ValueNotifier<Color> readingBackgroundColorNotifier = ValueNotifier(
+    SharedPreferencesSettingsService().getReadingBackgroundColor(),
   );
   QuranCubit(this._quranRepo) : super(QuranInitial());
 
@@ -97,6 +102,22 @@ class QuranCubit extends Cubit<QuranState> {
     currentSurahNotifier.dispose();
     currentTabNotifier.dispose();
     currentReadingPositionNotifier.dispose();
+    readingBackgroundColorNotifier.dispose();
+  }
+
+  void updateReadingBackgroundColor(Color color) {
+    readingBackgroundColorNotifier.value = color;
+    _settingsService.saveReadingBackgroundColor(color);
+  }
+
+  Color getVerseTextColor(Color background) {
+    return background.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+  }
+
+  Color getTranslationTextColor(Color background) {
+    return background.computeLuminance() > 0.5
+        ? Colors.black87
+        : Colors.white70;
   }
 
   static List<QuranReader> quranReader = [
