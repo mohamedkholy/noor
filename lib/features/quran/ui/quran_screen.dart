@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/routing/my_routes.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
@@ -33,7 +35,29 @@ class _QuranScreenState extends State<QuranScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: S.current.quran),
+      appBar: MyAppBar(
+        title: S.current.quran,
+        actions: [
+          if (SharedPreferencesSettingsService().getBookMark() != null)
+            IconButton(
+              onPressed: () {
+                final bookmark = SharedPreferencesSettingsService()
+                    .getBookMark();
+                Navigator.pushNamed(
+                  context,
+                  MyRoutes.reading,
+                  arguments: {
+                    'surahNumber': bookmark!.surahNumber,
+                    'ayaNumber': bookmark.ayaNumber,
+                    'juzNumber': bookmark.juzNumber,
+                    'pageNumber': bookmark.pageNumber,
+                  },
+                );
+              },
+              icon: const Icon(Icons.bookmark, color: Colors.white),
+            ),
+        ],
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 800),
