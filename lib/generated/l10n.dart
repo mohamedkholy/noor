@@ -264,6 +264,11 @@ class S {
     return Intl.message('Juz', name: 'juz', desc: '', args: []);
   }
 
+  /// `Juz`
+  String get juz_2 {
+    return Intl.message('Juz', name: 'juz_2', desc: '', args: []);
+  }
+
   /// `Ayah of the Day`
   String get ayah_of_the_day {
     return Intl.message(
@@ -1639,6 +1644,21 @@ class S {
     return Intl.message(
       'Completed Hajj and Umrah reward',
       name: 'completed_hajj_umrah',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookmark`
+  String get bookmark {
+    return Intl.message('Bookmark', name: 'bookmark', desc: '', args: []);
+  }
+
+  /// `Add bookmark`
+  String get bookmarkSublabel {
+    return Intl.message(
+      'Add bookmark',
+      name: 'bookmarkSublabel',
       desc: '',
       args: [],
     );

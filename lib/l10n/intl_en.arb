@@ -32,6 +32,7 @@
     "aya": "Aya",
     "surah": "Surah",
     "juz": "Juz",
+    "juz_2": "Juz",
     "ayah_of_the_day": "Ayah of the Day",
     "hadith_of_the_day": "Hadith of the Day",
     "home": "Home",
@@ -190,7 +191,7 @@
     "hajj_umrah_count": "Hajj and Umrah Count",
     "hajj_umrah_hadith": "Whoever prays Fajr in congregation, then sits remembering Allah until the sun rises, then prays two rak‘ahs, will have a reward like that of a complete Hajj and a complete Umrah — complete, complete, complete. Narrated by Anas ibn Malik.",
     "complete_hajj_umrah_message": "Congratulations! You have received the reward of the Hajj and Umrah",
-    "completed_hajj_umrah": "Completed Hajj and Umrah reward"
-
-
+    "completed_hajj_umrah": "Completed Hajj and Umrah reward",
+    "bookmark": "Bookmark",
+    "bookmarkSublabel": "Add bookmark"
 }

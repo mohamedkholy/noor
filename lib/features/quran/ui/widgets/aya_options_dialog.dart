@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/models/bookmark.dart';
 import 'package:noor/core/routing/my_routes.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
 import 'package:noor/features/quran/ui/widgets/aya_options_button.dart';
 import 'package:noor/generated/l10n.dart';
 
@@ -8,6 +12,7 @@ class AyaBottomSheet extends StatefulWidget {
   final int suraNumber;
   final int ayaNumber;
   final int pageNumber;
+  final int juzNumber;
   final String ayaText;
   final VoidCallback? onPlaySound;
   final String fontFamily;
@@ -17,6 +22,7 @@ class AyaBottomSheet extends StatefulWidget {
     required this.suraNumber,
     required this.ayaNumber,
     required this.pageNumber,
+    required this.juzNumber,
     required this.ayaText,
     this.onPlaySound,
     required this.fontFamily,
@@ -52,7 +58,6 @@ class _AyaBottomSheetState extends State<AyaBottomSheet>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-
     final bgColor = isDark ? const Color(0xFF1A1A2E) : const Color(0xFFF8F5EE);
     final surfaceColor = isDark
         ? const Color(0xFF16213E)
@@ -207,6 +212,33 @@ class _AyaBottomSheetState extends State<AyaBottomSheet>
                             MyRoutes.tafsir,
                             arguments: (widget.suraNumber, widget.ayaNumber),
                           );
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: AyaOptionsButton(
+                        icon: Icons.bookmark_add_rounded,
+                        label: S.of(context).bookmark,
+                        sublabel: S.of(context).bookmarkSublabel,
+                        iconColor: Colors.red,
+                        bgColor: Colors.red.withValues(alpha: 0.1),
+                        borderColor: Colors.red.withValues(alpha: 0.3),
+                        textColor: textPrimary,
+                        subtextColor: textSecondary,
+                        onTap: () {
+                          final bookmark = Bookmark(
+                            surahNumber: widget.suraNumber,
+                            ayaNumber: widget.ayaNumber,
+                            pageNumber: widget.pageNumber,
+                            juzNumber: widget.juzNumber,
+                          );
+                          SharedPreferencesSettingsService().saveBookMark(
+                            bookmark,
+                          );
+                          context.read<QuranCubit>().bookMarkNotifier.value =
+                              bookmark;
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),

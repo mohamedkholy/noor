@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/home/data/models/last_reading.dart';

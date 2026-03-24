@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/di/dependency_injection.dart';
@@ -59,77 +61,103 @@ class _ReadingScreenState extends State<ReadingScreen> {
         _quranCubit.currentReadingPositionNotifier.value?.surahNumber ??
         widget.surahNumber;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: ValueListenableBuilder<ReadingPosition?>(
-          valueListenable: _quranCubit.currentReadingPositionNotifier,
-          builder: (context, verse, child) {
-            if (verse == null) {
-              return AppBar(automaticallyImplyLeading: false);
-            }
-            return SurahAppBar(
-              juz: verse.juz.toString(),
-              surahNumber: verse.surahNumber.toString(),
-              surahName: verse.surahName,
-            );
-          },
-        ),
-      ),
-      body: DefaultTabController(
-        length: 2,
-        child: Column(
-          children: [
-            Container(
-              color: MyColors.primary,
-              child: TabBar(
-                onTap: (value) {
-                  _quranCubit.currentTabNotifier.value = value;
-                  setState(() {
-                    _index = value;
-                  });
-                },
-                indicatorColor: Colors.black,
-                labelColor: Colors.white,
-                unselectedLabelColor: Colors.grey.shade400,
-                indicatorSize: TabBarIndicatorSize.label,
-                labelStyle: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+      body: SafeArea(
+        bottom: false,
+        child: DefaultTabController(
+          length: 2,
+          child: Column(
+            children: [
+              Container(
+                color: MyColors.primary,
+                child: Row(
+                  children: [
+                    if (Platform.isIOS)
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
+                      ),
+                    Expanded(
+                      child: TabBar(
+                        onTap: (value) {
+                          _quranCubit.currentTabNotifier.value = value;
+                          setState(() {
+                            _index = value;
+                          });
+                        },
+                        indicatorColor: Colors.black,
+                        labelColor: Colors.white,
+                        unselectedLabelColor: Colors.grey.shade400,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        labelStyle: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        tabs: [
+                          Tab(text: S.of(context).mushafStyle, height: 60),
+                          Tab(text: S.of(context).ayatStyle, height: 60),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                tabs: [
-                  Tab(text: S.of(context).mushafStyle, height: 60),
-                  Tab(text: S.of(context).ayatStyle, height: 60),
-                ],
               ),
-            ),
-            Expanded(
-              child: IndexedStack(
-                index: _index,
-                children: [
-                  BlocProvider(
-                    create: (context) => getIt<MushafCubit>(),
-                    child: MushafScreen(
-                      key: ValueKey(pageNumber),
-                      pageNumber: pageNumber,
+              Expanded(
+                child: Column(
+                  children: [
+                    ValueListenableBuilder<ReadingPosition?>(
+                      valueListenable:
+                          _quranCubit.currentReadingPositionNotifier,
+                      builder: (context, verse, child) {
+                        if (verse == null) {
+                          return const SizedBox.shrink();
+                        }
+                        return SurahAppBar(
+                          juz: verse.juz.toString(),
+                          surahNumber: verse.surahNumber.toString(),
+                          surahName: verse.surahName,
+                        );
+                      },
                     ),
-                  ),
-                  BlocProvider(
-                    create: (context) => getIt<AyatCubit>(),
-                    child: QuranAyatScreen(
-                      key: ValueKey(surahNumber),
-                      surahNumber: surahNumber,
-                      ayaNumber:
-                          _quranCubit
-                              .currentReadingPositionNotifier
-                              .value
-                              ?.verseNumber ??
-                          widget.ayaNumber,
+                    Expanded(
+                      child: ValueListenableBuilder(
+                        valueListenable: _quranCubit.bookMarkNotifier,
+                        builder: (context, bookmark, child) {
+                          return IndexedStack(
+                            index: _index,
+                            children: [
+                              BlocProvider(
+                                create: (context) => getIt<MushafCubit>(),
+                                child: MushafScreen(
+                                  key: ValueKey(pageNumber),
+                                  pageNumber: pageNumber,
+                                ),
+                              ),
+                              BlocProvider(
+                                create: (context) => getIt<AyatCubit>(),
+                                child: QuranAyatScreen(
+                                  key: ValueKey(surahNumber),
+                                  surahNumber: surahNumber,
+                                  ayaNumber:
+                                      _quranCubit
+                                          .currentReadingPositionNotifier
+                                          .value
+                                          ?.verseNumber ??
+                                      widget.ayaNumber,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

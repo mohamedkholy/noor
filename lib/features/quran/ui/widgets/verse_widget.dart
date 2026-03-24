@@ -46,22 +46,26 @@ class VerseWidget extends StatelessWidget {
                 context: context,
                 backgroundColor: Colors.transparent,
                 isScrollControlled: true,
-                builder: (_) => AyaBottomSheet(
-                  ayaText: verse.textAr,
-                  suraNumber: verse.surahNumber,
-                  ayaNumber: verse.number,
-                  pageNumber: verse.page,
-                  fontFamily: "KFGQPC_Uthmanic",
-                  onPlaySound: () {
-                    context.read<AyatCubit>().getAyaSound(
-                      surahNumber: verse.surahNumber,
-                      verseNumber: verse.number,
-                      qari: context
-                          .read<QuranCubit>()
-                          .currentQuranReaderNotifier
-                          .url,
-                    );
-                  },
+                builder: (_) => BlocProvider.value(
+                  value: context.read<QuranCubit>(),
+                  child: AyaBottomSheet(
+                    ayaText: verse.textAr,
+                    suraNumber: verse.surahNumber,
+                    ayaNumber: verse.number,
+                    pageNumber: verse.page,
+                    juzNumber: verse.juz,
+                    fontFamily: "KFGQPC_Uthmanic",
+                    onPlaySound: () {
+                      context.read<AyatCubit>().getAyaSound(
+                        surahNumber: verse.surahNumber,
+                        verseNumber: verse.number,
+                        qari: context
+                            .read<QuranCubit>()
+                            .currentQuranReaderNotifier
+                            .url,
+                      );
+                    },
+                  ),
                 ),
               );
             }
@@ -75,6 +79,19 @@ class VerseWidget extends StatelessWidget {
                       state.surahNumber == verse.surahNumber &&
                       state.verseNumber == verse.number
                   ? Colors.green.shade100
+                  : (context
+                                .read<QuranCubit>()
+                                .bookMarkNotifier
+                                .value
+                                ?.surahNumber ==
+                            verse.surahNumber &&
+                        context
+                                .read<QuranCubit>()
+                                .bookMarkNotifier
+                                .value
+                                ?.ayaNumber ==
+                            verse.number)
+                  ? Colors.red.shade50
                   : Colors.transparent,
             ),
             width: double.infinity,

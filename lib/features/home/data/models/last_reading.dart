@@ -1,4 +1,3 @@
-import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/features/quran/data/models/reading_position.dart';
 
 class LastReadingData {

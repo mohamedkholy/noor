@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
+import 'package:noor/core/models/bookmark.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
 import 'package:noor/features/quran/data/models/quran_reader.dart';
 import 'package:noor/features/quran/data/models/reading_position.dart';
 import 'package:noor/features/quran/data/repos/quran_repo.dart';
@@ -20,6 +22,9 @@ class QuranCubit extends Cubit<QuranState> {
   ValueNotifier<Surah?> currentSurahNotifier = ValueNotifier(null);
   ValueNotifier<int> currentTabNotifier = ValueNotifier(0);
   QuranReader currentQuranReaderNotifier = QuranCubit.quranReader.first;
+  ValueNotifier<Bookmark?> bookMarkNotifier = ValueNotifier(
+    SharedPreferencesSettingsService().getBookMark(),
+  );
   QuranCubit(this._quranRepo) : super(QuranInitial());
 
   Future<void> getSuras() async {

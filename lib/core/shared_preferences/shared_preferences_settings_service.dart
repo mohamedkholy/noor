@@ -2,9 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:noor/core/di/dependency_injection.dart';
+import 'package:noor/core/models/bookmark.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/hajj_umrah/data/models/sunan_data.dart';
+import 'package:noor/features/home/data/models/last_reading.dart';
 import 'package:noor/features/properties/data/models/sunan_data.dart';
+import 'package:noor/features/quran/data/models/reading_position.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
@@ -14,9 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable()
 class SharedPreferencesSettingsService {
-  final SharedPreferences sp;
-
-  SharedPreferencesSettingsService(this.sp);
+  final SharedPreferences sp = getIt<SharedPreferences>();
 
   bool getLocationUpdateSetting() {
     final result = sp.getBool(SharedPreferencesKeys.locationUpdateSettings);
@@ -244,19 +246,28 @@ class SharedPreferencesSettingsService {
   HajjUmrahData getHajjUmrahData() {
     final result = sp.getString(SharedPreferencesKeys.hajjUmrahData);
     if (result == null) {
-      return HajjUmrahData(
-        date: DateTime.now(),
-        isCompleted: false,
-      );
+      return HajjUmrahData(date: DateTime.now(), isCompleted: false);
     }
     final hajjUmrahData = HajjUmrahData.fromJson(jsonDecode(result));
     if (DateUtils.dateOnly(hajjUmrahData.date) !=
         DateUtils.dateOnly(DateTime.now())) {
-      return HajjUmrahData(
-        date: DateTime.now(),
-        isCompleted: false,
-      );
+      return HajjUmrahData(date: DateTime.now(), isCompleted: false);
     }
     return hajjUmrahData;
+  }
+
+  Bookmark? getBookMark() {
+    final result = sp.getString(SharedPreferencesKeys.bookMark);
+    if (result == null) {
+      return null;
+    }
+    return Bookmark.fromJson(jsonDecode(result));
+  }
+
+  void saveBookMark(Bookmark bookmark) {
+    sp.setString(
+      SharedPreferencesKeys.bookMark,
+      jsonEncode(bookmark.toJson()),
+    );
   }
 }

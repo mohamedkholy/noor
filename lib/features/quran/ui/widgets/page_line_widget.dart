@@ -58,11 +58,26 @@ class PageLineWidget extends StatelessWidget {
                       (e) => TextSpan(
                         text: e.$1,
                         style: TextStyle(
+                          background:
+                              (context
+                                          .read<QuranCubit>()
+                                          .bookMarkNotifier
+                                          .value
+                                          ?.surahNumber ==
+                                      line.words.firstOrNull?.surah &&
+                                  context
+                                          .read<QuranCubit>()
+                                          .bookMarkNotifier
+                                          .value
+                                          ?.ayaNumber ==
+                                      e.$2)
+                              ? (Paint()..color = Colors.red.shade100)
+                              : null,
                           color:
-                              state is AudioPlayerState &&
+                              (state is AudioPlayerState &&
                                   state.suraNumber ==
                                       line.words.firstOrNull?.surah &&
-                                  state.ayaNumber == e.$2
+                                  state.ayaNumber == e.$2)
                               ? Colors.red
                               : Colors.black,
                         ),
@@ -80,29 +95,36 @@ class PageLineWidget extends StatelessWidget {
                                 context: context,
                                 backgroundColor: Colors.transparent,
                                 isScrollControlled: true,
-                                builder: (_) => AyaBottomSheet(
-                                  ayaText: ayaText,
-                                  suraNumber:
-                                      line.words.firstOrNull?.surah ?? 0,
-                                  ayaNumber: e.$2,
-                                  pageNumber: pageNumber,
-                                  fontFamily: "KFGQPC_Uthmanic",
-                                  onPlaySound: () {
-                                    if (line.info.lineType ==
-                                            LineType.ayah.name &&
-                                        (state is! AudioPlayerState)) {
-                                      context.read<MushafCubit>().getPageSound(
-                                        pageNumber: pageNumber,
-                                        verseNumber: e.$2,
-                                        suraNumber: line.words.first.surah,
-                                        lineNumber: line.info.lineNumber,
-                                        qari: context
-                                            .read<QuranCubit>()
-                                            .currentQuranReaderNotifier
-                                            .url,
-                                      );
-                                    }
-                                  },
+                                builder: (_) => BlocProvider.value(
+                                  value: context.read<QuranCubit>(),
+                                  child: AyaBottomSheet(
+                                    ayaText: ayaText,
+                                    suraNumber:
+                                        line.words.firstOrNull?.surah ?? 0,
+                                    ayaNumber: e.$2,
+                                    pageNumber: pageNumber,
+                                    juzNumber: line.words.firstOrNull?.juz ?? 0,
+                                    fontFamily: "KFGQPC_Uthmanic",
+                                    onPlaySound: () {
+                                      if (line.info.lineType ==
+                                              LineType.ayah.name &&
+                                          (state is! AudioPlayerState)) {
+                                        context
+                                            .read<MushafCubit>()
+                                            .getPageSound(
+                                              pageNumber: pageNumber,
+                                              verseNumber: e.$2,
+                                              suraNumber:
+                                                  line.words.first.surah,
+                                              lineNumber: line.info.lineNumber,
+                                              qari: context
+                                                  .read<QuranCubit>()
+                                                  .currentQuranReaderNotifier
+                                                  .url,
+                                            );
+                                      }
+                                    },
+                                  ),
                                 ),
                               );
                             }

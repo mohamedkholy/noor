@@ -60,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "before_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
       "Before Dhuhr Sunnah",
     ),
+    "bookmark": MessageLookupByLibrary.simpleMessage("Bookmark"),
+    "bookmarkSublabel": MessageLookupByLibrary.simpleMessage("Add bookmark"),
     "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "calender": MessageLookupByLibrary.simpleMessage("Calender"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -139,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "isha": MessageLookupByLibrary.simpleMessage("Isha"),
     "isha_sunnah": MessageLookupByLibrary.simpleMessage("Isha Sunnah"),
     "juz": MessageLookupByLibrary.simpleMessage("Juz"),
+    "juz_2": MessageLookupByLibrary.simpleMessage("Juz"),
     "km": MessageLookupByLibrary.simpleMessage("KM"),
     "lands_count": MessageLookupByLibrary.simpleMessage("qirats count"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),

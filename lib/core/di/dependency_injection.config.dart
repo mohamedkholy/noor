@@ -145,7 +145,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i555.StoreCubit>(() => _i555.StoreCubit(gh<_i108.StoreRepo>()));
     gh.factory<_i479.SharedPreferencesSettingsService>(
       () =>
-          _i479.SharedPreferencesSettingsService(gh<_i460.SharedPreferences>()),
+          _i479.SharedPreferencesSettingsService(),
     );
     gh.factory<_i434.TasbihCubit>(
       () => _i434.TasbihCubit(gh<_i966.TasbihRepo>()),

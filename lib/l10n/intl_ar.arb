@@ -32,6 +32,7 @@
   "aya": "آية",
   "surah": "سورة",
   "juz": "جزء",
+  "juz_2": "الجزء",
   "ayah_of_the_day": "آية اليوم",
   "hadith_of_the_day": "حديث اليوم",
   "home": "الرئيسية",
@@ -185,10 +186,12 @@
   "pressToShowOptions": "اضغط على الآية مطولاً لعرض الخيارات",
   "sunan_notifications": "إشعارات السنن",
   "did_you_pray": "هل صليت",
-  "sunan_message":"تفقد منازلك في الجنة",
+  "sunan_message": "تفقد منازلك في الجنة",
   "dhuhrSunan": "سنن الظهر",
   "hajj_umrah_count": "عدد الحج والعمرة",
   "hajj_umrah_hadith": "مَن صلى الفجرَ في جماعةٍ، ثم قَعَد يَذْكُرُ اللهَ حتى تَطْلُعَ الشمسُ، ثم صلى ركعتينِ، كانت له كأجرِ حَجَّةٍ وعُمْرَةٍ تامَّةٍ، تامَّةٍ، تامَّةٍ. الراوي: أنس بن مالك",
   "complete_hajj_umrah_message": "تهانينا! لقد حصلت على أجر الحج والعمرة .",
-  "completed_hajj_umrah": "أكملت أجر الحج والعمرة"
+  "completed_hajj_umrah": "أكملت أجر الحج والعمرة",
+  "bookmark": "علامة",
+  "bookmarkSublabel": "أضف علامة"
 }

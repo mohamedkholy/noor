@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noor/core/database/quran/quran_database.dart';
-import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/widgets/decorated_container.dart';
-import 'package:noor/features/quran/data/models/quran_reader.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_cubit.dart';
 import 'package:noor/features/quran/logic/ayat_cubit/ayat_state.dart';
 import 'package:noor/features/quran/logic/quran_cubit/quran_cubit.dart';
