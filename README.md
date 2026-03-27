@@ -1,16 +1,40 @@
-# noor
+# Noor
 
-A new Flutter project.
+An Islamic companion app for daily worship and spiritual guidance.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+### Core Features
+- **Prayer Times** - Accurate prayer times based on your location with customizable calculation methods
+- **Qiblah Direction** - Real-time qiblah compass and map-based direction finder
+- **Hijri Calendar** - Islamic calendar with important dates and events
 
-A few resources to get you started if this is your first Flutter project:
+### Quran
+- **Full Quran Reading** - Complete Holy Quran with Uthmani script
+- **Tafsir** - Interpretation and explanation of Quranic verses
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Ruqyah & Azkar
+- **Daily Azkar** - Morning and evening remembrances with audio
+- **Duas & Treasures** - Collection of authentic supplications
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Islamic Guide
+- **Hajj & Umrah** - Complete guide for pilgrimage rituals
+- **Hadith** - Collection of Prophet Muhammad's sayings and traditions
+
+### Utilities
+- **Tasbih Counter** - Digital tasbih for dhikr
+- **Islamic Radio** - Live streaming of Quran recitations and Islamic radio stations
+- **Nearby Mosque Finder** - Locate mosques and prayer spaces near you
+- **Islamic Store** - Browse Islamic products and services
+
+## Tech Stack
+
+- **Framework**: Flutter
+- **State Management**: flutter_bloc (BLoC pattern)
+- **Local Database**: Drift (SQLite)
+- **Dependency Injection**: GetIt + Injectable
+- **Networking**: Dio + Retrofit
+- **Audio**: just_audio
+- **Location Services**: Geolocator + Geocoding
+- **Maps**: Google Maps Flutter
+- **Localization**: flutter_localizations (Arabic & English)
