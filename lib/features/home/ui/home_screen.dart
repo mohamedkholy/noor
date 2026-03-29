@@ -54,8 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushNamed(context, MyRoutes.settings).then((
                       value,
                     ) {
+                      _navigationCubit.refreshPrayerTimes();
                       _navigationCubit.scheduleNotifications();
-                      setState(() {});
                     });
                   },
                   icon: const Icon(

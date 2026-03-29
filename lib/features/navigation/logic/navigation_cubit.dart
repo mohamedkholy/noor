@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -7,6 +8,8 @@ import 'package:injectable/injectable.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
+import 'package:noor/core/helpers/constants.dart';
+import 'package:noor/core/helpers/prayer_times_helper.dart';
 import 'package:noor/core/notifications/notifications_manager.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
@@ -24,6 +27,9 @@ class NavigationCubit extends Cubit<NavigationState> {
   final AudioPlayer audioPlayer = AudioPlayer();
   RadioData track = RadioData(name: "", url: "");
   final ValueNotifier<bool> isPlaying = ValueNotifier(false);
+  final ValueNotifier<PrayerTimes> prayerTimesNotifier = ValueNotifier(
+    PrayerTimesHelper.getPrayerTimes(city: Constants.defaultCity),
+  );
 
   NavigationCubit(this._navigationRepo) : super(NavigationInitial()) {
     audioPlayer.playerStateStream.listen((state) {
@@ -73,7 +79,13 @@ class NavigationCubit extends Cubit<NavigationState> {
 
   Future<void> setCity(City city) async {
     emit(CityLoaded(city: city));
+    refreshPrayerTimes();
     scheduleNotifications();
+  }
+
+  void refreshPrayerTimes() {
+    final city = getSavedCity() ?? Constants.defaultCity;
+    prayerTimesNotifier.value = PrayerTimesHelper.getPrayerTimes(city: city);
   }
 
   void scheduleNotifications() async {
