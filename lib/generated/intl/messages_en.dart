@@ -62,6 +62,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bookmark": MessageLookupByLibrary.simpleMessage("Bookmark"),
     "bookmarkSublabel": MessageLookupByLibrary.simpleMessage("Add bookmark"),
+    "calculation_method": MessageLookupByLibrary.simpleMessage(
+      "Calculation Method",
+    ),
+    "calculation_settings": MessageLookupByLibrary.simpleMessage(
+      "Calculation Settings",
+    ),
     "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "calender": MessageLookupByLibrary.simpleMessage("Calender"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -160,8 +166,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "location_settings": MessageLookupByLibrary.simpleMessage(
       "Location Settings",
     ),
+    "madhab": MessageLookupByLibrary.simpleMessage("Madhab"),
+    "madhab_hanafi": MessageLookupByLibrary.simpleMessage("Hanafi"),
+    "madhab_shafi": MessageLookupByLibrary.simpleMessage("Shafi"),
     "maghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
     "maghrib_sunnah": MessageLookupByLibrary.simpleMessage("Maghrib Sunnah"),
+    "method_dubai": MessageLookupByLibrary.simpleMessage("Dubai"),
+    "method_egyptian": MessageLookupByLibrary.simpleMessage("Egyptian"),
+    "method_karachi": MessageLookupByLibrary.simpleMessage(
+      "Karachi (University of Karachi)",
+    ),
+    "method_kuwait": MessageLookupByLibrary.simpleMessage("Kuwait"),
+    "method_muslim_world_league": MessageLookupByLibrary.simpleMessage(
+      "Muslim World League",
+    ),
+    "method_north_america": MessageLookupByLibrary.simpleMessage(
+      "North America (ISNA)",
+    ),
+    "method_qatar": MessageLookupByLibrary.simpleMessage("Qatar"),
+    "method_singapore": MessageLookupByLibrary.simpleMessage("Singapore"),
+    "method_umm_al_qura": MessageLookupByLibrary.simpleMessage("Umm Al Qura"),
     "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
     "minutes_before": MessageLookupByLibrary.simpleMessage("Minutes before"),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("Morning Azkar"),

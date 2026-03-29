@@ -33,25 +33,38 @@ class OnboardingScreen extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        OnboardingProgress(
-                          currentScreen: cubit.state.currentScreenIndex + 1,
-                          totalScreens: cubit.totalScreens,
-                          progress: cubit.progress,
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Column(
+                            children: [
+                              OnboardingProgress(
+                                currentScreen:
+                                    cubit.state.currentScreenIndex + 1,
+                                totalScreens: cubit.totalScreens,
+                                progress: cubit.progress,
+                              ),
+                              const SizedBox(height: 40),
+                              OnboardingContent(screen: currentScreen),
+                              const SizedBox(height: 15),
+                            ],
+                          ),
                         ),
-                        const SizedBox(height: 40),
-                        OnboardingContent(screen: currentScreen),
-                        const Spacer(),
-                        OnboardingNavigation(
-                          isFirstScreen: cubit.isFirstScreen,
-                          isLastScreen: cubit.isLastScreen,
-                          onNext: () => cubit.nextScreen(),
-                          onPrevious: () => cubit.previousScreen(),
-                          onSkip: () =>
-                              cubit.skipOnboardingAndNavigate(context),
-                          onComplete: () =>
-                              cubit.completeOnboardingAndNavigate(context),
+                        SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: OnboardingNavigation(
+                              isFirstScreen: cubit.isFirstScreen,
+                              isLastScreen: cubit.isLastScreen,
+                              onNext: () => cubit.nextScreen(),
+                              onPrevious: () => cubit.previousScreen(),
+                              onSkip: () =>
+                                  cubit.skipOnboardingAndNavigate(context),
+                              onComplete: () =>
+                                  cubit.completeOnboardingAndNavigate(context),
+                            ),
+                          ),
                         ),
                       ],
                     ),

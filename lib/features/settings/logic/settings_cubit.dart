@@ -5,6 +5,7 @@ import 'package:noor/core/shared_preferences/shared_preferences_settings_service
 import 'package:noor/core/shared_preferences/shared_prefs_azan.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
+import 'package:noor/features/settings/data/models/calculation_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
 import 'package:noor/features/settings/data/models/sunan_settings.dart';
@@ -73,5 +74,13 @@ class SettingsCubit extends Cubit {
 
   void saveSunanSetting(SunanSettings sunanSettings) {
     _sharedPreferencesSettingsService.saveSunanSettigs(sunanSettings);
+  }
+
+  CalculationSettings getCalculationSettings() {
+    return _sharedPreferencesSettingsService.getCalculationSettings();
+  }
+
+  void saveCalculationSettings(CalculationSettings settings) {
+    _sharedPreferencesSettingsService.saveCalculationSettings(settings);
   }
 }

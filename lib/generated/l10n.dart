@@ -1663,6 +1663,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Calculation Settings`
+  String get calculation_settings {
+    return Intl.message(
+      'Calculation Settings',
+      name: 'calculation_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Calculation Method`
+  String get calculation_method {
+    return Intl.message(
+      'Calculation Method',
+      name: 'calculation_method',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Madhab`
+  String get madhab {
+    return Intl.message('Madhab', name: 'madhab', desc: '', args: []);
+  }
+
+  /// `Egyptian`
+  String get method_egyptian {
+    return Intl.message(
+      'Egyptian',
+      name: 'method_egyptian',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Umm Al Qura`
+  String get method_umm_al_qura {
+    return Intl.message(
+      'Umm Al Qura',
+      name: 'method_umm_al_qura',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Karachi (University of Karachi)`
+  String get method_karachi {
+    return Intl.message(
+      'Karachi (University of Karachi)',
+      name: 'method_karachi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `North America (ISNA)`
+  String get method_north_america {
+    return Intl.message(
+      'North America (ISNA)',
+      name: 'method_north_america',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Muslim World League`
+  String get method_muslim_world_league {
+    return Intl.message(
+      'Muslim World League',
+      name: 'method_muslim_world_league',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dubai`
+  String get method_dubai {
+    return Intl.message('Dubai', name: 'method_dubai', desc: '', args: []);
+  }
+
+  /// `Qatar`
+  String get method_qatar {
+    return Intl.message('Qatar', name: 'method_qatar', desc: '', args: []);
+  }
+
+  /// `Kuwait`
+  String get method_kuwait {
+    return Intl.message('Kuwait', name: 'method_kuwait', desc: '', args: []);
+  }
+
+  /// `Singapore`
+  String get method_singapore {
+    return Intl.message(
+      'Singapore',
+      name: 'method_singapore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shafi`
+  String get madhab_shafi {
+    return Intl.message('Shafi', name: 'madhab_shafi', desc: '', args: []);
+  }
+
+  /// `Hanafi`
+  String get madhab_hanafi {
+    return Intl.message('Hanafi', name: 'madhab_hanafi', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

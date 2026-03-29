@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       value,
                     ) {
                       _navigationCubit.scheduleNotifications();
+                      setState(() {});
                     });
                   },
                   icon: const Icon(

@@ -13,20 +13,22 @@ class HajjUmrahScreen extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(title: S.of(context).sLandsSection),
       body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 600),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            margin: const EdgeInsets.symmetric(vertical: 30),
-            width: double.infinity,
-            child: const Column(
-              children: [
-                HajjUmrahCountWidget(),
-                SizedBox(height: 20),
-                RewardWidget(),
-                SizedBox(height: 20),
-                CountHajjUmrahWidget(),
-              ],
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(vertical: 30),
+              width: double.infinity,
+              child: const Column(
+                children: [
+                  HajjUmrahCountWidget(),
+                  SizedBox(height: 20),
+                  RewardWidget(),
+                  SizedBox(height: 20),
+                  CountHajjUmrahWidget(),
+                ],
+              ),
             ),
           ),
         ),

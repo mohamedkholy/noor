@@ -11,6 +11,7 @@ import 'package:noor/features/properties/data/models/sunan_data.dart';
 import 'package:noor/features/quran/data/models/reading_position.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
+import 'package:noor/features/settings/data/models/calculation_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
 import 'package:noor/features/settings/data/models/sunan_settings.dart';
@@ -278,5 +279,20 @@ class SharedPreferencesSettingsService {
 
   void saveReadingBackgroundColor(Color color) {
     sp.setInt(SharedPreferencesKeys.readingBackgroundColor, color.toARGB32());
+  }
+
+  CalculationSettings getCalculationSettings() {
+    final result = sp.getString(SharedPreferencesKeys.calculationSettings);
+    if (result == null) {
+      return CalculationSettings.defaultSettings;
+    }
+    return CalculationSettings.fromJson(jsonDecode(result));
+  }
+
+  void saveCalculationSettings(CalculationSettings settings) {
+    sp.setString(
+      SharedPreferencesKeys.calculationSettings,
+      jsonEncode(settings.toJson()),
+    );
   }
 }

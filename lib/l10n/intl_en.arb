@@ -193,5 +193,19 @@
     "complete_hajj_umrah_message": "Congratulations! You have received the reward of the Hajj and Umrah",
     "completed_hajj_umrah": "Completed Hajj and Umrah reward",
     "bookmark": "Bookmark",
-    "bookmarkSublabel": "Add bookmark"
+    "bookmarkSublabel": "Add bookmark",
+    "calculation_settings": "Calculation Settings",
+    "calculation_method": "Calculation Method",
+    "madhab": "Madhab",
+    "method_egyptian": "Egyptian",
+    "method_umm_al_qura": "Umm Al Qura",
+    "method_karachi": "Karachi (University of Karachi)",
+    "method_north_america": "North America (ISNA)",
+    "method_muslim_world_league": "Muslim World League",
+    "method_dubai": "Dubai",
+    "method_qatar": "Qatar",
+    "method_kuwait": "Kuwait",
+    "method_singapore": "Singapore",
+    "madhab_shafi": "Shafi",
+    "madhab_hanafi": "Hanafi"
 }
