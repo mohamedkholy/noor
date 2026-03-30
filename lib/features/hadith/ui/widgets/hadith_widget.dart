@@ -89,4 +89,8 @@ class HadithWidget extends StatelessWidget {
   String formatText(String text) {
     return text.replaceAll(r'\n', '\n').replaceAll(r'\"', '"');
   }
+
+  String _stripMarksDart(String text) {
+    return text.replaceAll(RegExp(r'[\u064B-\u065F\u0610-\u061A]'), '');
+  }
 }

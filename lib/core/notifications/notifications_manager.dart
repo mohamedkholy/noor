@@ -22,7 +22,6 @@ import 'package:noor/features/properties/ui/widgets/sunan_widget.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_type.dart';
-import 'package:noor/features/settings/data/models/calculation_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/sunan_settings.dart';
 import 'package:noor/generated/l10n.dart';
@@ -244,7 +243,6 @@ class NotificationsManager {
     final azkarNotificationsSettings = _sp.getAzkarNotificationSetting();
     final iqamaNotificationsSettings = _sp.getIqamaNotificationSetting();
     final sunanNotificationsSettings = _sp.getSunanSetting();
-    final calculationSettings = _sp.getCalculationSettings();
 
     final perodicAzkarSettings = _sp.getPerodicAzkarSetting();
     for (int i = 0; i < 7; i++) {
@@ -252,7 +250,6 @@ class NotificationsManager {
       final prayerTimes = PrayerTimesHelper.getPrayerTimes(
         city: city,
         date: date,
-        settings: calculationSettings,
       );
       _scheduleAzanNotifications(prayerTimes, azanNotificationsSettings);
       if (azkarNotificationsSettings.sleepingAzkarState) {

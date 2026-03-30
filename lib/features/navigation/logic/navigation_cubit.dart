@@ -27,8 +27,10 @@ class NavigationCubit extends Cubit<NavigationState> {
   final AudioPlayer audioPlayer = AudioPlayer();
   RadioData track = RadioData(name: "", url: "");
   final ValueNotifier<bool> isPlaying = ValueNotifier(false);
-  final ValueNotifier<PrayerTimes> prayerTimesNotifier = ValueNotifier(
-    PrayerTimesHelper.getPrayerTimes(city: Constants.defaultCity),
+  late final ValueNotifier<PrayerTimes> prayerTimesNotifier = ValueNotifier(
+    PrayerTimesHelper.getPrayerTimes(
+      city: getSavedCity() ?? Constants.defaultCity,
+    ),
   );
 
   NavigationCubit(this._navigationRepo) : super(NavigationInitial()) {
