@@ -62,6 +62,10 @@ class Assets {
   /// assets/images/png/koran.png
   static const String assetsImagesPngKoran = "assets/images/png/koran.png";
 
+  /// Assets for assetsImagesPngLauncherBranding
+  /// assets/images/png/launcher_branding.png
+  static const String assetsImagesPngLauncherBranding = "assets/images/png/launcher_branding.png";
+
   /// Assets for assetsImagesPngMainframe
   /// assets/images/png/mainframe.png
   static const String assetsImagesPngMainframe = "assets/images/png/mainframe.png";

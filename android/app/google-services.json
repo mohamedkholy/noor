@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "368681870315",
+    "project_id": "noor-c67fb",
+    "storage_bucket": "noor-c67fb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368681870315:android:fa2f68a28b603670dfafae",
+        "android_client_info": {
+          "package_name": "com.puresoft.noor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArMam4w1S7gwNOAP79PLIRKrnnwhVC4W8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
