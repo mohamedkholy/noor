@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/core/theming/my_text_styles.dart';
+import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/radio/data/model/radio_data.dart';
 import 'package:noor/features/radio/presentation/widgets/radio_reader_audio.dart';
 import 'package:noor/features/radio/presentation/widgets/radio_reader_item.dart';
@@ -43,28 +44,30 @@ class _RadioDetailScreenState extends State<RadioDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandScape =
+    final bool isLandScape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
+      appBar: MyAppBar(title: selectedRadio.name!),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              isLandScape ? SizedBox(height: 16) : SizedBox(height: 120),
+              isLandScape
+                  ? const SizedBox(height: 16)
+                  : const SizedBox(height: 120),
               ClipRRect(
                 borderRadius: BorderRadius.circular(24),
                 child: Image.network(selectedRadio.img!, height: 200),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Text(
                 selectedRadio.name!,
                 style: MyTextStyles.f18CairoSemiBoldPrimary.copyWith(
                   color: MyColors.primary,
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               RadioReaderAudio(
                 radioData: selectedRadio,
                 radioList: widget.radioList,
