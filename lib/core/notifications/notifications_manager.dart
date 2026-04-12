@@ -286,16 +286,21 @@ class NotificationsManager {
     DateTime date,
     int sleepingAzkarTime,
   ) async {
+    final sleepingAzkarDate = tz.TZDateTime.from(
+      date
+          .add(const Duration(days: 1))
+          .subtract(Duration(hours: sleepingAzkarTime)),
+      tz.local,
+    );
+    if (sleepingAzkarDate.isBefore(DateTime.now())) {
+      return;
+    }
+
     await _localNotifications.zonedSchedule(
       sleepingAzkarTime.hashCode,
       S.current.hayya_alal_falah,
       '${S.current.time_of} ${S.current.sleepingAzkar}',
-      tz.TZDateTime.from(
-        date
-            .add(const Duration(days: 1))
-            .subtract(Duration(hours: sleepingAzkarTime)),
-        tz.local,
-      ),
+      sleepingAzkarDate,
       const NotificationDetails(
         android: AndroidNotificationDetails(
           _sleepingAzkarChannelId,

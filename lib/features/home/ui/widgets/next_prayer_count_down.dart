@@ -89,7 +89,13 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
 
   void _calculateNextPrayer(PrayerTimes prayerTimes) {
     _nextPrayer = prayerTimes.nextPrayer();
+    if (_nextPrayer == Prayer.none) {
+      _nextPrayer = Prayer.fajr;
+    }
     _nextPrayerTime = prayerTimes.timeForPrayer(_nextPrayer)!;
+    if (prayerTimes.nextPrayer() == Prayer.none) {
+      _nextPrayerTime = _nextPrayerTime.add(const Duration(days: 1));
+    }
     _calcTotalDuration(prayerTimes, _nextPrayer);
     startTimer(prayerTimes);
   }
@@ -110,7 +116,8 @@ class _NextPrayerCountDownState extends State<NextPrayerCountDown> {
   }
 
   void _updateRemainigTime(PrayerTimes prayerTimes) {
-    if (prayerTimes.nextPrayer() != _nextPrayer) {
+    if (prayerTimes.nextPrayer() != _nextPrayer &&
+        prayerTimes.nextPrayer() != Prayer.none) {
       timer?.cancel();
       context.read<NavigationCubit>().refreshPrayerTimes();
       return;

@@ -38,33 +38,7 @@ class _MushafScreenState extends State<MushafScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ShowcaseView.register(
-        globalFloatingActionWidget: (showcaseContext) => FloatingActionWidget(
-          left: 16,
-          bottom: 16,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () => ShowcaseView.get().dismiss(),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xffEE5366),
-              ),
-              child: Text(
-                S.of(context).skip,
-                style: const TextStyle(color: Colors.white, fontSize: 15),
-              ),
-            ),
-          ),
-        ),
-        blurValue: 1,
-        disableBarrierInteraction: true,
-        onDismiss: (dismissedAt) async {
-          await getIt<SharedPreferences>().setBool(
-            SharedPreferencesKeys.showCaseDone,
-            true,
-          );
-        },
-      );
+      registerShowCase();
     });
     _quranCubit.currentTabNotifier.addListener(() {
       _mushafCubit.stopPlayer();
@@ -128,21 +102,7 @@ class _MushafScreenState extends State<MushafScreen> {
                           firstAya.words.first.juz,
                           firstAya.info.pageNumber,
                         );
-                        if (getIt<SharedPreferences>().getBool(
-                              SharedPreferencesKeys.showCaseDone,
-                            ) !=
-                            true) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            Future.delayed(
-                              const Duration(milliseconds: 500),
-                              () {
-                                ShowcaseView.get().startShowCase([
-                                  _showCaseKey,
-                                ]);
-                              },
-                            );
-                          });
-                        }
+                        checkShowCase();
                       } else if (state is QuranLinesLodedFromStart) {
                         pages.insertAll(0, state.pages);
                         currentPageIndex =
@@ -355,5 +315,48 @@ class _MushafScreenState extends State<MushafScreen> {
         ),
       ),
     );
+  }
+
+  void registerShowCase() {
+    ShowcaseView.register(
+      globalFloatingActionWidget: (showcaseContext) => FloatingActionWidget(
+        left: 16,
+        bottom: 16,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: () => ShowcaseView.get().dismiss(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xffEE5366),
+            ),
+            child: Text(
+              S.of(context).skip,
+              style: const TextStyle(color: Colors.white, fontSize: 15),
+            ),
+          ),
+        ),
+      ),
+      blurValue: 1,
+      disableBarrierInteraction: true,
+      onDismiss: (dismissedAt) async {
+        await getIt<SharedPreferences>().setBool(
+          SharedPreferencesKeys.showCaseDone,
+          true,
+        );
+      },
+    );
+  }
+
+  void checkShowCase() {
+    if (getIt<SharedPreferences>().getBool(
+          SharedPreferencesKeys.showCaseDone,
+        ) !=
+        true) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          ShowcaseView.get().startShowCase([_showCaseKey]);
+        });
+      });
+    }
   }
 }

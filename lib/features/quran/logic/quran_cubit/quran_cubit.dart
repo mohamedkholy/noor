@@ -44,11 +44,12 @@ class QuranCubit extends Cubit<QuranState> {
     }
   }
 
-  Future<void> saveLastReading(
-    int surahNumber,
-    int verseNumber,
-    int juzNumber,
-  ) async {
+  Future<void> saveLastReading({
+    required int surahNumber,
+    required int verseNumber,
+    required int juzNumber,
+    required int pageNumber,
+  }) async {
     final surah = await _quranRepo.getSurahDetails(surahNumber: surahNumber);
 
     final surahInfo = surah;
@@ -61,7 +62,7 @@ class QuranCubit extends Cubit<QuranState> {
           surahNumber: surahInfo.number,
           surahName: surahInfo.nameAr,
           verseNumber: verseNumber,
-          pageNumber: surahInfo.pageNumber,
+          pageNumber: pageNumber,
         ),
         "suraNameEn": surahInfo.nameTransliteration,
       }),
@@ -94,9 +95,10 @@ class QuranCubit extends Cubit<QuranState> {
           currentReadingPositionNotifier.value!;
 
       await saveLastReading(
-        readingPosition.surahNumber,
-        readingPosition.verseNumber,
-        readingPosition.juz,
+        surahNumber: readingPosition.surahNumber,
+        verseNumber: readingPosition.verseNumber,
+        juzNumber: readingPosition.juz,
+        pageNumber: readingPosition.pageNumber,
       );
     }
     currentSurahNotifier.dispose();

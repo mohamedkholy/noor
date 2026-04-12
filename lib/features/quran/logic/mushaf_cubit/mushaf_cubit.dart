@@ -84,7 +84,6 @@ class MushafCubit extends Cubit<MushafState> {
   }
 
   Future<void> getSurasLines(int pageNumber) async {
-    delay = Duration.zero;
     final result = await _quranRepo.getSurasLines(pageNumber);
     if (!isClosed) {
       emit(QuranLinesLoaded(result));
@@ -185,7 +184,10 @@ class MushafCubit extends Cubit<MushafState> {
     return super.close();
   }
 
-  Future<String> getAyaText({required int suraNumber, required int ayaNumber}) async {
+  Future<String> getAyaText({
+    required int suraNumber,
+    required int ayaNumber,
+  }) async {
     return await _quranRepo.getAyaText(suraNumber, ayaNumber);
   }
 }
