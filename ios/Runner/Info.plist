@@ -3,7 +3,9 @@
 <plist version="1.0">
 	<dict>
 		<key>PermissionGroupNotification</key>
-		<string>This app needs notification permission to alert you about important updates.</string>
+		<string>This app sends notifications to remind you of prayer times and notify you about daily Islamic reminders.</string>
+		<key>NSUserNotificationUsageDescription</key>
+		<string>This app sends notifications for prayer times and daily azkar reminders.</string>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>CFBundleDevelopmentRegion</key>
@@ -34,15 +36,13 @@
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>This app needs access to location when open.</string>
-		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-		<string>This app needs access to your location to provide location-based services like qibla finder, prayer times and nearest mosques</string>
+		<string>Your location is used to show Qibla direction, calculate prayer times, and find nearby mosques.</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
-		<key>UIBackgroundModes</key>
+		<!-- <key>UIBackgroundModes</key>
 		<array>
 			<string>remote-notification</string>
-		</array>
+		</array> -->
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
