@@ -39,7 +39,7 @@ class PageLineWidget extends StatelessWidget {
         return ValueListenableBuilder<Color>(
           valueListenable: quranCubit.readingBackgroundColorNotifier,
           builder: (context, bgColor, child) {
-            final textColor = quranCubit.getVerseTextColor(bgColor);
+            final textColor = quranCubit.getVerseTextColor();
 
             return DefaultTextStyle(
               style: TextStyle(

@@ -87,20 +87,19 @@ class QuranCubit extends Cubit<QuranState> {
       verseNumber: verseNumber,
       pageNumber: pageNumber,
     );
+
+    final ReadingPosition readingPosition =
+        currentReadingPositionNotifier.value!;
+
+    await saveLastReading(
+      surahNumber: readingPosition.surahNumber,
+      verseNumber: readingPosition.verseNumber,
+      juzNumber: readingPosition.juz,
+      pageNumber: readingPosition.pageNumber,
+    );
   }
 
   Future<void> dispose() async {
-    if (currentReadingPositionNotifier.value != null) {
-      final ReadingPosition readingPosition =
-          currentReadingPositionNotifier.value!;
-
-      await saveLastReading(
-        surahNumber: readingPosition.surahNumber,
-        verseNumber: readingPosition.verseNumber,
-        juzNumber: readingPosition.juz,
-        pageNumber: readingPosition.pageNumber,
-      );
-    }
     currentSurahNotifier.dispose();
     currentTabNotifier.dispose();
     currentReadingPositionNotifier.dispose();
@@ -112,12 +111,14 @@ class QuranCubit extends Cubit<QuranState> {
     _settingsService.saveReadingBackgroundColor(color);
   }
 
-  Color getVerseTextColor(Color background) {
-    return background.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+  Color getVerseTextColor() {
+    return readingBackgroundColorNotifier.value.computeLuminance() > 0.5
+        ? Colors.black
+        : Colors.white;
   }
 
-  Color getTranslationTextColor(Color background) {
-    return background.computeLuminance() > 0.5
+  Color getTranslationTextColor() {
+    return readingBackgroundColorNotifier.value.computeLuminance() > 0.5
         ? Colors.black87
         : Colors.white70;
   }

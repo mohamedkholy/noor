@@ -44,10 +44,8 @@ class VerseWidget extends StatelessWidget {
         return ValueListenableBuilder<Color>(
           valueListenable: quranCubit.readingBackgroundColorNotifier,
           builder: (context, bgColor, child) {
-            final verseTextColor = quranCubit.getVerseTextColor(bgColor);
-            final translationTextColor = quranCubit.getTranslationTextColor(
-              bgColor,
-            );
+            final verseTextColor = quranCubit.getVerseTextColor();
+            final translationTextColor = quranCubit.getTranslationTextColor();
 
             return GestureDetector(
               onLongPress: () {

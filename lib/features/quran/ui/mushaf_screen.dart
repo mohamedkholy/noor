@@ -286,7 +286,13 @@ class _MushafScreenState extends State<MushafScreen> {
                                           },
                                         ),
                                       ),
-                                      Text(pageNumber.toString()),
+                                      Text(
+                                        pageNumber.toString(),
+                                        style: TextStyle(
+                                          color: _quranCubit
+                                              .getVerseTextColor(),
+                                        ),
+                                      ),
                                     ],
                                   );
                                 },

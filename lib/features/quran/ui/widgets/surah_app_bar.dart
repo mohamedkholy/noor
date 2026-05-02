@@ -69,7 +69,7 @@ class SurahAppBar extends StatelessWidget implements PreferredSizeWidget {
                   " ${S.current.juz_2} ${Localizations.localeOf(context).languageCode == 'ar' ? arabicOrdinals[int.parse(juz)] : juz}",
                   style: TextStyle(
                     fontSize: 17,
-                    color: quranCubit.getVerseTextColor(value),
+                    color: quranCubit.getVerseTextColor(),
                     fontWeight: FontWeightHelper.medium,
                   ),
                 ),
@@ -88,7 +88,7 @@ class SurahAppBar extends StatelessWidget implements PreferredSizeWidget {
                 style: TextStyle(
                   fontSize: 23,
                   fontFamily: "KFGQPC_Uthmanic",
-                  color: quranCubit.getVerseTextColor(value),
+                  color: quranCubit.getVerseTextColor(),
                   fontWeight: FontWeightHelper.medium,
                 ),
               ),

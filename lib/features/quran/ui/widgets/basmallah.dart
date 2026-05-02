@@ -18,7 +18,7 @@ class _BasmallahState extends State<Basmallah> {
     return ValueListenableBuilder<Color>(
       valueListenable: quranCubit.readingBackgroundColorNotifier,
       builder: (context, bgColor, child) {
-        final textColor = quranCubit.getVerseTextColor(bgColor);
+        final textColor = quranCubit.getVerseTextColor();
 
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
