@@ -144,7 +144,6 @@ class PageLineWidget extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 1,
-                  stepGranularity: 4,
                 ),
               ),
             );
