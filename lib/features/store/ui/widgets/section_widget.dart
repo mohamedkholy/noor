@@ -12,7 +12,10 @@ class SectionWidget extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.onTap,
+    required this.value,
   });
+
+  final int value;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +30,12 @@ class SectionWidget extends StatelessWidget {
           children: [
             AutoSizeText(
               title,
+              style: const TextStyle(fontSize: 25, color: Colors.white),
+              maxLines: 1,
+            ),
+            const SizedBox(height: 12),
+            AutoSizeText(
+              value.toString(),
               style: const TextStyle(fontSize: 25, color: Colors.white),
               maxLines: 1,
             ),

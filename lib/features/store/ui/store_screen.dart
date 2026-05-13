@@ -1,7 +1,9 @@
 import 'package:dynamic_height_list_view/dynamic_height_view.dart';
 import 'package:flutter/material.dart';
+import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/helpers/assets_helper.dart';
 import 'package:noor/core/routing/my_routes.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
 import 'package:noor/core/widgets/my_app_bar.dart';
 import 'package:noor/features/store/ui/widgets/section_widget.dart';
 import 'package:noor/generated/l10n.dart';
@@ -14,37 +16,19 @@ class StoreScreen extends StatefulWidget {
 }
 
 class _StoreScreenState extends State<StoreScreen> {
-  late final List<(String, String, String)> sections;
+  late List<(String, String, String, int)> sections;
+  late SharedPreferencesSettingsService sharedPreferencesSettingsService;
+
+  @override
+  void initState() {
+    sharedPreferencesSettingsService =
+        getIt<SharedPreferencesSettingsService>();
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
-    sections = [
-      (
-        S.of(context).sRealEstateSection,
-        Assets.assetsImagesPngPalace,
-        MyRoutes.properties,
-      ),
-      (
-        S.of(context).sLandsSection,
-        Assets.assetsImagesPngField,
-        MyRoutes.lands,
-      ),
-      (
-        S.of(context).sAgricultureSection,
-        Assets.assetsImagesPngForest,
-        MyRoutes.agri,
-      ),
-      (
-        S.of(context).sTreasuresSection,
-        Assets.assetsImagesPngTreasure,
-        MyRoutes.treasures,
-      ),
-      (
-        S.of(context).sHajjAndUmrahSection,
-        Assets.assetsImagesPngPalace,
-        MyRoutes.hajjUmrah,
-      ),
-    ];
+    reloadSections();
     super.didChangeDependencies();
   }
 
@@ -63,10 +47,16 @@ class _StoreScreenState extends State<StoreScreen> {
               builder: (context, index) {
                 return SectionWidget(
                   onTap: () {
-                    Navigator.pushNamed(context, sections[index].$3);
+                    Navigator.pushNamed(context, sections[index].$3).then((
+                      value,
+                    ) {
+                      reloadSections();
+                      setState(() {});
+                    });
                   },
                   title: sections[index].$1,
                   icon: sections[index].$2,
+                  value: sections[index].$4,
                 );
               },
               itemCount: 5,
@@ -76,5 +66,40 @@ class _StoreScreenState extends State<StoreScreen> {
         ),
       ),
     );
+  }
+
+  void reloadSections() {
+    sections = [
+      (
+        S.of(context).sRealEstateSection,
+        Assets.assetsImagesPngPalace,
+        MyRoutes.properties,
+        sharedPreferencesSettingsService.getPropertiesCount(),
+      ),
+      (
+        S.of(context).sLandsSection,
+        Assets.assetsImagesPngField,
+        MyRoutes.lands,
+        sharedPreferencesSettingsService.getLandsCount(),
+      ),
+      (
+        S.of(context).sAgricultureSection,
+        Assets.assetsImagesPngForest,
+        MyRoutes.agri,
+        sharedPreferencesSettingsService.getTreesCount(),
+      ),
+      (
+        S.of(context).sTreasuresSection,
+        Assets.assetsImagesPngTreasure,
+        MyRoutes.treasures,
+        sharedPreferencesSettingsService.getTreasuresCount(),
+      ),
+      (
+        S.of(context).sHajjAndUmrahSection,
+        Assets.assetsImagesPngPalace,
+        MyRoutes.hajjUmrah,
+        sharedPreferencesSettingsService.getHajjUmrahCount(),
+      ),
+    ];
   }
 }

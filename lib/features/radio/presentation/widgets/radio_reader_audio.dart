@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:noor/core/theming/my_colors.dart';
 import 'package:noor/features/navigation/logic/navigation_cubit.dart';
 import 'package:noor/features/radio/data/model/radio_data.dart';
 
@@ -131,92 +132,100 @@ class _RadioReaderAudioState extends State<RadioReaderAudio> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () {
-                changeRadioRight(widget.radioData);
-              },
-              child: const Icon(Icons.skip_previous),
-            ),
-            const SizedBox(width: 24),
-            InkWell(
-              onTap: () {
-                togglePlayPause(widget.radioData.url!, false);
-              },
-              child: Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.3),
-                      blurRadius: 10,
-                      offset: const Offset(4, 4),
-                    ),
-                  ],
-                ),
-                child: Icon(
-                  isPlaying ? Icons.pause : Icons.play_arrow,
-                  size: 40,
-                  color: Colors.white,
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  changeRadioRight(widget.radioData);
+                },
+                child: const Icon(Icons.skip_previous),
+              ),
+              const SizedBox(width: 24),
+              InkWell(
+                onTap: () {
+                  togglePlayPause(widget.radioData.url!, false);
+                },
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 10,
+                        offset: const Offset(4, 4),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: 40,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 24),
-            InkWell(
-              onTap: () {
-                changeRadioLeft(widget.radioData);
-              },
-              child: const Icon(Icons.skip_next),
-            ),
-          ],
-        ),
-
-        const SizedBox(height: 20),
-
-        // شريط الوقت
-        // Slider(
-        //   value: position.inSeconds.toDouble(),
-        //   min: 0,
-        //   max: 0,
-        //   onChanged: (value) async {
-        //     // final newPosition = Duration(seconds: value.toInt());
-        //     // await audioPlayer.seek(newPosition);
-        //   },
-        // ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Divider(color: Colors.black, height: 5, thickness: 2),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text(formatTime(position)), Text(formatTime(duration))],
+              const SizedBox(width: 24),
+              InkWell(
+                onTap: () {
+                  changeRadioLeft(widget.radioData);
+                },
+                child: const Icon(Icons.skip_next),
+              ),
+            ],
           ),
-        ),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.volume_down, color: Colors.black),
-            Slider(
-              value: volume,
-              onChanged: (value) {
-                setState(() => volume = value);
-                audioPlayer.setVolume(value);
-              },
+          const SizedBox(height: 20),
+
+          // شريط الوقت
+          // Slider(
+          //   value: position.inSeconds.toDouble(),
+          //   min: 0,
+          //   max: 0,
+          //   onChanged: (value) async {
+          //     // final newPosition = Duration(seconds: value.toInt());
+          //     // await audioPlayer.seek(newPosition);
+          //   },
+          // ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Divider(color: Colors.black, height: 5, thickness: 2),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(formatTime(position)),
+                Text(formatTime(duration)),
+              ],
             ),
-            const Icon(Icons.volume_up, color: Colors.black),
-          ],
-        ),
-      ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.volume_down, color: Colors.black),
+              Slider(
+                thumbColor: MyColors.primary,
+                activeColor: MyColors.primary,
+                inactiveColor: MyColors.secondary.withValues(alpha: 0.3),
+                value: volume,
+                onChanged: (value) {
+                  setState(() => volume = value);
+                  audioPlayer.setVolume(value);
+                },
+              ),
+              const Icon(Icons.volume_up, color: Colors.black),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

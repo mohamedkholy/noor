@@ -66,18 +66,19 @@ class HadithOfTheDay extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    textDirection: TextDirection.ltr,
-                    state.hadith.terjemah,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeightHelper.medium,
+                if (Localizations.localeOf(context).languageCode == 'en')
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      textDirection: TextDirection.ltr,
+                      state.hadith.terjemah,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeightHelper.medium,
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           );
