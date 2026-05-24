@@ -427,5 +427,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "until_prayer": MessageLookupByLibrary.simpleMessage("Until prayer"),
     "win_treasure": MessageLookupByLibrary.simpleMessage("win a treasure"),
     "zekr": MessageLookupByLibrary.simpleMessage("Zekr"),
+    "noResults": MessageLookupByLibrary.simpleMessage("No results"),
   };
 }

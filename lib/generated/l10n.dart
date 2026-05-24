@@ -1773,6 +1773,11 @@ class S {
   String get madhab_hanafi {
     return Intl.message('Hanafi', name: 'madhab_hanafi', desc: '', args: []);
   }
+
+  /// `No results`
+  String get noResults {
+    return Intl.message('No results', name: 'noResults', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

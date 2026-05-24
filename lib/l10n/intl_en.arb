@@ -207,5 +207,6 @@
     "method_kuwait": "Kuwait",
     "method_singapore": "Singapore",
     "madhab_shafi": "Shafi",
-    "madhab_hanafi": "Hanafi"
+    "madhab_hanafi": "Hanafi",
+    "noResults": "No results"
 }

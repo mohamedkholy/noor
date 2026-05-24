@@ -207,5 +207,6 @@
     "method_kuwait": "الكويت",
     "method_singapore": "سنغافورة",
     "madhab_shafi": "الشافعي",
-    "madhab_hanafi": "الحنفي"
+    "madhab_hanafi": "الحنفي",
+    "noResults": "لا توجد نتائج"
 }

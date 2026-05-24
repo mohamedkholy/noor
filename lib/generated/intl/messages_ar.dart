@@ -398,5 +398,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "until_prayer": MessageLookupByLibrary.simpleMessage("حتى الصلاة"),
     "win_treasure": MessageLookupByLibrary.simpleMessage("اربح كنز"),
     "zekr": MessageLookupByLibrary.simpleMessage("ذكر"),
+    "noResults": MessageLookupByLibrary.simpleMessage("لا توجد نتائج"),
   };
 }

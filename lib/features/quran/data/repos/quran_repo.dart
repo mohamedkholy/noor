@@ -217,4 +217,59 @@ class QuranRepo {
             .getSingleOrNull();
     return verse?.textAr ?? "";
   }
+
+  String _buildStripSql(String columnSql) {
+    const marks = [
+      '\u064B',
+      '\u064C',
+      '\u064D',
+      '\u064E',
+      '\u064F',
+      '\u0650',
+      '\u0651',
+      '\u0652',
+      '\u0653',
+      '\u0654',
+      '\u0655',
+      '\u0656',
+      '\u0657',
+      '\u0658',
+      '\u0659',
+      '\u065A',
+      '\u065B',
+      '\u065C',
+      '\u065D',
+      '\u065E',
+      '\u065F',
+    ];
+
+    var sql = columnSql;
+    for (final mark in marks) {
+      sql = "REPLACE($sql, '$mark', '')";
+    }
+    return sql;
+  }
+
+  String _stripMarksDart(String text) {
+    return text.replaceAll(RegExp(r'[\u064B-\u065F\u0610-\u061A]'), '');
+  }
+
+  Future<List<Verse>> searchVerses(String query) async {
+    if (query.isEmpty) return [];
+    final cleanQuery = _stripMarksDart(query);
+
+    return await (_db.select(_db.verses)
+          ..where((t) {
+            final arabStripped = CustomExpression<String>(
+              _buildStripSql('"text_ar"'),
+            );
+            final engStripped = CustomExpression<String>(
+              _buildStripSql('"text_en"'),
+            );
+            return arabStripped.contains(cleanQuery) |
+                engStripped.contains(cleanQuery);
+          })
+          ..limit(50))
+        .get();
+  }
 }

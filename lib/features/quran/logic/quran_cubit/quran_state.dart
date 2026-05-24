@@ -12,3 +12,9 @@ class SurahsLoaded extends QuranState {
   final List<Verse> verses;
   SurahsLoaded({required this.surahs, required this.verses});
 }
+
+class QuranSearchLoaded extends QuranState {
+  final List<Verse> results;
+  final String query;
+  QuranSearchLoaded({required this.results, required this.query});
+}

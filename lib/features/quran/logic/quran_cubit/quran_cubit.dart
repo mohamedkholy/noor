@@ -19,6 +19,7 @@ class QuranCubit extends Cubit<QuranState> {
   final QuranRepo _quranRepo;
   final SharedPreferencesSettingsService _settingsService =
       SharedPreferencesSettingsService();
+  SurahsLoaded? _lastSurahsLoaded;
   ValueNotifier<ReadingPosition?> currentReadingPositionNotifier =
       ValueNotifier(null);
   ValueNotifier<Surah?> currentSurahNotifier = ValueNotifier(null);
@@ -40,7 +41,9 @@ class QuranCubit extends Cubit<QuranState> {
     final surahs = result[0] as List<Surah>;
     final verses = result[1] as List<Verse>;
     if (!isClosed) {
-      emit(SurahsLoaded(surahs: surahs, verses: verses));
+      final loaded = SurahsLoaded(surahs: surahs, verses: verses);
+      _lastSurahsLoaded = loaded;
+      emit(loaded);
     }
   }
 
@@ -97,6 +100,19 @@ class QuranCubit extends Cubit<QuranState> {
       juzNumber: readingPosition.juz,
       pageNumber: readingPosition.pageNumber,
     );
+  }
+
+  Future<void> searchVerses(String query) async {
+    if (query.isEmpty) {
+      if (_lastSurahsLoaded != null && !isClosed) {
+        emit(_lastSurahsLoaded!);
+      }
+      return;
+    }
+    final results = await _quranRepo.searchVerses(query);
+    if (!isClosed) {
+      emit(QuranSearchLoaded(results: results, query: query));
+    }
   }
 
   Future<void> dispose() async {
