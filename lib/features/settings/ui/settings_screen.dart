@@ -12,6 +12,7 @@ import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/widgets/azan_sounds_widget.dart';
 import 'package:noor/features/settings/ui/widgets/azkar_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/calculation_settings_widget.dart';
+import 'package:noor/features/settings/ui/widgets/company_logo.dart';
 import 'package:noor/features/settings/ui/widgets/iqama_setting_widget.dart';
 import 'package:noor/features/settings/ui/widgets/language_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/location_settings_widget.dart';
@@ -78,7 +79,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 15),
+                    const Center(child: CompanyLogo()),
+                    const SizedBox(height: 15),
                     CalculationSettingsWidget(
                       calculationSettings: _calculationSettings,
                     ),

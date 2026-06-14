@@ -196,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noInternetConnection": MessageLookupByLibrary.simpleMessage(
       "No internet connection",
     ),
+    "noResults": MessageLookupByLibrary.simpleMessage("No results"),
     "no_compass_sensor": MessageLookupByLibrary.simpleMessage(
       "Your device doesn\'t support compass sensor",
     ),
@@ -427,6 +428,5 @@ class MessageLookup extends MessageLookupByLibrary {
     "until_prayer": MessageLookupByLibrary.simpleMessage("Until prayer"),
     "win_treasure": MessageLookupByLibrary.simpleMessage("win a treasure"),
     "zekr": MessageLookupByLibrary.simpleMessage("Zekr"),
-    "noResults": MessageLookupByLibrary.simpleMessage("No results"),
   };
 }
