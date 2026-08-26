@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "add": MessageLookupByLibrary.simpleMessage("Add"),
     "aerial_distance": MessageLookupByLibrary.simpleMessage("Aerial Distance"),
+    "after_adhan": MessageLookupByLibrary.simpleMessage("After Adhan"),
     "after_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
       "After Dhuhr Sunnah",
     ),
@@ -57,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Azkar Notifications",
     ),
     "beforeMidNight": MessageLookupByLibrary.simpleMessage("Midnight"),
+    "before_adhan": MessageLookupByLibrary.simpleMessage("Before Adhan"),
     "before_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
       "Before Dhuhr Sunnah",
     ),
@@ -187,7 +189,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "method_singapore": MessageLookupByLibrary.simpleMessage("Singapore"),
     "method_umm_al_qura": MessageLookupByLibrary.simpleMessage("Umm Al Qura"),
     "minutes": MessageLookupByLibrary.simpleMessage("Minutes"),
+    "minutes_after_adhan": MessageLookupByLibrary.simpleMessage(
+      "minutes after Adhan",
+    ),
     "minutes_before": MessageLookupByLibrary.simpleMessage("Minutes before"),
+    "minutes_before_adhan": MessageLookupByLibrary.simpleMessage(
+      "minutes before Adhan",
+    ),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("Morning Azkar"),
     "mushafStyle": MessageLookupByLibrary.simpleMessage("Mushaf"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("Near mosque"),
@@ -389,6 +397,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "settingsSaved": MessageLookupByLibrary.simpleMessage("Settings saved"),
     "shorok": MessageLookupByLibrary.simpleMessage("Shorok"),
+    "silent_during_prayer": MessageLookupByLibrary.simpleMessage(
+      "Silent during prayer time",
+    ),
+    "silent_end_time": MessageLookupByLibrary.simpleMessage(
+      "Silent mode end time",
+    ),
+    "silent_mode_permission_message": MessageLookupByLibrary.simpleMessage(
+      "Please enable Do Not Disturb access for the app, then try again",
+    ),
+    "silent_mode_settings": MessageLookupByLibrary.simpleMessage("Silent Mode"),
+    "silent_start_time": MessageLookupByLibrary.simpleMessage(
+      "Silent mode start time",
+    ),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("Sleeping Azkar"),
     "start_navigation": MessageLookupByLibrary.simpleMessage(

@@ -91,6 +91,9 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i361.Dio>(() => registerModule.dio);
+    gh.factory<_i479.SharedPreferencesSettingsService>(
+      () => _i479.SharedPreferencesSettingsService(),
+    );
     gh.factory<_i308.PropertiesRepo>(() => _i308.PropertiesRepo());
     gh.factory<_i108.StoreRepo>(() => _i108.StoreRepo());
     gh.singleton<_i155.AzkarDatabase>(() => _i155.AzkarDatabase());
@@ -99,12 +102,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i495.MosquesDatabase>(() => _i495.MosquesDatabase());
     gh.singleton<_i651.QuranDatabase>(() => _i651.QuranDatabase());
     gh.singleton<_i339.TasbihDatabase>(() => _i339.TasbihDatabase());
-    gh.factory<_i298.HomeRepo>(
-      () =>
-          _i298.HomeRepo(gh<_i928.HadithDatabase>(), gh<_i651.QuranDatabase>()),
-    );
-    gh.factory<_i839.LocationRepo>(
-      () => _i839.LocationRepo(gh<_i502.CitiesDatabase>()),
+    gh.factory<_i406.PropertiesCubit>(
+      () => _i406.PropertiesCubit(
+        gh<_i308.PropertiesRepo>(),
+        gh<_i479.SharedPreferencesSettingsService>(),
+      ),
     );
     gh.factory<_i819.QuranSoundService>(
       () => _i819.QuranSoundService(gh<_i361.Dio>()),
@@ -115,11 +117,25 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i815.TafsirApiService>(
       () => _i815.TafsirApiService(gh<_i361.Dio>()),
     );
+    gh.singleton<_i730.NavigationRepo>(
+      () => _i730.NavigationRepo(
+        gh<_i502.CitiesDatabase>(),
+        gh<_i479.SharedPreferencesSettingsService>(),
+      ),
+    );
+    gh.factory<_i99.AzkarRepo>(() => _i99.AzkarRepo(gh<_i155.AzkarDatabase>()));
     gh.factory<_i327.MosqueApiService>(
       () => _i327.MosqueApiService(gh<_i361.Dio>()),
     );
-    gh.factory<_i873.RadioRepo>(
-      () => _i873.RadioRepo(gh<_i891.RadioApiService>()),
+    gh.factory<_i966.TasbihRepo>(
+      () => _i966.TasbihRepo(gh<_i339.TasbihDatabase>()),
+    );
+    gh.singleton<_i952.HadithRepo>(
+      () => _i952.HadithRepo(gh<_i928.HadithDatabase>()),
+    );
+    gh.factory<_i824.AzkarCubit>(() => _i824.AzkarCubit(gh<_i99.AzkarRepo>()));
+    gh.factory<_i839.LocationRepo>(
+      () => _i839.LocationRepo(gh<_i502.CitiesDatabase>()),
     );
     gh.factory<_i655.SharedPreferencesLanguageService>(
       () =>
@@ -128,48 +144,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i583.SharedPreferencesAzanService>(
       () => _i583.SharedPreferencesAzanService(gh<_i460.SharedPreferences>()),
     );
-    gh.factory<_i1019.LanguageCubit>(
-      () => _i1019.LanguageCubit(gh<_i655.SharedPreferencesLanguageService>()),
-    );
-    gh.singleton<_i952.HadithRepo>(
-      () => _i952.HadithRepo(gh<_i928.HadithDatabase>()),
-    );
-    gh.factory<_i966.TasbihRepo>(
-      () => _i966.TasbihRepo(gh<_i339.TasbihDatabase>()),
-    );
-    gh.factory<_i99.AzkarRepo>(() => _i99.AzkarRepo(gh<_i155.AzkarDatabase>()));
-    gh.factory<_i892.HomeCubit>(() => _i892.HomeCubit(gh<_i298.HomeRepo>()));
-    gh.factory<_i501.HadithCubit>(
-      () => _i501.HadithCubit(gh<_i952.HadithRepo>()),
-    );
-    gh.factory<_i555.StoreCubit>(() => _i555.StoreCubit(gh<_i108.StoreRepo>()));
-    gh.factory<_i479.SharedPreferencesSettingsService>(
-      () =>
-          _i479.SharedPreferencesSettingsService(),
-    );
-    gh.factory<_i434.TasbihCubit>(
-      () => _i434.TasbihCubit(gh<_i966.TasbihRepo>()),
-    );
-    gh.factory<_i328.RadioCubit>(() => _i328.RadioCubit(gh<_i873.RadioRepo>()));
-    gh.factory<_i803.LocationCubit>(
-      () => _i803.LocationCubit(gh<_i839.LocationRepo>()),
-    );
-    gh.factory<_i288.TafsirRepo>(
-      () => _i288.TafsirRepo(gh<_i815.TafsirApiService>()),
-    );
-    gh.factory<_i1015.QuranRepo>(
-      () => _i1015.QuranRepo(
-        gh<_i651.QuranDatabase>(),
-        gh<_i819.QuranSoundService>(),
-        gh<_i815.TafsirApiService>(),
-      ),
-    );
-    gh.factory<_i824.AzkarCubit>(() => _i824.AzkarCubit(gh<_i99.AzkarRepo>()));
-    gh.factory<_i406.PropertiesCubit>(
-      () => _i406.PropertiesCubit(
-        gh<_i308.PropertiesRepo>(),
-        gh<_i479.SharedPreferencesSettingsService>(),
-      ),
+    gh.factory<_i287.OnboardingCubit>(
+      () => _i287.OnboardingCubit(gh<_i479.SharedPreferencesSettingsService>()),
     );
     gh.factory<_i179.AgriCubit>(
       () => _i179.AgriCubit(gh<_i479.SharedPreferencesSettingsService>()),
@@ -186,20 +162,56 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i881.TreasuresCubit>(
       () => _i881.TreasuresCubit(gh<_i479.SharedPreferencesSettingsService>()),
     );
+    gh.factory<_i1015.QuranRepo>(
+      () => _i1015.QuranRepo(
+        gh<_i651.QuranDatabase>(),
+        gh<_i819.QuranSoundService>(),
+        gh<_i815.TafsirApiService>(),
+      ),
+    );
+    gh.factory<_i555.StoreCubit>(() => _i555.StoreCubit(gh<_i108.StoreRepo>()));
+    gh.factory<_i501.HadithCubit>(
+      () => _i501.HadithCubit(gh<_i952.HadithRepo>()),
+    );
+    gh.factory<_i298.HomeRepo>(
+      () =>
+          _i298.HomeRepo(gh<_i928.HadithDatabase>(), gh<_i651.QuranDatabase>()),
+    );
+    gh.factory<_i873.RadioRepo>(
+      () => _i873.RadioRepo(gh<_i891.RadioApiService>()),
+    );
+    gh.factory<_i915.NavigationCubit>(
+      () => _i915.NavigationCubit(gh<_i730.NavigationRepo>()),
+    );
     gh.factory<_i1051.NearMosqueRepo>(
       () => _i1051.NearMosqueRepo(
         gh<_i495.MosquesDatabase>(),
         gh<_i327.MosqueApiService>(),
       ),
     );
-    gh.factory<_i881.NearMosqueCubit>(
-      () => _i881.NearMosqueCubit(gh<_i1051.NearMosqueRepo>()),
-    );
-    gh.singleton<_i730.NavigationRepo>(
-      () => _i730.NavigationRepo(
-        gh<_i502.CitiesDatabase>(),
+    gh.singleton<_i555.NotificationsManager>(
+      () => _i555.NotificationsManager(
         gh<_i479.SharedPreferencesSettingsService>(),
+        gh<_i583.SharedPreferencesAzanService>(),
       ),
+    );
+    gh.factory<_i288.TafsirRepo>(
+      () => _i288.TafsirRepo(gh<_i815.TafsirApiService>()),
+    );
+    gh.factory<_i434.TasbihCubit>(
+      () => _i434.TasbihCubit(gh<_i966.TasbihRepo>()),
+    );
+    gh.factory<_i1019.LanguageCubit>(
+      () => _i1019.LanguageCubit(gh<_i655.SharedPreferencesLanguageService>()),
+    );
+    gh.factory<_i803.LocationCubit>(
+      () => _i803.LocationCubit(gh<_i839.LocationRepo>()),
+    );
+    gh.factory<_i825.AyaTafsirCubit>(
+      () => _i825.AyaTafsirCubit(gh<_i288.TafsirRepo>()),
+    );
+    gh.factory<_i225.TafsirCubit>(
+      () => _i225.TafsirCubit(gh<_i288.TafsirRepo>()),
     );
     gh.factory<_i999.AyatCubit>(() => _i999.AyatCubit(gh<_i1015.QuranRepo>()));
     gh.factory<_i75.MushafCubit>(
@@ -208,23 +220,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i422.QuranCubit>(
       () => _i422.QuranCubit(gh<_i1015.QuranRepo>()),
     );
-    gh.factory<_i287.OnboardingCubit>(
-      () => _i287.OnboardingCubit(gh<_i479.SharedPreferencesSettingsService>()),
-    );
-    gh.factory<_i915.NavigationCubit>(
-      () => _i915.NavigationCubit(gh<_i730.NavigationRepo>()),
-    );
-    gh.factory<_i825.AyaTafsirCubit>(
-      () => _i825.AyaTafsirCubit(gh<_i288.TafsirRepo>()),
-    );
-    gh.factory<_i225.TafsirCubit>(
-      () => _i225.TafsirCubit(gh<_i288.TafsirRepo>()),
-    );
-    gh.singleton<_i555.NotificationsManager>(
-      () => _i555.NotificationsManager(
-        gh<_i479.SharedPreferencesSettingsService>(),
-        gh<_i583.SharedPreferencesAzanService>(),
-      ),
+    gh.factory<_i892.HomeCubit>(() => _i892.HomeCubit(gh<_i298.HomeRepo>()));
+    gh.factory<_i328.RadioCubit>(() => _i328.RadioCubit(gh<_i873.RadioRepo>()));
+    gh.factory<_i881.NearMosqueCubit>(
+      () => _i881.NearMosqueCubit(gh<_i1051.NearMosqueRepo>()),
     );
     return this;
   }

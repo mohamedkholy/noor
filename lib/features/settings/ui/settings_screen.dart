@@ -7,6 +7,7 @@ import 'package:noor/features/settings/data/models/azkar_notifications_settings.
 import 'package:noor/features/settings/data/models/calculation_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
+import 'package:noor/features/settings/data/models/silent_mode_settings.dart';
 import 'package:noor/features/settings/data/models/sunan_settings.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
 import 'package:noor/features/settings/ui/widgets/azan_sounds_widget.dart';
@@ -18,6 +19,7 @@ import 'package:noor/features/settings/ui/widgets/language_settings_widget.dart'
 import 'package:noor/features/settings/ui/widgets/location_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/perodic_azkar_settings_widget.dart';
 import 'package:noor/features/settings/ui/widgets/salawat_row.dart';
+import 'package:noor/features/settings/ui/widgets/silent_mode_widget.dart';
 import 'package:noor/features/settings/ui/widgets/sunan_row.dart';
 import 'package:noor/generated/l10n.dart';
 
@@ -37,6 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late final IqamaNotificationsSettings _iqamaNotificationsSettings;
   late final SunanSettings _sunanSetting;
   late final CalculationSettings _calculationSettings;
+  late final SilentModeSettings _silentModeSettings;
 
   @override
   void initState() {
@@ -48,6 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _iqamaNotificationsSettings = _settingsCubit.getIqamaNotificationSetting();
     _sunanSetting = _settingsCubit.getSunanSetting();
     _calculationSettings = _settingsCubit.getCalculationSettings();
+    _silentModeSettings = _settingsCubit.getSilentModeSettings();
   }
 
   @override
@@ -89,6 +93,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     SalawatRow(
                       azanNotificationsSettings: _azanNotificationsSettings,
                     ),
+                    const SizedBox(height: 20),
+                    SilentModeWidget(silentModeSettings: _silentModeSettings),
                     const SizedBox(height: 20),
                     SunanRow(sunanSettings: _sunanSetting),
                     const SizedBox(height: 20),

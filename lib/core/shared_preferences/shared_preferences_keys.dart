@@ -26,4 +26,6 @@ abstract class SharedPreferencesKeys {
   static const String bookMark = "book_mark";
   static const String readingBackgroundColor = "reading_background_color";
   static const String calculationSettings = "calculation_settings";
+  static const String silentDuringPrayer = "silent_during_prayer";
+  static const String silentModeSettings = "silent_mode_settings";
 }

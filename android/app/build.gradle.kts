@@ -22,7 +22,7 @@ plugins {
 android {
     namespace = "com.dev3mk.noor"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.2.12479018"
+    ndkVersion = "29.0.14206865"
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

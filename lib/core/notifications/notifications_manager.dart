@@ -12,6 +12,7 @@ import 'package:noor/core/database/cities/cities_database.dart';
 import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/helpers/constants.dart';
 import 'package:noor/core/helpers/prayer_times_helper.dart';
+import 'package:noor/core/helpers/silent_mode_helper.dart';
 import 'package:noor/core/routing/my_routes.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
@@ -276,6 +277,45 @@ class NotificationsManager {
         perodicAzkarSettings.text,
       );
     }
+
+    await scheduleSilentModeWindows();
+  }
+
+  Future<void> scheduleSilentModeWindows() async {
+    final silentModeSettings = _sp.getSilentModeSettings();
+    if (!silentModeSettings.isEnabled) {
+      await SilentModeHelper.cancelSilentWindows();
+      return;
+    }
+    final city = _getSavedCity() ?? Constants.defaultCity;
+    final azanNotificationsSettings = _sp.getAzanNotificationSetting();
+    final List<(DateTime, DateTime)> windows = [];
+    for (int i = 0; i < 7; i++) {
+      final date = DateUtils.dateOnly(DateTime.now()).add(Duration(days: i));
+      final prayerTimes = PrayerTimesHelper.getPrayerTimes(
+        city: city,
+        date: date,
+      );
+      final prayerTimesList = [
+        (prayerTimes.fajr, azanNotificationsSettings.fajrState),
+        (prayerTimes.dhuhr, azanNotificationsSettings.dhuhrState),
+        (prayerTimes.asr, azanNotificationsSettings.asrState),
+        (prayerTimes.maghrib, azanNotificationsSettings.maghribState),
+        (prayerTimes.isha, azanNotificationsSettings.ishaState),
+      ];
+      for (final e in prayerTimesList) {
+        if (!e.$2) continue;
+        final start = e.$1.add(
+          Duration(minutes: silentModeSettings.startOffsetMinutes),
+        );
+        final end = e.$1.add(
+          Duration(minutes: silentModeSettings.endOffsetMinutes),
+        );
+        if (end.isBefore(DateTime.now())) continue;
+        windows.add((start, end));
+      }
+    }
+    await SilentModeHelper.scheduleSilentWindows(windows);
   }
 
   void cancelAllNotifications() {

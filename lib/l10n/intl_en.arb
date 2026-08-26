@@ -208,5 +208,14 @@
     "method_singapore": "Singapore",
     "madhab_shafi": "Shafi",
     "madhab_hanafi": "Hanafi",
-    "noResults": "No results"
+    "noResults": "No results",
+    "silent_mode_settings": "Silent Mode",
+    "silent_during_prayer": "Silent during prayer time",
+    "silent_mode_permission_message": "Please enable Do Not Disturb access for the app, then try again",
+    "silent_start_time": "Silent mode start time",
+    "silent_end_time": "Silent mode end time",
+    "before_adhan": "Before Adhan",
+    "after_adhan": "After Adhan",
+    "minutes_after_adhan": "minutes after Adhan",
+    "minutes_before_adhan": "minutes before Adhan"
 }

@@ -1,6 +1,8 @@
 import 'package:noor/core/database/cities/cities_database.dart';
 
 abstract class Constants {
+  static const int silentModeDurationMinutes = 30;
+
   static const City defaultCity = City(
     name: "Makkah",
     lat: 21.42664,

@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "add": MessageLookupByLibrary.simpleMessage("إضافة"),
     "aerial_distance": MessageLookupByLibrary.simpleMessage("المسافة الخطية"),
+    "after_adhan": MessageLookupByLibrary.simpleMessage("بعد الأذان"),
     "after_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
       "سنة الظهر البعدية",
     ),
@@ -57,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "إشعارات الأذكار",
     ),
     "beforeMidNight": MessageLookupByLibrary.simpleMessage("منتصف الليل"),
+    "before_adhan": MessageLookupByLibrary.simpleMessage("قبل الأذان"),
     "before_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
       "سنة الظهر القبلية",
     ),
@@ -179,7 +181,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "method_singapore": MessageLookupByLibrary.simpleMessage("سنغافورة"),
     "method_umm_al_qura": MessageLookupByLibrary.simpleMessage("أم القرى"),
     "minutes": MessageLookupByLibrary.simpleMessage("دقيقة"),
+    "minutes_after_adhan": MessageLookupByLibrary.simpleMessage(
+      "دقيقة بعد الأذان",
+    ),
     "minutes_before": MessageLookupByLibrary.simpleMessage("دقيقة قبل"),
+    "minutes_before_adhan": MessageLookupByLibrary.simpleMessage(
+      "دقيقة قبل الأذان",
+    ),
     "morning_azkar": MessageLookupByLibrary.simpleMessage("أذكار الصباح"),
     "mushafStyle": MessageLookupByLibrary.simpleMessage("مصحف"),
     "near_mosque": MessageLookupByLibrary.simpleMessage("أقرب مسجد"),
@@ -368,6 +376,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "settingsSaved": MessageLookupByLibrary.simpleMessage("تم حفظ الإعدادات"),
     "shorok": MessageLookupByLibrary.simpleMessage("الشروق"),
+    "silent_during_prayer": MessageLookupByLibrary.simpleMessage(
+      "كتم الصوت أثناء وقت الصلاة",
+    ),
+    "silent_end_time": MessageLookupByLibrary.simpleMessage(
+      "وقت انتهاء الوضع الصامت",
+    ),
+    "silent_mode_permission_message": MessageLookupByLibrary.simpleMessage(
+      "يرجى منح التطبيق إذن عدم الإزعاج ثم المحاولة مرة أخرى",
+    ),
+    "silent_mode_settings": MessageLookupByLibrary.simpleMessage(
+      "الوضع الصامت",
+    ),
+    "silent_start_time": MessageLookupByLibrary.simpleMessage(
+      "وقت بدء الوضع الصامت",
+    ),
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "sleepingAzkar": MessageLookupByLibrary.simpleMessage("أذكار النوم"),
     "start_navigation": MessageLookupByLibrary.simpleMessage("بدء التنقل"),

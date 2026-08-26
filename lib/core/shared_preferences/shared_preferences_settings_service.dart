@@ -6,14 +6,13 @@ import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/models/bookmark.dart';
 import 'package:noor/core/shared_preferences/shared_preferences_keys.dart';
 import 'package:noor/features/hajj_umrah/data/models/sunan_data.dart';
-import 'package:noor/features/home/data/models/last_reading.dart';
 import 'package:noor/features/properties/data/models/sunan_data.dart';
-import 'package:noor/features/quran/data/models/reading_position.dart';
 import 'package:noor/features/settings/data/models/azan_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/azkar_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/calculation_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
+import 'package:noor/features/settings/data/models/silent_mode_settings.dart';
 import 'package:noor/features/settings/data/models/sunan_settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -292,6 +291,30 @@ class SharedPreferencesSettingsService {
   void saveCalculationSettings(CalculationSettings settings) {
     sp.setString(
       SharedPreferencesKeys.calculationSettings,
+      jsonEncode(settings.toJson()),
+    );
+  }
+
+  bool getSilentDuringPrayer() {
+    final result = sp.getBool(SharedPreferencesKeys.silentDuringPrayer);
+    return result ?? false;
+  }
+
+  void saveSilentDuringPrayer(bool state) {
+    sp.setBool(SharedPreferencesKeys.silentDuringPrayer, state);
+  }
+
+  SilentModeSettings getSilentModeSettings() {
+    final result = sp.getString(SharedPreferencesKeys.silentModeSettings);
+    if (result == null) {
+      return SilentModeSettings.defaultSettings;
+    }
+    return SilentModeSettings.fromJson(jsonDecode(result));
+  }
+
+  void saveSilentModeSettings(SilentModeSettings settings) {
+    sp.setString(
+      SharedPreferencesKeys.silentModeSettings,
       jsonEncode(settings.toJson()),
     );
   }

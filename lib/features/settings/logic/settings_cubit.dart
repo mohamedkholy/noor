@@ -8,6 +8,7 @@ import 'package:noor/features/settings/data/models/azkar_notifications_settings.
 import 'package:noor/features/settings/data/models/calculation_settings.dart';
 import 'package:noor/features/settings/data/models/iqama_notifications_settings.dart';
 import 'package:noor/features/settings/data/models/perodic_azkar_settings.dart';
+import 'package:noor/features/settings/data/models/silent_mode_settings.dart';
 import 'package:noor/features/settings/data/models/sunan_settings.dart';
 
 @Injectable()
@@ -82,5 +83,21 @@ class SettingsCubit extends Cubit {
 
   void saveCalculationSettings(CalculationSettings settings) {
     _sharedPreferencesSettingsService.saveCalculationSettings(settings);
+  }
+
+  bool getSilentDuringPrayer() {
+    return _sharedPreferencesSettingsService.getSilentDuringPrayer();
+  }
+
+  void saveSilentDuringPrayer(bool state) {
+    _sharedPreferencesSettingsService.saveSilentDuringPrayer(state);
+  }
+
+  SilentModeSettings getSilentModeSettings() {
+    return _sharedPreferencesSettingsService.getSilentModeSettings();
+  }
+
+  void saveSilentModeSettings(SilentModeSettings settings) {
+    _sharedPreferencesSettingsService.saveSilentModeSettings(settings);
   }
 }

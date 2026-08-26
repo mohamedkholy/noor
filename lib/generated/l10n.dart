@@ -1778,6 +1778,91 @@ class S {
   String get noResults {
     return Intl.message('No results', name: 'noResults', desc: '', args: []);
   }
+
+  /// `Silent Mode`
+  String get silent_mode_settings {
+    return Intl.message(
+      'Silent Mode',
+      name: 'silent_mode_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Silent during prayer time`
+  String get silent_during_prayer {
+    return Intl.message(
+      'Silent during prayer time',
+      name: 'silent_during_prayer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enable Do Not Disturb access for the app, then try again`
+  String get silent_mode_permission_message {
+    return Intl.message(
+      'Please enable Do Not Disturb access for the app, then try again',
+      name: 'silent_mode_permission_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Silent mode start time`
+  String get silent_start_time {
+    return Intl.message(
+      'Silent mode start time',
+      name: 'silent_start_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Silent mode end time`
+  String get silent_end_time {
+    return Intl.message(
+      'Silent mode end time',
+      name: 'silent_end_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Before Adhan`
+  String get before_adhan {
+    return Intl.message(
+      'Before Adhan',
+      name: 'before_adhan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After Adhan`
+  String get after_adhan {
+    return Intl.message('After Adhan', name: 'after_adhan', desc: '', args: []);
+  }
+
+  /// `minutes after Adhan`
+  String get minutes_after_adhan {
+    return Intl.message(
+      'minutes after Adhan',
+      name: 'minutes_after_adhan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `minutes before Adhan`
+  String get minutes_before_adhan {
+    return Intl.message(
+      'minutes before Adhan',
+      name: 'minutes_before_adhan',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
