@@ -318,4 +318,12 @@ class SharedPreferencesSettingsService {
       jsonEncode(settings.toJson()),
     );
   }
+
+  bool getBatteryOptimizationPrompted() {
+    return sp.getBool(SharedPreferencesKeys.batteryOptimizationPrompted) ?? false;
+  }
+
+  Future<void> setBatteryOptimizationPrompted() async {
+    await sp.setBool(SharedPreferencesKeys.batteryOptimizationPrompted, true);
+  }
 }

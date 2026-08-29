@@ -217,5 +217,9 @@
     "before_adhan": "Before Adhan",
     "after_adhan": "After Adhan",
     "minutes_after_adhan": "minutes after Adhan",
-    "minutes_before_adhan": "minutes before Adhan"
+    "minutes_before_adhan": "minutes before Adhan",
+    "battery_optimization_title": "Disable Battery Optimization",
+    "battery_optimization_message": "Please disable battery optimization for the app so that prayer alarms and silent mode can run accurately in the background.",
+    "battery_optimization_allow": "Allow",
+    "battery_optimization_skip": "Skip"
 }

@@ -28,4 +28,5 @@ abstract class SharedPreferencesKeys {
   static const String calculationSettings = "calculation_settings";
   static const String silentDuringPrayer = "silent_during_prayer";
   static const String silentModeSettings = "silent_mode_settings";
+  static const String batteryOptimizationPrompted = "battery_optimization_prompted";
 }

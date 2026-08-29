@@ -7,6 +7,7 @@ import 'package:noor/core/helpers/silent_mode_helper.dart';
 import 'package:noor/core/helpers/ui_helper.dart';
 import 'package:noor/core/notifications/notifications_manager.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/core/widgets/battery_optimization_dialog.dart';
 import 'package:noor/core/widgets/decorated_container.dart';
 import 'package:noor/features/settings/data/models/silent_mode_settings.dart';
 import 'package:noor/features/settings/logic/settings_cubit.dart';
@@ -25,9 +26,6 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
   late final SettingsCubit _settingsCubit = context.read();
   late SilentModeSettings _settings = _normalized(widget.silentModeSettings);
 
-  /// Keeps endOffsetMinutes >= startOffsetMinutes + 5 so the slider and the
-  /// text label can never disagree, and so we never persist an invalid
-  /// combination in the first place.
   SilentModeSettings _normalized(SilentModeSettings settings) {
     final minEnd = (settings.startOffsetMinutes + 5).clamp(5, 60);
     if (settings.endOffsetMinutes < minEnd) {
@@ -78,7 +76,6 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
               ),
               if (_settings.isEnabled) ...[
                 const Divider(color: Colors.white24, height: 25),
-                // Start Time Offset Section
                 _buildTimeSection(
                   icon: Icons.play_circle_outline,
                   title: S.of(context).silent_start_time,
@@ -101,7 +98,6 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
                           final newOffset = selectBefore
                               ? -startAbsMinutes
                               : startAbsMinutes;
-                          // Discrete action (not a drag) — safe to persist right away.
                           _commitSettings(
                             _settings.copyWith(startOffsetMinutes: newOffset),
                           );
@@ -127,7 +123,6 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
                         thumbColor: MyColors.secondary,
                         activeColor: MyColors.secondary,
                         inactiveColor: Colors.grey,
-                        // Cheap: only updates local UI state while dragging.
                         onChanged: (val) {
                           final minutes = val.toInt();
                           final newOffset = isBefore ? -minutes : minutes;
@@ -135,7 +130,6 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
                             _settings.copyWith(startOffsetMinutes: newOffset),
                           );
                         },
-                        // Expensive work (save + reschedule) only once, on release.
                         onChangeEnd: (val) => _commitSettings(_settings),
                       ),
                       Text(
@@ -152,12 +146,8 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
                 ),
 
                 const SizedBox(height: 14),
-                // End Time Offset Section
                 Builder(
                   builder: (_) {
-                    // Single source of truth for BOTH the slider position and
-                    // the label below, so they can never show different
-                    // numbers.
                     final displayEndMinutes = _settings.endOffsetMinutes.clamp(
                       minEndMinutes,
                       60,
@@ -204,9 +194,6 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
     );
   }
 
-  /// Wraps a time section (start or end) in its own bordered card with an
-  /// icon + title header, so the two sections read as visually distinct
-  /// blocks instead of running together.
   Widget _buildTimeSection({
     required IconData icon,
     required String title,
@@ -255,22 +242,22 @@ class _SilentModeWidgetState extends State<SilentModeWidget> {
       return;
     }
 
-    // Discrete action — safe to persist immediately.
+    if (!mounted) return;
+
+    if (value) {
+      await showBatteryOptimizationDialog(context);
+      if (!mounted) return;
+    }
+
     _commitSettings(_settings.copyWith(isEnabled: value));
   }
 
-  /// Updates local UI state only. No disk I/O, no notification
-  /// rescheduling. Safe to call on every slider drag tick.
   void _updateLocal(SilentModeSettings newSettings) {
     setState(() {
       _settings = _normalized(newSettings);
     });
   }
 
-  /// Persists settings and reschedules notifications. This does real I/O,
-  /// so it should only be called on discrete actions (toggle, segmented
-  /// button) or once a drag has finished (onChangeEnd) — never on every
-  /// onChanged tick.
   void _commitSettings(SilentModeSettings newSettings) {
     final normalized = _normalized(newSettings);
 

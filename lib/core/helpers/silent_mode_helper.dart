@@ -36,4 +36,15 @@ abstract class SilentModeHelper {
     if (!Platform.isAndroid) return;
     await _channel.invokeMethod<void>('cancelSilentWindows');
   }
+
+  static Future<bool> isBatteryOptimizationIgnored() async {
+    if (!Platform.isAndroid) return true;
+    final result = await _channel.invokeMethod<bool>('isBatteryOptimizationIgnored');
+    return result ?? true;
+  }
+
+  static Future<void> requestBatteryOptimizationExclusion() async {
+    if (!Platform.isAndroid) return;
+    await _channel.invokeMethod<void>('requestBatteryOptimizationExclusion');
+  }
 }

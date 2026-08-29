@@ -217,5 +217,9 @@
   "before_adhan": "قبل الأذان",
   "after_adhan": "بعد الأذان",
   "minutes_after_adhan": "دقيقة بعد الأذان",
-  "minutes_before_adhan": "دقيقة قبل الأذان"
+  "minutes_before_adhan": "دقيقة قبل الأذان",
+  "battery_optimization_title": "تعطيل تحسين البطارية",
+  "battery_optimization_message": "يرجى استبعاد التطبيق من تحسينات البطارية لضمان عمل منبهات الصلوات والوضع الصامت بدقة في الخلفية.",
+  "battery_optimization_allow": "السماح",
+  "battery_optimization_skip": "تخطي"
 }

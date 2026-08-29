@@ -4,7 +4,10 @@ import android.app.AlarmManager
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.net.Uri
+import android.os.PowerManager
 import android.provider.Settings
+import android.util.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -35,6 +38,18 @@ class MainActivity : FlutterActivity() {
                         }
                         "cancelSilentWindows" -> {
                             cancelSilentWindows()
+                            result.success(true)
+                        }
+                        "isBatteryOptimizationIgnored" -> {
+                            val pm = getSystemService(PowerManager::class.java)
+                            result.success(pm.isIgnoringBatteryOptimizations(packageName))
+                        }
+                        "requestBatteryOptimizationExclusion" -> {
+                            val intent = Intent(
+                                Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                                Uri.parse("package:$packageName"),
+                            )
+                            startActivity(intent)
                             result.success(true)
                         }
                         else -> result.notImplemented()
@@ -80,6 +95,7 @@ class MainActivity : FlutterActivity() {
             enable: Boolean,
             requestCode: Int,
     ) {
+        Log.d("AlarmManager", "Scheduling alarm at $triggerAtMillis")
         val intent =
                 Intent(this, SilentModeReceiver::class.java)
                         .setAction(SilentModeReceiver.ACTION_SILENT_MODE)

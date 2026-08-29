@@ -1863,6 +1863,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Disable Battery Optimization`
+  String get battery_optimization_title {
+    return Intl.message(
+      'Disable Battery Optimization',
+      name: 'battery_optimization_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please disable battery optimization for the app so that prayer alarms and silent mode can run accurately in the background.`
+  String get battery_optimization_message {
+    return Intl.message(
+      'Please disable battery optimization for the app so that prayer alarms and silent mode can run accurately in the background.',
+      name: 'battery_optimization_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow`
+  String get battery_optimization_allow {
+    return Intl.message(
+      'Allow',
+      name: 'battery_optimization_allow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get battery_optimization_skip {
+    return Intl.message(
+      'Skip',
+      name: 'battery_optimization_skip',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

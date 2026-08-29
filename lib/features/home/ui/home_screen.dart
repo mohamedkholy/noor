@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noor/core/di/dependency_injection.dart';
 import 'package:noor/core/routing/my_routes.dart';
+import 'package:noor/core/shared_preferences/shared_preferences_settings_service.dart';
 import 'package:noor/core/theming/my_colors.dart';
+import 'package:noor/core/widgets/battery_optimization_dialog.dart';
 import 'package:noor/features/home/logic/home_cubit.dart';
 import 'package:noor/features/home/ui/widgets/ayah_of_the_day_widget.dart';
 import 'package:noor/features/home/ui/widgets/current_radio_track_widget.dart';
@@ -28,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _homeCubit.getTodayContent();
     _navigationCubit.getNotificationsState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkBatteryOptimization();
+    });
     super.initState();
   }
 
@@ -120,5 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _checkBatteryOptimization() async {
+    if (!Platform.isAndroid) return;
+    await Future.delayed(const Duration(milliseconds: 500));
+    final sp = getIt<SharedPreferencesSettingsService>();
+    if (!sp.getBatteryOptimizationPrompted()) {
+      if (mounted) {
+        await showBatteryOptimizationDialog(context);
+        await sp.setBatteryOptimizationPrompted();
+      }
+    }
   }
 }

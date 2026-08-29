@@ -57,6 +57,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "azkar_notifications": MessageLookupByLibrary.simpleMessage(
       "إشعارات الأذكار",
     ),
+    "battery_optimization_allow": MessageLookupByLibrary.simpleMessage(
+      "السماح",
+    ),
+    "battery_optimization_message": MessageLookupByLibrary.simpleMessage(
+      "يرجى استبعاد التطبيق من تحسينات البطارية لضمان عمل منبهات الصلوات والوضع الصامت بدقة في الخلفية.",
+    ),
+    "battery_optimization_skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+    "battery_optimization_title": MessageLookupByLibrary.simpleMessage(
+      "تعطيل تحسين البطارية",
+    ),
     "beforeMidNight": MessageLookupByLibrary.simpleMessage("منتصف الليل"),
     "before_adhan": MessageLookupByLibrary.simpleMessage("قبل الأذان"),
     "before_dhuhr_sunnah": MessageLookupByLibrary.simpleMessage(
