@@ -45,10 +45,11 @@ class MainActivity : FlutterActivity() {
                             result.success(pm.isIgnoringBatteryOptimizations(packageName))
                         }
                         "requestBatteryOptimizationExclusion" -> {
-                            val intent = Intent(
-                                Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                Uri.parse("package:$packageName"),
-                            )
+                            val intent =
+                                    Intent(
+                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                            Uri.parse("package:$packageName"),
+                                    )
                             startActivity(intent)
                             result.success(true)
                         }
